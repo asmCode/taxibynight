@@ -1,0 +1,10 @@
+<map>
+	<sprite name="main_menu_bg" file="gui01" bounds="0,0,960,640" />
+	<sprite name="start_game_btn" file="gui01" bounds="0,640,128,128" />
+	<sprite name="start_game_btn_down" file="gui01" bounds="0,640,128,128" />
+	<sprite name="leaderboard_btn" file="gui01" bounds="128,640,128,128" />
+	<sprite name="leaderboard_btn_down" file="gui01" bounds="128,640,128,128" />
+	<sprite name="achievements_btn" file="gui01" bounds="256,640,128,128" />
+	<sprite name="achievements_btn_down" file="gui01" bounds="256,640,128,128" />
+	<sprite name="crosshair" file="gui01" bounds="0,768,32,32" />
+</map>

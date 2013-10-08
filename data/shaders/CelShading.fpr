@@ -1,0 +1,17 @@
+uniform sampler2D u_diffTex;
+uniform sampler2D u_celLight;
+
+varying vec3 v_directionToLight;
+varying vec3 v_normal;
+varying vec2 v_coords;
+
+void main()
+{
+	float diffuse = dot(v_directionToLight, v_normal);
+	
+    gl_FragColor =
+		texture2D(u_diffTex, v_coords) *
+		texture2D(u_celLight, vec2(diffuse, 0));
+
+	//gl_FragColor = vec4(1, 1, 0, 1);
+}

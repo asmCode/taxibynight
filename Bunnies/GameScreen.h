@@ -1,0 +1,36 @@
+#pragma once
+
+#include "IScreen.h"
+#include "IDamageableProvider.h"
+#include <Math/Matrix.h>
+
+class IShapesRenderer;
+class Street;
+class ManCam;
+
+class GameScreen : public IScreen
+{
+public:
+	GameScreen(void);
+	~GameScreen(void);
+
+	bool Initialize();
+
+	bool InitResources();
+	bool ReleaseResources();
+
+	void Draw(float time, float seconds);
+	void Update(float time, float seconds);
+
+	void HandlePress(uint32_t pointIndex, const sm::Vec2 &point);
+    void HandleRelease(uint32_t pointIndex, const sm::Vec2 &point);
+	void HandleMove(uint32_t pointIndex, const sm::Vec2 &point);
+
+private:
+	Street *m_street;
+
+	sm::Matrix m_projMatrix;
+
+	ManCam *m_manCam;
+};
+

@@ -1,0 +1,10 @@
+attribute vec4 a_position;
+attribute vec3 a_normal;
+
+uniform float u_outlineWidth;
+uniform mat4 u_mvpMatrix;
+
+void main()
+{
+    gl_Position = u_mvpMatrix * (a_position + vec4((a_normal * u_outlineWidth), 0));
+}

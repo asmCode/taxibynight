@@ -1,0 +1,24 @@
+attribute vec4 a_position;
+attribute vec3 a_normal;
+attribute vec2 a_coords;
+
+uniform mat4 u_worldMatrix;
+uniform mat4 u_viewProjMatrix;
+uniform vec3 u_lightPosition;
+
+varying vec3 v_directionToLight;
+varying vec3 v_normal;
+varying vec2 v_coords;
+
+void main()
+{
+	v_coords = a_coords;
+	v_normal = mat3(u_worldMatrix) * a_normal;
+	v_normal = normalize(v_normal);
+	
+	vec4 worldPosition = u_worldMatrix * a_position;
+	v_directionToLight = normalize(u_lightPosition - worldPosition.xyz);
+	
+    gl_Position = u_viewProjMatrix * worldPosition;
+}
+ 

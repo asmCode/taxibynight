@@ -1,0 +1,12 @@
+uniform sampler2D u_diffTex;
+uniform sampler2D u_colorMapTex;
+
+varying vec2 v_coords;
+varying vec2 v_colorMapCoords;
+
+void main()
+{
+    gl_FragColor =
+		texture2D(u_diffTex, v_coords) * 0.5 + 
+		texture2D(u_colorMapTex, v_colorMapCoords) * 0.5;
+}

@@ -1,0 +1,15 @@
+attribute vec4 a_position;
+attribute vec2 a_coords;
+
+uniform mat4 u_viewMatrix;
+uniform mat4 u_projMatrix;
+
+varying vec2 v_coords;
+
+void main()
+{
+	v_coords = a_coords;
+	
+    gl_Position = u_projMatrix * vec4(mat3(u_viewMatrix) * a_position.xyz, 1);
+}
+ 

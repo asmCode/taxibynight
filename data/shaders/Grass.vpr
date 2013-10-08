@@ -1,0 +1,20 @@
+attribute vec4 a_position;
+attribute vec2 a_coords;
+
+uniform mat4 u_worldMatrix;
+uniform mat4 u_viewProjMatrix;
+
+varying vec2 v_coords;
+varying vec2 v_colorMapCoords;
+
+void main()
+{
+	v_coords = a_coords;
+
+	vec4 worldPosition = u_worldMatrix * a_position;
+
+	v_colorMapCoords.x = (worldPosition.x + 50.0f) / 100.0f;
+	v_colorMapCoords.y = (worldPosition.z + 50.0f) / 100.0f;
+	
+    gl_Position = u_viewProjMatrix * worldPosition;
+}
