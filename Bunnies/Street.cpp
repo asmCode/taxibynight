@@ -66,22 +66,14 @@ void Street::Draw(float time, float seconds)
 			DrawingRoutines::DrawStreet(
 				m_streetPieces[streetType].m_model,
 				m_streetPieces[streetType].m_texture,
-				m_viewMatrix,
 				sm::Matrix::TranslateMatrix(x * 10, 0, y * 10) * m_streetPieces[streetType].m_world);
 
 			if (streetType == StreetMap::StreetType_Skycrapper_1)
 				DrawingRoutines::DrawStreet(
 					m_streetModel,
 					m_pavementTexture,
-					m_viewMatrix,
 					sm::Matrix::TranslateMatrix(x * 10, 0, y * 10)
 					);
 		}
 	}
 }
-
-void Street::SetViewMatrix(const sm::Matrix &viewMatrix)
-{
-	m_viewMatrix = viewMatrix;
-}
-

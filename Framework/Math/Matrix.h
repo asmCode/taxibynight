@@ -364,6 +364,8 @@ namespace sm
 
 			return rot;
 		}
+
+		static Matrix CreateLookAt2(const sm::Vec3 &direction, const sm::Vec3 &up);
 	};
 }
 

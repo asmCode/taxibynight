@@ -27,8 +27,6 @@ public:
 	Street();
 	~Street();
 
-	void SetViewMatrix(const sm::Matrix &viewMatrix);
-
 	void Update(float time, float seconds);
 	void Draw(float time, float seconds);
 
@@ -42,8 +40,6 @@ private:
 	StreetMap *m_streetMap;
 
 	StreetPiece m_streetPieces[256];
-
-	sm::Matrix m_viewMatrix;
 };
 
 #endif // STREET

@@ -7,6 +7,7 @@
 class IShapesRenderer;
 class Street;
 class ManCam;
+class Taxi;
 
 class GameScreen : public IScreen
 {
@@ -28,9 +29,17 @@ public:
 
 private:
 	Street *m_street;
+	Taxi *m_taxi;
 
+	sm::Matrix m_viewMatrix;
 	sm::Matrix m_projMatrix;
 
 	ManCam *m_manCam;
+
+	void SimulatePress();
+
+	void TurnLeftButtonPressed();
+	void TurnRightButtonPressed();
+	void AccelerationButtonPressed();
 };
 
