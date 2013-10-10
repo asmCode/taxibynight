@@ -211,6 +211,25 @@ public:
 		return a > b ? a : b;
 	}
 
+	static inline float Sign(const float &v)
+	{
+		if (v > 0.0f) return 1.0f;
+		if (v < 0.0f) return -1.0f;
+		return 0.0f;
+	}
+
+	template <typename T>
+	static inline T Clamp(const T &v, const T &_min, const T &_max)
+	{
+		return Max(Min(v, _max), _min);
+	}
+
+	template <typename T>
+	static inline T Abs(const T &v)
+	{
+		return v >= 0 ? v : -v;
+	}
+
 	static float PI;
 	static float PI2;
 	static float PI4;
