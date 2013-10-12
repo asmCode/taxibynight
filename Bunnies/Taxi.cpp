@@ -56,30 +56,30 @@ void Taxi::Update(float time, float seconds)
 		m_speed += 10.0f * seconds;
 	}
 
-	m_speed -= 3.0f * seconds;
+	m_speed -= 5.0f * seconds;
 	m_speed = MathUtils::Clamp(m_speed, 0.0f, 12.0f);
 
 	bool notTurning = true;
 	if (m_isTurningRight)
 	{
-		m_wheelsAngle -= 1.0 * seconds;
+		m_wheelsAngle -= 2.0 * seconds;
 		notTurning = false;
 	}
 
 	if (m_isTurningLeft)
 	{
-		m_wheelsAngle += 1.0f * seconds;
+		m_wheelsAngle += 2.0f * seconds;
 		notTurning = false;
 	}
 
-	if (notTurning)
+	/*if (notTurning)
 	{
 		if (m_wheelsAngle > 0.0)
 			m_wheelsAngle -= MathUtils::Min(m_wheelsAngle, 2.0f * seconds);
 	
 		if (m_wheelsAngle < 0.0)
 			m_wheelsAngle += MathUtils::Min(MathUtils::Abs(m_wheelsAngle), 2.0f * seconds);
-	}
+	}*/
 
 	m_wheelsAngle = MathUtils::Clamp(m_wheelsAngle, -MathUtils::PI4, MathUtils::PI4);
 
@@ -111,7 +111,15 @@ void Taxi::Update(float time, float seconds)
 			turnMatrixNormal *
 			sm::Matrix::TranslateMatrix(turnPivot.GetReversed());
 
+		sm::Vec3 prevCarDirection = m_carDirection;
 		m_carDirection = turnMatrixNormal * m_carDirection;
+		m_carDirection.Normalize();
+
+		//if (notTurning)
+		{
+			float angleDiff = sm::Vec3::GetAngle(prevCarDirection, m_carDirection);
+			m_wheelsAngle -= angleDiff * MathUtils::Sign(m_wheelsAngle);
+		}
 
 		m_position = turnMatrix * m_position;
 	}

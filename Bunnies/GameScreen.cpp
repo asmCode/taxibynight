@@ -84,6 +84,7 @@ void GameScreen::Update(float time, float seconds)
 	m_viewMatrix = m_viewMatrix.GetInversed();
 
 	//m_viewMatrix = m_manCam->GetViewMatrix();
+	//camPosition = m_viewMatrix.GetInversed() * sm::Vec3(0, 0, 0);
 
 	DrawingRoutines::SetProjectionMatrix(m_projMatrix);
 	DrawingRoutines::SetViewMatrix(m_viewMatrix);

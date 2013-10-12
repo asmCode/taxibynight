@@ -32,11 +32,11 @@ Street::Street()
 	m_streetPieces[StreetMap::StreetType_Pavement].Set(m_streetModel, content->Get<Texture>("street_pavement"), sm::Matrix::IdentityMatrix());
 	m_streetPieces[StreetMap::StreetType_StraightVert_1].Set(m_streetModel, content->Get<Texture>("street_1_straight"), sm::Matrix::IdentityMatrix());
 	m_streetPieces[StreetMap::StreetType_StraightHori_1].Set(m_streetModel, content->Get<Texture>("street_1_straight"), sm::Matrix::RotateAxisMatrix(MathUtils::PI2, 0, 1, 0));
-	m_streetPieces[StreetMap::StreetType_TurnUpRight_1].Set(m_streetModel, content->Get<Texture>("street_1_turn"), sm::Matrix::ScaleMatrix(1, 1, -1));
+	m_streetPieces[StreetMap::StreetType_TurnUpRight_1].Set(m_streetModel, content->Get<Texture>("street_1_turn"), sm::Matrix::RotateAxisMatrix(MathUtils::PI2, 0, 1, 0));
 	m_streetPieces[StreetMap::StreetType_TurnUpLeft_1].Set(m_streetModel, content->Get<Texture>("street_1_turn"), sm::Matrix::RotateAxisMatrix(MathUtils::PI, 0, 1, 0));
 	m_streetPieces[StreetMap::StreetType_TurnDownRight_1].Set(m_streetModel, content->Get<Texture>("street_1_turn"), sm::Matrix::IdentityMatrix());
-	m_streetPieces[StreetMap::StreetType_TurnDownLeft_1].Set(m_streetModel, content->Get<Texture>("street_1_turn"), sm::Matrix::ScaleMatrix(-1, 1, 1));
-	m_streetPieces[StreetMap::StreetType_TUp_1].Set(m_streetModel, content->Get<Texture>("street_1_t"), sm::Matrix::ScaleMatrix(1, 1, -1));
+	m_streetPieces[StreetMap::StreetType_TurnDownLeft_1].Set(m_streetModel, content->Get<Texture>("street_1_turn"), sm::Matrix::RotateAxisMatrix(-MathUtils::PI2, 0, 1, 0));
+	m_streetPieces[StreetMap::StreetType_TUp_1].Set(m_streetModel, content->Get<Texture>("street_1_t"), sm::Matrix::RotateAxisMatrix(MathUtils::PI, 0, 1, 0));
 	m_streetPieces[StreetMap::StreetType_TDown_1].Set(m_streetModel, content->Get<Texture>("street_1_t"), sm::Matrix::ScaleMatrix(1, 1, 1));
 	m_streetPieces[StreetMap::StreetType_TLeft_1].Set(m_streetModel, content->Get<Texture>("street_1_t"), sm::Matrix::RotateAxisMatrix(MathUtils::PI2, 0, 1, 0));
 	m_streetPieces[StreetMap::StreetType_TRight_1].Set(m_streetModel, content->Get<Texture>("street_1_t"), sm::Matrix::RotateAxisMatrix(-MathUtils::PI2, 0, 1, 0));
