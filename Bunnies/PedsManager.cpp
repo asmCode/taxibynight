@@ -20,6 +20,7 @@ const float PedsManager::TaxiViewRange = 30.0f;
 
 PedsManager::PedsManager(const sm::Vec3 taxiPosition)
 {
+	m_pedResets = 0;
 	m_taxiPosition = taxiPosition;
 	Content *content = InterfaceProvider::GetContent();
 
@@ -110,7 +111,7 @@ void PedsManager::MovePedNearCar(Ped *ped)
 	{
 		int randIndex = random.GetInt(0, avaibleSegmentsCount - 1);
 
-		ped->ResetPosition(positions[randIndex]);
+		ResetPosition(m_peds[randIndex], positions[randIndex], directions[randIndex]);
 	}
 
 	/*sm::Vec3 randomDirection = sm::Vec3(random.GetFloat(-1, 1), 0, random.GetFloat(-1, 1));
@@ -139,12 +140,24 @@ void PedsManager::NotifyStreetSegmentVisibilityChanged(StreetSegment *streetSegm
 				sm::Vec3 direction;
 
 				StreetMap::Instance->GetRandomPavementArea(streetSegment->CoordX(), streetSegment->CoordY(), position, direction);
-				m_peds[pedIndex]->ResetPosition(position);
+				ResetPosition(m_peds[pedIndex], position, direction);
 				pedsToSet--;
 			}
 
 			pedIndex++;
 		}
+	}
+}
+
+void PedsManager::ResetPosition(Ped *ped, const sm::Vec3 &position, const sm::Vec3 &direction)
+{
+	ped->ResetPosition(position);
+
+	m_pedResets++;
+	if (m_pedResets == PassangerPerPeds)
+	{
+		m_pedResets = 0;
+		ped->SetToPassenger(sm::Vec3(0, 0, 0), 0.0f);
 	}
 }
 

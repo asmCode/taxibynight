@@ -7,6 +7,7 @@ class Animation;
 class Model;
 class Mesh;
 class Texture;
+class Material;
 
 class Ped
 {
@@ -20,6 +21,10 @@ public:
 	void ResetPosition(const sm::Vec3 position);
 	const sm::Vec3& GetPosition() const;
 
+	void SetToPassenger(const sm::Vec3 &tripDestination, float cash);
+
+	bool IsPassenger() const;
+
 private:
 	sm::Matrix m_transform;
 
@@ -30,8 +35,15 @@ private:
 	Animation *m_getInAnim;
 	Animation *m_getOutAnim;
 
+	Material *m_pedMaterial;
+	Material *m_passengerMaterial;
+
 	sm::Vec3 m_position;
 	sm::Vec3 m_direction;
+
+	bool m_isPassenger;
+	sm::Vec3 m_tripDestination;
+	float m_cash;
 };
 
 #endif // PED

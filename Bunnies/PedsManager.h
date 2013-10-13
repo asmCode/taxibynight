@@ -25,13 +25,17 @@ public:
 private:
 	static const uint32_t MaxPeds = 100;
 	static const float TaxiViewRange;
+	static const uint32_t PassangerPerPeds = 10; // every x ped is a passenger
 
 	Ped *m_peds[MaxPeds];
+
+	uint32_t m_pedResets; /// used to spawn passenger
 
 	sm::Vec3 m_taxiPosition;
 
 	void MovePedNearCar(Ped *ped);
 	bool IsOnVisibleSegment(Ped *ped);
+	void ResetPosition(Ped *ped, const sm::Vec3 &position, const sm::Vec3 &direction);
 };
 
 #endif // PEDS_MANAGER

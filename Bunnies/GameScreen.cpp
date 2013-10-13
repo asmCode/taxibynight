@@ -83,7 +83,7 @@ void GameScreen::Update(float time, float seconds)
 	m_manCam->Process(seconds);
 
 	sm::Vec3 taxiPosition = m_taxi->GetPosition();
-	sm::Vec3 camPosition = taxiPosition + sm::Vec3(0, 50, -4);
+	sm::Vec3 camPosition = taxiPosition + sm::Vec3(0, 10, -4);
 	sm::Vec3 camLook = (camPosition - (taxiPosition + sm::Vec3(0, 0, +2))).GetNormalized();
 	m_viewMatrix =
 		sm::Matrix::TranslateMatrix(camPosition) *

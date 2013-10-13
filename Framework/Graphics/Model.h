@@ -5,6 +5,7 @@
 
 class Mesh;
 class MeshPart;
+class Material;
 
 class Model
 {
@@ -26,6 +27,8 @@ public:
 	void SetTransformForMeshes(const sm::Matrix &transform);
 
 	void SetAlwaysVisible(bool visible);
+
+	void SetMaterial(Material *material);
 
 	Model *CreateReference();
 };

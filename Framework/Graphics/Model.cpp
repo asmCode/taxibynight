@@ -50,6 +50,12 @@ void Model::SetAlwaysVisible(bool visible)
 			meshes[i]->GetMeshParts()[j]->IsAlvaysVisible() = visible;
 }
 
+void Model::SetMaterial(Material *material)
+{
+	for (uint32_t i = 0; i < m_meshParts.size(); i++)
+		m_meshParts[i]->SetMaterial(material);
+}
+
 Model *Model::CreateReference()
 {
 	Model *model = new Model();
