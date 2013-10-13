@@ -5,27 +5,11 @@
 #include <string>
 #include <stdint.h>
 
+#include "StreetPiece.h"
+
 class StreetMap
 {
 public:
-	enum StreetType : uint8_t
-	{
-		StreetType_Pavement = 0,
-		StreetType_StraightHori_1,
-		StreetType_StraightVert_1,
-		StreetType_TurnUpRight_1,
-		StreetType_TurnUpLeft_1,
-		StreetType_TurnDownRight_1,
-		StreetType_TurnDownLeft_1,
-		StreetType_Cross_1,
-		StreetType_TUp_1,
-		StreetType_TDown_1,
-		StreetType_TLeft_1,
-		StreetType_TRight_1,
-
-		StreetType_Skycrapper_1,
-	};
-
 	enum PixelType : uint8_t
 	{
 		PixelType_Green,
@@ -34,13 +18,17 @@ public:
 		PixelType_White,
 	};
 
+	static StreetMap *Instance;
+
 	StreetMap(const std::string &dataPath);
 	~StreetMap();
 
 	uint32_t GetWidth() const;
 	uint32_t GetHeight() const;
 
-	StreetType GetStreetType(uint32_t x, uint32_t y) const;
+	StreetPiece::PieceType GetPieceType(uint32_t x, uint32_t y) const;
+
+	bool GetRandomPavementArea(uint32_t x, uint32_t y, sm::Vec3 &position, sm::Vec3 &direction);
 
 private:
 	uint8_t *m_streetMap;

@@ -19,3 +19,8 @@ float Randomizer::GetFloat(float min, float max)
 {
 	return (GetFloat() * (max - min)) + min;
 }
+
+float Randomizer::GetSign()
+{
+	return rand() % 2 == 0 ? 1.0f : -1.0f;
+}

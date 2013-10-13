@@ -1,5 +1,6 @@
 #include "GameScreen.h"
 
+#include "PedsManager.h"
 #include "IGun.h"
 #include "IBullet.h"
 #include "InterfaceProvider.h"
@@ -24,7 +25,8 @@
 
 GameScreen::GameScreen(void) :
 	m_street(NULL),
-	m_taxi(NULL)
+	m_taxi(NULL),
+	m_pedsManager(NULL)
 {
 }
 
@@ -36,8 +38,10 @@ bool GameScreen::Initialize()
 {
 	m_manCam = new ManCam();
 
-	m_street = new Street();
 	m_taxi = new Taxi();
+	m_pedsManager = new PedsManager(m_taxi->GetPosition());
+	m_street = new Street(m_pedsManager);
+	m_street->SetInitialVisibility(m_taxi->GetPosition());
 
 	uint32_t screenWidth = Environment::GetInstance()->GetScreenWidth();
 	uint32_t screenHeight = Environment::GetInstance()->GetScreenHeight();
@@ -60,8 +64,8 @@ bool GameScreen::ReleaseResources()
 void GameScreen::Draw(float time, float seconds)
 {
 	m_street->Draw(time, seconds);
-
 	m_taxi->Draw(time, seconds);
+	m_pedsManager->Draw(time, seconds);
 }
 
 void GameScreen::Update(float time, float seconds)
@@ -70,13 +74,17 @@ void GameScreen::Update(float time, float seconds)
 
 	m_taxi->Update(time, seconds);
 
+	m_street->SetTaxiPosition(m_taxi->GetPosition());
 	m_street->Update(time, seconds);
+
+	m_pedsManager->SetTaxiPosition(m_taxi->GetPosition());
+	m_pedsManager->Update(time, seconds);
 
 	m_manCam->Process(seconds);
 
 	sm::Vec3 taxiPosition = m_taxi->GetPosition();
-	sm::Vec3 camPosition = taxiPosition + sm::Vec3(0, 10, -6);
-	sm::Vec3 camLook = (camPosition - (taxiPosition + sm::Vec3(0, 0, +4))).GetNormalized();
+	sm::Vec3 camPosition = taxiPosition + sm::Vec3(0, 50, -4);
+	sm::Vec3 camLook = (camPosition - (taxiPosition + sm::Vec3(0, 0, +2))).GetNormalized();
 	m_viewMatrix =
 		sm::Matrix::TranslateMatrix(camPosition) *
 		sm::Matrix::CreateLookAt2(camLook, sm::Vec3(0, 1, 0));

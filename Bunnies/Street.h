@@ -2,35 +2,41 @@
 #define STREET
 
 #include <Math/Matrix.h>
+#include <stdint.h>
 
 class Model;
 class Texture;
 class StreetMap;
-
-struct StreetPiece
-{
-	void Set(Model *model, Texture *texture, const sm::Matrix &world)
-	{
-		m_model = model;
-		m_texture = texture;
-		m_world = world;
-	}
-
-	Model *m_model;
-	Texture *m_texture;
-	sm::Matrix m_world;
-};
+class StreetPiece;
+class StreetSegment;
+class PedsManager;
 
 class Street
 {
 public:
-	Street();
+	static Street *Instance;
+
+	Street(PedsManager *pedsManager);
 	~Street();
 
 	void Update(float time, float seconds);
 	void Draw(float time, float seconds);
 
+	StreetPiece* GetStreetPiece(uint8_t type);
+
+	void SetTaxiPosition(const sm::Vec3 &taxiPosition);
+
+	void GetSegmentCoords(const sm::Vec3 &position, int32_t &x, int32_t &y) const;
+	StreetSegment* GetSegmentAtPosition(const sm::Vec3 &position) const;
+	StreetSegment* GetSegment(int x, int y) const;
+	void SetInitialVisibility(const sm::Vec3 &taxiPosition);
+
 private:
+	static const int Range = 2;
+
+	PedsManager *m_pedsManager;
+
+	sm::Vec3 m_taxiPosition;
 	Model *m_streetModel;
 	Model *m_skycrapper;
 
@@ -39,7 +45,11 @@ private:
 
 	StreetMap *m_streetMap;
 
-	StreetPiece m_streetPieces[256];
+	StreetPiece *m_streetPieces[256];
+
+	StreetSegment **m_streetSegments;
+
+	StreetSegment *m_lastTaxiSegment;
 };
 
 #endif // STREET

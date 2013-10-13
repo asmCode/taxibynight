@@ -1,12 +1,20 @@
 #include "StreetMap.h"
 #include "InterfaceProvider.h"
+#include "Street.h"
+#include "StreetPiece.h"
+#include <Utils/Randomizer.h>
 
+#include <Math/MathUtils.h>
 #include <Graphics/Content/Content.h>
 #include <Graphics/ImageLoader.h>
 #include <assert.h>
 
+StreetMap *StreetMap::Instance;
+
 StreetMap::StreetMap(const std::string &dataPath)
 {
+	Instance = this;
+
 	uint8_t *data;
 	uint32_t bytesCount;
 
@@ -30,88 +38,88 @@ StreetMap::StreetMap(const std::string &dataPath)
 			PixelType pDown = GetPixelType(data, x, y - 1);
 
 			if (pixelType == PixelType_White)
-				m_streetMap[y * m_width + x] = StreetType_Pavement;
+				m_streetMap[y * m_width + x] = StreetPiece::PieceType_Pavement;
 			else if ( // prosto poziomo
 				pixelType == PixelType_Green &&
 				pLeft == PixelType_Green &&
 				pRight == PixelType_Green &&
 				pUp!= PixelType_Green &&
 				pDown != PixelType_Green)
-				m_streetMap[y * m_width + x] = StreetType_StraightHori_1;
+				m_streetMap[y * m_width + x] = StreetPiece::PieceType_StraightHori_1;
 			else if ( // prosto pionowo
 				pixelType == PixelType_Green &&
 				pLeft != PixelType_Green &&
 				pRight != PixelType_Green &&
 				pUp == PixelType_Green &&
 				pDown == PixelType_Green)
-				m_streetMap[y * m_width + x] = StreetType_StraightVert_1;
+				m_streetMap[y * m_width + x] = StreetPiece::PieceType_StraightVert_1;
 			else if ( // skret up prawo
 				pixelType == PixelType_Green &&
 				pLeft != PixelType_Green &&
 				pRight == PixelType_Green &&
 				pUp != PixelType_Green &&
 				pDown == PixelType_Green)
-				m_streetMap[y * m_width + x] = StreetType_TurnUpRight_1;
+				m_streetMap[y * m_width + x] = StreetPiece::PieceType_TurnUpRight_1;
 			else if ( // skret up lewo
 				pixelType == PixelType_Green &&
 				pLeft == PixelType_Green &&
 				pRight != PixelType_Green &&
 				pUp != PixelType_Green &&
 				pDown == PixelType_Green)
-				m_streetMap[y * m_width + x] = StreetType_TurnUpLeft_1;
+				m_streetMap[y * m_width + x] = StreetPiece::PieceType_TurnUpLeft_1;
 			else if ( // skret down prawo
 				pixelType == PixelType_Green &&
 				pLeft != PixelType_Green &&
 				pRight == PixelType_Green &&
 				pUp == PixelType_Green &&
 				pDown != PixelType_Green)
-				m_streetMap[y * m_width + x] = StreetType_TurnDownRight_1;
+				m_streetMap[y * m_width + x] = StreetPiece::PieceType_TurnDownRight_1;
 			else if ( // skret down lewo
 				pixelType == PixelType_Green &&
 				pLeft == PixelType_Green &&
 				pRight != PixelType_Green &&
 				pUp == PixelType_Green &&
 				pDown != PixelType_Green)
-				m_streetMap[y * m_width + x] = StreetType_TurnDownLeft_1;
+				m_streetMap[y * m_width + x] = StreetPiece::PieceType_TurnDownLeft_1;
 			else if ( // up T
 				pixelType == PixelType_Green &&
 				pLeft == PixelType_Green &&
 				pRight == PixelType_Green &&
 				pUp == PixelType_Green &&
 				pDown != PixelType_Green)
-				m_streetMap[y * m_width + x] = StreetType_TUp_1;
+				m_streetMap[y * m_width + x] = StreetPiece::PieceType_TUp_1;
 			else if ( // down T
 				pixelType == PixelType_Green &&
 				pLeft == PixelType_Green &&
 				pRight == PixelType_Green &&
 				pUp != PixelType_Green &&
 				pDown == PixelType_Green)
-				m_streetMap[y * m_width + x] = StreetType_TDown_1;
+				m_streetMap[y * m_width + x] = StreetPiece::PieceType_TDown_1;
 			else if ( // left T
 				pixelType == PixelType_Green &&
 				pLeft == PixelType_Green &&
 				pRight != PixelType_Green &&
 				pUp == PixelType_Green &&
 				pDown == PixelType_Green)
-				m_streetMap[y * m_width + x] = StreetType_TLeft_1;
+				m_streetMap[y * m_width + x] = StreetPiece::PieceType_TLeft_1;
 			else if ( // Right T
 				pixelType == PixelType_Green &&
 				pLeft != PixelType_Green &&
 				pRight == PixelType_Green &&
 				pUp == PixelType_Green &&
 				pDown == PixelType_Green)
-				m_streetMap[y * m_width + x] = StreetType_TRight_1;
+				m_streetMap[y * m_width + x] = StreetPiece::PieceType_TRight_1;
 			else if ( // cross
 				pixelType == PixelType_Green &&
 				pLeft == PixelType_Green &&
 				pRight == PixelType_Green &&
 				pUp == PixelType_Green &&
 				pDown == PixelType_Green)
-				m_streetMap[y * m_width + x] = StreetType_Cross_1;
+				m_streetMap[y * m_width + x] = StreetPiece::PieceType_Cross_1;
 
 			else if ( // skycrapper
 				pixelType == PixelType_Blue)
-				m_streetMap[y * m_width + x] = StreetType_Skycrapper_1;
+				m_streetMap[y * m_width + x] = StreetPiece::PieceType_Skycrapper_1;
 		}
 	}
 
@@ -133,9 +141,177 @@ uint32_t StreetMap::GetHeight() const
 	return m_height;
 }
 
-StreetMap::StreetType StreetMap::GetStreetType(uint32_t x, uint32_t y) const
+StreetPiece::PieceType StreetMap::GetPieceType(uint32_t x, uint32_t y) const
 {
-	return (StreetMap::StreetType)m_streetMap[y * m_width + x];
+	return (StreetPiece::PieceType)m_streetMap[y * m_width + x];
+}
+
+bool StreetMap::GetRandomPavementArea(uint32_t x, uint32_t y, sm::Vec3 &position, sm::Vec3 &direction)
+{
+	static Randomizer random;
+
+	StreetPiece::PieceType type = GetPieceType(x, y);
+
+	float streetWidth = 10.0f;
+	float pavementWidth = 1.0f;
+
+	switch (type)
+	{
+	case StreetPiece::PieceType_Pavement:
+		return false;
+		break;
+	case StreetPiece::PieceType_StraightHori_1:
+		position = sm::Vec3(
+			x * streetWidth + random.GetFloat(-streetWidth / 2, streetWidth / 2),
+			0,
+			y * streetWidth + random.GetFloat(streetWidth / 2 - pavementWidth, streetWidth / 2) * random.GetSign());
+
+		direction = sm::Vec3(MathUtils::Sign(random.GetFloat(-1, 1)), 0, 0);
+		return true;
+		
+	case StreetPiece::PieceType_StraightVert_1:
+		position = sm::Vec3(
+			x * streetWidth + random.GetFloat(streetWidth / 2 - pavementWidth, streetWidth / 2) * random.GetSign(),
+			0,
+			y * streetWidth + random.GetFloat(-streetWidth / 2, streetWidth / 2));
+
+		direction = sm::Vec3(0, 0, MathUtils::Sign(random.GetFloat(-1, 1)));
+		return true;
+
+	case StreetPiece::PieceType_TurnUpRight_1:
+		if (random.GetInt(0, 1) == 1)
+		{
+			position = sm::Vec3(
+				x * streetWidth + random.GetFloat(-streetWidth / 2, streetWidth / 2),
+				0,
+				y * streetWidth + random.GetFloat(streetWidth / 2 - pavementWidth, streetWidth / 2));
+		}
+		else
+		{
+			position = sm::Vec3(
+				x * streetWidth + random.GetFloat(streetWidth / 2 - pavementWidth, streetWidth / 2) * -1,
+				0,
+				y * streetWidth + random.GetFloat(-streetWidth / 2, streetWidth / 2));
+		}
+
+		direction = sm::Vec3(0, 0, MathUtils::Sign(random.GetFloat(-1, 1)));
+		return true;
+
+	case StreetPiece::PieceType_TurnUpLeft_1:
+		if (random.GetInt(0, 1) == 1)
+		{
+			position = sm::Vec3(
+				random.GetFloat(-streetWidth / 2, streetWidth / 2),
+				0,
+				random.GetFloat(streetWidth / 2 - pavementWidth, streetWidth / 2) * -1);
+		}
+		else
+		{
+			position = sm::Vec3(
+				random.GetFloat(streetWidth / 2 - pavementWidth, streetWidth / 2) * -1,
+				0,
+				random.GetFloat(-streetWidth / 2, streetWidth / 2));
+		}
+
+		position = Street::Instance->GetStreetPiece((uint8_t)type)->GetTransform() * position;
+		position.x += streetWidth * x;
+		position.z += streetWidth * y;
+
+		direction = sm::Vec3(0, 0, MathUtils::Sign(random.GetFloat(-1, 1)));
+		return true;
+
+	case StreetPiece::PieceType_TurnDownRight_1:
+		if (random.GetInt(0, 1) == 1)
+		{
+			position = sm::Vec3(
+				random.GetFloat(-streetWidth / 2, streetWidth / 2),
+				0,
+				random.GetFloat(streetWidth / 2 - pavementWidth, streetWidth / 2) * -1);
+		}
+		else
+		{
+			position = sm::Vec3(
+				random.GetFloat(streetWidth / 2 - pavementWidth, streetWidth / 2) * -1,
+				0,
+				random.GetFloat(-streetWidth / 2, streetWidth / 2));
+		}
+
+		position = Street::Instance->GetStreetPiece((uint8_t)type)->GetTransform() * position;
+		position.x += streetWidth * x;
+		position.z += streetWidth * y;
+
+		direction = sm::Vec3(0, 0, MathUtils::Sign(random.GetFloat(-1, 1)));
+		return true;
+
+	case StreetPiece::PieceType_TurnDownLeft_1:
+		if (random.GetInt(0, 1) == 1)
+		{
+			position = sm::Vec3(
+				random.GetFloat(-streetWidth / 2, streetWidth / 2),
+				0,
+				random.GetFloat(streetWidth / 2 - pavementWidth, streetWidth / 2) * -1);
+		}
+		else
+		{
+			position = sm::Vec3(
+				random.GetFloat(streetWidth / 2 - pavementWidth, streetWidth / 2) * -1,
+				0,
+				random.GetFloat(-streetWidth / 2, streetWidth / 2));
+		}
+
+		position = Street::Instance->GetStreetPiece((uint8_t)type)->GetTransform() * position;
+		position.x += streetWidth * x;
+		position.z += streetWidth * y;
+
+		direction = sm::Vec3(0, 0, MathUtils::Sign(random.GetFloat(-1, 1)));
+		return true;
+
+	case StreetPiece::PieceType_Cross_1:
+		break;
+
+	case StreetPiece::PieceType_TUp_1:
+		position = sm::Vec3(
+			x * streetWidth + random.GetFloat(-streetWidth / 2, streetWidth / 2),
+			0,
+			y * streetWidth + random.GetFloat(streetWidth / 2 - pavementWidth, streetWidth / 2) * -1);
+
+		direction = sm::Vec3(MathUtils::Sign(random.GetFloat(-1, 1)), 0, 0);
+		return true;
+
+	case StreetPiece::PieceType_TDown_1:
+		position = sm::Vec3(
+			x * streetWidth + random.GetFloat(-streetWidth / 2, streetWidth / 2),
+			0,
+			y * streetWidth + random.GetFloat(streetWidth / 2 - pavementWidth, streetWidth / 2) * 1);
+
+		direction = sm::Vec3(MathUtils::Sign(random.GetFloat(-1, 1)), 0, 0);
+		return true;
+
+	case StreetPiece::PieceType_TLeft_1:
+		position = sm::Vec3(
+			x * streetWidth + random.GetFloat(streetWidth / 2 - pavementWidth, streetWidth / 2) * 1,
+			0,
+			y * streetWidth + random.GetFloat(-streetWidth / 2, streetWidth / 2));
+
+		direction = sm::Vec3(MathUtils::Sign(random.GetFloat(-1, 1)), 0, 0);
+		return true;
+
+	case StreetPiece::PieceType_TRight_1:
+		position = sm::Vec3(
+			x * streetWidth + random.GetFloat(streetWidth / 2 - pavementWidth, streetWidth / 2) * -1,
+			0,
+			y * streetWidth + random.GetFloat(-streetWidth / 2, streetWidth / 2));
+
+		direction = sm::Vec3(MathUtils::Sign(random.GetFloat(-1, 1)), 0, 0);
+		return true;
+
+	case StreetPiece::PieceType_Skycrapper_1:
+		break;
+	default:
+		break;
+	}
+
+	return false;
 }
 
 StreetMap::PixelType StreetMap::GetPixelType(uint8_t *data, uint32_t x, uint32_t y)
