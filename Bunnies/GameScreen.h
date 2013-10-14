@@ -10,6 +10,7 @@ class ManCam;
 class Taxi;
 class PedsManager;
 class Arrow;
+class PlaceIndicator;
 
 class GameScreen : public IScreen
 {
@@ -34,6 +35,7 @@ private:
 	Taxi *m_taxi;
 	PedsManager *m_pedsManager;
 	Arrow *m_arrow;
+	PlaceIndicator *m_placeIndicator;
 
 	sm::Matrix m_viewMatrix;
 	sm::Matrix m_projMatrix;

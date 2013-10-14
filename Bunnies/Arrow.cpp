@@ -28,10 +28,8 @@ Arrow::~Arrow()
 
 void Arrow::Update(float time, float seconds)
 {
-	m_direction = sm::Vec3(1, 0, 1).GetNormalized();
-
 	m_transform =
-		sm::Matrix::CreateLookAt(m_direction, sm::Vec3(0, 1, 0)) *
+		sm::Matrix::CreateLookAt(m_direction.GetReversed(), sm::Vec3(0, 1, 0)) *
 		sm::Matrix::ScaleMatrix(0.4f, 0.4f, 0.4f);
 }
 

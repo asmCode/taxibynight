@@ -1,4 +1,5 @@
 #include "Shader.h"
+#include "../Utils/Log.h"
 #include <fstream>
 #include <assert.h>
 
@@ -73,7 +74,8 @@ void Shader::SetParameter(const char *name, float val1, float val2, float val3)
 void Shader::SetParameter(const char *name, float val1, float val2, float val3, float val4)
 {
 	int uniformParam = glGetUniformLocation(m_programId, name);
-	assert(uniformParam != -1);
+	if (uniformParam == -1)
+		return;
 	
 	glUniform4f(uniformParam, val1, val2, val3, val4);
 }
@@ -83,16 +85,22 @@ void Shader::SetParameter(const char *name, const sm::Vec3 &val)
 	SetParameter(name, val.x, val.y, val.z);
 }
 
+void Shader::SetParameter(const char *name, const sm::Vec4 &val)
+{
+	SetParameter(name, val.x, val.y, val.z, val.w);
+}
+
 void Shader::SetTextureParameter(const char *name, unsigned channel, unsigned texId)
 {
+	int uniformParam = glGetUniformLocation(m_programId, name);
+	if (uniformParam == -1)
+		return;
+
 	glActiveTexture(GL_TEXTURE0 + channel);
 	glBindTexture(GL_TEXTURE_2D, texId);
-
-	int uniformParam = glGetUniformLocation(m_programId, name);
-	assert(uniformParam != -1);
 	
 	glUniform1i(uniformParam, channel);
-
+	
 }
 
 void Shader::SetMatrixParameter(const char *name, const sm::Matrix &matrix)
@@ -136,7 +144,8 @@ GLuint Shader::CompileShader(GLenum shaderType, const char* file)
     if (logLength > 0) {
         GLchar *log = (GLchar *)malloc(logLength);
         glGetShaderInfoLog(shaderId, logLength, &logLength, log);
-		printf("%s", log);
+		OutputDebugStringA(log);
+		//Log::LogT("shader log: %s", log);
         free(log);
     }
 #endif
@@ -167,13 +176,12 @@ void Shader::LinkProgram()
         free(log);
     }
 #endif
-    
-    glGetProgramiv(m_programId, GL_LINK_STATUS, &status);
-    if (status == 0)
+
+	glGetProgramiv(m_programId, GL_LINK_STATUS, &status);
+    if (status != GL_TRUE)
 	{
-        return;
 		assert(false);
-    }
+	}
 	
 	ValidateProgram(m_programId);
 }
@@ -195,10 +203,10 @@ bool Shader::ValidateProgram(GLuint programId)
 			glGetProgramInfoLog(programId, logLength, &logLength, _log);
 			printf("validate log: %s\n", _log);
 			delete _log;
-			//assert(false);
+			assert(false);
 		}
 	}    
     
-    return status == 0;
+    return status == GL_TRUE;
 }
 

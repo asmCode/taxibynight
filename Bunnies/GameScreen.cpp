@@ -12,6 +12,8 @@
 #include "DrawingRoutines.h"
 #include "Taxi.h"
 #include "Arrow.h"
+#include "Billboard.h"
+#include "PlaceIndicator.h"
 
 #include <Math/MathUtils.h>
 #include <Graphics/Shader.h>
@@ -34,6 +36,8 @@ GameScreen::~GameScreen(void)
 
 bool GameScreen::Initialize()
 {
+	Billboard::Initialize();
+
 	m_manCam = new ManCam();
 
 	m_taxi = new Taxi();
@@ -42,6 +46,7 @@ bool GameScreen::Initialize()
 	m_street->SetInitialVisibility(m_taxi->GetPosition());
 
 	m_arrow = new Arrow();
+	m_placeIndicator = new PlaceIndicator();
 
 	uint32_t screenWidth = Environment::GetInstance()->GetScreenWidth();
 	uint32_t screenHeight = Environment::GetInstance()->GetScreenHeight();
@@ -67,6 +72,7 @@ void GameScreen::Draw(float time, float seconds)
 	m_taxi->Draw(time, seconds);
 	m_pedsManager->Draw(time, seconds);
 	m_arrow->Draw(time, seconds);
+	m_placeIndicator->Draw(time, seconds);
 }
 
 void GameScreen::Update(float time, float seconds)
@@ -81,6 +87,7 @@ void GameScreen::Update(float time, float seconds)
 	m_pedsManager->SetTaxiPosition(m_taxi->GetPosition());
 	m_pedsManager->Update(time, seconds);
 
+	m_arrow->SetDirection((sm::Vec3(100, 0, 104) - m_taxi->GetPosition()).GetNormalized());
 	m_arrow->Update(time, seconds);
 
 	m_manCam->Process(seconds);
@@ -96,6 +103,10 @@ void GameScreen::Update(float time, float seconds)
 
 	//m_viewMatrix = m_manCam->GetViewMatrix();
 	//camPosition = m_viewMatrix.GetInversed() * sm::Vec3(0, 0, 0);
+
+	m_placeIndicator->SetActive(true);
+	m_placeIndicator->SetPosition(sm::Vec3(100, 0, 104));
+	m_placeIndicator->Update(time, seconds, m_projMatrix * m_viewMatrix);
 
 	DrawingRoutines::SetProjectionMatrix(m_projMatrix);
 	DrawingRoutines::SetViewMatrix(m_viewMatrix);
