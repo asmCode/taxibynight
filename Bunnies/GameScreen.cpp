@@ -11,9 +11,7 @@
 #include "Street.h"
 #include "DrawingRoutines.h"
 #include "Taxi.h"
-
-#include "../BunniesView/IShapesRenderer.h"
-#include "../BunniesView/WinShapesRenderer.h"
+#include "Arrow.h"
 
 #include <Math/MathUtils.h>
 #include <Graphics/Shader.h>
@@ -43,6 +41,8 @@ bool GameScreen::Initialize()
 	m_street = new Street(m_pedsManager);
 	m_street->SetInitialVisibility(m_taxi->GetPosition());
 
+	m_arrow = new Arrow();
+
 	uint32_t screenWidth = Environment::GetInstance()->GetScreenWidth();
 	uint32_t screenHeight = Environment::GetInstance()->GetScreenHeight();
 
@@ -66,6 +66,7 @@ void GameScreen::Draw(float time, float seconds)
 	m_street->Draw(time, seconds);
 	m_taxi->Draw(time, seconds);
 	m_pedsManager->Draw(time, seconds);
+	m_arrow->Draw(time, seconds);
 }
 
 void GameScreen::Update(float time, float seconds)
@@ -79,6 +80,8 @@ void GameScreen::Update(float time, float seconds)
 
 	m_pedsManager->SetTaxiPosition(m_taxi->GetPosition());
 	m_pedsManager->Update(time, seconds);
+
+	m_arrow->Update(time, seconds);
 
 	m_manCam->Process(seconds);
 

@@ -9,6 +9,7 @@ class Street;
 class ManCam;
 class Taxi;
 class PedsManager;
+class Arrow;
 
 class GameScreen : public IScreen
 {
@@ -32,6 +33,7 @@ private:
 	Street *m_street;
 	Taxi *m_taxi;
 	PedsManager *m_pedsManager;
+	Arrow *m_arrow;
 
 	sm::Matrix m_viewMatrix;
 	sm::Matrix m_projMatrix;
