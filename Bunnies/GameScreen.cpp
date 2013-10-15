@@ -1,11 +1,8 @@
 #include "GameScreen.h"
 
 #include "PedsManager.h"
-#include "IGun.h"
-#include "IBullet.h"
 #include "InterfaceProvider.h"
 #include "Environment.h"
-#include "Skydome.h"
 #include "GameProps.h"
 #include "ManCam.h"
 #include "Street.h"

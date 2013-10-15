@@ -13,6 +13,8 @@ class Ped;
 class PedsManager
 {
 public:
+	static PedsManager *Instance;
+
 	PedsManager(const sm::Vec3 taxiPosition);
 	~PedsManager();
 
@@ -22,10 +24,15 @@ public:
 
 	void NotifyStreetSegmentVisibilityChanged(StreetSegment *streetSegment);
 
+	bool CanPassangerApproachTocar() const;
+	void NotifyApproachingToCar(Ped *ped);
+
 private:
 	static const uint32_t MaxPeds = 100;
 	static const float TaxiViewRange;
 	static const uint32_t PassangerPerPeds = 10; // every x ped is a passenger
+
+	Ped *m_pedApproaching;
 
 	Ped *m_peds[MaxPeds];
 

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "IScreen.h"
-#include "IDamageableProvider.h"
 #include <Math/Matrix.h>
 
 class IShapesRenderer;

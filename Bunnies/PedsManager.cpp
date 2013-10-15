@@ -17,9 +17,13 @@
 #include <assert.h>
 
 const float PedsManager::TaxiViewRange = 30.0f;
+PedsManager* PedsManager::Instance;
 
-PedsManager::PedsManager(const sm::Vec3 taxiPosition)
+PedsManager::PedsManager(const sm::Vec3 taxiPosition) :
+	m_pedApproaching(NULL)
 {
+	Instance = this;
+
 	m_pedResets = 0;
 	m_taxiPosition = taxiPosition;
 	Content *content = InterfaceProvider::GetContent();
@@ -159,5 +163,15 @@ void PedsManager::ResetPosition(Ped *ped, const sm::Vec3 &position, const sm::Ve
 		m_pedResets = 0;
 		ped->SetToPassenger(sm::Vec3(0, 0, 0), 0.0f);
 	}
+}
+
+bool PedsManager::CanPassangerApproachTocar() const
+{
+	return m_pedApproaching == NULL;
+}
+
+void PedsManager::NotifyApproachingToCar(Ped *ped)
+{
+	m_pedApproaching = ped;
 }
 
