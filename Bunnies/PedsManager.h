@@ -32,6 +32,8 @@ private:
 	static const float TaxiViewRange;
 	static const uint32_t PassangerPerPeds = 10; // every x ped is a passenger
 
+	Ped *GetFreePed();
+
 	Ped *m_pedApproaching;
 
 	Ped *m_peds[MaxPeds];

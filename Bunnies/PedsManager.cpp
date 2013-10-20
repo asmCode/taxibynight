@@ -49,6 +49,21 @@ void PedsManager::SetTaxiPosition(const sm::Vec3 &position)
 
 void PedsManager::Update(float time, float seconds)
 {
+	if (Taxi::GetInstance()->IsOccupied())
+	{
+		if ((Taxi::GetInstance()->GetPosition() - Taxi::GetInstance()->GetPassengerTarget()).GetLength() < 5.0)
+		{
+			Ped *ped = GetFreePed();
+			if (ped != NULL)
+			{
+				ped->ResetPosition(m_taxiPosition);
+				ped->SetTarget(Taxi::GetInstance()->GetPassengerTarget());
+				Taxi::GetInstance()->SetFree();
+				GameScreen::GetInstance()->SetFreeMode();
+			}
+		}
+	}
+
 	if (m_pedApproaching != NULL)
 	{
 		sm::Vec3 taxiDirection = m_taxiPosition - m_pedApproaching->GetPosition();
@@ -164,7 +179,7 @@ void PedsManager::NotifyStreetSegmentVisibilityChanged(StreetSegment *streetSegm
 	{
 		int pedIndex = 0;
 
-		while (pedsToSet != 0 || pedIndex == MaxPeds - 1)
+		while (pedsToSet != 0 && pedIndex <= MaxPeds - 1)
 		{
 			if (!IsOnVisibleSegment(m_peds[pedIndex]))
 			{
@@ -179,6 +194,17 @@ void PedsManager::NotifyStreetSegmentVisibilityChanged(StreetSegment *streetSegm
 			pedIndex++;
 		}
 	}
+}
+
+Ped *PedsManager::GetFreePed()
+{
+	for (uint32_t i = 0; i < MaxPeds; i++)
+	{
+		if (!IsOnVisibleSegment(m_peds[i]))
+			return m_peds[i];
+	}
+
+	return NULL;
 }
 
 void PedsManager::ResetPosition(Ped *ped, const sm::Vec3 &position, const sm::Vec3 &direction)
