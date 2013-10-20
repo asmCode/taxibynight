@@ -25,6 +25,12 @@ public:
 
 	bool IsPassenger() const;
 
+	void SetTarget(const sm::Vec3 &target);
+
+	void StartApproach();
+	void CancelApproach();
+	bool IsTaxiInApproachRange(const sm::Vec3 &taxiPosition) const;
+
 private:
 	sm::Matrix m_transform;
 
@@ -38,8 +44,11 @@ private:
 	Material *m_pedMaterial;
 	Material *m_passengerMaterial;
 
+	sm::Vec3 m_positionBeforeApproaching;
+
 	sm::Vec3 m_position;
 	sm::Vec3 m_direction;
+	sm::Vec3 m_target; // where to go
 
 	bool m_isPassenger;
 	sm::Vec3 m_tripDestination;

@@ -47,13 +47,27 @@ void PedsManager::SetTaxiPosition(const sm::Vec3 &position)
 
 void PedsManager::Update(float time, float seconds)
 {
+	if (m_pedApproaching != NULL)
+	{
+		if (!m_pedApproaching->IsTaxiInApproachRange(m_taxiPosition))
+		{
+			m_pedApproaching->CancelApproach();
+			m_pedApproaching = NULL;
+		}
+		else
+			m_pedApproaching->SetTarget(m_taxiPosition);
+	}
+
 	for (uint32_t i = 0; i < MaxPeds; i++)
 	{
-		/*sm::Vec3 taxiDirection = m_taxiPosition - m_peds[i]->GetPosition();
+		sm::Vec3 taxiDirection = m_taxiPosition - m_peds[i]->GetPosition();
 		float distanceToTaxi = taxiDirection.GetLength();
 
-		if (distanceToTaxi > TaxiViewRange)
-			MovePedNearCar(m_peds[i]);*/
+		if (CanPassangerApproachTocar() && m_peds[i]->IsPassenger() && distanceToTaxi < 5.0f)
+		{
+			NotifyApproachingToCar(m_peds[i]);
+			m_peds[i]->StartApproach();
+		}
 
 		m_peds[i]->Update(time, seconds);
 	}
