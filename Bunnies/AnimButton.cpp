@@ -51,12 +51,16 @@ void AnimButton::OnDraw(float time, float ms)
 
 void AnimButton::OnTouchBegin(int x, int y)
 {
+	this->Control::OnTouchBegin(x, y);
+
 	bg = pushedState;
 	currentShift = pushedShift;
 }
 
 void AnimButton::OnTouchEnd(int x, int y)
 {
+	this->Control::OnTouchEnd(x, y);
+
 	bg = normalState;
 	currentShift = sm::Vec2(0, 0);
 }

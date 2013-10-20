@@ -15,10 +15,10 @@
 IGameController *gctrl;
 IGraphicsEngine *graphics;
 
-bool mouseDown = false;
+extern int ScreenWidth;
+extern int ScreenHeight;
 
-static const int ScreenWidth = 960;
-static const int ScreenHeight = 640;
+bool mouseDown = false;
 
 Renderer::Renderer(OpenglWindow *glwnd)
 {
@@ -40,7 +40,7 @@ void Renderer::Initialize()
 	gctrl = InfectedBunniesFactory::Create(graphics);
 
 	Environment::GetInstance()->SetScreenSize(ScreenWidth, ScreenHeight);
-	Environment::GetInstance()->SetBasePath(currentDir);
+	Environment::GetInstance()->SetBasePath(std::string(currentDir) + "/");
 
 	bool success = gctrl->Initialize();
 	assert(success != NULL);

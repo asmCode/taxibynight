@@ -14,6 +14,7 @@
 #include <Graphics/Model.h>
 #include <Graphics/Animation.h>
 #include <Graphics/SpriteBatch.h>
+#include <Graphics/FontRenderer.h>
 #include <stddef.h>
 #include <assert.h>
 
@@ -37,12 +38,12 @@ bool GameController::InitializeGraphics(const std::string &basePath)
 
 	m_content = new Content(m_graphicsEngine);
 	InterfaceProvider::m_content = m_content;
-	m_content->LoadTextures(basePath + "/data/gui/");
-	m_content->LoadTextures(basePath + "/data/textures/");
-	m_content->LoadShaders(basePath + "/data/shaders/");
-	m_content->LoadModels(basePath + "/data/models/");
-	m_content->LoadAnimations(basePath + "/data/animations/");
-	m_content->LoadMaterials(basePath + "/data/materials/");
+	m_content->LoadTextures(basePath + "data/gui/");
+	m_content->LoadTextures(basePath + "data/textures/");
+	m_content->LoadShaders(basePath + "data/shaders/");
+	m_content->LoadModels(basePath + "data/models/");
+	m_content->LoadAnimations(basePath + "data/animations/");
+	m_content->LoadMaterials(basePath + "data/materials/");
 	m_content->CombineResources();
 
 	DrawingRoutines::Initialize();
@@ -53,12 +54,13 @@ bool GameController::InitializeGraphics(const std::string &basePath)
 	SpriteBatch *spriteBatch = new SpriteBatch(shader, sm::Matrix::Ortho2DMatrix(0, screenWidth, screenHeight, 0));
 
 	SpritesMap *spritesMap = new SpritesMap();
-	if (!spritesMap->LoadFromFile(basePath + "/data/gui/SpritesMap.xml", m_content))
+	if (!spritesMap->LoadFromFile(basePath + "data/gui/SpritesMap.xml", m_content))
 		return false;
 
 	InterfaceProvider::m_graphicsEngine = m_graphicsEngine;
 	InterfaceProvider::m_spriteBatch = spriteBatch;
 	InterfaceProvider::m_spritesMap = spritesMap;
+	InterfaceProvider::m_fontRenderer = FontRenderer::LoadFromFile((basePath + "data/fonts/komika_title_32.xml").c_str(), spriteBatch);
 
 	Control::SetSpriteBatch(spriteBatch);
 	

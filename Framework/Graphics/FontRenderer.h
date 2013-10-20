@@ -24,7 +24,8 @@ public:
 	void DrawString(const char *text,
 					unsigned x,
 					unsigned y,
-					const Color &color);
+					const Color &color,
+					float scale = 0.5f);
 	
 	sm::Point<int> MeasureString(const char *text);
 };

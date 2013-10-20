@@ -40,11 +40,6 @@ void MainMenuScreen::Update(float time, float seconds)
 {
 }
 
-void MainMenuScreen::HandleRelease(uint32_t pointIndex, const sm::Vec2 &point)
-{
-	m_mainMenuPanel->HandleRelease(pointIndex, point);
-}
-
 void MainMenuScreen::HandleTapGesture(const sm::Vec2 &point)
 {
 	m_mainMenuPanel->HandleTapGesture(point);

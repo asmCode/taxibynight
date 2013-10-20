@@ -10,6 +10,7 @@ class Taxi;
 class PedsManager;
 class Arrow;
 class PlaceIndicator;
+class HUD;
 
 class GameScreen : public IScreen
 {
@@ -34,14 +35,22 @@ public:
     void HandleRelease(uint32_t pointIndex, const sm::Vec2 &point);
 	void HandleMove(uint32_t pointIndex, const sm::Vec2 &point);
 
+	void TurnLeftButtonPressed(bool isPressed);
+	void TurnRightButtonPressed(bool isPressed);
+	void AccelerationButtonPressed(bool isPressed);
+
 private:
 	static GameScreen *m_instance;
+
+	bool m_isTurnRightPressed;
+	bool m_isTurnLeftPressed;
 
 	Street *m_street;
 	Taxi *m_taxi;
 	PedsManager *m_pedsManager;
 	Arrow *m_arrow;
 	PlaceIndicator *m_placeIndicator;
+	HUD *m_hud;
 
 	sm::Matrix m_viewMatrix;
 	sm::Matrix m_projMatrix;
@@ -49,9 +58,5 @@ private:
 	ManCam *m_manCam;
 
 	void SimulatePress();
-
-	void TurnLeftButtonPressed();
-	void TurnRightButtonPressed();
-	void AccelerationButtonPressed();
 };
 

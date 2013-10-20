@@ -1,8 +1,10 @@
-#include "MainMenuPanel.h"
+#include "HUD.h"
 #include "Environment.h"
 #include "InterfaceProvider.h"
 #include "AnimButton.h"
+#include "Label.h"
 #include "SpritesMap.h"
+#include "GameScreen.h"
 #include "GameController.h"
 #include <Graphics/TexPart.h>
 #include <Graphics/Content/Content.h>
@@ -11,24 +13,25 @@
 //#include "MessageBox.h"
 //#include "SoundManager.h"
 
-MainMenuPanel::MainMenuPanel(GameController *gameController) :
-	Control("MainMenuPanel"),
-	m_gameController(gameController)
+HUD::HUD() :
+	Control("HUD")
 {
 }
 
-MainMenuPanel *MainMenuPanel::Create(GameController *gameController)
+HUD *HUD::Create(GameScreen *gameScreen)
 {	
-	MainMenuPanel *ret = new MainMenuPanel(gameController);
+	HUD *ret = new HUD();
 	if (ret != NULL)
 	{		
+		ret->m_gameScreen = gameScreen;
+
 		ret ->x = 0;
 		ret ->y = 0;
 		ret ->width = Environment::GetInstance()->GetScreenWidth();
 		ret ->height = Environment::GetInstance()->GetScreenHeight();
 
 		std::string basePath = Environment::GetInstance()->GetBasePath();
-		XMLNode *root = XMLLoader::LoadFromFile(basePath + "data/gui/MainMenuPanel.xml");
+		XMLNode *root = XMLLoader::LoadFromFile(basePath + "data/gui/HUD.xml");
 		if (root == NULL)
 			return NULL;
 
@@ -69,19 +72,45 @@ MainMenuPanel *MainMenuPanel::Create(GameController *gameController)
 
 				ret->AddChild(ctrl);
 			}
+			else if (type == "Label")
+			{
+				std::string text = childDesc.GetAttribAsString("text");
+				float size = childDesc.GetAttribAsFloat("size");
+
+				Label *ctrl = new Label("current_money", text, InterfaceProvider::GetFontRenderer(), size, Color::White, left, top);
+				ret->AddChild(ctrl);
+			}
 		}
 	}
 	
 	return ret;
 }
 
-void MainMenuPanel::Clicked(Control *control, uint32_t x, uint32_t y)
+void HUD::Clicked(Control *control, uint32_t x, uint32_t y)
 {
-	if (control->GetName() == "start_game_btn")
-		m_gameController->ShowGameScreen();
 }
 
-void MainMenuPanel::OnDraw(float time, float seconds)
+void HUD::Pressed(Control *control, uint32_t x, uint32_t y)
+{
+	if (control->GetName() == "turn_left")
+		m_gameScreen->TurnLeftButtonPressed(true);
+	else if (control->GetName() == "turn_right")
+		m_gameScreen->TurnRightButtonPressed(true);
+	if (control->GetName() == "acc_pedal")
+		m_gameScreen->AccelerationButtonPressed(true);
+}
+
+void HUD::Released(Control *control, uint32_t x, uint32_t y)
+{
+	if (control->GetName() == "turn_left")
+		m_gameScreen->TurnLeftButtonPressed(false);
+	else if (control->GetName() == "turn_right")
+		m_gameScreen->TurnRightButtonPressed(false);
+	if (control->GetName() == "acc_pedal")
+		m_gameScreen->AccelerationButtonPressed(false);
+}
+
+void HUD::OnDraw(float time, float seconds)
 {
 	this->Control::OnDraw(time, seconds);
 }

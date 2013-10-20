@@ -36,7 +36,7 @@ Street::Street(PedsManager *pedsManager)
 	m_pavementTexture = content->Get<Texture>("street_pavement");
 	assert(m_pavementTexture != NULL);
 
-	m_streetMap = new StreetMap(Environment::GetInstance()->GetBasePath() + "/Data/");
+	m_streetMap = new StreetMap(Environment::GetInstance()->GetBasePath() + "data/");
 
 	m_streetPieces[StreetPiece::PieceType_Pavement] = new StreetPiece(
 		StreetPiece::PieceType_Pavement,
@@ -261,7 +261,7 @@ StreetSegment *Street::GetRandomPavement()
 {
 	static Randomizer random;
 
-	int randomIndex = random.GetInt(0, m_pavementSegments.size());
+	int randomIndex = random.GetInt(0, m_pavementSegments.size() - 1);
 
 	return m_pavementSegments[randomIndex];
 }

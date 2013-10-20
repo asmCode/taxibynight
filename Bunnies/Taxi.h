@@ -16,9 +16,8 @@ public:
 	void Update(float time, float seconds);
 	void Draw(float time, float seconds);
 
-	void TurnLeft();
-	void TurnRight();
-	void Accelerate();
+	void SetTurn(float turnValue);
+	void Accelerate(bool accelerate);
 
 	const sm::Vec3& GetPosition() const;
 
@@ -37,8 +36,7 @@ private:
 
 	bool m_isOccupied;
 
-	bool m_isTurningLeft;
-	bool m_isTurningRight;
+	float m_turnValue;
 	bool m_isAccelerating;
 
 	Model *m_taxiModel;

@@ -7,6 +7,12 @@
 #include <stdio.h>
 #include <assert.h>
 
+//int ScreenWidth = 960;
+//int ScreenHeight = 640;
+
+int ScreenWidth = 1280;
+int ScreenHeight = 720;
+
 OpenglWindow *glwnd;
 Renderer *renderer;
 
@@ -32,7 +38,7 @@ void InitGl()
 	glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
 	glDebugMessageCallback(OpenglDebugCallback, NULL);
 
-	glViewport(0, 0, 960, 640);
+	glViewport(0, 0, ScreenWidth, ScreenHeight);
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
@@ -72,7 +78,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR, int)
 
 	glwnd = new OpenglWindow();
 	glwnd ->SetCurrentContext();
-	glwnd ->Initialize(NULL, "dupa", 960, 640, 32, 0, false, true, NULL);
+	glwnd ->Initialize(NULL, "dupa", ScreenWidth, ScreenHeight, 32, 0, false, true, NULL);
 
 	InitGl();
 

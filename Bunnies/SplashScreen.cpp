@@ -2,6 +2,7 @@
 #include "InterfaceProvider.h"
 #include "GameProps.h"
 #include "GameController.h"
+#include "Environment.h"
 #include <Graphics/Content/Content.h>
 #include <Graphics/SpriteBatch.h>
 
@@ -32,7 +33,7 @@ bool SplashScreen::ReleaseResources()
 void SplashScreen::Draw(float time, float seconds)
 {
 	InterfaceProvider::GetSpriteBatch()->Begin();
-	InterfaceProvider::GetSpriteBatch()->Draw(m_splashScreenTex, 0, 0);
+	InterfaceProvider::GetSpriteBatch()->Draw(m_splashScreenTex, 0, 0, Environment::GetInstance()->GetScreenWidth(), Environment::GetInstance()->GetScreenHeight());
 	InterfaceProvider::GetSpriteBatch()->End();
 }
 

@@ -1,0 +1,11 @@
+<Panel>
+	<AnimButton name="turn_left" left="10" top="500" image="arrow_left" image_pushed="arrow_left" />
+	<AnimButton name="turn_right" left="148" top="500" image="arrow_right" image_pushed="arrow_right" />
+	<AnimButton name="acc_pedal" left="800" top="362" image="arrow_up" image_pushed="arrow_up" />
+	<AnimButton name="brake_pedal" left="800" top="500" image="arrow_down" image_pushed="arrow_down" />
+	<Label name="total_money_label" text="Total Money:" size="0.7" left="600" top="10" />
+	<Label name="total_passengers" text="Total Courses:" size="0.7" left="600" top="42" />
+	
+	<Label name="total_money_value" text="129.23$" size="0.7" left="800" top="10" />
+	<Label name="total_passengers_value" text="12" size="0.7" left="800" top="42" />
+</Panel>

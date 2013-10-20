@@ -7,4 +7,9 @@
 	<sprite name="achievements_btn" file="gui01" bounds="256,640,128,128" />
 	<sprite name="achievements_btn_down" file="gui01" bounds="256,640,128,128" />
 	<sprite name="crosshair" file="gui01" bounds="0,768,32,32" />
+	
+	<sprite name="arrow_left" file="gui01" bounds="384,640,128,128" />
+	<sprite name="arrow_right" file="gui01" bounds="512,640,128,128" />
+	<sprite name="arrow_up" file="gui01" bounds="640,640,128,128" />
+	<sprite name="arrow_down" file="gui01" bounds="768,640,128,128" />
 </map>

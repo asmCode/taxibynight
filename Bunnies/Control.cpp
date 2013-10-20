@@ -168,18 +168,18 @@ void Control::HandlePanGesture(IGestureHandler::GestureStatus status,
 }
 
 
-void Control::HandlePress(const sm::Point<int> &point)
+void Control::HandlePress(uint32_t pointIndex, const sm::Vec2 &point)
 {
 	if (!visible || !enabled)
 		return;
 
 	std::list<Control*>::iterator it;
 	for (it = children.begin(); it != children.end(); it++)
-		(*it) ->HandlePress(sm::Point<int>(point.X - this->x, point.Y - this->y));
+		(*it) ->HandlePress(pointIndex, sm::Vec2(point.x - this->x, point.y - this->y));
 	
-	if (HitTest(point.X, point.Y))
+	if (HitTest(point.x, point.y))
 	{
-		OnTouchBegin(point.X - this->x, point.Y - this->y);
+		OnTouchBegin(point.x - this->x, point.y - this->y);
 	}
 }
 
@@ -192,7 +192,7 @@ void Control::HandleRelease(uint32_t pointIndex, const sm::Vec2 &point)
 	for (it = children.begin(); it != children.end(); it++)
 		(*it) ->HandleRelease(pointIndex, sm::Vec2(point.x - this->x, point.y - this->y));
 	
-	if (HitTest(point.x, point.x))
+	if (HitTest(point.x, point.y))
 	{
 		OnTouchEnd(point.x - this->x, point.y - this->y);
 		OnTouch(point.x - this->x, point.y - this->y);
@@ -236,10 +236,13 @@ void Control::OnTouch(int x, int y)
 
 void Control::OnTouchBegin(int x, int y)
 {
+	ObsCast(IControlEventsObserver, this)->NotifyObservers(&IControlEventsObserver::Pressed, this, x, y);
 }
 
 void Control::OnTouchEnd(int x, int y)
 {
+	ObsCast(IControlEventsObserver, this)->NotifyObservers(&IControlEventsObserver::Released, this, x, y);
+	//ObsCast(IControlEventsObserver, this)->NotifyObservers(&IControlEventsObserver::Clicked, this, x, y);
 }
 
 void Control::OnDraw(float time, float ms)

@@ -21,8 +21,8 @@ public:
 	virtual void HandleTapGesture(const sm::Vec2 &point) {}
 	virtual void HandleDoubleTapGesture(const sm::Vec2 &point) {}
 
-    virtual void HandlePress(uint32_t pointIndex, const sm::Vec2 &point) {}
-    virtual void HandleRelease(uint32_t pointIndex, const sm::Vec2 &point) {}
+	virtual void HandlePress(uint32_t pointIndex, const sm::Vec2 &point) {};
+	virtual void HandleRelease(uint32_t pointIndex, const sm::Vec2 &point) {};
 	virtual void HandleMove(uint32_t pointIndex, const sm::Vec2 &point) {}
 };
 

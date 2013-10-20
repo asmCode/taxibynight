@@ -11,6 +11,7 @@
 #include "Arrow.h"
 #include "Billboard.h"
 #include "PlaceIndicator.h"
+#include "HUD.h"
 
 #include <Math/MathUtils.h>
 #include <Graphics/Shader.h>
@@ -18,6 +19,7 @@
 #include <Graphics/Mesh.h>
 #include <Graphics/MeshPart.h>
 #include <Graphics/Texture.h>
+#include <Graphics/SpriteBatch.h>
 #include <Graphics/Content/Content.h>
 
 GameScreen *GameScreen::m_instance;
@@ -28,6 +30,9 @@ GameScreen::GameScreen(void) :
 	m_pedsManager(NULL)
 {
 	m_instance = this;
+
+	m_isTurnRightPressed = false;
+	m_isTurnLeftPressed = false;
 }
 
 GameScreen::~GameScreen(void)
@@ -53,6 +58,8 @@ bool GameScreen::Initialize()
 	m_arrow = new Arrow();
 	m_placeIndicator = new PlaceIndicator();
 
+	m_hud = HUD::Create(this);
+
 	uint32_t screenWidth = Environment::GetInstance()->GetScreenWidth();
 	uint32_t screenHeight = Environment::GetInstance()->GetScreenHeight();
 
@@ -73,11 +80,17 @@ bool GameScreen::ReleaseResources()
 
 void GameScreen::Draw(float time, float seconds)
 {
+	glEnable(GL_DEPTH_TEST);
+
 	m_street->Draw(time, seconds);
 	m_taxi->Draw(time, seconds);
 	m_pedsManager->Draw(time, seconds);
 	m_arrow->Draw(time, seconds);
 	m_placeIndicator->Draw(time, seconds);
+
+	InterfaceProvider::GetSpriteBatch()->Begin();
+	m_hud->Draw(time, seconds);
+	InterfaceProvider::GetSpriteBatch()->End();
 }
 
 void GameScreen::Update(float time, float seconds)
@@ -114,6 +127,8 @@ void GameScreen::Update(float time, float seconds)
 
 	m_placeIndicator->Update(time, seconds, m_projMatrix * m_viewMatrix);
 
+	m_hud->Update(time, seconds);
+
 	DrawingRoutines::SetProjectionMatrix(m_projMatrix);
 	DrawingRoutines::SetViewMatrix(m_viewMatrix);
 	DrawingRoutines::SetLightPosition(camPosition);
@@ -136,40 +151,66 @@ void GameScreen::SetFreeMode()
 
 void GameScreen::HandlePress(uint32_t pointIndex, const sm::Vec2 &point)
 {
+	m_hud->HandlePress(pointIndex, point);
 }
 
 void GameScreen::HandleRelease(uint32_t pointIndex, const sm::Vec2 &point)
 {
+	m_hud->HandleRelease(pointIndex, point);
 }
 
 void GameScreen::HandleMove(uint32_t pointIndex, const sm::Vec2 &point)
 {
 }
 
-void GameScreen::TurnLeftButtonPressed()
+void GameScreen::TurnLeftButtonPressed(bool isPressed)
 {
-	m_taxi->TurnLeft();
+	m_isTurnLeftPressed = isPressed;
+
+	if (!m_isTurnRightPressed && !m_isTurnLeftPressed)
+		m_taxi->SetTurn(0.0f);
+	else if (m_isTurnRightPressed)
+		m_taxi->SetTurn(-1.0f);
+	else if (m_isTurnLeftPressed)
+		m_taxi->SetTurn(1.0f);
 }
 
-void GameScreen::TurnRightButtonPressed()
+void GameScreen::TurnRightButtonPressed(bool isPressed)
 {
-	m_taxi->TurnRight();
+	m_isTurnRightPressed = isPressed;
+
+	if (!m_isTurnRightPressed && !m_isTurnLeftPressed)
+		m_taxi->SetTurn(0.0f);
+	else if (m_isTurnRightPressed)
+		m_taxi->SetTurn(-1.0f);
+	else if (m_isTurnLeftPressed)
+		m_taxi->SetTurn(1.0f);
 }
 
-void GameScreen::AccelerationButtonPressed()
+void GameScreen::AccelerationButtonPressed(bool isPressed)
 {
-	m_taxi->Accelerate();
+	if (isPressed)
+		m_taxi->Accelerate(true);
+	else
+		m_taxi->Accelerate(false);
 }
 
 void GameScreen::SimulatePress()
 {
+	return;
+
 	if (GetAsyncKeyState(VK_UP) & 0x8000)
-		AccelerationButtonPressed();
+		AccelerationButtonPressed(true);
+	else
+		AccelerationButtonPressed(false);
 
 	if (GetAsyncKeyState(VK_LEFT) & 0x8000)
-		TurnLeftButtonPressed();
+		TurnLeftButtonPressed(true);
+	else
+		TurnLeftButtonPressed(false);
 
 	if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
-		TurnRightButtonPressed();
+		TurnRightButtonPressed(true);
+	else
+		TurnRightButtonPressed(false);
 }
-

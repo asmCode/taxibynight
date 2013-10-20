@@ -86,7 +86,7 @@ public:
 						  const sm::Vec2 &trans,
 						  const sm::Vec2 &velocity);
 	void HandleTapGesture(const sm::Vec2 &point);
-	void HandlePress(const sm::Point<int> &point);
+	void HandlePress(uint32_t pointIndex, const sm::Vec2 &point);
 	void HandleRelease(uint32_t pointIndex, const sm::Vec2 &point);
 
 	virtual bool HitTest(int x, int y) const;

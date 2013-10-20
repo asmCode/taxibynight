@@ -6,6 +6,7 @@ IGraphicsEngine *InterfaceProvider::m_graphicsEngine;
 Content *InterfaceProvider::m_content;
 SpriteBatch *InterfaceProvider::m_spriteBatch;
 SpritesMap* InterfaceProvider::m_spritesMap;
+FontRenderer *InterfaceProvider::m_fontRenderer;
 
 IGraphicsEngine* InterfaceProvider::GetGraphicsEngine()
 {
@@ -26,5 +27,10 @@ SpriteBatch* InterfaceProvider::GetSpriteBatch()
 SpritesMap* InterfaceProvider::GetSpritesMap()
 {
 	return m_spritesMap;
+}
+
+FontRenderer* InterfaceProvider::GetFontRenderer()
+{
+	return m_fontRenderer;
 }
 

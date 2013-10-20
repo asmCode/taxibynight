@@ -14,8 +14,7 @@
 Taxi *Taxi::m_instance;
 
 Taxi::Taxi() :
-	m_isTurningLeft(false),
-	m_isTurningRight(false),
+	m_turnValue(0.0f),
 	m_isAccelerating(false),
 	m_speed(0.0f),
 	m_wheelsAngle(0.0f),
@@ -69,27 +68,7 @@ void Taxi::Update(float time, float seconds)
 	m_speed -= 5.0f * seconds;
 	m_speed = MathUtils::Clamp(m_speed, 0.0f, 12.0f);
 
-	bool notTurning = true;
-	if (m_isTurningRight)
-	{
-		m_wheelsAngle -= 2.0 * seconds;
-		notTurning = false;
-	}
-
-	if (m_isTurningLeft)
-	{
-		m_wheelsAngle += 2.0f * seconds;
-		notTurning = false;
-	}
-
-	/*if (notTurning)
-	{
-		if (m_wheelsAngle > 0.0)
-			m_wheelsAngle -= MathUtils::Min(m_wheelsAngle, 2.0f * seconds);
-	
-		if (m_wheelsAngle < 0.0)
-			m_wheelsAngle += MathUtils::Min(MathUtils::Abs(m_wheelsAngle), 2.0f * seconds);
-	}*/
+	m_wheelsAngle += 2.0 * m_turnValue * seconds;
 
 	m_wheelsAngle = MathUtils::Clamp(m_wheelsAngle, -MathUtils::PI4, MathUtils::PI4);
 
@@ -125,11 +104,9 @@ void Taxi::Update(float time, float seconds)
 		m_carDirection = turnMatrixNormal * m_carDirection;
 		m_carDirection.Normalize();
 
-		//if (notTurning)
-		{
-			float angleDiff = sm::Vec3::GetAngle(prevCarDirection, m_carDirection);
-			m_wheelsAngle -= angleDiff * MathUtils::Sign(m_wheelsAngle);
-		}
+	
+		float angleDiff = sm::Vec3::GetAngle(prevCarDirection, m_carDirection);
+		m_wheelsAngle -= angleDiff * MathUtils::Sign(m_wheelsAngle);
 
 		m_position = turnMatrix * m_position;
 	}
@@ -149,10 +126,6 @@ void Taxi::Update(float time, float seconds)
 		m_frontLeftWheel->m_worldMatrix *
 		sm::Matrix::RotateAxisMatrix(m_wheelsAngle, 0, 1, 0) *
 		m_frontLeftWheel->m_worldInverseMatrix;
-
-	m_isTurningLeft = false;
-	m_isTurningRight = false;
-	m_isAccelerating = false;
 }
 
 void Taxi::Draw(float time, float seconds)
@@ -160,19 +133,14 @@ void Taxi::Draw(float time, float seconds)
 	DrawingRoutines::DrawWithMaterial(m_taxiModel->m_meshParts, m_worldMatrix);
 }
 
-void Taxi::TurnLeft()
+void Taxi::SetTurn(float turnValue)
 {
-	m_isTurningLeft = true;
+	m_turnValue = turnValue;
 }
 
-void Taxi::TurnRight()
+void Taxi::Accelerate(bool accelerate)
 {
-	m_isTurningRight = true;
-}
-
-void Taxi::Accelerate()
-{
-	m_isAccelerating = true;
+	m_isAccelerating = accelerate;
 }
 
 const sm::Vec3& Taxi::GetPosition() const

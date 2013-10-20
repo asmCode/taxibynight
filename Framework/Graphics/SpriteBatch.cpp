@@ -80,7 +80,7 @@ void SpriteBatch::Draw(const Color &color, int x, int y, int width, int height)
 		color.R, color.G, color.B, color.A,
 		color.R, color.G, color.B, color.A,
 		color.R, color.G, color.B, color.A
-	};	
+	};
 	
 	Draw(NULL, verts, NULL, _color);
 }

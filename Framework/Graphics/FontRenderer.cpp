@@ -2,6 +2,7 @@
 #include "FontRenderer.h"
 
 #include <Graphics/ImageLoader.h>
+#include <Graphics/ImageUtils.h>
 #include <IO/Path.h>
 #include <XML/XMLNode.h>
 #include <XML/XMLLoader.h>
@@ -9,7 +10,6 @@
 
 #include <Windows.h>
 #include <gl/gl.h>
-#include <glext.h>
 
 FontRenderer::FontRenderer() :
 	m_spriteBatch(NULL)
@@ -28,11 +28,13 @@ Texture *FontRenderer::LoadFontBitmap(const std::string &path)
 
 	if (!ImageLoader::LoadFromFile(path, data, width, height, bytesCount))
 		return NULL;
+
+	ImageUtils::FlipVertical(data, width, height, bytesCount);
 	
 	Texture *texture = new Texture(
 		width,
 		height,
-		bytesCount,
+		bytesCount * 8,
 		data,
 		Texture::Wrap_ClampToEdge,
 		Texture::Filter_Nearest,
@@ -41,10 +43,10 @@ Texture *FontRenderer::LoadFontBitmap(const std::string &path)
 
 	delete [] data;
 	
-	texture ->BindTexture();
-	//glGenerateMipmap(GL_TEXTURE_2D);
-//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	/*texture ->BindTexture();
+	glGenerateMipmap(GL_TEXTURE_2D);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);*/
 
 	/*glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
@@ -72,7 +74,7 @@ FontRenderer* FontRenderer::LoadFromFile(const char *path, SpriteBatch *spriteBa
 {
 	assert(spriteBatch != NULL);
 
-	FontLetter texLetters[256];
+ 	FontLetter texLetters[256];
 
 	XMLNode *xmlDoc = XMLLoader::LoadFromFile(path);
 	if (xmlDoc == NULL)
@@ -95,15 +97,19 @@ FontRenderer* FontRenderer::LoadFromFile(const char *path, SpriteBatch *spriteBa
 
 	for (uint32_t i = 0; i < xmlDoc->GetChildrenCount(); i++)
 	{
-		std::string letter = xmlDoc[i].GetAttribAsString("letter");
-		std::string bounds = xmlDoc[i].GetAttribAsString("bounds");
+		std::string letter = (*xmlDoc)[i].GetAttribAsString("letter");
+		std::string bounds = (*xmlDoc)[i].GetAttribAsString("bounds");
 
 		sm::Rect<int> boundsValues;
 		if (!ParseBounds(bounds, boundsValues))
 			return NULL;
 
 		texLetters[letter[0]].Size = sm::Point<int>(boundsValues.Width, boundsValues.Height);
-		texLetters[letter[0]].Coords = TexPart(tex, boundsValues);
+		//texLetters[letter[0]].Coords = TexPart(tex, boundsValues);
+		texLetters[letter[0]].Coords =
+			TexPart(
+				tex,
+				sm::Rect<int>(boundsValues.X, tex->GetHeight() - boundsValues.Y - boundsValues.Height, boundsValues.Width, boundsValues.Height));
 	}
 	
 	FontRenderer *fontRenderer = new FontRenderer();
@@ -119,7 +125,7 @@ FontRenderer::~FontRenderer()
 {
 }
 
-void FontRenderer::DrawString(const char *text, unsigned x, unsigned y, const Color &color)
+void FontRenderer::DrawString(const char *text, unsigned x, unsigned y, const Color &color, float scale)
 {
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -127,7 +133,7 @@ void FontRenderer::DrawString(const char *text, unsigned x, unsigned y, const Co
 	m_spriteBatch->Begin();
 	unsigned xShift = x;
 	unsigned yShift = y;
-	unsigned rowHeight = texLetters['A'].Size.Y;
+	unsigned rowHeight = texLetters['A'].Size.Y * scale;
 	for (unsigned i = 0; i < strlen(text); i++)
 	{
 		if (text[i] == '\n')
@@ -138,11 +144,17 @@ void FontRenderer::DrawString(const char *text, unsigned x, unsigned y, const Co
 		}
 		
 		FontLetter letter = texLetters[text[i]];
-		m_spriteBatch ->Draw(letter.Coords, color, xShift, yShift);//, letter.Size.X, letter.Size.Y);
-		xShift += letter.Size.X;
+		m_spriteBatch ->Draw(
+			letter.Coords,
+			color,
+			xShift,
+			yShift,
+			(int)((float)letter.Coords.ImageRect.Width * scale),
+			(int)((float)letter.Coords.ImageRect.Height * scale));//, letter.Size.X, letter.Size.Y);
+		xShift += letter.Size.X * scale;
 		
 	}
-	//spriteBatch ->Draw(texLetters[text[0]].Coords.Tex, Color(255, 0, 0), 0, 40);
+	//m_spriteBatch ->Draw(texLetters[text[0]].Coords.Tex, Color(255, 0, 0), 0, 40);
 	m_spriteBatch->End();
 }
 
