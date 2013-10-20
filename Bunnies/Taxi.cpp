@@ -11,13 +11,18 @@
 #include <GL/glew.h>
 #include <assert.h>
 
+Taxi *Taxi::m_instance;
+
 Taxi::Taxi() :
 	m_isTurningLeft(false),
 	m_isTurningRight(false),
 	m_isAccelerating(false),
 	m_speed(0.0f),
-	m_wheelsAngle(0.0f)
+	m_wheelsAngle(0.0f),
+	m_isOccupied(false)
 {
+	m_instance = this;
+
 	Content *content = InterfaceProvider::GetContent();
 
 	m_taxiModel = content->Get<Model>("taxi");
@@ -39,6 +44,11 @@ Taxi::Taxi() :
 	m_backFrontWheelsDistance = (m_baseFrontRightWheelPosition - m_baseBackRightWheelPosition).GetLength();
 
 	m_worldMatrix = sm::Matrix::IdentityMatrix();
+}
+
+Taxi* Taxi::GetInstance()
+{
+	return m_instance;
 }
 
 Taxi::~Taxi()
@@ -168,4 +178,25 @@ void Taxi::Accelerate()
 const sm::Vec3& Taxi::GetPosition() const
 {
 	return m_position;
+}
+
+bool Taxi::IsOccupied() const
+{
+	return m_isOccupied;
+}
+
+void Taxi::SetOccupied(const sm::Vec3 &passengerTarget)
+{
+	m_isOccupied = true;
+	m_passengerTarget = passengerTarget;
+}
+
+void Taxi::SetFree()
+{
+	m_isOccupied = false;
+}
+
+sm::Vec3 Taxi::GetPassengerTarget() const
+{
+	return m_passengerTarget;
 }

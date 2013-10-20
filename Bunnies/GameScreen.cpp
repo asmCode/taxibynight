@@ -20,15 +20,23 @@
 #include <Graphics/Texture.h>
 #include <Graphics/Content/Content.h>
 
+GameScreen *GameScreen::m_instance;
+
 GameScreen::GameScreen(void) :
 	m_street(NULL),
 	m_taxi(NULL),
 	m_pedsManager(NULL)
 {
+	m_instance = this;
 }
 
 GameScreen::~GameScreen(void)
 {
+}
+
+GameScreen *GameScreen::GetInstance()
+{
+	return m_instance;
 }
 
 bool GameScreen::Initialize()
@@ -84,8 +92,11 @@ void GameScreen::Update(float time, float seconds)
 	m_pedsManager->SetTaxiPosition(m_taxi->GetPosition());
 	m_pedsManager->Update(time, seconds);
 
-	m_arrow->SetDirection((sm::Vec3(100, 0, 104) - m_taxi->GetPosition()).GetNormalized());
-	m_arrow->Update(time, seconds);
+	if (m_taxi->IsOccupied())
+	{
+		m_arrow->SetDirection((m_taxi->GetPassengerTarget() - m_taxi->GetPosition()).GetNormalized());
+		m_arrow->Update(time, seconds);
+	}
 
 	m_manCam->Process(seconds);
 
@@ -101,14 +112,26 @@ void GameScreen::Update(float time, float seconds)
 	//m_viewMatrix = m_manCam->GetViewMatrix();
 	//camPosition = m_viewMatrix.GetInversed() * sm::Vec3(0, 0, 0);
 
-	m_placeIndicator->SetActive(true);
-	m_placeIndicator->SetPosition(sm::Vec3(100, 0, 104));
 	m_placeIndicator->Update(time, seconds, m_projMatrix * m_viewMatrix);
 
 	DrawingRoutines::SetProjectionMatrix(m_projMatrix);
 	DrawingRoutines::SetViewMatrix(m_viewMatrix);
 	DrawingRoutines::SetLightPosition(camPosition);
 	DrawingRoutines::SetEyePosition(camPosition);
+}
+
+void GameScreen::SetOccupiedMode()
+{
+	m_arrow->SetDirection(m_taxi->GetPassengerTarget());
+	m_arrow->SetActive(true);
+	m_placeIndicator->SetActive(true);
+	m_placeIndicator->SetPosition(m_taxi->GetPassengerTarget());
+}
+
+void GameScreen::SetFreeMode()
+{
+	m_arrow->SetActive(false);
+	m_placeIndicator->SetActive(false);
 }
 
 void GameScreen::HandlePress(uint32_t pointIndex, const sm::Vec2 &point)

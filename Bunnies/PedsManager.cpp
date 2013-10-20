@@ -6,6 +6,8 @@
 #include "StreetMap.h"
 #include "StreetSegment.h"
 #include "Street.h"
+#include "Taxi.h"
+#include "GameScreen.h"
 
 #include <Graphics/Model.h>
 #include <Graphics/Mesh.h>
@@ -49,13 +51,25 @@ void PedsManager::Update(float time, float seconds)
 {
 	if (m_pedApproaching != NULL)
 	{
+		sm::Vec3 taxiDirection = m_taxiPosition - m_pedApproaching->GetPosition();
+		float distanceToTaxi = taxiDirection.GetLength();
+
 		if (!m_pedApproaching->IsTaxiInApproachRange(m_taxiPosition))
 		{
 			m_pedApproaching->CancelApproach();
 			m_pedApproaching = NULL;
 		}
+		else if (distanceToTaxi < 1.0)
+		{
+			Taxi::GetInstance()->SetOccupied(m_pedApproaching->GetTripDestination());
+			GameScreen::GetInstance()->SetOccupiedMode();
+			m_pedApproaching->ResetPosition(sm::Vec3(0, 0, 0));
+			m_pedApproaching = NULL;
+		}
 		else
+		{
 			m_pedApproaching->SetTarget(m_taxiPosition);
+		}
 	}
 
 	for (uint32_t i = 0; i < MaxPeds; i++)
@@ -175,13 +189,18 @@ void PedsManager::ResetPosition(Ped *ped, const sm::Vec3 &position, const sm::Ve
 	if (m_pedResets == PassangerPerPeds)
 	{
 		m_pedResets = 0;
-		ped->SetToPassenger(sm::Vec3(0, 0, 0), 0.0f);
+
+		StreetSegment *pavement = Street::Instance->GetRandomPavement();
+		sm::Vec3 pos;
+		sm::Vec3 dir;
+		StreetMap::Instance->GetRandomPavementArea(pavement->CoordX(), pavement->CoordY(), pos, dir);
+		ped->SetToPassenger(pos, 0.0f);
 	}
 }
 
 bool PedsManager::CanPassangerApproachTocar() const
 {
-	return m_pedApproaching == NULL;
+	return m_pedApproaching == NULL && !Taxi::GetInstance()->IsOccupied();
 }
 
 void PedsManager::NotifyApproachingToCar(Ped *ped)

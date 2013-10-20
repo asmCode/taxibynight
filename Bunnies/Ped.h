@@ -22,6 +22,7 @@ public:
 	const sm::Vec3& GetPosition() const;
 
 	void SetToPassenger(const sm::Vec3 &tripDestination, float cash);
+	sm::Vec3 GetTripDestination() const;
 
 	bool IsPassenger() const;
 

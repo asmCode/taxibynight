@@ -17,6 +17,8 @@ public:
 	GameScreen(void);
 	~GameScreen(void);
 
+	static GameScreen *GetInstance();
+
 	bool Initialize();
 
 	bool InitResources();
@@ -25,11 +27,16 @@ public:
 	void Draw(float time, float seconds);
 	void Update(float time, float seconds);
 
+	void SetOccupiedMode();
+	void SetFreeMode();
+
 	void HandlePress(uint32_t pointIndex, const sm::Vec2 &point);
     void HandleRelease(uint32_t pointIndex, const sm::Vec2 &point);
 	void HandleMove(uint32_t pointIndex, const sm::Vec2 &point);
 
 private:
+	static GameScreen *m_instance;
+
 	Street *m_street;
 	Taxi *m_taxi;
 	PedsManager *m_pedsManager;

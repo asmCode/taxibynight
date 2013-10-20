@@ -11,7 +11,8 @@
 #include <GL/glew.h>
 #include <assert.h>
 
-Arrow::Arrow()
+Arrow::Arrow() :
+	m_active(false)
 {
 	Content *content = InterfaceProvider::GetContent();
 
@@ -26,8 +27,16 @@ Arrow::~Arrow()
 {
 }
 
+void Arrow::SetActive(bool active)
+{
+	m_active = active;
+}
+
 void Arrow::Update(float time, float seconds)
 {
+	if (!m_active)
+		return;
+
 	m_transform =
 		sm::Matrix::CreateLookAt(m_direction.GetReversed(), sm::Vec3(0, 1, 0)) *
 		sm::Matrix::ScaleMatrix(0.4f, 0.4f, 0.4f);
@@ -35,6 +44,9 @@ void Arrow::Update(float time, float seconds)
 
 void Arrow::Draw(float time, float seconds)
 {
+	if (!m_active)
+		return;
+
 	float width = (float)Environment::GetInstance()->GetScreenWidth();
 	float height = (float)Environment::GetInstance()->GetScreenHeight();
 

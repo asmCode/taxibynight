@@ -2,6 +2,7 @@
 #define STREET
 
 #include <Math/Matrix.h>
+#include <vector>
 #include <stdint.h>
 
 class Model;
@@ -31,6 +32,8 @@ public:
 	StreetSegment* GetSegment(int x, int y) const;
 	void SetInitialVisibility(const sm::Vec3 &taxiPosition);
 
+	StreetSegment *GetRandomPavement();
+
 private:
 	static const int Range = 2;
 
@@ -39,6 +42,8 @@ private:
 	sm::Vec3 m_taxiPosition;
 	Model *m_streetModel;
 	Model *m_skycrapper;
+
+	std::vector<StreetSegment*> m_pavementSegments;
 
 	Texture *m_skycrapperTexture;
 	Texture *m_pavementTexture;

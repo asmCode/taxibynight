@@ -22,8 +22,20 @@ public:
 
 	const sm::Vec3& GetPosition() const;
 
+	bool IsOccupied() const;
+
+	void SetOccupied(const sm::Vec3 &passengerTarget);
+	void SetFree();
+	sm::Vec3 GetPassengerTarget() const;
+
+	static Taxi* GetInstance();
+
 private:
+	static Taxi *m_instance;
+
 	sm::Matrix m_worldMatrix;
+
+	bool m_isOccupied;
 
 	bool m_isTurningLeft;
 	bool m_isTurningRight;
@@ -31,6 +43,7 @@ private:
 
 	Model *m_taxiModel;
 
+	sm::Vec3 m_passengerTarget;
 	sm::Vec3 m_position;
 	sm::Vec3 m_turnDirection; // normalized
 	sm::Vec3 m_velocity;

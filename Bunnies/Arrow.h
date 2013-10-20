@@ -19,8 +19,11 @@ public:
 
 	void SetDirection(const sm::Vec3 &direction);
 
+	void SetActive(bool active);
+
 private:
 	sm::Matrix m_transform;
+	bool m_active;
 
 	Model *m_model;
 

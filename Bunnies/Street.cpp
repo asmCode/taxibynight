@@ -7,6 +7,7 @@
 #include "StreetMap.h"
 #include "Environment.h"
 
+#include <Utils/Randomizer.h>
 #include <Graphics/Model.h>
 #include <Graphics/Texture.h>
 #include <Math/MathUtils.h>
@@ -124,6 +125,9 @@ Street::Street(PedsManager *pedsManager)
 
 			StreetPiece::PieceType streetType = m_streetMap->GetPieceType(x, y);
 			m_streetSegments[index] = new StreetSegment(sm::Vec3(x * 10.0f, 0, y * 10.0f), m_streetPieces[(uint8_t)streetType]);
+
+			if (m_streetSegments[index]->GetStreetPiece()->HasPavement())
+				m_pavementSegments.push_back(m_streetSegments[index]);
 		}
 	}
 }
@@ -251,6 +255,15 @@ StreetSegment* Street::GetSegmentAtPosition(const sm::Vec3 &position) const
 StreetSegment* Street::GetSegment(int x, int y) const
 {
 	return m_streetSegments[y * m_streetMap->GetWidth() + x];
+}
+
+StreetSegment *Street::GetRandomPavement()
+{
+	static Randomizer random;
+
+	int randomIndex = random.GetInt(0, m_pavementSegments.size());
+
+	return m_pavementSegments[randomIndex];
 }
 
 void Street::SetInitialVisibility(const sm::Vec3 &taxiPosition)

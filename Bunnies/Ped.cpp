@@ -99,6 +99,11 @@ void Ped::SetToPassenger(const sm::Vec3 &tripDestination, float cash)
 	m_model->SetMaterial(m_passengerMaterial);
 }
 
+sm::Vec3 Ped::GetTripDestination() const
+{
+	return m_tripDestination;
+}
+
 bool Ped::IsPassenger() const
 {
 	return m_isPassenger;
