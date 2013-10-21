@@ -1,8 +1,9 @@
 #include "Billboard.h"
 
-#include <GL/glew.h>
-#include <gl/gl.h>
 #include <assert.h>
+
+#include <FGraphicsOpengl2.h>
+using namespace Tizen::Graphics::Opengl;
 
 uint32_t Billboard::m_vboId = 0;
 

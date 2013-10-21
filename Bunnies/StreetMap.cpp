@@ -8,6 +8,7 @@
 #include <Graphics/Content/Content.h>
 #include <Graphics/ImageLoader.h>
 #include <assert.h>
+#include <memory.h>
 
 StreetMap *StreetMap::Instance;
 

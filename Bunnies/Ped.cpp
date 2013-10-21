@@ -8,8 +8,10 @@
 #include <Graphics/Texture.h>
 #include <Math/MathUtils.h>
 #include <Graphics/Content/Content.h>
-#include <GL/glew.h>
 #include <assert.h>
+
+#include <FGraphicsOpengl2.h>
+using namespace Tizen::Graphics::Opengl;
 
 Ped::Ped()
 {

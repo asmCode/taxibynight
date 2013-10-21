@@ -4,7 +4,7 @@
 #include "InterfaceProvider.h"
 #include "Environment.h"
 #include "GameProps.h"
-#include "ManCam.h"
+//#include "ManCam.h"
 #include "Street.h"
 #include "DrawingRoutines.h"
 #include "Taxi.h"
@@ -21,6 +21,10 @@
 #include <Graphics/Texture.h>
 #include <Graphics/SpriteBatch.h>
 #include <Graphics/Content/Content.h>
+#include <Utils/Log.h>
+
+#include <FGraphicsOpengl2.h>
+using namespace Tizen::Graphics::Opengl;
 
 GameScreen *GameScreen::m_instance;
 
@@ -48,7 +52,7 @@ bool GameScreen::Initialize()
 {
 	Billboard::Initialize();
 
-	m_manCam = new ManCam();
+	//m_manCam = new ManCam();
 
 	m_taxi = new Taxi();
 	m_pedsManager = new PedsManager(m_taxi->GetPosition());
@@ -111,7 +115,7 @@ void GameScreen::Update(float time, float seconds)
 		m_arrow->Update(time, seconds);
 	}
 
-	m_manCam->Process(seconds);
+	//m_manCam->Process(seconds);
 
 	sm::Vec3 taxiPosition = m_taxi->GetPosition();
 	sm::Vec3 camPosition = taxiPosition + sm::Vec3(0, 10, -4);
@@ -123,7 +127,7 @@ void GameScreen::Update(float time, float seconds)
 	m_viewMatrix = m_viewMatrix.GetInversed();
 
 	//m_viewMatrix = m_manCam->GetViewMatrix();
-	//camPosition = m_viewMatrix.GetInversed() * sm::Vec3(0, 0, 0);
+	camPosition = m_viewMatrix.GetInversed() * sm::Vec3(0, 0, 0);
 
 	m_placeIndicator->Update(time, seconds, m_projMatrix * m_viewMatrix);
 
@@ -199,18 +203,18 @@ void GameScreen::SimulatePress()
 {
 	return;
 
-	if (GetAsyncKeyState(VK_UP) & 0x8000)
-		AccelerationButtonPressed(true);
-	else
-		AccelerationButtonPressed(false);
-
-	if (GetAsyncKeyState(VK_LEFT) & 0x8000)
-		TurnLeftButtonPressed(true);
-	else
-		TurnLeftButtonPressed(false);
-
-	if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
-		TurnRightButtonPressed(true);
-	else
-		TurnRightButtonPressed(false);
+//	if (GetAsyncKeyState(VK_UP) & 0x8000)
+//		AccelerationButtonPressed(true);
+//	else
+//		AccelerationButtonPressed(false);
+//
+//	if (GetAsyncKeyState(VK_LEFT) & 0x8000)
+//		TurnLeftButtonPressed(true);
+//	else
+//		TurnLeftButtonPressed(false);
+//
+//	if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
+//		TurnRightButtonPressed(true);
+//	else
+//		TurnRightButtonPressed(false);
 }

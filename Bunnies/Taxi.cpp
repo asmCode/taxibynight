@@ -8,8 +8,10 @@
 #include <Graphics/Texture.h>
 #include <Math/MathUtils.h>
 #include <Graphics/Content/Content.h>
-#include <GL/glew.h>
 #include <assert.h>
+
+#include <FGraphicsOpengl2.h>
+using namespace Tizen::Graphics::Opengl;
 
 Taxi *Taxi::m_instance;
 
@@ -76,12 +78,12 @@ void Taxi::Update(float time, float seconds)
 	{
 		if (m_wheelsAngle < 0.0)
 		{
-			pivotDistance = m_backFrontWheelsDistance / tanf(abs(m_wheelsAngle));
+			pivotDistance = m_backFrontWheelsDistance / tanf(fabs(m_wheelsAngle));
 			turnPivot = sm::Vec3(m_baseBackRightWheelPosition.x + pivotDistance, 0, m_baseBackRightWheelPosition.z);
 		}
 		else
 		{
-			pivotDistance = m_backFrontWheelsDistance / tanf(abs(m_wheelsAngle));
+			pivotDistance = m_backFrontWheelsDistance / tanf(fabs(m_wheelsAngle));
 			turnPivot = sm::Vec3(m_baseBackLeftWheelPosition.x - pivotDistance, 0, m_baseBackLeftWheelPosition.z);
 		}
 

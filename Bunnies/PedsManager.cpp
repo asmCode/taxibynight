@@ -15,8 +15,10 @@
 #include <Utils/Randomizer.h>
 #include <Math/MathUtils.h>
 #include <Graphics/Content/Content.h>
-#include <GL/glew.h>
 #include <assert.h>
+
+#include <FGraphicsOpengl2.h>
+using namespace Tizen::Graphics::Opengl;
 
 const float PedsManager::TaxiViewRange = 30.0f;
 PedsManager* PedsManager::Instance;

@@ -6,6 +6,8 @@
 class IScreen : public IGestureHandler
 {
 public:
+	virtual ~IScreen() {}
+
 	virtual bool InitResources() = 0;
 	virtual bool ReleaseResources() = 0;
 

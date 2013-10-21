@@ -10,7 +10,7 @@
 class StreetMap
 {
 public:
-	enum PixelType : uint8_t
+	enum PixelType
 	{
 		PixelType_Green,
 		PixelType_Red,

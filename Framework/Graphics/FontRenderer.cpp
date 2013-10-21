@@ -6,9 +6,12 @@
 #include <IO/Path.h>
 #include <XML/XMLNode.h>
 #include <XML/XMLLoader.h>
+#include <Utils/Log.h>
 #include "SpriteBatch.h"
+#include <memory.h>
 
-#include <gl/gl.h>
+#include <FGraphicsOpengl2.h>
+using namespace Tizen::Graphics::Opengl;
 
 FontRenderer::FontRenderer() :
 	m_spriteBatch(NULL)
@@ -17,6 +20,8 @@ FontRenderer::FontRenderer() :
 
 Texture *FontRenderer::LoadFontBitmap(const std::string &path)
 {
+	Log::LogT(path.c_str());
+
 	if (!Path::IsFileExists(path.c_str()))
 		return NULL;
 	

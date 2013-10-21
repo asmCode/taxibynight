@@ -8,8 +8,10 @@
 #include <Graphics/Texture.h>
 #include <Math/MathUtils.h>
 #include <Graphics/Content/Content.h>
-#include <GL/glew.h>
 #include <assert.h>
+
+#include <FGraphicsOpengl2.h>
+using namespace Tizen::Graphics::Opengl;
 
 StreetPiece::StreetPiece(
 		StreetPiece::PieceType pieceType,
@@ -39,15 +41,15 @@ const sm::Matrix& StreetPiece::GetTransform() const
 bool StreetPiece::HasPavement() const
 {
 	return
-		m_pieceType == StreetPiece::PieceType::PieceType_StraightHori_1 ||
-		m_pieceType == StreetPiece::PieceType::PieceType_StraightVert_1 ||
-		m_pieceType == StreetPiece::PieceType::PieceType_TDown_1 ||
-		m_pieceType == StreetPiece::PieceType::PieceType_TLeft_1 ||
-		m_pieceType == StreetPiece::PieceType::PieceType_TRight_1 ||
-		m_pieceType == StreetPiece::PieceType::PieceType_TUp_1 ||
-		m_pieceType == StreetPiece::PieceType::PieceType_TurnDownLeft_1 ||
-		m_pieceType == StreetPiece::PieceType::PieceType_TurnDownRight_1 ||
-		m_pieceType == StreetPiece::PieceType::PieceType_TurnUpLeft_1 ||
-		m_pieceType == StreetPiece::PieceType::PieceType_TurnUpRight_1;
+		m_pieceType == StreetPiece::PieceType_StraightHori_1 ||
+		m_pieceType == StreetPiece::PieceType_StraightVert_1 ||
+		m_pieceType == StreetPiece::PieceType_TDown_1 ||
+		m_pieceType == StreetPiece::PieceType_TLeft_1 ||
+		m_pieceType == StreetPiece::PieceType_TRight_1 ||
+		m_pieceType == StreetPiece::PieceType_TUp_1 ||
+		m_pieceType == StreetPiece::PieceType_TurnDownLeft_1 ||
+		m_pieceType == StreetPiece::PieceType_TurnDownRight_1 ||
+		m_pieceType == StreetPiece::PieceType_TurnUpLeft_1 ||
+		m_pieceType == StreetPiece::PieceType_TurnUpRight_1;
 }
 

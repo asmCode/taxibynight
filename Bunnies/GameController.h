@@ -16,7 +16,7 @@ class GameController : public IGameController
 {
 public:
 	GameController(IGraphicsEngine *graphicsEngine);
-	~GameController(void);
+	virtual ~GameController(void);
 
 	bool Initialize();
 

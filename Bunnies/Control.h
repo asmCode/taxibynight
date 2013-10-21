@@ -53,7 +53,7 @@ public:
 	Control(const std::string &name, int x, int y, int width, int height);
 	Control(const std::string &name, int x, int y, const TexPart &bg);
 	Control(const std::string &name, int x, int y, int width, int height, const TexPart &bg);
-	~Control();
+	virtual ~Control();
 	
 	Control *GetParent();
 	void AddChild(Control *control);

@@ -15,6 +15,7 @@
 #include <Graphics/Animation.h>
 #include <Graphics/SpriteBatch.h>
 #include <Graphics/FontRenderer.h>
+#include <Utils/Log.h>
 #include <stddef.h>
 #include <assert.h>
 
@@ -33,6 +34,9 @@ GameController::~GameController(void)
 
 bool GameController::InitializeGraphics(const std::string &basePath)
 {
+	Log::StartLog(true, false, false);
+	Log::LogT("Initializing Graphics");
+
 	uint32_t screenWidth = TaxiGame::Environment::GetInstance()->GetScreenWidth();
 	uint32_t screenHeight = TaxiGame::Environment::GetInstance()->GetScreenHeight();
 

@@ -1,6 +1,6 @@
 #include "Environment.h"
 
-TaxiGame::Environment *GenericSingleton<TaxiGame::Environment>::instance;
+TaxiGame::Environment* TaxiGame::Environment::m_instance;
 
 namespace TaxiGame
 {
@@ -9,6 +9,14 @@ Environment::Environment()
 {
 	m_screenWidth = 0;
 	m_screenHeight = 0;
+}
+
+Environment* Environment::GetInstance()
+{
+	if (m_instance == NULL)
+		m_instance = new Environment();
+
+	return m_instance;
 }
 
 void Environment::SetScreenSize(unsigned width, unsigned height)

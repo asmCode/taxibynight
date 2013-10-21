@@ -10,6 +10,8 @@ class Player;
 class IGameController : public IGestureHandler
 {
 public:
+	virtual ~IGameController() {}
+
 	virtual bool Initialize() = 0;
 
 	virtual void Draw(float time, float seconds) = 0;

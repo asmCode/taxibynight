@@ -11,7 +11,7 @@ class StreetMap;
 class StreetPiece
 {
 public:
-	enum PieceType : uint8_t
+	enum PieceType
 	{
 		PieceType_Pavement = 0,
 		PieceType_StraightHori_1,

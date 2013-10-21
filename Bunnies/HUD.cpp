@@ -8,6 +8,7 @@
 #include "GameController.h"
 #include <Graphics/TexPart.h>
 #include <Graphics/Content/Content.h>
+#include <Utils/Log.h>
 #include <XML/XMLLoader.h>
 #include <XML/XMLNode.h>
 //#include "MessageBox.h"
@@ -92,6 +93,8 @@ void HUD::Clicked(Control *control, uint32_t x, uint32_t y)
 
 void HUD::Pressed(Control *control, uint32_t x, uint32_t y)
 {
+	Log::LogT("HUD:Pressed");
+
 	if (control->GetName() == "turn_left")
 		m_gameScreen->TurnLeftButtonPressed(true);
 	else if (control->GetName() == "turn_right")
