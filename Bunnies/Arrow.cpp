@@ -47,8 +47,8 @@ void Arrow::Draw(float time, float seconds)
 	if (!m_active)
 		return;
 
-	float width = (float)Environment::GetInstance()->GetScreenWidth();
-	float height = (float)Environment::GetInstance()->GetScreenHeight();
+	float width = (float)TaxiGame::Environment::GetInstance()->GetScreenWidth();
+	float height = (float)TaxiGame::Environment::GetInstance()->GetScreenHeight();
 
 	float arrowWidth = width * 0.1f;
 
@@ -69,7 +69,7 @@ void Arrow::Draw(float time, float seconds)
 	DrawingRoutines::SetEyePosition(camPosition);
 	DrawingRoutines::DrawWithMaterial(m_model->m_meshParts, m_transform);
 
-	glViewport(0, 0, Environment::GetInstance()->GetScreenWidth(), Environment::GetInstance()->GetScreenHeight());
+	glViewport(0, 0, TaxiGame::Environment::GetInstance()->GetScreenWidth(), TaxiGame::Environment::GetInstance()->GetScreenHeight());
 }
 
 void Arrow::SetDirection(const sm::Vec3 &direction)

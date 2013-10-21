@@ -27,10 +27,10 @@ HUD *HUD::Create(GameScreen *gameScreen)
 
 		ret ->x = 0;
 		ret ->y = 0;
-		ret ->width = Environment::GetInstance()->GetScreenWidth();
-		ret ->height = Environment::GetInstance()->GetScreenHeight();
+		ret ->width = TaxiGame::Environment::GetInstance()->GetScreenWidth();
+		ret ->height = TaxiGame::Environment::GetInstance()->GetScreenHeight();
 
-		std::string basePath = Environment::GetInstance()->GetBasePath();
+		std::string basePath = TaxiGame::Environment::GetInstance()->GetBasePath();
 		XMLNode *root = XMLLoader::LoadFromFile(basePath + "data/gui/HUD.xml");
 		if (root == NULL)
 			return NULL;

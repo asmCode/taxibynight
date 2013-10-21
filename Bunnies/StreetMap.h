@@ -3,7 +3,7 @@
 
 #include <Math/Matrix.h>
 #include <string>
-#include <stdint.h>
+#include <Core/stdint.h>
 
 #include "StreetPiece.h"
 

@@ -1,7 +1,7 @@
 #ifndef ICONTROL_EVENTS_OBSERVER
 #define ICONTROL_EVENTS_OBSERVER
 
-#include <stdint.h>
+#include <Core/stdint.h>
 
 class Control;
 

@@ -39,8 +39,8 @@ void Renderer::Initialize()
 
 	gctrl = InfectedBunniesFactory::Create(graphics);
 
-	Environment::GetInstance()->SetScreenSize(ScreenWidth, ScreenHeight);
-	Environment::GetInstance()->SetBasePath(std::string(currentDir) + "/");
+	TaxiGame::Environment::GetInstance()->SetScreenSize(ScreenWidth, ScreenHeight);
+	TaxiGame::Environment::GetInstance()->SetBasePath(std::string(currentDir) + "/");
 
 	bool success = gctrl->Initialize();
 	assert(success != NULL);

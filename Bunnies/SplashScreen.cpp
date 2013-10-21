@@ -33,7 +33,9 @@ bool SplashScreen::ReleaseResources()
 void SplashScreen::Draw(float time, float seconds)
 {
 	InterfaceProvider::GetSpriteBatch()->Begin();
-	InterfaceProvider::GetSpriteBatch()->Draw(m_splashScreenTex, 0, 0, Environment::GetInstance()->GetScreenWidth(), Environment::GetInstance()->GetScreenHeight());
+	InterfaceProvider::GetSpriteBatch()->Draw(m_splashScreenTex, 0, 0,
+		TaxiGame::Environment::GetInstance()->GetScreenWidth(),
+		TaxiGame::Environment::GetInstance()->GetScreenHeight());
 	InterfaceProvider::GetSpriteBatch()->End();
 }
 

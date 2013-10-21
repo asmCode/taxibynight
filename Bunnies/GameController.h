@@ -2,7 +2,7 @@
 
 #include <UI/IGestureHandler.h>
 #include "IGameController.h"
-#include <stdint.h>
+#include <Core/stdint.h>
 #include <string>
 
 class IGraphicsEngine;

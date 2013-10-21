@@ -4,6 +4,9 @@
 #include <Core/GenericSingleton.h>
 #include <string>
 
+namespace TaxiGame
+{
+
 class Environment : public virtual GenericSingleton<Environment>
 {
 private:
@@ -26,3 +29,5 @@ public:
 };
 
 #endif
+
+}

@@ -3,7 +3,7 @@
 #include <Graphics/Content/Content.h>
 #include <XML/XMLLoader.h>
 #include <XML/XMLNode.h>
-#include <stdint.h>
+#include <Core/stdint.h>
 #include <stdio.h>
 
 SpritesMap::SpritesMap()

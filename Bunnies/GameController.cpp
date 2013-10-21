@@ -33,8 +33,8 @@ GameController::~GameController(void)
 
 bool GameController::InitializeGraphics(const std::string &basePath)
 {
-	uint32_t screenWidth = Environment::GetInstance()->GetScreenWidth();
-	uint32_t screenHeight = Environment::GetInstance()->GetScreenHeight();
+	uint32_t screenWidth = TaxiGame::Environment::GetInstance()->GetScreenWidth();
+	uint32_t screenHeight = TaxiGame::Environment::GetInstance()->GetScreenHeight();
 
 	m_content = new Content(m_graphicsEngine);
 	InterfaceProvider::m_content = m_content;
@@ -69,7 +69,7 @@ bool GameController::InitializeGraphics(const std::string &basePath)
 
 bool GameController::Initialize()
 {
-	std::string basePath = Environment::GetInstance()->GetBasePath();
+	std::string basePath = TaxiGame::Environment::GetInstance()->GetBasePath();
 
 	if (!InitializeGraphics(basePath))
 	{

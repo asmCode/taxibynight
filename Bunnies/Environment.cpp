@@ -1,6 +1,9 @@
 #include "Environment.h"
 
-Environment *GenericSingleton<Environment>::instance;
+TaxiGame::Environment *GenericSingleton<TaxiGame::Environment>::instance;
+
+namespace TaxiGame
+{
 
 Environment::Environment()
 {
@@ -42,5 +45,7 @@ std::string Environment::GetIOSVersion() const
 std::string Environment::GetBasePath() const
 {
 	return m_basePath;
+}
+
 }
 

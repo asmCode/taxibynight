@@ -3,7 +3,7 @@
 
 #include <Math/Matrix.h>
 #include <vector>
-#include <stdint.h>
+#include <Core/stdint.h>
 
 class Model;
 class Texture;

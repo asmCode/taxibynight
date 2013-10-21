@@ -8,7 +8,6 @@
 #include <XML/XMLLoader.h>
 #include "SpriteBatch.h"
 
-#include <Windows.h>
 #include <gl/gl.h>
 
 FontRenderer::FontRenderer() :

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Math/Vec2.h>
-#include <stdint.h>
+#include <Core/stdint.h>
 
 class IGestureHandler
 {

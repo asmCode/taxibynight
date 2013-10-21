@@ -60,8 +60,8 @@ bool GameScreen::Initialize()
 
 	m_hud = HUD::Create(this);
 
-	uint32_t screenWidth = Environment::GetInstance()->GetScreenWidth();
-	uint32_t screenHeight = Environment::GetInstance()->GetScreenHeight();
+	uint32_t screenWidth = TaxiGame::Environment::GetInstance()->GetScreenWidth();
+	uint32_t screenHeight = TaxiGame::Environment::GetInstance()->GetScreenHeight();
 
 	m_projMatrix = sm::Matrix::PerspectiveMatrix(MathUtils::PI / 2.0f, static_cast<float>(screenWidth) / static_cast<float>(screenHeight), 0.1f, 1000.0f);
 

@@ -2,7 +2,7 @@
 #define PEDS_MANAGER
 
 #include <Math/Matrix.h>
-#include <stdint.h>
+#include <Core/stdint.h>
 
 class Model;
 class Mesh;

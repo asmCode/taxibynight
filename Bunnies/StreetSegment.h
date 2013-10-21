@@ -2,7 +2,7 @@
 #define STREET_SEGMENT
 
 #include <Math/Matrix.h>
-#include <stdint.h>
+#include <Core/stdint.h>
 
 class StreetPiece;
 

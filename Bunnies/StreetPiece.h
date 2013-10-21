@@ -2,7 +2,7 @@
 #define STREET_PIECE
 
 #include <Math/Matrix.h>
-#include <stdint.h>
+#include <Core/stdint.h>
 
 class Model;
 class Texture;
