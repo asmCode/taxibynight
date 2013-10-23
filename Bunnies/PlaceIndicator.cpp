@@ -10,8 +10,7 @@
 #include <Graphics/Content/Content.h>
 #include <assert.h>
 
-#include <FGraphicsOpengl2.h>
-using namespace Tizen::Graphics::Opengl;
+#include <Graphics/OpenglPort.h>
 
 PlaceIndicator::PlaceIndicator()
 {

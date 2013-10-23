@@ -5,7 +5,9 @@
 #include "Label.h"
 #include "SpritesMap.h"
 #include "GameScreen.h"
+#include "Taxi.h"
 #include "GameController.h"
+#include "PedsManager.h"
 #include <Graphics/TexPart.h>
 #include <Graphics/Content/Content.h>
 #include <Utils/Log.h>
@@ -78,11 +80,20 @@ HUD *HUD::Create(GameScreen *gameScreen)
 				std::string text = childDesc.GetAttribAsString("text");
 				float size = childDesc.GetAttribAsFloat("size");
 
-				Label *ctrl = new Label("current_money", text, InterfaceProvider::GetFontRenderer(), size, Color::White, left, top);
+				Label *ctrl = new Label(name, text, InterfaceProvider::GetFontRenderer(), size, Color::White, left, top);
 				ret->AddChild(ctrl);
 			}
 		}
 	}
+
+	ret->m_totalMoneyLabel = dynamic_cast<Label*>(ret->FindChild("total_money_value"));
+	assert(ret->m_totalMoneyLabel != NULL);
+	ret->m_totalCoursesLabel = dynamic_cast<Label*>(ret->FindChild("total_courses_value"));
+	assert(ret->m_totalCoursesLabel != NULL);
+	ret->m_rewardLabel = dynamic_cast<Label*>(ret->FindChild("reward_value"));
+	assert(ret->m_rewardLabel != NULL);
+	ret->m_timeLeftLabel = dynamic_cast<Label*>(ret->FindChild("time_left_value"));
+	assert(ret->m_timeLeftLabel != NULL);
 	
 	return ret;
 }
@@ -93,8 +104,6 @@ void HUD::Clicked(Control *control, uint32_t x, uint32_t y)
 
 void HUD::Pressed(Control *control, uint32_t x, uint32_t y)
 {
-	Log::LogT("HUD:Pressed");
-
 	if (control->GetName() == "turn_left")
 		m_gameScreen->TurnLeftButtonPressed(true);
 	else if (control->GetName() == "turn_right")
@@ -116,5 +125,37 @@ void HUD::Released(Control *control, uint32_t x, uint32_t y)
 void HUD::OnDraw(float time, float seconds)
 {
 	this->Control::OnDraw(time, seconds);
+}
+
+void toTime(char *txt, float seconds)
+{
+	sprintf(txt, "%02d:%02d", (int)(seconds / 60.0f), (int)fmodf(seconds, 60.0f));
+}
+
+void HUD::OnUpdate(float time, float seconds)
+{
+	static char txt[128];
+
+	sprintf(txt, "%d", PedsManager::Instance->m_totalCourses);
+	m_totalCoursesLabel->SetText(txt);
+
+	sprintf(txt, "%.2f$", PedsManager::Instance->m_totalMoney);
+	m_totalMoneyLabel->SetText(txt);
+
+	if (Taxi::GetInstance()->IsOccupied())
+	{
+		m_rewardLabel->SetVisible(true);
+		sprintf(txt, "%.2f$", Taxi::GetInstance()->m_revard);
+		m_rewardLabel->SetText(txt);
+
+		m_timeLeftLabel->SetVisible(true);
+		toTime(txt, Taxi::GetInstance()->m_timeLeft);
+		m_timeLeftLabel->SetText(txt);
+	}
+	else
+	{
+		m_rewardLabel->SetVisible(false);
+		m_timeLeftLabel->SetVisible(false);
+	}
 }
 

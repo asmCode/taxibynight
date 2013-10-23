@@ -23,11 +23,18 @@ public:
 
 	bool IsOccupied() const;
 
-	void SetOccupied(const sm::Vec3 &passengerTarget);
+	void SetOccupied(
+		const sm::Vec3 &passengerTarget,
+		float revard,
+		float timeLeft);
+
 	void SetFree();
 	sm::Vec3 GetPassengerTarget() const;
 
 	static Taxi* GetInstance();
+
+	float m_revard;
+	float m_timeLeft;
 
 private:
 	static Taxi *m_instance;

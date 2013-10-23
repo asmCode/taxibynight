@@ -21,7 +21,10 @@ public:
 	void ResetPosition(const sm::Vec3 position);
 	const sm::Vec3& GetPosition() const;
 
-	void SetToPassenger(const sm::Vec3 &tripDestination, float cash);
+	void SetToPassenger(
+		const sm::Vec3 &tripDestination,
+		float cash,
+		float time);
 	sm::Vec3 GetTripDestination() const;
 
 	bool IsPassenger() const;
@@ -31,6 +34,9 @@ public:
 	void StartApproach();
 	void CancelApproach();
 	bool IsTaxiInApproachRange(const sm::Vec3 &taxiPosition) const;
+
+	float GetCash() const;
+	float GetTimeLimit() const;
 
 private:
 	sm::Matrix m_transform;
@@ -54,6 +60,7 @@ private:
 	bool m_isPassenger;
 	sm::Vec3 m_tripDestination;
 	float m_cash;
+	float m_timeLimit;
 };
 
 #endif // PED

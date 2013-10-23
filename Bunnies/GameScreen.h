@@ -57,6 +57,11 @@ private:
 
 	ManCam *m_manCam;
 
+	int m_fps;
+	int m_currentFps;
+	float m_fpsCooldown;
+	float m_fpsUpdatesPerSecond;
+
 	void SimulatePress();
 };
 

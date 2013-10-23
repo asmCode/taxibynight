@@ -10,8 +10,7 @@
 #include <Graphics/Content/Content.h>
 #include <assert.h>
 
-#include <FGraphicsOpengl2.h>
-using namespace Tizen::Graphics::Opengl;
+#include <Graphics/OpenglPort.h>
 
 Taxi *Taxi::m_instance;
 
@@ -58,6 +57,13 @@ Taxi::~Taxi()
 
 void Taxi::Update(float time, float seconds)
 {
+	if (IsOccupied())
+	{
+		m_timeLeft -= seconds;
+		if (m_timeLeft < 0.0f)
+			m_timeLeft = 0.0f;
+	}
+
 	sm::Vec3 turnPivot;
 	sm::Matrix turnMatrix;
 	float pivotDistance = 0.0f;
@@ -155,9 +161,13 @@ bool Taxi::IsOccupied() const
 	return m_isOccupied;
 }
 
-void Taxi::SetOccupied(const sm::Vec3 &passengerTarget)
+void Taxi::SetOccupied(const sm::Vec3 &passengerTarget,
+					   float revard,
+					   float timeLeft)
 {
 	m_isOccupied = true;
+	m_revard = revard;
+	m_timeLeft = timeLeft;
 	m_passengerTarget = passengerTarget;
 }
 

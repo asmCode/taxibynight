@@ -17,8 +17,7 @@
 #include <Graphics/Content/Content.h>
 #include <assert.h>
 
-#include <FGraphicsOpengl2.h>
-using namespace Tizen::Graphics::Opengl;
+#include <Graphics/OpenglPort.h>
 
 const float PedsManager::TaxiViewRange = 30.0f;
 PedsManager* PedsManager::Instance;
@@ -28,16 +27,29 @@ PedsManager::PedsManager(const sm::Vec3 taxiPosition) :
 {
 	Instance = this;
 
+	for (uint32_t i = 0; i < MaxPeds; i++)
+		m_peds[i] = new Ped();
+
+	Reset(taxiPosition);
+}
+
+void PedsManager::Reset(const sm::Vec3 &taxiPosition)
+{
+	for (uint32_t i = 0; i < MaxPeds; i++)
+		m_peds[i]->ResetPosition(sm::Vec3(0, 0, 0));
+
 	m_pedResets = 0;
 	m_taxiPosition = taxiPosition;
-	Content *content = InterfaceProvider::GetContent();
 
-	for (uint32_t i = 0; i < MaxPeds; i++)
-	{
-		m_peds[i] = new Ped();
-		m_peds[i]->ResetPosition(sm::Vec3(0, 0, 0));
-		//MovePedNearCar(m_peds[i]);
-	}
+	m_totalCourses = 0;
+	m_totalMoney = 0.0f;
+
+	m_dollarsPerKm = 1.5f;
+	m_secondsPerKm = 15.0f;
+	m_dollarsMultiplierStep = 0.10f;
+	m_secondsMultiplierStep = 0.05f;
+	m_dollarsMultiplier = 1.0f;
+	m_secondsMultiplier = 1.0f;
 }
 
 PedsManager::~PedsManager()
@@ -62,6 +74,15 @@ void PedsManager::Update(float time, float seconds)
 				ped->SetTarget(Taxi::GetInstance()->GetPassengerTarget());
 				Taxi::GetInstance()->SetFree();
 				GameScreen::GetInstance()->SetFreeMode();
+
+				m_totalCourses++;
+				m_totalMoney += Taxi::GetInstance()->m_revard;
+
+				m_dollarsMultiplier += m_dollarsMultiplierStep;
+				m_secondsMultiplier -= m_secondsMultiplierStep;
+
+				if (m_secondsMultiplier < 0.0f)
+					m_secondsMultiplier = 0.0f;
 			}
 		}
 	}
@@ -78,7 +99,11 @@ void PedsManager::Update(float time, float seconds)
 		}
 		else if (distanceToTaxi < 1.0)
 		{
-			Taxi::GetInstance()->SetOccupied(m_pedApproaching->GetTripDestination());
+			Taxi::GetInstance()->SetOccupied(
+				m_pedApproaching->GetTripDestination(),
+				m_pedApproaching->GetCash(),
+				m_pedApproaching->GetTimeLimit());
+
 			GameScreen::GetInstance()->SetOccupiedMode();
 			m_pedApproaching->ResetPosition(sm::Vec3(0, 0, 0));
 			m_pedApproaching = NULL;
@@ -107,7 +132,10 @@ void PedsManager::Update(float time, float seconds)
 void PedsManager::Draw(float time, float seconds)
 {
 	for (uint32_t i = 0; i < MaxPeds; i++)
-		m_peds[i]->Draw(time, seconds);
+	{
+		if (IsOnVisibleSegment(m_peds[i]))
+			m_peds[i]->Draw(time, seconds);
+	}
 }
 
 //void GetRandomPedPosition(sm::Vec3 &position, sm::Vec3 &direction)
@@ -117,7 +145,10 @@ void PedsManager::Draw(float time, float seconds)
 bool PedsManager::IsOnVisibleSegment(Ped *ped)
 {
 	StreetSegment *ss = Street::Instance->GetSegmentAtPosition(ped->GetPosition());
-	return ss->IsVisible();
+	if (ss != NULL)
+		return ss->IsVisible();
+
+	return false;
 }
 
 void PedsManager::MovePedNearCar(Ped *ped)
@@ -222,7 +253,14 @@ void PedsManager::ResetPosition(Ped *ped, const sm::Vec3 &position, const sm::Ve
 		sm::Vec3 pos;
 		sm::Vec3 dir;
 		StreetMap::Instance->GetRandomPavementArea(pavement->CoordX(), pavement->CoordY(), pos, dir);
-		ped->SetToPassenger(pos, 0.0f);
+
+		float targetDistance = (pos - ped->GetPosition()).GetLength();
+		targetDistance *= 0.05f;
+
+		float revard = targetDistance * m_dollarsPerKm * m_dollarsMultiplier;
+		float timeLeft = targetDistance * m_secondsPerKm * m_secondsMultiplier;
+
+		ped->SetToPassenger(pos, revard, timeLeft);
 	}
 }
 

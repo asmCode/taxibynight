@@ -313,3 +313,13 @@ void Control::SetOpacity(float opacity)
 	this->opacity = opacity;
 }
 
+Control* Control::FindChild(const std::string &name)
+{
+	std::list<Control*>::iterator it;
+	for (it = children.begin(); it != children.end(); it++)
+		if ((*it)->GetName() == name)
+			return *it;
+
+	return NULL;
+}
+

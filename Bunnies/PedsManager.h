@@ -15,6 +15,8 @@ class PedsManager
 public:
 	static PedsManager *Instance;
 
+	void Reset(const sm::Vec3 &taxiPosition);
+
 	PedsManager(const sm::Vec3 taxiPosition);
 	~PedsManager();
 
@@ -26,6 +28,16 @@ public:
 
 	bool CanPassangerApproachTocar() const;
 	void NotifyApproachingToCar(Ped *ped);
+
+	int m_totalCourses;
+	float m_totalMoney;
+
+	float m_dollarsPerKm;
+	float m_secondsPerKm;
+	float m_dollarsMultiplierStep;
+	float m_secondsMultiplierStep;
+	float m_dollarsMultiplier;
+	float m_secondsMultiplier;
 
 private:
 	static const uint32_t MaxPeds = 100;

@@ -10,8 +10,7 @@
 #include "SpriteBatch.h"
 #include <memory.h>
 
-#include <FGraphicsOpengl2.h>
-using namespace Tizen::Graphics::Opengl;
+#include "OpenglPort.h"
 
 FontRenderer::FontRenderer() :
 	m_spriteBatch(NULL)

@@ -73,6 +73,8 @@ public:
 	bool IsVisible() const;
 	bool IsEnabled() const;
 
+	Control* FindChild(const std::string &name);
+
 	std::string GetName() const;
 	
 	float GetOpacity() const;

@@ -15,6 +15,7 @@
 
 #include <Math/MathUtils.h>
 #include <Graphics/Shader.h>
+#include <Graphics/FontRenderer.h>
 #include <Graphics/Model.h>
 #include <Graphics/Mesh.h>
 #include <Graphics/MeshPart.h>
@@ -23,8 +24,7 @@
 #include <Graphics/Content/Content.h>
 #include <Utils/Log.h>
 
-#include <FGraphicsOpengl2.h>
-using namespace Tizen::Graphics::Opengl;
+#include <Graphics/OpenglPort.h>
 
 GameScreen *GameScreen::m_instance;
 
@@ -33,6 +33,10 @@ GameScreen::GameScreen(void) :
 	m_taxi(NULL),
 	m_pedsManager(NULL)
 {
+	m_fps = 0;
+	m_currentFps = 0;
+	m_fpsCooldown = 0.0f;
+
 	m_instance = this;
 
 	m_isTurnRightPressed = false;
@@ -95,6 +99,10 @@ void GameScreen::Draw(float time, float seconds)
 	InterfaceProvider::GetSpriteBatch()->Begin();
 	m_hud->Draw(time, seconds);
 	InterfaceProvider::GetSpriteBatch()->End();
+
+	char fpsText[16];
+	sprintf(fpsText, "fps: %d", m_currentFps);
+	InterfaceProvider::GetFontRenderer()->DrawString(fpsText, 2, 2, Color::White);
 }
 
 void GameScreen::Update(float time, float seconds)
@@ -132,6 +140,15 @@ void GameScreen::Update(float time, float seconds)
 	m_placeIndicator->Update(time, seconds, m_projMatrix * m_viewMatrix);
 
 	m_hud->Update(time, seconds);
+
+	m_fps++;
+	m_fpsCooldown += seconds;
+	if (m_fpsCooldown >= 0.5f)
+	{
+		m_fpsCooldown = 0.0f;
+		m_currentFps = m_fps * 2;
+		m_fps = 0;
+	}
 
 	DrawingRoutines::SetProjectionMatrix(m_projMatrix);
 	DrawingRoutines::SetViewMatrix(m_viewMatrix);
@@ -201,20 +218,18 @@ void GameScreen::AccelerationButtonPressed(bool isPressed)
 
 void GameScreen::SimulatePress()
 {
-	return;
+	if (GetAsyncKeyState(VK_UP) & 0x8000)
+		AccelerationButtonPressed(true);
+	else
+		AccelerationButtonPressed(false);
 
-//	if (GetAsyncKeyState(VK_UP) & 0x8000)
-//		AccelerationButtonPressed(true);
-//	else
-//		AccelerationButtonPressed(false);
-//
-//	if (GetAsyncKeyState(VK_LEFT) & 0x8000)
-//		TurnLeftButtonPressed(true);
-//	else
-//		TurnLeftButtonPressed(false);
-//
-//	if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
-//		TurnRightButtonPressed(true);
-//	else
-//		TurnRightButtonPressed(false);
+	if (GetAsyncKeyState(VK_LEFT) & 0x8000)
+		TurnLeftButtonPressed(true);
+	else
+		TurnLeftButtonPressed(false);
+
+	if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
+		TurnRightButtonPressed(true);
+	else
+		TurnRightButtonPressed(false);
 }

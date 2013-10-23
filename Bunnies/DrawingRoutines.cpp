@@ -8,9 +8,6 @@
 #include <Graphics/Model.h>
 #include <assert.h>
 
-#include <FGraphicsOpengl2.h>
-using namespace Tizen::Graphics::Opengl;
-
 Shader* DrawingRoutines::m_celShadingShader;
 Shader* DrawingRoutines::m_celShadingMutatingShader;
 Shader* DrawingRoutines::m_outlineShader;

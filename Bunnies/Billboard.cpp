@@ -2,8 +2,7 @@
 
 #include <assert.h>
 
-#include <FGraphicsOpengl2.h>
-using namespace Tizen::Graphics::Opengl;
+#include <Graphics/OpenglPort.h>
 
 uint32_t Billboard::m_vboId = 0;
 

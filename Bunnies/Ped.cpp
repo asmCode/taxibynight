@@ -10,8 +10,7 @@
 #include <Graphics/Content/Content.h>
 #include <assert.h>
 
-#include <FGraphicsOpengl2.h>
-using namespace Tizen::Graphics::Opengl;
+#include <Graphics/OpenglPort.h>
 
 Ped::Ped()
 {
@@ -90,13 +89,18 @@ void Ped::ResetPosition(const sm::Vec3 position)
 	m_model->SetMaterial(m_pedMaterial);
 }
 
-void Ped::SetToPassenger(const sm::Vec3 &tripDestination, float cash)
+void Ped::SetToPassenger(
+	const sm::Vec3 &tripDestination,
+	float cash,
+	float time
+	)
 {
 	m_positionBeforeApproaching = m_position;
 
 	m_isPassenger = true;
 	m_tripDestination = tripDestination;
 	m_cash = cash;
+	m_timeLimit = time;
 
 	m_model->SetMaterial(m_passengerMaterial);
 }
@@ -128,4 +132,14 @@ void Ped::CancelApproach()
 bool Ped::IsTaxiInApproachRange(const sm::Vec3 &taxiPosition) const
 {
 	return (m_positionBeforeApproaching - taxiPosition).GetLength() <= 6.0f;
+}
+
+float Ped::GetCash() const
+{
+	return m_cash;
+}
+
+float Ped::GetTimeLimit() const
+{
+	return m_timeLimit;
 }
