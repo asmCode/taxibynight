@@ -175,6 +175,14 @@ void GameScreen::Update(float time, float seconds)
 	}
 }
 
+void GameScreen::Reset()
+{
+	SetFreeMode();
+	m_taxi->Reset();
+	m_pedsManager->Reset(m_taxi->GetPosition());
+	m_street->SetInitialVisibility(m_taxi->GetPosition());
+}
+
 void GameScreen::SetOccupiedMode()
 {
 	m_arrow->SetDirection(m_taxi->GetPassengerTarget());

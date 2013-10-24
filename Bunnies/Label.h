@@ -30,4 +30,6 @@ public:
 	void OnDraw(float time, float ms);
 	
 	sm::Point<int> GetTextSize();
+
+	void RecalculateSize();
 };

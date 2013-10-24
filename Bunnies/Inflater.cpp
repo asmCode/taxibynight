@@ -60,29 +60,18 @@ Control* Inflater::LoadNode(XMLNode *node)
 
 void Inflater::LoadLayout(XMLNode *node, Control *control)
 {
-	uint32_t left = 0;
-	uint32_t top = 0;
-	uint32_t width = 0;
-	uint32_t height = 0;
-	bool fill = false;
-	std::string align = "";
-
 	if (node->HasAttrib("left"))
-		left = node->GetAttribAsUInt32("left");
+		control->SetX(node->GetAttribAsUInt32("left"));
 	if (node->HasAttrib("top"))
-		top = node->GetAttribAsUInt32("top");
+		control->SetY(node->GetAttribAsUInt32("top"));
 	if (node->HasAttrib("width"))
-		width = node->GetAttribAsUInt32("width");
+		control->SetWidth(node->GetAttribAsUInt32("width"));
 	if (node->HasAttrib("height"))
-		height = node->GetAttribAsUInt32("height");
+		control->SetHeight(node->GetAttribAsUInt32("height"));
 	if (node->HasAttrib("fill"))
-		fill = node->GetAttribAsBool("fill");
+		control->SetFill(node->GetAttribAsBool("fill"));
 	if (node->HasAttrib("align"))
-		align = node->GetAttribAsString("align");
-
-	control->SetBounds(left, top, width, height);
-	control->SetFill(fill);
-	control->SetAlign(align);
+		control->SetAlign(node->GetAttribAsString("align"));
 }
 
 Control* Inflater::LoadImageControl(XMLNode *node, const std::string &name)

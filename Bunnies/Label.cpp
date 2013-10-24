@@ -15,6 +15,8 @@ Label::Label(const std::string &name,
 	this ->fontRenderer = fontRenderer;
 	this ->textColor = textColor;
 	this->opacity = 1.0f;
+
+	RecalculateSize();
 }
 
 void Label::OnUpdate(float time, float ms)
@@ -33,6 +35,8 @@ void Label::OnDraw(float time, float ms)
 void Label::SetText(const std::string &text)
 {
 	this ->text = text;
+
+	RecalculateSize();
 }
 
 const std::string& Label::GetText()
@@ -42,6 +46,16 @@ const std::string& Label::GetText()
 
 sm::Point<int> Label::GetTextSize()
 {
-	return fontRenderer->MeasureString(text.c_str());
+	sm::Point<int> size = fontRenderer->MeasureString(text.c_str());
+	size.X = (int)((float)size.X * m_size);
+	size.Y = (int)((float)size.Y * m_size);
+
+	return size;
 }
 
+void Label::RecalculateSize()
+{
+	sm::Point<int> textSize = GetTextSize();
+	width = textSize.X;
+	height = textSize.Y;
+}

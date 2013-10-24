@@ -36,6 +36,8 @@ public:
 	float m_revard;
 	float m_timeLeft;
 
+	void Reset();
+
 private:
 	static Taxi *m_instance;
 

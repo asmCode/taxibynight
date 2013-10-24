@@ -3,17 +3,18 @@
 #include "Control.h"
 #include "IControlEventsObserver.h"
 
-class GameScreen;
+class GameController;
 class Label;
+class AnimButton;
 
 class SummaryPanel :
 	public Control,
 	public IControlEventsObserver
 {
 public:
-	GameScreen *m_gameScreen;
+	GameController *m_gameController;
 
-	static SummaryPanel *Create(GameScreen *m_gameScreen);
+	static SummaryPanel *Create(GameController *m_gameController);
 
 	void SetContent(
 		float earn,
@@ -26,6 +27,10 @@ private:
 	Label *m_coursesLabel;
 	Label *m_totalEarnLabel;
 	Label *m_totalCoursesLabel;
+
+	AnimButton *m_mainMenuButton;
+	AnimButton *m_againButton;
+
 	bool m_record;
 
 	SummaryPanel();

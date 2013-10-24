@@ -31,7 +31,7 @@ std::string StringUtils::ToNarrow(const std::wstring &str)
 std::string StringUtils::ToString(float val)
 {
 	char txt[128];
-	sprintf(txt, "%f", val);
+	sprintf(txt, "%.2f", val);
 	return txt;
 }
 

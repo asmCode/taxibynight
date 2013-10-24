@@ -32,6 +32,7 @@ Taxi::Taxi() :
 	m_velocity.Set(0, 0, 0);
 	m_turnDirection.Set(0, 0, -1);
 	m_carDirection.Set(0, 0, -1);
+	m_wheelsAngle = 0.0f;
 
 	m_frontRightWheel = m_taxiModel->FindMesh("wheel_front_right");
 	m_frontLeftWheel = m_taxiModel->FindMesh("wheel_front_left");
@@ -44,6 +45,24 @@ Taxi::Taxi() :
 	m_backFrontWheelsDistance = (m_baseFrontRightWheelPosition - m_baseBackRightWheelPosition).GetLength();
 
 	m_worldMatrix = sm::Matrix::IdentityMatrix();
+}
+
+void Taxi::Reset()
+{
+	m_speed = 0.0f;
+
+	m_position.Set(100, 0, 100);
+	m_velocity.Set(0, 0, 0);
+	m_turnDirection.Set(0, 0, -1);
+	m_carDirection.Set(0, 0, -1);
+
+	m_isOccupied = false;
+
+	m_wheelsAngle = 0.0f;
+	m_isAccelerating = false;
+	m_turnValue = 0.0f;
+	m_revard = 0.0f;
+	m_timeLeft = 0.0f;
 }
 
 Taxi* Taxi::GetInstance()

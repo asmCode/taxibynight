@@ -18,6 +18,7 @@
 #include <Graphics/SpriteBatch.h>
 #include <Graphics/FontRenderer.h>
 #include <Utils/Log.h>
+#include <time.h>
 #include <stddef.h>
 #include <assert.h>
 
@@ -76,6 +77,8 @@ bool GameController::InitializeGraphics(const std::string &basePath)
 
 bool GameController::Initialize()
 {
+	srand(time(NULL));
+
 	Player *player = new Player(TaxiGame::Environment::GetInstance()->GetWritePath() + "player.xml");
 	player->Load();
 
@@ -164,6 +167,7 @@ void GameController::proto_SetLookTarget(const sm::Vec3 &lookTarget)
 
 void GameController::ShowGameScreen()
 {
+	m_gameScreen->Reset();
 	m_activeScreen = m_gameScreen;
 }
 

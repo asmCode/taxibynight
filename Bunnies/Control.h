@@ -65,6 +65,8 @@ public:
 	void SetY(int y);
 	void SetPosition(int x, int y);
 	void SetSize(int width, int height);
+	void SetWidth(int width);
+	void SetHeight(int height);
 	void SetBounds(int x, int y, int width, int height);
 	void SetFill(bool fill);
 	void SetAlign(const std::string &align);

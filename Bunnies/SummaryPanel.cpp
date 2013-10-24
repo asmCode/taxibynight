@@ -4,7 +4,7 @@
 #include "AnimButton.h"
 #include "Label.h"
 #include "SpritesMap.h"
-#include "GameScreen.h"
+#include "GameController.h"
 #include "Taxi.h"
 #include "GameController.h"
 #include "Inflater.h"
@@ -22,10 +22,11 @@ SummaryPanel::SummaryPanel() :
 	SetFill(true);
 }
 
-SummaryPanel *SummaryPanel::Create(GameScreen *gameScreen)
+SummaryPanel *SummaryPanel::Create(GameController *gameController)
 {	
 	std::string basePath = TaxiGame::Environment::GetInstance()->GetBasePath();
 	SummaryPanel *ret = new SummaryPanel();
+	ret->m_gameController = gameController;
 
 	Control *content = Inflater::Inflate(basePath + "data/gui/SummaryPanel.xml");
 
@@ -40,11 +41,23 @@ SummaryPanel *SummaryPanel::Create(GameScreen *gameScreen)
 	ret->m_totalCoursesLabel = dynamic_cast<Label*>(ret->FindChild("total_courses_value"));
 	assert(ret->m_totalCoursesLabel != NULL);
 
+	ret->m_mainMenuButton = dynamic_cast<AnimButton*>(ret->FindChild("back"));
+	assert(ret->m_mainMenuButton != NULL);
+	ret->m_againButton = dynamic_cast<AnimButton*>(ret->FindChild("again"));
+	assert(ret->m_againButton != NULL);
+
+	ObsCast(IControlEventsObserver, ret->m_mainMenuButton)->AddObserver(ret);
+	ObsCast(IControlEventsObserver, ret->m_againButton)->AddObserver(ret);
+
 	return ret;
 }
 
 void SummaryPanel::Clicked(Control *control, uint32_t x, uint32_t y)
 {
+	if (control == m_mainMenuButton)
+		m_gameController->ShowMainMenuScreen();
+	if (control == m_againButton)
+		m_gameController->ShowGameScreen();
 }
 
 void SummaryPanel::OnDraw(float time, float seconds)
@@ -58,9 +71,9 @@ void SummaryPanel::SetContent(
 		float totalEarn,
 		int totalCourses)
 {
-	m_earnLabel->SetText(StringUtils::ToString(earn));
+	m_earnLabel->SetText(std::string("$") + StringUtils::ToString(earn));
 	m_coursesLabel->SetText(StringUtils::ToString(courses));
-	m_totalEarnLabel->SetText(StringUtils::ToString(totalEarn));
+	m_totalEarnLabel->SetText(std::string("$") + StringUtils::ToString(totalEarn));
 	m_totalCoursesLabel->SetText(StringUtils::ToString(totalCourses));
 	//bool m_record;
 }

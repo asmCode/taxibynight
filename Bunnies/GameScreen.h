@@ -29,6 +29,8 @@ public:
 	void Draw(float time, float seconds);
 	void Update(float time, float seconds);
 
+	void Reset();
+
 	void SetOccupiedMode();
 	void SetFreeMode();
 

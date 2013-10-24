@@ -19,7 +19,7 @@ SummaryScreen::~SummaryScreen(void)
 
 bool SummaryScreen::InitResources()
 {
-	m_summaryPanel = SummaryPanel::Create(NULL);
+	m_summaryPanel = SummaryPanel::Create(m_gameController);
 	if (m_summaryPanel == NULL)
 		return false;
 

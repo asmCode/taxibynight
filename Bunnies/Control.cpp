@@ -120,6 +120,16 @@ void Control::SetSize(int width, int height)
 	this ->height = height;
 }
 
+void Control::SetWidth(int width)
+{
+	this->width = width;
+}
+
+void Control::SetHeight(int height)
+{
+	this->height = height;
+}
+
 void Control::SetBounds(int x, int y, int width, int height)
 {
 	SetPosition(x, y);
@@ -145,7 +155,7 @@ sm::Vec2 Control::GetGlobalPos()
 {
 	sm::Vec2 pos(x, y);
 	if (parent != NULL)
-		pos += parent ->GetLocalPos();
+		pos += parent ->GetGlobalPos();
 	return pos;
 }
 

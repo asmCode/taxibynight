@@ -105,7 +105,7 @@ void PedsManager::Update(float time, float seconds)
 			Taxi::GetInstance()->SetOccupied(
 				m_pedApproaching->GetTripDestination(),
 				m_pedApproaching->GetCash(),
-				m_pedApproaching->GetTimeLimit());
+				m_pedApproaching->GetTimeLimit() * 0.1f);
 
 			GameScreen::GetInstance()->SetOccupiedMode();
 			m_pedApproaching->ResetPosition(sm::Vec3(0, 0, 0));
