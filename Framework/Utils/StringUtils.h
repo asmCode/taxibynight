@@ -11,6 +11,9 @@ public:
 
 	static std::wstring ToWide(const std::string &str);
 	static std::string ToNarrow(const std::wstring &str);
+
+	static std::string ToString(float val);
+	static std::string ToString(int val);
 };
 
 #endif // STRING_UTILS_H

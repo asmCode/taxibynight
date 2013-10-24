@@ -38,6 +38,7 @@ void MainMenuScreen::Draw(float time, float seconds)
 
 void MainMenuScreen::Update(float time, float seconds)
 {
+	m_mainMenuPanel->Update(time, seconds);
 }
 
 void MainMenuScreen::HandleTapGesture(const sm::Vec2 &point)

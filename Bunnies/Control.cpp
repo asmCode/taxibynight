@@ -13,7 +13,8 @@ void Control::SetSpriteBatch(SpriteBatch *spriteBatch)
 }
 
 Control::Control(const std::string &name) :
-	m_name(name)
+	m_name(name),
+	m_fill(false)
 {
 	x = 0;
 	y = 0;
@@ -27,7 +28,8 @@ Control::Control(const std::string &name) :
 }
 
 Control::Control(const std::string &name, int x, int y, int width, int height) :
-	m_name(name)
+	m_name(name),
+	m_fill(false)
 {
 	this ->x = x;
 	this ->y = y;
@@ -41,7 +43,8 @@ Control::Control(const std::string &name, int x, int y, int width, int height) :
 }
 
 Control::Control(const std::string &name, int x, int y, const TexPart &bg) :
-	m_name(name)
+	m_name(name),
+	m_fill(false)
 {
 	this ->x = x;
 	this ->y = y;
@@ -56,7 +59,8 @@ Control::Control(const std::string &name, int x, int y, const TexPart &bg) :
 }
 
 Control::Control(const std::string &name, int x, int y, int width, int height, const TexPart &bg) :
-	m_name(name)
+	m_name(name),
+	m_fill(false)
 {
 	this ->x = x;
 	this ->y = y;
@@ -362,10 +366,16 @@ void Control::SetOpacity(float opacity)
 
 Control* Control::FindChild(const std::string &name)
 {
+	if (GetName() == name)
+		return this;
+
 	std::list<Control*>::iterator it;
 	for (it = children.begin(); it != children.end(); it++)
-		if ((*it)->GetName() == name)
-			return *it;
+	{
+		Control *child = (*it)->FindChild(name);
+		if (child != NULL)
+			return child;
+	}
 
 	return NULL;
 }

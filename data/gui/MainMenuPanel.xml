@@ -1,6 +1,4 @@
-<Panel>
-	<Image name="background" left="0" top="0" image="main_menu_bg" />
-	<AnimButton name="start_game_btn" left="0" top="200" image="start_game_btn" image_pushed="start_game_btn_down" />
-	<AnimButton name="achievements_btn" left="128" top="328" image="achievements_btn" image_pushed="achievements_btn_down" />
-	<AnimButton name="leaderboard_btn" left="256" top="456" image="leaderboard_btn" image_pushed="leaderboard_btn_down" />
+<Panel name="main_menu" fill="true">
+	<Image name="background" image="main_menu_bg" fill="true" />
+	<AnimButton name="start_game_btn" align="center" width="200" height="150" image="start_game_btn" image_pushed="start_game_btn_down" />
 </Panel>

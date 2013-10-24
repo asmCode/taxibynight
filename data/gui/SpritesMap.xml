@@ -1,5 +1,6 @@
 <map>
 	<sprite name="main_menu_bg" file="gui01" bounds="0,0,960,640" />
+	<sprite name="summary_screen_bg" file="gui02" bounds="0,0,640,360" />
 	<sprite name="start_game_btn" file="gui01" bounds="0,640,128,128" />
 	<sprite name="start_game_btn_down" file="gui01" bounds="0,640,128,128" />
 	<sprite name="leaderboard_btn" file="gui01" bounds="128,640,128,128" />

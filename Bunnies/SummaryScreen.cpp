@@ -60,3 +60,17 @@ void SummaryScreen::HandleRelease(uint32_t pointIndex, const sm::Vec2 &point)
 {
 	m_summaryPanel->HandleRelease(pointIndex, point);
 }
+
+void SummaryScreen::SetStatistics(
+		float earn,
+		int courses,
+		float totalEarn,
+		int totalCourses)
+{
+	m_summaryPanel->SetContent(
+		earn,
+		courses,
+		totalEarn,
+		totalCourses);
+}
+

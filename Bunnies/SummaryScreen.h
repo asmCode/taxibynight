@@ -19,6 +19,12 @@ public:
 
 	void HandleTapGesture(const sm::Vec2 &point);
 
+	void SetStatistics(
+		float earn,
+		int courses,
+		float totalEarn,
+		int totalCourses);
+
 private:
 	GameController *m_gameController;
 

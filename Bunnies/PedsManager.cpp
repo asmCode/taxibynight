@@ -39,6 +39,8 @@ void PedsManager::Reset(const sm::Vec3 &taxiPosition)
 	for (uint32_t i = 0; i < MaxPeds; i++)
 		m_peds[i]->ResetPosition(sm::Vec3(0, 0, 0));
 
+	m_pedApproaching = NULL;
+
 	m_pedResets = 0;
 	m_taxiPosition = taxiPosition;
 

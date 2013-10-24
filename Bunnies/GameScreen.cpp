@@ -6,9 +6,11 @@
 #include "GameProps.h"
 //#include "ManCam.h"
 #include "Street.h"
+#include "GameController.h"
 #include "DrawingRoutines.h"
 #include "Taxi.h"
 #include "Arrow.h"
+#include "Player.h"
 #include "Billboard.h"
 #include "PlaceIndicator.h"
 #include "HUD.h"
@@ -28,7 +30,8 @@
 
 GameScreen *GameScreen::m_instance;
 
-GameScreen::GameScreen(void) :
+GameScreen::GameScreen(GameController *gameController) :
+	m_gameController(gameController),
 	m_street(NULL),
 	m_taxi(NULL),
 	m_pedsManager(NULL)
@@ -154,6 +157,22 @@ void GameScreen::Update(float time, float seconds)
 	DrawingRoutines::SetViewMatrix(m_viewMatrix);
 	DrawingRoutines::SetLightPosition(camPosition);
 	DrawingRoutines::SetEyePosition(camPosition);
+
+	if (m_taxi->IsOccupied())
+	{
+		if (m_taxi->m_timeLeft == 0.0f)
+		{
+			Player::Instance->m_totalMoney += m_pedsManager->m_totalMoney;
+			Player::Instance->m_totalCourses += m_pedsManager->m_totalCourses;
+			Player::Instance->Save();
+
+			m_gameController->ShowSummaryScreen(
+				m_pedsManager->m_totalMoney,
+				m_pedsManager->m_totalCourses,
+				Player::Instance->m_totalMoney,
+				Player::Instance->m_totalCourses);
+		}
+	}
 }
 
 void GameScreen::SetOccupiedMode()

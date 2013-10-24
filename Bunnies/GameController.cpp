@@ -6,6 +6,7 @@
 #include "MainMenuScreen.h"
 #include "SummaryScreen.h"
 #include "SpritesMap.h"
+#include "Player.h"
 #include "Environment.h"
 #include "Control.h"
 #include "DrawingRoutines.h"
@@ -75,6 +76,9 @@ bool GameController::InitializeGraphics(const std::string &basePath)
 
 bool GameController::Initialize()
 {
+	Player *player = new Player(TaxiGame::Environment::GetInstance()->GetWritePath() + "player.xml");
+	player->Load();
+
 	std::string basePath = TaxiGame::Environment::GetInstance()->GetBasePath();
 
 	if (!InitializeGraphics(basePath))
@@ -83,7 +87,7 @@ bool GameController::Initialize()
 		return false;
 	}
 
-	m_gameScreen = new GameScreen();
+	m_gameScreen = new GameScreen(this);
 	if (!m_gameScreen->Initialize())
 		return false;
 
@@ -165,7 +169,21 @@ void GameController::ShowGameScreen()
 
 void GameController::ShowMainMenuScreen()
 {
-	//m_activeScreen = m_mainMenuScreen;
+	m_activeScreen = m_mainMenuScreen;
+}
+
+void GameController::ShowSummaryScreen(
+	float earn,
+	int courses,
+	float totalEarn,
+	int totalCourses)
+{
+	m_summaryScreen->SetStatistics(
+		earn,
+		courses,
+		totalEarn,
+		totalCourses);
+
 	m_activeScreen = m_summaryScreen;
 }
 

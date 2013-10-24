@@ -11,11 +11,12 @@ class PedsManager;
 class Arrow;
 class PlaceIndicator;
 class HUD;
+class GameController;
 
 class GameScreen : public IScreen
 {
 public:
-	GameScreen(void);
+	GameScreen(GameController *gameController);
 	~GameScreen(void);
 
 	static GameScreen *GetInstance();
@@ -41,6 +42,8 @@ public:
 
 private:
 	static GameScreen *m_instance;
+
+	GameController *m_gameController;
 
 	bool m_isTurnRightPressed;
 	bool m_isTurnLeftPressed;

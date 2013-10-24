@@ -15,11 +15,18 @@ public:
 
 	static SummaryPanel *Create(GameScreen *m_gameScreen);
 
+	void SetContent(
+		float earn,
+		int courses,
+		float totalEarn,
+		int totalCourses);
+
 private:
-	/*Label *m_totalMoneyLabel;
+	Label *m_earnLabel;
+	Label *m_coursesLabel;
+	Label *m_totalEarnLabel;
 	Label *m_totalCoursesLabel;
-	Label *m_rewardLabel;
-	Label *m_timeLeftLabel;*/
+	bool m_record;
 
 	SummaryPanel();
 	

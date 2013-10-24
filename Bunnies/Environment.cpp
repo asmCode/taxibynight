@@ -35,6 +35,11 @@ void Environment::SetBasePath(const std::string &basePath)
 	this->m_basePath = basePath;
 }
 
+void Environment::SetWritePath(const std::string &writePath)
+{
+	this->m_writePath = writePath;
+}
+
 unsigned Environment::GetScreenWidth() const
 {
 	return m_screenWidth;
@@ -53,6 +58,11 @@ std::string Environment::GetIOSVersion() const
 std::string Environment::GetBasePath() const
 {
 	return m_basePath;
+}
+
+std::string Environment::GetWritePath() const
+{
+	return m_writePath;
 }
 
 }

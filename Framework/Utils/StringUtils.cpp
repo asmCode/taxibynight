@@ -28,3 +28,16 @@ std::string StringUtils::ToNarrow(const std::wstring &str)
 	return std::string(str.begin(), str.end());
 }
 
+std::string StringUtils::ToString(float val)
+{
+	char txt[128];
+	sprintf(txt, "%f", val);
+	return txt;
+}
+
+std::string StringUtils::ToString(int val)
+{
+	char txt[128];
+	sprintf(txt, "%d", val);
+	return txt;
+}

@@ -112,6 +112,19 @@ public:
 
 		return true;
 	}
+
+	static bool WriteTextFile(const char *fileName, const std::string &text)
+	{
+		std::ofstream file(fileName);
+		if (file.fail() || !file.is_open())
+			return false;
+
+		file.write(text.c_str(), text.size());
+		
+		file.close();
+
+		return true;
+	}
 };
 
 #endif

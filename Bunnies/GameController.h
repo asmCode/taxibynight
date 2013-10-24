@@ -36,6 +36,11 @@ public:
 
 	void ShowGameScreen();
 	void ShowMainMenuScreen();
+	void ShowSummaryScreen(
+		float earn,
+		int courses,
+		float totalEarn,
+		int totalCourses);
 
 private:
 	GameScreen *m_gameScreen;

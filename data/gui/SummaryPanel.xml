@@ -1,5 +1,5 @@
 <Panel name="summary_panel" fill="true">
-	<Image name="summary_screen_bg" image="main_menu_bg" fill="true" />
+	<Image name="summary_screen_bg" image="summary_screen_bg" fill="true" />
 	<Panel name="summary_panel" align="center" width="600" height="400">
 		<Image name="summary_screen_content_bg" image="uni_button_down" fill="true" />
 		
