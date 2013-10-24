@@ -25,6 +25,10 @@ protected:
 	int y;
 	int width;
 	int height;
+	int m_marginLeft;
+	int m_marginRight;
+	int m_marginTop;
+	int m_marginBottom;
 	
 	float opacity;
 	
@@ -42,6 +46,8 @@ protected:
 
 	bool m_fill;
 	std::string m_align;
+
+	void SetDefaults();
 	
 	virtual void OnTouch(int x, int y);
 	virtual void OnTouchBegin(int x, int y);
@@ -67,6 +73,12 @@ public:
 	void SetSize(int width, int height);
 	void SetWidth(int width);
 	void SetHeight(int height);
+
+	void SetMarginLeft(int value);
+	void SetMarginRight(int value);
+	void SetMarginTop(int value);
+	void SetMarginBottom(int value);
+
 	void SetBounds(int x, int y, int width, int height);
 	void SetFill(bool fill);
 	void SetAlign(const std::string &align);

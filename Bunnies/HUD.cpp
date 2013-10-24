@@ -3,88 +3,46 @@
 #include "InterfaceProvider.h"
 #include "AnimButton.h"
 #include "Label.h"
-#include "SpritesMap.h"
 #include "GameScreen.h"
 #include "Taxi.h"
 #include "GameController.h"
 #include "PedsManager.h"
+#include "Inflater.h"
 #include <Graphics/TexPart.h>
 #include <Graphics/Content/Content.h>
 #include <Utils/Log.h>
-#include <XML/XMLLoader.h>
-#include <XML/XMLNode.h>
 //#include "MessageBox.h"
 //#include "SoundManager.h"
 
 HUD::HUD() :
 	Control("HUD")
 {
+	SetFill(true);
 }
 
 HUD *HUD::Create(GameScreen *gameScreen)
-{	
+{
+	std::string basePath = TaxiGame::Environment::GetInstance()->GetBasePath();
 	HUD *ret = new HUD();
-	if (ret != NULL)
-	{		
-		ret->m_gameScreen = gameScreen;
+	ret->m_gameScreen = gameScreen;
 
-		ret ->x = 0;
-		ret ->y = 0;
-		ret ->width = TaxiGame::Environment::GetInstance()->GetScreenWidth();
-		ret ->height = TaxiGame::Environment::GetInstance()->GetScreenHeight();
+	Control *content = Inflater::Inflate(basePath + "data/gui/HUD.xml");
 
-		std::string basePath = TaxiGame::Environment::GetInstance()->GetBasePath();
-		XMLNode *root = XMLLoader::LoadFromFile(basePath + "data/gui/HUD.xml");
-		if (root == NULL)
-			return NULL;
+	ret->AddChild(content);
+	
+	Control *left = dynamic_cast<AnimButton*>(ret->FindChild("turn_left"));
+	assert(left != NULL);
+	Control *right = dynamic_cast<AnimButton*>(ret->FindChild("turn_right"));
+	assert(right != NULL);
+	Control *acc = dynamic_cast<AnimButton*>(ret->FindChild("acc_pedal"));
+	assert(acc != NULL);
+	Control *brake = dynamic_cast<AnimButton*>(ret->FindChild("brake_pedal"));
+	assert(brake != NULL);
 
-		for (uint32_t i = 0; i < root->GetChildrenCount(); i++)
-		{
-			XMLNode &childDesc = (*root)[i];
-
-			std::string type = childDesc.GetName();
-			std::string name = childDesc.GetAttribAsString("name");
-			uint32_t left = childDesc.GetAttribAsUInt32("left");
-			uint32_t top = childDesc.GetAttribAsUInt32("top");
-
-			if (type == "AnimButton")
-			{
-				std::string imageName = childDesc.GetAttribAsString("image");
-				std::string imagePushedName = childDesc.GetAttribAsString("image_pushed");
-
-				TexPart *image = InterfaceProvider::GetSpritesMap()->GetTexPart(imageName);
-				assert(image != NULL);
-
-				TexPart *imagePushed = InterfaceProvider::GetSpritesMap()->GetTexPart(imagePushedName);
-				assert(imagePushed != NULL);
-
-				AnimButton *ctrl = new AnimButton(name, left, top, *image, *imagePushed);
-
-				ret->AddChild(ctrl);
-
-				ObsCast(IControlEventsObserver, ctrl)->AddObserver(ret);
-			}
-			else if (type == "Image")
-			{
-				std::string imageName = childDesc.GetAttribAsString("image");
-
-				TexPart *image = InterfaceProvider::GetSpritesMap()->GetTexPart(imageName);
-				assert(image != NULL);
-
-				Control *ctrl = new Control(name, left, top, *image);
-
-				ret->AddChild(ctrl);
-			}
-			else if (type == "Label")
-			{
-				std::string text = childDesc.GetAttribAsString("text");
-				float size = childDesc.GetAttribAsFloat("size");
-
-				Label *ctrl = new Label(name, text, InterfaceProvider::GetFontRenderer(), size, Color::White, left, top);
-				ret->AddChild(ctrl);
-			}
-		}
-	}
+	ObsCast(IControlEventsObserver, left)->AddObserver(ret);
+	ObsCast(IControlEventsObserver, right)->AddObserver(ret);
+	ObsCast(IControlEventsObserver, acc)->AddObserver(ret);
+	ObsCast(IControlEventsObserver, brake)->AddObserver(ret);
 
 	ret->m_totalMoneyLabel = dynamic_cast<Label*>(ret->FindChild("total_money_value"));
 	assert(ret->m_totalMoneyLabel != NULL);
@@ -139,13 +97,13 @@ void HUD::OnUpdate(float time, float seconds)
 	sprintf(txt, "%d", PedsManager::Instance->m_totalCourses);
 	m_totalCoursesLabel->SetText(txt);
 
-	sprintf(txt, "%.2f$", PedsManager::Instance->m_totalMoney);
+	sprintf(txt, "$%.2f", PedsManager::Instance->m_totalMoney);
 	m_totalMoneyLabel->SetText(txt);
 
 	if (Taxi::GetInstance()->IsOccupied())
 	{
 		m_rewardLabel->SetVisible(true);
-		sprintf(txt, "%.2f$", Taxi::GetInstance()->m_revard);
+		sprintf(txt, "$%.2f", Taxi::GetInstance()->m_revard);
 		m_rewardLabel->SetText(txt);
 
 		m_timeLeftLabel->SetVisible(true);

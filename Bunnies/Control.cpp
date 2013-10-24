@@ -16,6 +16,8 @@ Control::Control(const std::string &name) :
 	m_name(name),
 	m_fill(false)
 {
+	SetDefaults();
+
 	x = 0;
 	y = 0;
 	width = 0;
@@ -31,6 +33,8 @@ Control::Control(const std::string &name, int x, int y, int width, int height) :
 	m_name(name),
 	m_fill(false)
 {
+	SetDefaults();
+
 	this ->x = x;
 	this ->y = y;
 	this ->width = width;
@@ -46,6 +50,8 @@ Control::Control(const std::string &name, int x, int y, const TexPart &bg) :
 	m_name(name),
 	m_fill(false)
 {
+	SetDefaults();
+
 	this ->x = x;
 	this ->y = y;
 	this ->width = bg.ImageRect.Width;
@@ -62,6 +68,8 @@ Control::Control(const std::string &name, int x, int y, int width, int height, c
 	m_name(name),
 	m_fill(false)
 {
+	SetDefaults();
+
 	this ->x = x;
 	this ->y = y;
 	this ->width = width;
@@ -70,7 +78,7 @@ Control::Control(const std::string &name, int x, int y, int width, int height, c
 	
 	parent = NULL;
 	visible = true;
-	enabled		= true;
+	enabled	= true;
 	this ->bg = bg;
 }
 
@@ -79,6 +87,19 @@ Control::~Control()
 	std::map<std::string, unsigned char*>::iterator it;
 	for (it = userData.begin(); it != userData.end(); it++)
 		delete [] it ->second;
+}
+
+void Control::SetDefaults()
+{
+	x = 0;
+	y = 0;
+	width = 0;
+	height = 0;
+
+	m_marginLeft = 0;
+	m_marginRight = 0;
+	m_marginTop = 0;
+	m_marginBottom = 0;
 }
 
 Control *Control::GetParent()
@@ -128,6 +149,26 @@ void Control::SetWidth(int width)
 void Control::SetHeight(int height)
 {
 	this->height = height;
+}
+
+void Control::SetMarginLeft(int value)
+{
+	m_marginLeft = value;
+}
+
+void Control::SetMarginRight(int value)
+{
+	m_marginRight = value;
+}
+
+void Control::SetMarginTop(int value)
+{
+	m_marginTop = value;
+}
+
+void Control::SetMarginBottom(int value)
+{
+	m_marginBottom = value;
 }
 
 void Control::SetBounds(int x, int y, int width, int height)
@@ -251,13 +292,23 @@ void Control::Update(float time, float ms)
 	}
 	else if (!m_fill && m_align =="bottom-left")
 	{
-		x = 0;
-		y = parentSize.y - height;
+		x = m_marginLeft;
+		y = parentSize.y - height - m_marginBottom;
 	}
 	else if (!m_fill && m_align =="bottom-right")
 	{
-		x = parentSize.x - width;
-		y = parentSize.y - height;
+		x = parentSize.x - width - m_marginRight;
+		y = parentSize.y - height - m_marginBottom;
+	}
+	else if (!m_fill && m_align =="top-left")
+	{
+		x = m_marginLeft;
+		y = m_marginTop;
+	}
+	else if (!m_fill && m_align =="top-right")
+	{
+		x = parentSize.x - width - m_marginRight;
+		y = m_marginTop;
 	}
 	
 	std::list<Control*>::iterator it;

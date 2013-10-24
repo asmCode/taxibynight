@@ -13,11 +13,11 @@
 		<Label name="total_courses_label" text="Total Courses" size="0.7" left="50" top="210" />
 		<Label name="total_courses_value" text="0" size="0.7" left="350" top="210" />
 		
-		<AnimButton name="back" align="bottom-left" width="150" height="100" image="uni_button" image_pushed="uni_button_down">
+		<AnimButton name="back" align="bottom-left" margin_left="10" margin_bottom="10" width="150" height="100" image="uni_button" image_pushed="uni_button_down">
 			<Label text="Main Menu" size="0.7" align="center" />
 		</AnimButton>
 		
-		<AnimButton name="again" align="bottom-right" width="150" height="100" image="uni_button" image_pushed="uni_button_down">
+		<AnimButton name="again" align="bottom-right" margin_right="10" margin_bottom="10" width="150" height="100" image="uni_button" image_pushed="uni_button_down">
 			<Label text="Again!" size="0.7" align="center" />
 		</AnimButton>
 	</Panel>
