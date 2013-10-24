@@ -39,6 +39,9 @@ protected:
 	static SpriteBatch *spriteBatch;
 
 	std::string m_name;
+
+	bool m_fill;
+	std::string m_align;
 	
 	virtual void OnTouch(int x, int y);
 	virtual void OnTouchBegin(int x, int y);
@@ -63,6 +66,8 @@ public:
 	void SetPosition(int x, int y);
 	void SetSize(int width, int height);
 	void SetBounds(int x, int y, int width, int height);
+	void SetFill(bool fill);
+	void SetAlign(const std::string &align);
 	void SetVisible(bool visible);
 	void SetEnabled(bool enabled);
 	
@@ -72,6 +77,8 @@ public:
 	int GetHeight() const;
 	bool IsVisible() const;
 	bool IsEnabled() const;
+
+	sm::Vec2 GetParentSize() const;
 
 	Control* FindChild(const std::string &name);
 

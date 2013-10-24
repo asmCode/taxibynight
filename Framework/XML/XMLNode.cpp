@@ -127,3 +127,9 @@ XMLNode& XMLNode::operator[](uint32_t index) const
 	return *m_children[index];
 }
 
+XMLNode* XMLNode::GetChild(uint32_t index) const
+{
+	assert(index < m_children.size());
+
+	return m_children[index];
+}

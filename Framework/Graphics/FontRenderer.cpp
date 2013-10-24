@@ -133,7 +133,6 @@ void FontRenderer::DrawString(const char *text, unsigned x, unsigned y, const Co
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	m_spriteBatch->Begin();
 	unsigned xShift = x;
 	unsigned yShift = y;
 	unsigned rowHeight = texLetters['A'].Size.Y * scale;
@@ -158,7 +157,7 @@ void FontRenderer::DrawString(const char *text, unsigned x, unsigned y, const Co
 		
 	}
 	//m_spriteBatch ->Draw(texLetters[text[0]].Coords.Tex, Color(255, 0, 0), 0, 40);
-	m_spriteBatch->End();
+	//m_spriteBatch->End();
 }
 
 sm::Point<int> FontRenderer::MeasureString(const char *text)

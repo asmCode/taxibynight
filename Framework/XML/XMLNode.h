@@ -37,6 +37,8 @@ public:
 	XMLNode& operator[](const std::string &name) const;
 	XMLNode& operator[](uint32_t index) const;
 
+	XMLNode* GetChild(uint32_t index) const;
+
 private:
 	std::string m_name;
 	std::string m_value;

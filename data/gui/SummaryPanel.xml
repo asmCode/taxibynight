@@ -1,0 +1,19 @@
+<Panel name="summary_panel" fill="true">
+	<Image name="summary_screen_bg" image="main_menu_bg" fill="true" />
+	<Panel name="summary_panel" align="center" width="600" height="400">
+		<Image name="summary_screen_content_bg" image="uni_button_down" fill="true" />
+		
+		<Label name="earn_label" text="Earn" size="1.0" left="50" top="100" />
+		<Label name="earn_value" text="$0" size="1.0" left="350" top="100" />
+		<Label name="courses_label" text="Courses" size="0.7" left="50" top="150" />
+		<Label name="courses_value" text="0" size="0.7" left="350" top="150" />
+		
+		<Label name="total_money_label" text="Total Income" size="0.7" left="50" top="180" />
+		<Label name="total_money_value" text="$0 / $10.000" size="0.7" left="350" top="180" />
+		<Label name="total_courses_label" text="Total Courses" size="0.7" left="50" top="210" />
+		<Label name="total_courses_value" text="0" size="0.7" left="350" top="210" />
+		
+		<AnimButton name="back" align="bottom-left" width="150" height="100" image="uni_button" image_pushed="uni_button_down" />
+		<AnimButton name="again" align="bottom-right" width="150" height="100" image="uni_button" image_pushed="uni_button_down" />
+	</Panel>
+</Panel>

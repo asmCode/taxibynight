@@ -4,6 +4,7 @@
 #include "GameScreen.h"
 #include "SplashScreen.h"
 #include "MainMenuScreen.h"
+#include "SummaryScreen.h"
 #include "SpritesMap.h"
 #include "Environment.h"
 #include "Control.h"
@@ -23,6 +24,7 @@ GameController::GameController(IGraphicsEngine *graphicsEngine) :
 	m_graphicsEngine(graphicsEngine),
 	m_splashScreen(NULL),
 	m_mainMenuScreen(NULL),
+	m_summaryScreen(NULL),
 	m_gameScreen(NULL),
 	m_activeScreen(NULL)
 {
@@ -93,6 +95,10 @@ bool GameController::Initialize()
 	if (!m_mainMenuScreen->InitResources())
 		return false;
 
+	m_summaryScreen = new SummaryScreen(this);
+	if (!m_summaryScreen->InitResources())
+		return false;
+
 	m_activeScreen = m_splashScreen;
 
 	return true;
@@ -159,7 +165,8 @@ void GameController::ShowGameScreen()
 
 void GameController::ShowMainMenuScreen()
 {
-	m_activeScreen = m_mainMenuScreen;
+	//m_activeScreen = m_mainMenuScreen;
+	m_activeScreen = m_summaryScreen;
 }
 
 bool GameController::proto_IsInGame()

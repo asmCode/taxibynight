@@ -1,4 +1,5 @@
 #include "Control.h"
+#include "Environment.h"
 #include <assert.h>
 #include <Graphics/SpriteBatch.h>
 #include <Graphics/TexPart.h>
@@ -121,6 +122,16 @@ void Control::SetBounds(int x, int y, int width, int height)
 	SetSize(width, height);
 }
 
+void Control::SetFill(bool fill)
+{
+	m_fill = fill;
+}
+
+void Control::SetAlign(const std::string &align)
+{
+	m_align = align;
+}
+
 sm::Vec2 Control::GetLocalPos()
 {
 	return sm::Vec2(x, y);
@@ -209,6 +220,31 @@ bool Control::HitTest(int x, int y) const
 void Control::Update(float time, float ms)
 {	
 	OnUpdate(time, ms);
+
+	sm::Vec2 parentSize = GetParentSize();
+
+	if (m_fill)
+	{
+		x = 0;
+		y = 0;
+		width = parentSize.x;
+		height = parentSize.y;
+	}
+	else if (!m_fill && m_align =="center")
+	{
+		x = (parentSize.x - width) / 2;
+		y = (parentSize.y - height) / 2;
+	}
+	else if (!m_fill && m_align =="bottom-left")
+	{
+		x = 0;
+		y = parentSize.y - height;
+	}
+	else if (!m_fill && m_align =="bottom-right")
+	{
+		x = parentSize.x - width;
+		y = parentSize.y - height;
+	}
 	
 	std::list<Control*>::iterator it;
 	for (it = children.begin(); it != children.end(); it++)
@@ -301,6 +337,17 @@ bool Control::IsVisible() const
 bool Control::IsEnabled() const
 {
 	return enabled;
+}
+
+sm::Vec2 Control::GetParentSize() const
+{
+	static int screenWidth = TaxiGame::Environment::GetInstance()->GetScreenWidth();
+	static int screenHeight = TaxiGame::Environment::GetInstance()->GetScreenHeight();
+
+	if (parent != NULL)
+		return sm::Vec2(parent->GetWidth(), parent->GetHeight());
+	else
+		return sm::Vec2(screenWidth, screenHeight);
 }
 
 float Control::GetOpacity() const

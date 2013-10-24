@@ -10,6 +10,7 @@ class IScreen;
 class GameScreen;
 class SplashScreen;
 class MainMenuScreen;
+class SummaryScreen;
 class Content;
 
 class GameController : public IGameController
@@ -40,6 +41,7 @@ private:
 	GameScreen *m_gameScreen;
 	SplashScreen *m_splashScreen;
 	MainMenuScreen *m_mainMenuScreen;
+	SummaryScreen *m_summaryScreen;
 
 	IGraphicsEngine *m_graphicsEngine;
 	Content *m_content;

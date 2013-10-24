@@ -46,7 +46,7 @@ void AnimButton::OnDraw(float time, float ms)
 	
 	if (shadow.Tex != NULL)
 		spriteBatch ->Draw(shadow, (int)globalPos.x + 5, (int)globalPos.y + 10);
-	spriteBatch ->Draw(bg, (int)globalPos.x + currentShift.x, (int)globalPos.y + currentShift.y);
+	spriteBatch ->Draw(bg, (int)globalPos.x + currentShift.x, (int)globalPos.y + currentShift.y, width, height);
 }
 
 void AnimButton::OnTouchBegin(int x, int y)

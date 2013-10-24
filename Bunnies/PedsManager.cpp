@@ -30,6 +30,7 @@ PedsManager::PedsManager(const sm::Vec3 taxiPosition) :
 	for (uint32_t i = 0; i < MaxPeds; i++)
 		m_peds[i] = new Ped();
 
+
 	Reset(taxiPosition);
 }
 
