@@ -105,7 +105,7 @@ void PedsManager::Update(float time, float seconds)
 			Taxi::GetInstance()->SetOccupied(
 				m_pedApproaching->GetTripDestination(),
 				m_pedApproaching->GetCash(),
-				m_pedApproaching->GetTimeLimit() * 0.1f);
+				m_pedApproaching->GetTimeLimit() * 1.0f);
 
 			GameScreen::GetInstance()->SetOccupiedMode();
 			m_pedApproaching->ResetPosition(sm::Vec3(0, 0, 0));
@@ -262,6 +262,14 @@ void PedsManager::ResetPosition(Ped *ped, const sm::Vec3 &position, const sm::Ve
 
 		float revard = targetDistance * m_dollarsPerKm * m_dollarsMultiplier;
 		float timeLeft = targetDistance * m_secondsPerKm * m_secondsMultiplier;
+
+		static Randomizer random;
+
+		revard *= random.GetFloat(0.8f, 1.2f);
+		timeLeft *= random.GetFloat(0.8f, 1.2f);
+
+		if (timeLeft < 10.0f)
+			timeLeft = 10.0f;
 
 		ped->SetToPassenger(pos, revard, timeLeft);
 	}

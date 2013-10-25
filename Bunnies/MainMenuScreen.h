@@ -5,6 +5,7 @@
 
 class GameController;
 class MainMenuPanel;
+class Label;
 
 class MainMenuScreen : public IScreen
 {
@@ -18,10 +19,16 @@ public:
 	void Draw(float time, float seconds);
 	void Update(float time, float seconds);
 
+	void UpdateStats();
+
 private:
 	GameController *m_gameController;
 
 	MainMenuPanel *m_mainMenuPanel;
+
+	Label *m_totalIncome;
+	Label *m_totalCourses;
+	Label *m_bestReward;
 
 	void HandleTapGesture(const sm::Vec2 &point);
 };

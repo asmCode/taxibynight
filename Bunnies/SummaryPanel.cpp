@@ -69,7 +69,8 @@ void SummaryPanel::SetContent(
 		float earn,
 		int courses,
 		float totalEarn,
-		int totalCourses)
+		int totalCourses,
+		bool record)
 {
 	m_earnLabel->SetText(std::string("$") + StringUtils::ToString(earn));
 	m_coursesLabel->SetText(StringUtils::ToString(courses));

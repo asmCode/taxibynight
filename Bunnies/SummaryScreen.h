@@ -23,7 +23,8 @@ public:
 		float earn,
 		int courses,
 		float totalEarn,
-		int totalCourses);
+		int totalCourses,
+		bool record);
 
 private:
 	GameController *m_gameController;

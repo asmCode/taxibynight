@@ -65,12 +65,14 @@ void SummaryScreen::SetStatistics(
 		float earn,
 		int courses,
 		float totalEarn,
-		int totalCourses)
+		int totalCourses,
+		bool record)
 {
 	m_summaryPanel->SetContent(
 		earn,
 		courses,
 		totalEarn,
-		totalCourses);
+		totalCourses,
+		record);
 }
 

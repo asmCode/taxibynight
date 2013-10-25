@@ -173,6 +173,8 @@ void GameController::ShowGameScreen()
 
 void GameController::ShowMainMenuScreen()
 {
+	m_mainMenuScreen->UpdateStats();
+
 	m_activeScreen = m_mainMenuScreen;
 }
 
@@ -180,13 +182,15 @@ void GameController::ShowSummaryScreen(
 	float earn,
 	int courses,
 	float totalEarn,
-	int totalCourses)
+	int totalCourses,
+	bool record)
 {
 	m_summaryScreen->SetStatistics(
 		earn,
 		courses,
 		totalEarn,
-		totalCourses);
+		totalCourses,
+		record);
 
 	m_activeScreen = m_summaryScreen;
 }

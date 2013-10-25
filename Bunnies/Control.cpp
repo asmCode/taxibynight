@@ -290,6 +290,26 @@ void Control::Update(float time, float ms)
 		x = (parentSize.x - width) / 2;
 		y = (parentSize.y - height) / 2;
 	}
+	else if (!m_fill && m_align =="bottom")
+	{
+		x = (parentSize.x - width) / 2;
+		y = parentSize.y - height - m_marginBottom;
+	}
+	else if (!m_fill && m_align =="top")
+	{
+		x = (parentSize.x - width) / 2;
+		y = m_marginTop;
+	}
+	else if (!m_fill && m_align =="left")
+	{
+		x = m_marginLeft;
+		y = (parentSize.y - height) / 2;
+	}
+	else if (!m_fill && m_align =="right")
+	{
+		x = parentSize.x - width - m_marginRight;
+		y = (parentSize.y - height) / 2;
+	}
 	else if (!m_fill && m_align =="bottom-left")
 	{
 		x = m_marginLeft;

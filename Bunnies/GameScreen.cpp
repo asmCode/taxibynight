@@ -105,7 +105,9 @@ void GameScreen::Draw(float time, float seconds)
 
 	char fpsText[16];
 	sprintf(fpsText, "fps: %d", m_currentFps);
-	InterfaceProvider::GetFontRenderer()->DrawString(fpsText, 2, 2, Color::White);
+	InterfaceProvider::GetSpriteBatch()->Begin();
+	InterfaceProvider::GetFontRenderer()->DrawString(fpsText, 2, TaxiGame::Environment::GetInstance()->GetScreenHeight() - 22, Color::White);
+	InterfaceProvider::GetSpriteBatch()->End();
 }
 
 void GameScreen::Update(float time, float seconds)
@@ -162,15 +164,22 @@ void GameScreen::Update(float time, float seconds)
 	{
 		if (m_taxi->m_timeLeft == 0.0f)
 		{
+			bool record = false;
 			Player::Instance->m_totalMoney += m_pedsManager->m_totalMoney;
 			Player::Instance->m_totalCourses += m_pedsManager->m_totalCourses;
+			if (Player::Instance->m_bestRoundIncome < m_pedsManager->m_totalMoney)
+			{
+				record = true;
+				Player::Instance->m_bestRoundIncome = m_pedsManager->m_totalMoney;
+			}
 			Player::Instance->Save();
 
 			m_gameController->ShowSummaryScreen(
 				m_pedsManager->m_totalMoney,
 				m_pedsManager->m_totalCourses,
 				Player::Instance->m_totalMoney,
-				Player::Instance->m_totalCourses);
+				Player::Instance->m_totalCourses,
+				record);
 		}
 	}
 }
@@ -245,6 +254,8 @@ void GameScreen::AccelerationButtonPressed(bool isPressed)
 
 void GameScreen::SimulatePress()
 {
+	return;
+
 	if (GetAsyncKeyState(VK_UP) & 0x8000)
 		AccelerationButtonPressed(true);
 	else

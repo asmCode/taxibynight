@@ -13,6 +13,7 @@ public:
 	void Save();
 
 	float m_totalMoney;
+	float m_bestRoundIncome;
 	int m_totalCourses;
 
 private:
