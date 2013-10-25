@@ -1,0 +1,12 @@
+<Panel fill="true">
+	<Image image="pause_bg" fill="true" />
+	<Panel align="center" width="500" height="300">
+		<Label align="top" text="Pause" size="1.0" />
+		<AnimButton name="end" align="bottom-left" width="200" height="150" image="uni_button" image_pushed="uni_button_down">
+			<Label text="End Round" size="1.0" align="center" />
+		</AnimButton>
+		<AnimButton name="resume" align="bottom-right" width="200" height="150" image="uni_button" image_pushed="uni_button_down">
+			<Label text="Resume" size="1.0" align="center" />
+		</AnimButton>
+	</Panel>
+</Panel>
