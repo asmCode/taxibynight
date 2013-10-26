@@ -1,4 +1,5 @@
 #include "StringUtils.h"
+#include <stdio.h>
 #include <algorithm>
 #include <ctype.h>
 

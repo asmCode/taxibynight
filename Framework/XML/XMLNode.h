@@ -5,6 +5,7 @@
 #include <map>
 #include <vector>
 #include <stdint.h>
+#include <stdio.h>
 #include <assert.h>
 
 class XMLNode

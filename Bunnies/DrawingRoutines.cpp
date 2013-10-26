@@ -6,6 +6,7 @@
 #include <Graphics/Mesh.h>
 #include <Graphics/Material.h>
 #include <Graphics/Model.h>
+#include <Graphics/OpenglPort.h>
 #include <assert.h>
 
 Shader* DrawingRoutines::m_celShadingShader;
