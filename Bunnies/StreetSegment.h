@@ -15,14 +15,19 @@ public:
 
 	bool IsVisible() const;
 	StreetPiece *GetStreetPiece();
+	const sm::Vec3& GetPivotPosition() const;
 
 	uint32_t CoordX() const;
 	uint32_t CoordY() const;
+
+	const sm::Matrix& GetWorldTransform() const;
 
 private:
 	StreetPiece *m_streetPiece;
 	sm::Vec3 m_pivotPosition;
 	bool m_isVisible;
+
+	sm::Matrix m_worldMatrix;
 };
 
 #endif // STREET_SEGMENT

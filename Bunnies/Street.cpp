@@ -13,6 +13,7 @@
 #include <Math/MathUtils.h>
 #include <Graphics/Content/Content.h>
 #include <assert.h>
+#include "BoxCollider.h"
 
 #include <Graphics/OpenglPort.h>
 
@@ -255,6 +256,9 @@ StreetSegment* Street::GetSegmentAtPosition(const sm::Vec3 &position) const
 
 StreetSegment* Street::GetSegment(int x, int y) const
 {
+	if (x < 0 || x >= m_streetMap->GetWidth() || y < 0 || y >= m_streetMap->GetHeight())
+		return NULL;
+
 	return m_streetSegments[y * m_streetMap->GetWidth() + x];
 }
 
@@ -295,3 +299,90 @@ void Street::SetInitialVisibility(const sm::Vec3 &taxiPosition)
 		}
 	}
 }
+
+bool Street::GetCollistion(const sm::Vec3 &pStart, const sm::Vec3 &pEnd, sm::Vec3 &collisionPoint, sm::Vec3 &normal)
+{
+	static BoxCollider streetSegmentCollider(sm::Vec3(0, 0, 0), sm::Vec3(10, 0, 10));
+
+	StreetSegment *seg = GetSegmentAtPosition(pEnd);
+	if (seg == NULL)
+		return false;
+
+	StreetSegment *segs[9];
+
+	segs[0] = seg;
+	segs[1] = GetSegment(seg->CoordX() - 1, seg->CoordY());
+	segs[2] = GetSegment(seg->CoordX() + 1, seg->CoordY());
+	segs[3] = GetSegment(seg->CoordX(), seg->CoordY() - 1);
+	segs[4] = GetSegment(seg->CoordX(), seg->CoordY() + 1);
+
+	segs[5] = GetSegment(seg->CoordX() + 1, seg->CoordY() + 1);
+	segs[6] = GetSegment(seg->CoordX() + 1, seg->CoordY() - 1);
+	segs[7] = GetSegment(seg->CoordX() - 1, seg->CoordY() + 1);
+	segs[8] = GetSegment(seg->CoordX() - 1, seg->CoordY() - 1);
+	 
+	float closestDistance = 9999999999;
+	bool collision = false;
+	normal.Set(0, 0, 0);
+
+	for (int i = 0; i < 9; i++)
+	{
+		if (segs[i] == NULL)
+			continue;
+
+		if (!segs[i]->GetStreetPiece()->IsCollider())
+			continue;
+
+		sm::Matrix segWorldInv = segs[i]->GetWorldTransform().GetInversed(); // TODO: performance
+
+		sm::Vec3 localPStart = segWorldInv * pStart;
+		sm::Vec3 localPEnd = segWorldInv * pEnd;
+
+		sm::Vec3 cPoint;
+		sm::Vec3 cNorm;
+
+		if (streetSegmentCollider.CheckCollision(localPStart, localPEnd, cPoint, cNorm))
+		{
+			float dist = (localPStart - cPoint).GetLength();
+			if (dist < closestDistance)
+			{
+				closestDistance = dist;
+				collision = true;
+
+				collisionPoint = segs[i]->GetWorldTransform() * cPoint;
+				normal += cNorm;
+			}
+		}
+	}
+	
+	normal.Normalize();
+
+	return collision;
+
+/*
+	StreetSegment *seg = GetSegmentAtPosition(pEnd);
+	if (seg == NULL)
+		return false;
+
+	if (!seg->GetStreetPiece()->IsCollider())
+		return false;
+
+	sm::Vec3 localPoint = pEnd - seg->GetPivotPosition();
+
+	normal.Set(MathUtils::Sign(localPoint.x), 0, MathUtils::Sign(localPoint.z));
+
+	if (MathUtils::Abs(localPoint.x) >= MathUtils::Abs(localPoint.z))
+	{
+		normal.z = 0.0f;
+		collisionPoint.Set(pEnd.x - ((5.0f - MathUtils::Abs(localPoint.x)) * normal.x), 0, pEnd.z);
+	}
+	else
+	{
+		normal.x = 0.0f;
+		collisionPoint.Set(pEnd.x, 0, pEnd.z - ((5.0f - MathUtils::Abs(localPoint.z)) * normal.z));
+	}
+
+	return true;
+	*/
+}
+

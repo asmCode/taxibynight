@@ -52,3 +52,10 @@ bool StreetPiece::HasPavement() const
 		m_pieceType == StreetPiece::PieceType_TurnUpRight_1;
 }
 
+bool StreetPiece::IsCollider() const
+{
+	return
+		m_pieceType == StreetPiece::PieceType_Skycrapper_1 ||
+		m_pieceType == StreetPiece::PieceType_Pavement;
+}
+

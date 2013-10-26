@@ -34,6 +34,8 @@ public:
 
 	StreetSegment *GetRandomPavement();
 
+	bool GetCollistion(const sm::Vec3 &pStart, const sm::Vec3 &pEnd, sm::Vec3 &collisionPoint, sm::Vec3 &normal);
+
 private:
 	static const int Range = 2;
 

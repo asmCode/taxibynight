@@ -50,6 +50,11 @@ private:
 
 	Model *m_taxiModel;
 
+	sm::Vec3 m_boundsTopLeft;
+	sm::Vec3 m_boundsTopRight;
+	sm::Vec3 m_boundsBottomLeft;
+	sm::Vec3 m_boundsBottomRight;
+
 	sm::Vec3 m_passengerTarget;
 	sm::Vec3 m_position;
 	sm::Vec3 m_turnDirection; // normalized

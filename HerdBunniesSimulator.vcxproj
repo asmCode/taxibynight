@@ -90,6 +90,7 @@
     <ClInclude Include="Bunnies\Billboard.h" />
     <ClInclude Include="Bunnies\PausePanel.h" />
     <ClInclude Include="Bunnies\Player.h" />
+    <ClInclude Include="Bunnies\BoxCollider.h" />
     <ClInclude Include="Bunnies\SummaryScreen.h" />
     <ClInclude Include="Bunnies\SummaryPanel.h" />
     <ClInclude Include="Bunnies\Inflater.h" />
@@ -122,6 +123,9 @@
     <ClInclude Include="Bunnies\Taxi.h" />
     <ClInclude Include="Bunnies\ThrowTrajectory.h" />
     <ClInclude Include="Bunnies\Ticker.h" />
+    <ClInclude Include="Framework\Audio\AlAudioPlayer.h" />
+    <ClInclude Include="Framework\Audio\AudioPlayerFactory.h" />
+    <ClInclude Include="Framework\Audio\SoundManager.h" />
     <ClInclude Include="Framework\Graphics\Animation.h" />
     <ClInclude Include="Framework\Graphics\OpenglPort.h" />
     <ClInclude Include="Framework\Graphics\AnimationLoader.h" />
@@ -205,6 +209,7 @@
     <ClCompile Include="Bunnies\Billboard.cpp" />
     <ClCompile Include="Bunnies\PausePanel.cpp" />
     <ClCompile Include="Bunnies\Player.cpp" />
+    <ClCompile Include="Bunnies\BoxCollider.cpp" />
     <ClCompile Include="Bunnies\SummaryScreen.cpp" />
     <ClCompile Include="Bunnies\SummaryPanel.cpp" />
     <ClCompile Include="Bunnies\Inflater.cpp" />
@@ -235,6 +240,9 @@
     <ClCompile Include="Bunnies\ThrowTrajectory.cpp" />
     <ClCompile Include="Bunnies\Ticker.cpp" />
     <ClCompile Include="Ext\tinyxml\tinyxml2.cpp" />
+    <ClCompile Include="Framework\Audio\AlAudioPlayer.cpp" />
+    <ClCompile Include="Framework\Audio\AudioPlayerFactory.cpp" />
+    <ClCompile Include="Framework\Audio\SoundManager.cpp" />
     <ClCompile Include="Framework\Graphics\Animation.cpp" />
     <ClCompile Include="Framework\Graphics\AnimationLoader.cpp" />
     <ClCompile Include="Framework\Graphics\BoundingBox.cpp" />

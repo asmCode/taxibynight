@@ -2,9 +2,12 @@
 #include "DrawingRoutines.h"
 #include "InterfaceProvider.h"
 #include "Environment.h"
+#include "Street.h"
+#include "BoxCollider.h"
 
 #include <Graphics/Model.h>
 #include <Graphics/Mesh.h>
+#include <Graphics/BoundingBox.h>
 #include <Graphics/Texture.h>
 #include <Math/MathUtils.h>
 #include <Graphics/Content/Content.h>
@@ -34,6 +37,8 @@ Taxi::Taxi() :
 	m_carDirection.Set(0, 0, -1);
 	m_wheelsAngle = 0.0f;
 
+	m_worldMatrix = sm::Matrix::TranslateMatrix(m_position);
+
 	m_frontRightWheel = m_taxiModel->FindMesh("wheel_front_right");
 	m_frontLeftWheel = m_taxiModel->FindMesh("wheel_front_left");
 
@@ -44,7 +49,12 @@ Taxi::Taxi() :
 
 	m_backFrontWheelsDistance = (m_baseFrontRightWheelPosition - m_baseBackRightWheelPosition).GetLength();
 
-	m_worldMatrix = sm::Matrix::IdentityMatrix();
+	m_boundsTopLeft = m_taxiModel->FindMesh("helper.bounds.top-left")->m_worldMatrix * sm::Vec3(0, 0, 0);
+	m_boundsBottomRight = m_taxiModel->FindMesh("helper.bounds.bottom-right")->m_worldMatrix * sm::Vec3(0, 0, 0);
+	m_boundsTopLeft.y = 0;
+	m_boundsBottomRight.y = 0;
+	m_boundsTopRight.Set(m_boundsBottomRight.x, 0, m_boundsTopLeft.z);
+	m_boundsBottomLeft.Set(m_boundsTopLeft.x, 0, m_boundsBottomRight.z);
 }
 
 void Taxi::Reset()
@@ -52,6 +62,7 @@ void Taxi::Reset()
 	m_speed = 0.0f;
 
 	m_position.Set(100, 0, 100);
+	m_worldMatrix = sm::Matrix::TranslateMatrix(m_position);
 	m_velocity.Set(0, 0, 0);
 	m_turnDirection.Set(0, 0, -1);
 	m_carDirection.Set(0, 0, -1);
@@ -76,6 +87,8 @@ Taxi::~Taxi()
 
 void Taxi::Update(float time, float seconds)
 {
+	sm::Vec3 oldPos = m_position;
+
 	if (IsOccupied())
 	{
 		m_timeLeft -= seconds;
@@ -95,7 +108,7 @@ void Taxi::Update(float time, float seconds)
 	m_speed -= 5.0f * seconds;
 	m_speed = MathUtils::Clamp(m_speed, 0.0f, 12.0f);
 
-	m_wheelsAngle += 2.0 * m_turnValue * seconds;
+	m_wheelsAngle += 2.0f * m_turnValue * seconds;
 
 	m_wheelsAngle = MathUtils::Clamp(m_wheelsAngle, -MathUtils::PI4, MathUtils::PI4);
 
@@ -140,9 +153,35 @@ void Taxi::Update(float time, float seconds)
 	else
 		m_position += m_carDirection * m_speed * seconds;
 
-	m_worldMatrix =
+	sm::Matrix newWorldMatrix =
 		sm::Matrix::TranslateMatrix(m_position) *
 		sm::Matrix::CreateLookAt(m_carDirection.GetReversed(), sm::Vec3(0, 1, 0));
+
+	sm::Vec3 boundsTopLeftWorldOld = m_worldMatrix * m_boundsTopLeft;
+	sm::Vec3 boundsBottomLeftWorldOld = m_worldMatrix * m_boundsBottomLeft;
+	sm::Vec3 boundsTopLeftWorldNew = newWorldMatrix * m_boundsTopLeft;
+
+	sm::Vec3 collisionNormal;
+	sm::Vec3 collisionPoint;
+	if (Street::Instance->GetCollistion(boundsTopLeftWorldOld, boundsTopLeftWorldNew, collisionPoint, collisionNormal))
+	{
+		collisionPoint += collisionNormal * 0.01f;
+
+		sm::Vec3 toCollisionTarget = collisionPoint - boundsTopLeftWorldOld;
+		sm::Vec3 fromCollisionTarget = sm::Vec3::Reflect(collisionNormal, toCollisionTarget);
+		sm::Vec3 correntPosition = boundsTopLeftWorldOld + toCollisionTarget + fromCollisionTarget;
+		sm::Vec3 deltaMove = collisionPoint - boundsTopLeftWorldOld;
+
+		m_carDirection = (collisionPoint - boundsBottomLeftWorldOld).GetNormalized();
+
+		m_position = oldPos + deltaMove;
+
+		m_worldMatrix =
+			sm::Matrix::TranslateMatrix(m_position) *
+			sm::Matrix::CreateLookAt(m_carDirection.GetReversed(), sm::Vec3(0, 1, 0));
+	}
+	else
+		m_worldMatrix = newWorldMatrix;
 
 	m_frontRightWheel->Transform() =
 		m_frontRightWheel->m_worldMatrix *
