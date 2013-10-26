@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <assert.h>
 
-#if 1
+#if 0
 // iPod Touch 4
 int ScreenWidth = 960;
 int ScreenHeight = 640;
@@ -19,7 +19,7 @@ int ScreenWidth = 800;
 int ScreenHeight = 480;
 #endif
 
-#if 0
+#if 1
 // galaxy S III
 int ScreenWidth = 1280;
 int ScreenHeight = 720;

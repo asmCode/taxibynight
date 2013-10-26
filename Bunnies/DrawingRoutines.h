@@ -29,6 +29,11 @@ public:
 	static void SetProjectionMatrix(const sm::Matrix &projMatrix);
 	static void SetViewMatrix(const sm::Matrix &viewMatrix);
 
+	static const sm::Matrix& GetViewMatrix();
+	static const sm::Matrix& GetProjMatrix();
+	static const sm::Vec3& GetEyePosition();
+	static const sm::Vec3& GetLightPosition();
+
 private:
 	static Shader *m_celShadingShader;
 	static Shader *m_celShadingMutatingShader;

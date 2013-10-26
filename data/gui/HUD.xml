@@ -8,7 +8,8 @@
 	<Label name="total_courses_label" align="top-right" text="Courses:" size="1.0" margin_right="160" margin_top="50" />
 	<Label name="total_money_value" align="top-right" text="$0.00" size="1.0" margin_right="10" margin_top="10" />
 	<Label name="total_courses_value" align="top-right" text="0" size="1.0" margin_right="10" margin_top="50" />
-	
-	<Label name="time_left_value" align="top-left" text="00:00" size="1.0" margin_left="20" margin_top="10" />
-	<Label name="reward_value" align="top-left" text="$0" size="1.0" margin_left="20" margin_top="50" />
+
+	<AnimButton name="pause" align="top-left" margin_left="20" margin_top="20" width="52" height="52" image="pause_btn" image_pushed="pause_btn" />	
+	<Label name="time_left_value" align="top-left" text="00:00" size="1.0" margin_left="90" margin_top="10" />
+	<Label name="reward_value" align="top-left" text="$0" size="1.0" margin_left="90" margin_top="50" />
 </Panel>

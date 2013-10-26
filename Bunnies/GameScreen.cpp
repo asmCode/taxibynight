@@ -8,6 +8,7 @@
 #include "Street.h"
 #include "GameController.h"
 #include "DrawingRoutines.h"
+#include "PausePanel.h"
 #include "Taxi.h"
 #include "Arrow.h"
 #include "Player.h"
@@ -34,7 +35,8 @@ GameScreen::GameScreen(GameController *gameController) :
 	m_gameController(gameController),
 	m_street(NULL),
 	m_taxi(NULL),
-	m_pedsManager(NULL)
+	m_pedsManager(NULL),
+	m_isPaused(false)
 {
 	m_fps = 0;
 	m_currentFps = 0;
@@ -70,6 +72,8 @@ bool GameScreen::Initialize()
 	m_placeIndicator = new PlaceIndicator();
 
 	m_hud = HUD::Create(this);
+	m_pausePanel = PausePanel::Create(this);
+	m_pausePanel->Update(0, 0);
 
 	uint32_t screenWidth = TaxiGame::Environment::GetInstance()->GetScreenWidth();
 	uint32_t screenHeight = TaxiGame::Environment::GetInstance()->GetScreenHeight();
@@ -92,27 +96,35 @@ bool GameScreen::ReleaseResources()
 void GameScreen::Draw(float time, float seconds)
 {
 	glEnable(GL_DEPTH_TEST);
+	glDisable(GL_BLEND);
 
 	m_street->Draw(time, seconds);
 	m_taxi->Draw(time, seconds);
 	m_pedsManager->Draw(time, seconds);
-	m_arrow->Draw(time, seconds);
+	if (!m_isPaused)
+		m_arrow->Draw(time, seconds);
 	m_placeIndicator->Draw(time, seconds);
-
-	InterfaceProvider::GetSpriteBatch()->Begin();
-	m_hud->Draw(time, seconds);
-	InterfaceProvider::GetSpriteBatch()->End();
 
 	char fpsText[16];
 	sprintf(fpsText, "fps: %d", m_currentFps);
 	InterfaceProvider::GetSpriteBatch()->Begin();
 	InterfaceProvider::GetFontRenderer()->DrawString(fpsText, 2, TaxiGame::Environment::GetInstance()->GetScreenHeight() - 22, Color::White);
+	if (m_isPaused)
+		m_pausePanel->Draw(time, seconds);
+	else
+		m_hud->Draw(time, seconds);
 	InterfaceProvider::GetSpriteBatch()->End();
 }
 
 void GameScreen::Update(float time, float seconds)
 {
 	SimulatePress();
+
+	if (m_isPaused)
+	{
+		m_pausePanel->Update(time, seconds);
+		return;
+	}
 
 	m_taxi->Update(time, seconds);
 
@@ -143,7 +155,6 @@ void GameScreen::Update(float time, float seconds)
 	camPosition = m_viewMatrix.GetInversed() * sm::Vec3(0, 0, 0);
 
 	m_placeIndicator->Update(time, seconds, m_projMatrix * m_viewMatrix);
-
 	m_hud->Update(time, seconds);
 
 	m_fps++;
@@ -164,28 +175,15 @@ void GameScreen::Update(float time, float seconds)
 	{
 		if (m_taxi->m_timeLeft == 0.0f)
 		{
-			bool record = false;
-			Player::Instance->m_totalMoney += m_pedsManager->m_totalMoney;
-			Player::Instance->m_totalCourses += m_pedsManager->m_totalCourses;
-			if (Player::Instance->m_bestRoundIncome < m_pedsManager->m_totalMoney)
-			{
-				record = true;
-				Player::Instance->m_bestRoundIncome = m_pedsManager->m_totalMoney;
-			}
-			Player::Instance->Save();
-
-			m_gameController->ShowSummaryScreen(
-				m_pedsManager->m_totalMoney,
-				m_pedsManager->m_totalCourses,
-				Player::Instance->m_totalMoney,
-				Player::Instance->m_totalCourses,
-				record);
+			EndRound();
 		}
 	}
 }
 
 void GameScreen::Reset()
 {
+	m_pausePanel->SetVisible(false);
+	m_isPaused = false;
 	SetFreeMode();
 	m_taxi->Reset();
 	m_pedsManager->Reset(m_taxi->GetPosition());
@@ -206,14 +204,28 @@ void GameScreen::SetFreeMode()
 	m_placeIndicator->SetActive(false);
 }
 
+void GameScreen::HandleTapGesture(const sm::Vec2 &point)
+{
+	m_hud->HandleTapGesture(point);
+
+	if (m_isPaused)
+		m_pausePanel->HandleTapGesture(point);
+}
+
 void GameScreen::HandlePress(uint32_t pointIndex, const sm::Vec2 &point)
 {
 	m_hud->HandlePress(pointIndex, point);
+
+	if (m_isPaused)
+		m_pausePanel->HandlePress(pointIndex, point);
 }
 
 void GameScreen::HandleRelease(uint32_t pointIndex, const sm::Vec2 &point)
 {
 	m_hud->HandleRelease(pointIndex, point);
+
+	if (m_isPaused)
+		m_pausePanel->HandleRelease(pointIndex, point);
 }
 
 void GameScreen::HandleMove(uint32_t pointIndex, const sm::Vec2 &point)
@@ -254,7 +266,7 @@ void GameScreen::AccelerationButtonPressed(bool isPressed)
 
 void GameScreen::SimulatePress()
 {
-	return;
+	//return;
 
 	if (GetAsyncKeyState(VK_UP) & 0x8000)
 		AccelerationButtonPressed(true);
@@ -271,3 +283,36 @@ void GameScreen::SimulatePress()
 	else
 		TurnRightButtonPressed(false);
 }
+
+void GameScreen::ShowPause()
+{
+	m_pausePanel->SetVisible(true);
+	m_isPaused = true;
+}
+
+void GameScreen::Resume()
+{
+	m_pausePanel->SetVisible(false);
+	m_isPaused = false;
+}
+
+void GameScreen::EndRound()
+{
+	bool record = false;
+	Player::Instance->m_totalMoney += m_pedsManager->m_totalMoney;
+	Player::Instance->m_totalCourses += m_pedsManager->m_totalCourses;
+	if (Player::Instance->m_bestRoundIncome < m_pedsManager->m_totalMoney)
+	{
+		record = true;
+		Player::Instance->m_bestRoundIncome = m_pedsManager->m_totalMoney;
+	}
+	Player::Instance->Save();
+
+	m_gameController->ShowSummaryScreen(
+		m_pedsManager->m_totalMoney,
+		m_pedsManager->m_totalCourses,
+		Player::Instance->m_totalMoney,
+		Player::Instance->m_totalCourses,
+		record);
+}
+

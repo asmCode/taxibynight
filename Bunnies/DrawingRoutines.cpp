@@ -250,6 +250,26 @@ void DrawingRoutines::SetViewMatrix(const sm::Matrix &viewMatrix)
 	m_viewProjMatrix = m_projMatrix * m_viewMatrix;
 }
 
+const sm::Matrix& DrawingRoutines::GetViewMatrix()
+{
+	return m_viewMatrix;
+}
+
+const sm::Matrix& DrawingRoutines::GetProjMatrix()
+{
+	return m_projMatrix;
+}
+
+const sm::Vec3& DrawingRoutines::GetEyePosition()
+{
+	return m_eyePosition;
+}
+
+const sm::Vec3& DrawingRoutines::GetLightPosition()
+{
+	return m_lightPosition;
+}
+
 bool DrawingRoutines::SetupShader(Material *material, MeshPart *meshPart, const sm::Matrix &worldatrix)
 {
 	if (!material->IsOpacity())

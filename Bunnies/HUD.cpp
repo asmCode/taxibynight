@@ -38,11 +38,14 @@ HUD *HUD::Create(GameScreen *gameScreen)
 	assert(acc != NULL);
 	Control *brake = dynamic_cast<AnimButton*>(ret->FindChild("brake_pedal"));
 	assert(brake != NULL);
+	Control *pause = dynamic_cast<AnimButton*>(ret->FindChild("pause"));
+	assert(pause != NULL);
 
 	ObsCast(IControlEventsObserver, left)->AddObserver(ret);
 	ObsCast(IControlEventsObserver, right)->AddObserver(ret);
 	ObsCast(IControlEventsObserver, acc)->AddObserver(ret);
 	ObsCast(IControlEventsObserver, brake)->AddObserver(ret);
+	ObsCast(IControlEventsObserver, pause)->AddObserver(ret);
 
 	ret->m_totalMoneyLabel = dynamic_cast<Label*>(ret->FindChild("total_money_value"));
 	assert(ret->m_totalMoneyLabel != NULL);
@@ -58,6 +61,8 @@ HUD *HUD::Create(GameScreen *gameScreen)
 
 void HUD::Clicked(Control *control, uint32_t x, uint32_t y)
 {
+	if (control->GetName() == "pause")
+		m_gameScreen->ShowPause();
 }
 
 void HUD::Pressed(Control *control, uint32_t x, uint32_t y)

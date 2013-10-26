@@ -273,7 +273,10 @@ bool Control::HitTest(int x, int y) const
 }
 
 void Control::Update(float time, float ms)
-{	
+{
+	if (!visible)
+		return;
+
 	OnUpdate(time, ms);
 
 	sm::Vec2 parentSize = GetParentSize();

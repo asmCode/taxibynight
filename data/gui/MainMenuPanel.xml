@@ -1,6 +1,6 @@
 <Panel name="main_menu" fill="true">
 	<Image name="background" image="main_menu_bg" fill="true" />
-	<AnimButton name="start_game_btn" align="center" width="200" height="150" image="start_game_btn" image_pushed="start_game_btn_down" />
+	<AnimButton name="start_game_btn" align="center" width="200" height="100" image="start_game_btn" image_pushed="start_game_btn_down" />
 	<Panel align="bottom" width="600" height="180" margin_bottom="0">
 		<Label name="total_income_label" align="top-left" text="Total Income:" size="1.4" />
 		<Label name="total_income_value" align="top-right" text="0" size="1.4" />

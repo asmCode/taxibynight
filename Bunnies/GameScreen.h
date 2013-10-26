@@ -12,6 +12,7 @@ class Arrow;
 class PlaceIndicator;
 class HUD;
 class GameController;
+class PausePanel;
 
 class GameScreen : public IScreen
 {
@@ -42,10 +43,18 @@ public:
 	void TurnRightButtonPressed(bool isPressed);
 	void AccelerationButtonPressed(bool isPressed);
 
+	void ShowPause();
+	void Resume();
+	void EndRound();
+
 private:
 	static GameScreen *m_instance;
 
+	PausePanel *m_pausePanel;
+
 	GameController *m_gameController;
+
+	bool m_isPaused;
 
 	bool m_isTurnRightPressed;
 	bool m_isTurnLeftPressed;
@@ -68,5 +77,7 @@ private:
 	float m_fpsUpdatesPerSecond;
 
 	void SimulatePress();
+
+	void HandleTapGesture(const sm::Vec2 &point);
 };
 

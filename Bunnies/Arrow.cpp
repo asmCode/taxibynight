@@ -64,11 +64,21 @@ void Arrow::Draw(float time, float seconds)
 
 	viewMatrix = viewMatrix.GetInversed();
 
+	sm::Matrix prevViewMatrix = DrawingRoutines::GetViewMatrix();
+	sm::Matrix prevProjMatrix = DrawingRoutines::GetProjMatrix();
+	sm::Vec3 prevEyePosition = DrawingRoutines::GetEyePosition();
+	sm::Vec3 prevLightPosition = DrawingRoutines::GetLightPosition();
+
 	DrawingRoutines::SetViewMatrix(viewMatrix);
 	DrawingRoutines::SetProjectionMatrix(sm::Matrix::PerspectiveMatrix(45.0f, 1, 0.1f, 100.0f));
 	DrawingRoutines::SetLightPosition(camPosition);
 	DrawingRoutines::SetEyePosition(camPosition);
 	DrawingRoutines::DrawWithMaterial(m_model->m_meshParts, m_transform);
+
+	DrawingRoutines::SetViewMatrix(prevViewMatrix);
+	DrawingRoutines::SetProjectionMatrix(prevProjMatrix);
+	DrawingRoutines::SetEyePosition(prevEyePosition);
+	DrawingRoutines::SetLightPosition(prevLightPosition);
 
 	glViewport(0, 0, TaxiGame::Environment::GetInstance()->GetScreenWidth(), TaxiGame::Environment::GetInstance()->GetScreenHeight());
 }
