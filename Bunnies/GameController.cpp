@@ -17,9 +17,11 @@
 #include <Graphics/Animation.h>
 #include <Graphics/SpriteBatch.h>
 #include <Graphics/FontRenderer.h>
+#include <Audio/SoundManager.h>
 #include <Utils/Log.h>
 #include <time.h>
 #include <stddef.h>
+#include <stdlib.h>
 #include <assert.h>
 
 GameController::GameController(IGraphicsEngine *graphicsEngine) :
@@ -83,6 +85,8 @@ bool GameController::Initialize()
 	player->Load();
 
 	std::string basePath = TaxiGame::Environment::GetInstance()->GetBasePath();
+
+	SoundManager::GetInstance()->Initialize(basePath + "data/audio/");
 
 	if (!InitializeGraphics(basePath))
 	{
@@ -168,14 +172,19 @@ void GameController::proto_SetLookTarget(const sm::Vec3 &lookTarget)
 void GameController::ShowGameScreen()
 {
 	m_gameScreen->Reset();
+
+	m_activeScreen->Leave();
 	m_activeScreen = m_gameScreen;
+	m_activeScreen->Enter();
 }
 
 void GameController::ShowMainMenuScreen()
 {
 	m_mainMenuScreen->UpdateStats();
 
+	m_activeScreen->Leave();
 	m_activeScreen = m_mainMenuScreen;
+	m_activeScreen->Enter();
 }
 
 void GameController::ShowSummaryScreen(
@@ -192,7 +201,9 @@ void GameController::ShowSummaryScreen(
 		totalCourses,
 		record);
 
+	m_activeScreen->Leave();
 	m_activeScreen = m_summaryScreen;
+	m_activeScreen->Enter();
 }
 
 bool GameController::proto_IsInGame()

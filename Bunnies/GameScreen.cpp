@@ -14,6 +14,7 @@
 #include "Player.h"
 #include "Billboard.h"
 #include "PlaceIndicator.h"
+#include <Audio/SoundManager.h>
 #include "HUD.h"
 
 #include <Math/MathUtils.h>
@@ -266,7 +267,7 @@ void GameScreen::AccelerationButtonPressed(bool isPressed)
 
 void GameScreen::SimulatePress()
 {
-	//return;
+#if 0
 
 	if (GetAsyncKeyState(VK_UP) & 0x8000)
 		AccelerationButtonPressed(true);
@@ -282,6 +283,8 @@ void GameScreen::SimulatePress()
 		TurnRightButtonPressed(true);
 	else
 		TurnRightButtonPressed(false);
+
+#endif
 }
 
 void GameScreen::ShowPause()
@@ -316,3 +319,13 @@ void GameScreen::EndRound()
 		record);
 }
 
+void GameScreen::Enter()
+{
+	SoundManager::GetInstance()->PlayMusic();
+	SoundManager::GetInstance()->StartEngine();
+}
+
+void GameScreen::Leave()
+{
+	SoundManager::GetInstance()->StopEngine();
+}

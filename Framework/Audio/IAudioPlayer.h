@@ -12,4 +12,5 @@ public:
 	
 	virtual void SetVolume(float vol) = 0;
 	virtual float GetVolume() const = 0;
+	virtual void SetPitch(float pitch) = 0;
 };

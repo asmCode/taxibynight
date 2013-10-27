@@ -16,6 +16,8 @@ public:
 	static const std::string SoundFiles[];
 	
 private:	
+	static SoundManager *m_instance;
+
 	float soundVolume;
 	float musicVolume;
 	
@@ -24,9 +26,12 @@ private:
 	IAudioPlayer *sounds[SoundsCount];
 	IAudioPlayer *m_engine;
 		
-public:
 	SoundManager();
+
+public:
 	~SoundManager();
+
+	static SoundManager *GetInstance();
 
 	bool Initialize(const std::string &audioPath);
 	
@@ -39,8 +44,9 @@ public:
 	void PlayMusic();
 	void StopMusic();
 	
-	void PlayPixel();
-	void PlayBonus(unsigned bonusLevel);
+	void StartEngine();
+	void StopEngine();
+	void SetEnginePitch(float pitch);
 	
 	void PlaySound(Sound sound);
 	
