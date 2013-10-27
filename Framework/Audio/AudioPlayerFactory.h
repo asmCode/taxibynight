@@ -1,3 +1,5 @@
+#ifndef _WIN32
+
 #pragma once
 
 #include <string>
@@ -9,3 +11,5 @@ public:
 	static IAudioPlayer* CreateAlAudioPlayer(const std::string &file, bool stereo);
 	static IAudioPlayer* CreateTizenAudioPlayer(const std::string &file);
 };
+
+#endif

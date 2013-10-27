@@ -1,3 +1,5 @@
+#ifndef _WIN32
+
 #include "IAudioPlayer.h"
 #include <new>
 #include <unique_ptr.h>
@@ -61,3 +63,5 @@ private:
 	int __sampleRate;
 	OpenAlPlayerState __openalPlayerState;
 };
+
+#endif

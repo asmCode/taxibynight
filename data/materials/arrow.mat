@@ -1,0 +1,11 @@
+<Material Name="arrow">
+	<Param Type="Diffuse" Value="0.588;0.588;0.588" />
+	<Param Type="Specular" Value="0.9;0.9;0.9" />
+	<Param Type="Opacity" Value="1" />
+	<Param Type="Glossiness" Value="0.1" />
+	<Param Type="SpecularLevel" Value="0" />
+	<Textures>
+		<Texture Type="Diffuse" File="arrow.png">
+		</Texture>
+	</Textures>
+</Material>

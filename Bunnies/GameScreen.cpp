@@ -60,6 +60,8 @@ GameScreen *GameScreen::GetInstance()
 
 bool GameScreen::Initialize()
 {
+	m_fontKomika = InterfaceProvider::GetFontRenderer("komika_title_32");
+
 	Billboard::Initialize();
 
 	//m_manCam = new ManCam();
@@ -109,7 +111,7 @@ void GameScreen::Draw(float time, float seconds)
 	char fpsText[16];
 	sprintf(fpsText, "fps: %d", m_currentFps);
 	InterfaceProvider::GetSpriteBatch()->Begin();
-	InterfaceProvider::GetFontRenderer()->DrawString(fpsText, 2, TaxiGame::Environment::GetInstance()->GetScreenHeight() - 22, Color::White);
+	m_fontKomika->DrawString(fpsText, 2, TaxiGame::Environment::GetInstance()->GetScreenHeight() - 22, Color::White);
 	if (m_isPaused)
 		m_pausePanel->Draw(time, seconds);
 	else
@@ -267,7 +269,7 @@ void GameScreen::AccelerationButtonPressed(bool isPressed)
 
 void GameScreen::SimulatePress()
 {
-#if 0
+#if 1
 
 	if (GetAsyncKeyState(VK_UP) & 0x8000)
 		AccelerationButtonPressed(true);
@@ -321,7 +323,6 @@ void GameScreen::EndRound()
 
 void GameScreen::Enter()
 {
-	SoundManager::GetInstance()->PlayMusic();
 	SoundManager::GetInstance()->StartEngine();
 }
 

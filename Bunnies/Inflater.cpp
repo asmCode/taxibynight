@@ -98,14 +98,27 @@ Control* Inflater::LoadImageControl(XMLNode *node, const std::string &name)
 Control* Inflater::LoadLabelControl(XMLNode *node, const std::string &name)
 {
 	std::string text;
+	std::string font;
+	Color color = Color::White;
 	float size = 1.0f;
 
 	if (node->HasAttrib("text"))
 		text = node->GetAttribAsString("text");
+	if (node->HasAttrib("font"))
+		font = node->GetAttribAsString("font");
 	if (node->HasAttrib("size"))
 		size = node->GetAttribAsFloat("size");
+	if (node->HasAttrib("color"))
+	{
+		std::string colorTxt = node->GetAttribAsString("color");
+		int r, g, b;
+		sscanf(colorTxt.c_str(), "%d;%d;%d", &r, &g, &b);
+		color.R = (unsigned char)r;
+		color.G = (unsigned char)g;
+		color.B = (unsigned char)b;
+	}
 
-	return new Label(name, text, InterfaceProvider::GetFontRenderer(), size, Color::White, 0, 0);
+	return new Label(name, text, InterfaceProvider::GetFontRenderer(font), size, color, 0, 0);
 }
 
 Control* Inflater::LoadPanelControl(XMLNode *node, const std::string &name)

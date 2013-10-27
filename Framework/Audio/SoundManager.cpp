@@ -10,10 +10,12 @@ SoundManager *SoundManager::m_instance;
 
 const std::string SoundManager::SoundFiles[] =
 {
-	std::string("button.mp3")
-	//std::string("SampleMP3.mp3")
-	//std::string("a.mp3")
-	//std::string("engine.mp3")
+	std::string("collision01.mp3"),
+	std::string("collision02.mp3"),
+	std::string("collision03.mp3"),
+	std::string("button.mp3"),
+	std::string("money.mp3"),
+	std::string("summary.mp3")
 };
 
 SoundManager *SoundManager::GetInstance()
@@ -26,8 +28,8 @@ SoundManager *SoundManager::GetInstance()
 
 SoundManager::SoundManager()
 {
-	soundVolume = 0.5f;
-	musicVolume = 0.5f;
+	soundVolume = 1.0f;
+	musicVolume = 1.0f;
 	
 	music = NULL;
 	
@@ -40,7 +42,8 @@ SoundManager::~SoundManager()
 
 bool SoundManager::Initialize(const std::string &audioPath)
 {
-	music = AudioPlayerFactory::CreateTizenAudioPlayer(audioPath + "SampleMP3.mp3");
+#ifndef _WIN32
+	music = AudioPlayerFactory::CreateTizenAudioPlayer(audioPath + "city_ambient.mp3");
 	music->SetLoop(true);
 	music->SetVolume(musicVolume);
 	
@@ -54,6 +57,7 @@ bool SoundManager::Initialize(const std::string &audioPath)
 		sounds[i] = AudioPlayerFactory::CreateAlAudioPlayer(audioPath + SoundFiles[i], false);
 		sounds[i]->SetVolume(soundVolume);
 	}
+#endif
 	
 	return true;
 }
@@ -62,15 +66,19 @@ void SoundManager::SetSoundVolume(float value)
 {
 	this->soundVolume = value;
 	
+#ifndef _WIN32
 	for (unsigned i = 0; i < SoundsCount; i++)
 		sounds[i]->SetVolume(value);
+#endif
 }
 
 void SoundManager::SetMusicVolume(float value)
 {
+#ifndef _WIN32
 	this->musicVolume = value;
 	
 	music->SetVolume(value);
+#endif
 }
 
 float SoundManager::GetSoundVolume() const
@@ -85,33 +93,48 @@ float SoundManager::GetMusicVolume() const
 
 void SoundManager::PlayMusic()
 {
+#ifndef _WIN32
 	//return;
 	
 	assert(music != NULL);
 	music->Play();
+#endif
 }
 
 void SoundManager::StopMusic()
 {
+#ifndef _WIN32
 	music->Stop();
+#endif
 }
+
+#undef PlaySoundA
+#undef PlaySound
 
 void SoundManager::PlaySound(SoundManager::Sound sound)
 {
+#ifndef _WIN32
 	sounds[sound]->Play();
+#endif
 }
 
 void SoundManager::StartEngine()
 {
+#ifndef _WIN32
 	m_engine->Play();
+#endif
 }
 
 void SoundManager::StopEngine()
 {
+#ifndef _WIN32
 	m_engine->Stop();
+#endif
 }
 
 void SoundManager::SetEnginePitch(float pitch)
 {
+#ifndef _WIN32
 	m_engine->SetPitch(pitch);
+#endif
 }

@@ -56,6 +56,16 @@ void MainMenuScreen::HandleTapGesture(const sm::Vec2 &point)
 	m_mainMenuPanel->HandleTapGesture(point);
 }
 
+void MainMenuScreen::HandlePress(uint32_t pointIndex, const sm::Vec2 &point)
+{
+	m_mainMenuPanel->HandlePress(pointIndex, point);
+}
+
+void MainMenuScreen::HandleRelease(uint32_t pointIndex, const sm::Vec2 &point)
+{
+	m_mainMenuPanel->HandleRelease(pointIndex, point);
+}
+
 void MainMenuScreen::UpdateStats()
 {
 	static std::string S = "$";

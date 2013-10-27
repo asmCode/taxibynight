@@ -6,7 +6,7 @@ IGraphicsEngine *InterfaceProvider::m_graphicsEngine;
 Content *InterfaceProvider::m_content;
 SpriteBatch *InterfaceProvider::m_spriteBatch;
 SpritesMap* InterfaceProvider::m_spritesMap;
-FontRenderer *InterfaceProvider::m_fontRenderer;
+InterfaceProvider::FontsMap InterfaceProvider::m_fonts;
 
 IGraphicsEngine* InterfaceProvider::GetGraphicsEngine()
 {
@@ -29,8 +29,15 @@ SpritesMap* InterfaceProvider::GetSpritesMap()
 	return m_spritesMap;
 }
 
-FontRenderer* InterfaceProvider::GetFontRenderer()
+FontRenderer* InterfaceProvider::GetFontRenderer(const std::string &fontName)
 {
-	return m_fontRenderer;
+	FontsMap::iterator it = m_fonts.find(fontName);
+	if (it == m_fonts.end())
+	{
+		assert(false);
+		return NULL;
+	}
+
+	return (*it).second;
 }
 

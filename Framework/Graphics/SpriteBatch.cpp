@@ -208,11 +208,12 @@ void SpriteBatch::Draw(Texture *tex,
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_TRUE, 0, verts);
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_TRUE, 0, coords);
 	
-	/*if (colorMask != NULL)
+	if (colorMask != NULL)
 	{
-		glEnableClientState(GL_COLOR_ARRAY);
-		glColorPointer(4, GL_UNSIGNED_BYTE, 0, colorMask);
-	}*/
+		m_shader->SetParameter("u_color", (float)colorMask[0] / 255.0f, (float)colorMask[1] / 255.0f, (float)colorMask[2] / 255.0f, (float)colorMask[3] / 255.0f);
+	}
+	else
+		m_shader->SetParameter("u_color", sm::Vec4(1, 1, 1, 1));
 	
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 }

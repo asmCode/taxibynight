@@ -1,3 +1,5 @@
+#ifndef _WIN32
+
 #include "AudioPlayerFactory.h"
 #include "AlAudioPlayer.h"
 #include "TizenAudioPlayer.h"
@@ -22,3 +24,4 @@ IAudioPlayer* AudioPlayerFactory::CreateTizenAudioPlayer(const std::string &file
 	return TizenAudioPlayer::LoadFromFile(file);
 }
 
+#endif

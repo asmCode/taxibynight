@@ -92,7 +92,7 @@ void HUD::OnDraw(float time, float seconds)
 
 void toTime(char *txt, float seconds)
 {
-	sprintf(txt, "%02d:%02d", (int)(seconds / 60.0f), (int)fmodf(seconds, 60.0f));
+	sprintf(txt, "%d:%02d", (int)(seconds / 60.0f), (int)fmodf(seconds, 60.0f));
 }
 
 void HUD::OnUpdate(float time, float seconds)
@@ -108,7 +108,7 @@ void HUD::OnUpdate(float time, float seconds)
 	if (Taxi::GetInstance()->IsOccupied())
 	{
 		m_rewardLabel->SetVisible(true);
-		sprintf(txt, "$%.2f", Taxi::GetInstance()->m_revard);
+		sprintf(txt, "%.2f", Taxi::GetInstance()->m_revard);
 		m_rewardLabel->SetText(txt);
 
 		m_timeLeftLabel->SetVisible(true);

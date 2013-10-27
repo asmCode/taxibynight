@@ -31,5 +31,7 @@ private:
 	Label *m_bestReward;
 
 	void HandleTapGesture(const sm::Vec2 &point);
+	void HandlePress(uint32_t pointIndex, const sm::Vec2 &point);
+    void HandleRelease(uint32_t pointIndex, const sm::Vec2 &point);
 };
 

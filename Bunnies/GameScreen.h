@@ -7,6 +7,7 @@ class IShapesRenderer;
 class Street;
 class ManCam;
 class Taxi;
+class FontRenderer;
 class PedsManager;
 class Arrow;
 class PlaceIndicator;
@@ -68,6 +69,8 @@ private:
 	Arrow *m_arrow;
 	PlaceIndicator *m_placeIndicator;
 	HUD *m_hud;
+
+	FontRenderer *m_fontKomika;
 
 	sm::Matrix m_viewMatrix;
 	sm::Matrix m_projMatrix;

@@ -29,10 +29,10 @@ Street::Street(PedsManager *pedsManager)
 	m_streetModel = content->Get<Model>("street");
 	assert(m_streetModel != NULL);
 
-	m_skycrapper = content->Get<Model>("skycrapper");
+	m_skycrapper = content->Get<Model>("skycrapper01");
 	assert(m_skycrapper != NULL);
 
-	m_skycrapperTexture = content->Get<Texture>("skycrapper");
+	m_skycrapperTexture = content->Get<Texture>("flat_1_diffuse");
 	assert(m_skycrapperTexture != NULL);
 
 	m_pavementTexture = content->Get<Texture>("street_pavement");

@@ -1,18 +1,22 @@
 <Panel name="main_menu" fill="true">
 	<!--<Image name="background" image="main_menu_bg" fill="true" />-->
-	<Image image="town" fill="true" width="650" height="495" />
-	<Panel width="512" height="600" align="left">
-		<AnimButton name="start_game_btn" align="center" width="370" height="155" image="start_game_btn" image_pushed="start_game_btn_down" />
+	<Image image="town" width="650" height="495" align="right" margin_right="10" />
+	<Panel width="512" height="480" align="left" margin_left="20">
+		<!--<Image image="uni_button" fill="true" />-->
 		
-		<Panel align="bottom" width="600" height="180" margin_bottom="0">
-			<Label name="total_income_label" align="top-left" text="Total Income:" size="1.4" />
-			<Label name="total_income_value" align="top-right" text="0" size="1.4" />
+		<Image image="title" width="512" height="128" align="top" margin_top="0" />
 		
-			<Label name="total_courses_label" align="top-left" text="Total Courses:" size="1.0" margin_top="70" />
-			<Label name="total_courses_value" align="top-right" text="0" size="1.0" margin_top="70" />
+		<AnimButton name="start_game_btn" align="top" margin_top="150" width="360" height="150" image="start_game_btn" image_pushed="start_game_btn_down" />
 		
-			<Label name="best_reward_label" align="top-left" text="Best Reward:" size="1.0" margin_top="120" />
-			<Label name="best_reward_value" align="top-right" text="0" size="1.0" margin_top="120" />
+		<Panel align="bottom" width="480" height="180" margin_bottom="0">
+			<Label font="fenix_26" name="total_income_label" align="bottom-left" text="Total Income:" size="1.0" margin_bottom="90" />
+			<Label font="fenix_26" name="total_income_value" align="bottom-right" text="0" size="1.0" margin_bottom="90" />
+		
+			<Label font="fenix_18" name="total_courses_label" align="bottom-left" text="Total Courses:" margin_bottom="40" />
+			<Label font="fenix_18" name="total_courses_value" align="bottom-right" text="0" margin_bottom="40" />
+		
+			<Label font="fenix_18" name="best_reward_label" align="bottom-left" text="Best Reward:" margin_bottom="0" />
+			<Label font="fenix_18" name="best_reward_value" align="bottom-right" text="0" margin_bottom="0" />
 		</Panel>
 	</Panel>
 </Panel>

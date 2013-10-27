@@ -3,12 +3,20 @@
 #include <string>
 #include "IAudioPlayer.h"
 
+#undef PlaySoundA
+#undef PlaySound
+
 class SoundManager
 {
 public:
 	enum Sound
 	{
-		Sound_Button = 0,
+		Sound_Collision01 = 0,
+		Sound_Collision02,
+		Sound_Collision03,
+		Sound_Button,
+		Sound_Money,
+		Sound_Summary,
 		
 		SoundsCount // always last
 	};
@@ -22,9 +30,8 @@ private:
 	float musicVolume;
 	
 	IAudioPlayer *music;
-	
-	IAudioPlayer *sounds[SoundsCount];
 	IAudioPlayer *m_engine;
+	IAudioPlayer *sounds[SoundsCount];
 		
 	SoundManager();
 
