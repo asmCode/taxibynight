@@ -1,4 +1,6 @@
 <Panel name="hud" fill="true">
+	<AnimButton name="pause" align="top-left" margin_left="0" margin_top="0" width="420" height="214" image="taxometer" image_pushed="taxometer" />
+	
 	<AnimButton name="turn_left" align="bottom-left" margin_left="30" margin_bottom="40" width="100" height="100" image="arrow_left" image_pushed="arrow_left" />
 	<AnimButton name="turn_right" align="bottom-left" margin_left="140" margin_bottom="40" width="100" height="100" image="arrow_right" image_pushed="arrow_right" />
 	<AnimButton name="acc_pedal" align="bottom-right" margin_right="30" margin_bottom="40" width="100" height="100" image="arrow_up" image_pushed="arrow_up" />
@@ -9,7 +11,6 @@
 	<Label name="total_money_value" align="top-right" text="$0.00" size="1.0" margin_right="10" margin_top="10" />
 	<Label name="total_courses_value" align="top-right" text="0" size="1.0" margin_right="10" margin_top="50" />
 
-	<AnimButton name="pause" align="top-left" margin_left="20" margin_top="20" width="52" height="52" image="pause_btn" image_pushed="pause_btn" />	
 	<Label name="time_left_value" align="top-left" text="00:00" size="1.0" margin_left="90" margin_top="10" />
 	<Label name="reward_value" align="top-left" text="$0" size="1.0" margin_left="90" margin_top="50" />
 </Panel>

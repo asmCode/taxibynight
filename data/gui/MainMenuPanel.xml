@@ -1,14 +1,18 @@
 <Panel name="main_menu" fill="true">
-	<Image name="background" image="main_menu_bg" fill="true" />
-	<AnimButton name="start_game_btn" align="center" width="200" height="100" image="start_game_btn" image_pushed="start_game_btn_down" />
-	<Panel align="bottom" width="600" height="180" margin_bottom="0">
-		<Label name="total_income_label" align="top-left" text="Total Income:" size="1.4" />
-		<Label name="total_income_value" align="top-right" text="0" size="1.4" />
+	<!--<Image name="background" image="main_menu_bg" fill="true" />-->
+	<Image image="town" fill="true" width="650" height="495" />
+	<Panel width="512" height="600" align="left">
+		<AnimButton name="start_game_btn" align="center" width="370" height="155" image="start_game_btn" image_pushed="start_game_btn_down" />
 		
-		<Label name="total_courses_label" align="top-left" text="Total Courses:" size="1.0" margin_top="70" />
-		<Label name="total_courses_value" align="top-right" text="0" size="1.0" margin_top="70" />
+		<Panel align="bottom" width="600" height="180" margin_bottom="0">
+			<Label name="total_income_label" align="top-left" text="Total Income:" size="1.4" />
+			<Label name="total_income_value" align="top-right" text="0" size="1.4" />
 		
-		<Label name="best_reward_label" align="top-left" text="Best Reward:" size="1.0" margin_top="120" />
-		<Label name="best_reward_value" align="top-right" text="0" size="1.0" margin_top="120" />
+			<Label name="total_courses_label" align="top-left" text="Total Courses:" size="1.0" margin_top="70" />
+			<Label name="total_courses_value" align="top-right" text="0" size="1.0" margin_top="70" />
+		
+			<Label name="best_reward_label" align="top-left" text="Best Reward:" size="1.0" margin_top="120" />
+			<Label name="best_reward_value" align="top-right" text="0" size="1.0" margin_top="120" />
+		</Panel>
 	</Panel>
 </Panel>

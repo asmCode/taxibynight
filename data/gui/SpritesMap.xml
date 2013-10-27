@@ -1,16 +1,16 @@
 <map>
-	<sprite name="main_menu_bg" file="gui01" bounds="0,0,640,360" />
-	<sprite name="pause_bg" file="gui01" bounds="0,360,320,180" />
+	<sprite name="town" file="gui01" bounds="374,529,650,495" />
+	<sprite name="title" file="gui01" bounds="0,342,512,128" />
+	<sprite name="taxometer" file="gui01" bounds="0,128,420,214" />
 	<sprite name="summary_screen_bg" file="gui02" bounds="0,0,640,360" />
-	<sprite name="start_game_btn" file="gui01" bounds="300,768,200,100" />
-	<sprite name="start_game_btn_down" file="gui01" bounds="0,640,128,128" />
+	<sprite name="start_game_btn" file="gui01" bounds="512,0,370,155" />
+	<sprite name="start_game_btn" file="gui01" bounds="512,155,370,155" />
 	
-	<sprite name="arrow_left" file="gui01" bounds="384,640,128,128" />
-	<sprite name="arrow_right" file="gui01" bounds="512,640,128,128" />
-	<sprite name="arrow_up" file="gui01" bounds="640,640,128,128" />
-	<sprite name="arrow_down" file="gui01" bounds="768,640,128,128" />
+	<sprite name="arrow_left" file="gui01" bounds="0,0,128,128" />
+	<sprite name="arrow_right" file="gui01" bounds="128,0,128,128" />
+	<sprite name="arrow_up" file="gui01" bounds="256,0,128,128" />
+	<sprite name="arrow_down" file="gui01" bounds="384,0,128,128" />
 	
-	<sprite name="pause_btn" file="gui01" bounds="500,768,52,52" />
-	<sprite name="uni_button" file="gui01" bounds="0,768,150,100" />
-	<sprite name="uni_button_down" file="gui01" bounds="150,768,150,100" />
+	<sprite name="uni_button" file="gui01" bounds="0,470,150,100" />
+	<sprite name="uni_button_down" file="gui01" bounds="150,470,150,100" />
 </map>
