@@ -47,6 +47,9 @@ public:
 	void Resume();
 	void EndRound();
 
+	void Enter();
+	void Leave();
+
 private:
 	static GameScreen *m_instance;
 

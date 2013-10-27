@@ -13,6 +13,9 @@ public:
 
 	virtual void Draw(float time, float seconds) = 0;
 	virtual void Update(float time, float seconds) = 0;
+
+	virtual void Enter() {};
+	virtual void Leave() {};
 };
 
 #endif // _ISCREEN_

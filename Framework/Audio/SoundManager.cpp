@@ -2,13 +2,27 @@
 #include <stdio.h>
 #include <assert.h>
 #include <Utils/Log.h>
+#include <memory.h>
 
 #include "AudioPlayerFactory.h"
+
+SoundManager *SoundManager::m_instance;
 
 const std::string SoundManager::SoundFiles[] =
 {
 	std::string("button.mp3")
+	//std::string("SampleMP3.mp3")
+	//std::string("a.mp3")
+	//std::string("engine.mp3")
 };
+
+SoundManager *SoundManager::GetInstance()
+{
+	if (m_instance == NULL)
+		m_instance = new SoundManager();
+
+	return m_instance;
+}
 
 SoundManager::SoundManager()
 {
@@ -26,10 +40,14 @@ SoundManager::~SoundManager()
 
 bool SoundManager::Initialize(const std::string &audioPath)
 {
-	music = AudioPlayerFactory::CreateAqAudioPlayer(audioPath + "music01.mp3");
+	music = AudioPlayerFactory::CreateTizenAudioPlayer(audioPath + "SampleMP3.mp3");
 	music->SetLoop(true);
 	music->SetVolume(musicVolume);
 	
+	m_engine = AudioPlayerFactory::CreateAlAudioPlayer(audioPath + "engine.mp3", false);
+	m_engine->SetLoop(true);
+	m_engine->SetVolume(soundVolume);
+
 	for (unsigned i = 0; i < SoundsCount; i++)
 	{
 		Log::LogT("loading: %s", SoundFiles[i].c_str());
@@ -81,4 +99,19 @@ void SoundManager::StopMusic()
 void SoundManager::PlaySound(SoundManager::Sound sound)
 {
 	sounds[sound]->Play();
+}
+
+void SoundManager::StartEngine()
+{
+	m_engine->Play();
+}
+
+void SoundManager::StopEngine()
+{
+	m_engine->Stop();
+}
+
+void SoundManager::SetEnginePitch(float pitch)
+{
+	m_engine->SetPitch(pitch);
 }
