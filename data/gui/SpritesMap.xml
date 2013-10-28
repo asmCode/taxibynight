@@ -1,9 +1,9 @@
 <map>
 	<sprite name="town" file="gui01" bounds="374,529,650,495" />
-	<sprite name="title" file="gui01" bounds="0,342,512,128" />
+	<sprite name="title" file="gui01" bounds="0,279,512,128" />
 	<sprite name="taxometer" file="gui01" bounds="0,128,260,151" />
 	<sprite name="pause_bg" file="gui01" bounds="0,570,320,180" />
-	<sprite name="summary_screen_bg" file="gui02" bounds="0,0,640,360" />
+	<sprite name="summary_screen_bg" file="gui02" bounds="0,0,568,470" />
 	<sprite name="start_game_btn_down" file="gui01" bounds="512,0,360,150" />
 	<sprite name="start_game_btn" file="gui01" bounds="512,150,360,150" />
 	
@@ -12,6 +12,6 @@
 	<sprite name="arrow_up" file="gui01" bounds="256,0,128,128" />
 	<sprite name="arrow_down" file="gui01" bounds="384,0,128,128" />
 	
-	<sprite name="uni_button" file="gui01" bounds="0,470,150,100" />
-	<sprite name="uni_button_down" file="gui01" bounds="150,470,150,100" />
+	<sprite name="uni_button" file="gui01" bounds="0,407,205,76" />
+	<sprite name="uni_button_down" file="gui01" bounds="0,483,205,76" />
 </map>

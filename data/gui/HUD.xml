@@ -10,6 +10,6 @@
 	<AnimButton name="acc_pedal" align="bottom-right" margin_right="30" margin_bottom="40" width="100" height="100" image="arrow_up" image_pushed="arrow_up" />
 	<AnimButton name="brake_pedal" align="bottom-right" margin_right="140" margin_bottom="40" width="100" height="100" image="arrow_down" image_pushed="arrow_down" />
 	
-	<Label font="komika_title_32" name="total_money_label" align="top-right" text="Income:" size="1.0" margin_right="160" margin_top="10" />
-	<Label font="komika_title_32" name="total_money_value" align="top-right" text="$0.00" size="1.0" margin_right="10" margin_top="10" />
+	<Label font="fenix_26" name="total_money_label" align="top-right" text="Income:" margin_right="160" margin_top="10" />
+	<Label font="fenix_26" name="total_money_value" align="top-right" text="$0.00" margin_right="10" margin_top="10" />
 </Panel>

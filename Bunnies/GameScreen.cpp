@@ -60,7 +60,7 @@ GameScreen *GameScreen::GetInstance()
 
 bool GameScreen::Initialize()
 {
-	m_fontKomika = InterfaceProvider::GetFontRenderer("komika_title_32");
+	m_fontKomika = InterfaceProvider::GetFontRenderer("digital_bold_24");
 
 	Billboard::Initialize();
 

@@ -100,6 +100,8 @@ void Control::SetDefaults()
 	m_marginRight = 0;
 	m_marginTop = 0;
 	m_marginBottom = 0;
+
+	m_tmpFill = "";
 }
 
 Control *Control::GetParent()
@@ -280,6 +282,39 @@ void Control::Update(float time, float ms)
 	OnUpdate(time, ms);
 
 	sm::Vec2 parentSize = GetParentSize();
+
+	if (m_tmpFill == "fit")
+	{
+		float controlAspect = (float)width / (float)height;
+		float parentAspect = parentSize.x / parentSize.y;
+
+		if (controlAspect > parentAspect)
+		{
+			width = parentSize.x;
+			height = (int)(float)width / controlAspect;
+		}
+		else
+		{
+			height = parentSize.y;
+			width = (int)(float)height * controlAspect;
+		}
+	}
+	else if (m_tmpFill == "wypelnij")
+	{
+		float controlAspect = (float)width / (float)height;
+		float parentAspect = parentSize.x / parentSize.y;
+
+		if (controlAspect > parentAspect)
+		{
+			width = parentSize.x;
+			height = (int)(float)width / controlAspect;
+		}
+		else
+		{
+			width = parentSize.x;
+			height = (int)(float)width / controlAspect;
+		}
+	}
 
 	if (m_fill)
 	{

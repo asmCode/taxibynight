@@ -69,8 +69,6 @@ bool GameController::InitializeGraphics(const std::string &basePath)
 	InterfaceProvider::m_graphicsEngine = m_graphicsEngine;
 	InterfaceProvider::m_spriteBatch = spriteBatch;
 	InterfaceProvider::m_spritesMap = spritesMap;
-	InterfaceProvider::m_fonts["komika_title_32"] = FontRenderer::LoadFromFile((basePath + "data/fonts/komika_title_32.xml").c_str(), spriteBatch);
-	InterfaceProvider::m_fonts["digital_bold_36"] = FontRenderer::LoadFromFile((basePath + "data/fonts/digital_bold_36.xml").c_str(), spriteBatch);
 	InterfaceProvider::m_fonts["digital_bold_24"] = FontRenderer::LoadFromFile((basePath + "data/fonts/digital_bold_24.xml").c_str(), spriteBatch);
 	InterfaceProvider::m_fonts["fenix_18"] = FontRenderer::LoadFromFile((basePath + "data/fonts/fenix_18.xml").c_str(), spriteBatch);
 	InterfaceProvider::m_fonts["fenix_26"] = FontRenderer::LoadFromFile((basePath + "data/fonts/fenix_26.xml").c_str(), spriteBatch);

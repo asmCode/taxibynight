@@ -80,6 +80,8 @@ void Inflater::LoadLayout(XMLNode *node, Control *control)
 		control->SetMarginBottom(node->GetAttribAsInt32("margin_bottom"));
 	if (node->HasAttrib("margin_top"))
 		control->SetMarginTop(node->GetAttribAsInt32("margin_top"));
+	if (node->HasAttrib("tmp_fill"))
+		control->m_tmpFill = node->GetAttribAsString("tmp_fill");
 }
 
 Control* Inflater::LoadImageControl(XMLNode *node, const std::string &name)

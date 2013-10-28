@@ -56,6 +56,8 @@ protected:
 	virtual void OnUpdate(float time, float ms);
 	
 public:
+	std::string m_tmpFill;
+
 	static void SetSpriteBatch(SpriteBatch *spriteBatch);
 	
 	Control(const std::string &name);

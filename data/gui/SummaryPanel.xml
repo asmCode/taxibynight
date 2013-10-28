@@ -1,24 +1,24 @@
 <Panel name="summary_panel" fill="true">
-	<Image name="summary_screen_bg" image="summary_screen_bg" fill="true" />
-	<Panel name="summary_panel" align="center" width="600" height="400">
-		<Image name="summary_screen_content_bg" image="uni_button_down" fill="true" />
+	<Image image="town" tmp_fill="wypelnij" align="top" width="650" height="495"/>
+	<Panel name="summary_panel" align="center" width="568" height="470">
+		<Image name="summary_screen_content_bg" image="summary_screen_bg" fill="true" />
 		
-		<Label font="komika_title_32" name="earn_label" text="Earn" size="1.0" left="50" top="100" />
-		<Label font="komika_title_32" name="earn_value" text="$0" size="1.0" left="350" top="100" />
-		<Label font="komika_title_32" name="courses_label" text="Courses" size="0.7" left="50" top="150" />
-		<Label font="komika_title_32" name="courses_value" text="0" size="0.7" left="350" top="150" />
+		<Label font="fenix_26" name="earn_label" text="Earn" size="1.0" left="50" top="90" />
+		<Label font="fenix_26" name="earn_value" text="$0" size="1.0" left="350" top="90" />
+		<Label font="fenix_18" name="courses_label" text="Courses" size="1.0" left="50" top="140" />
+		<Label font="fenix_18" name="courses_value" text="0" size="1.0" left="350" top="140" />
 		
-		<Label font="komika_title_32" name="total_money_label" text="Total Income" size="0.7" left="50" top="180" />
-		<Label font="komika_title_32" name="total_money_value" text="$0 / $10.000" size="0.7" left="350" top="180" />
-		<Label font="komika_title_32" name="total_courses_label" text="Total Courses" size="0.7" left="50" top="210" />
-		<Label font="komika_title_32" name="total_courses_value" text="0" size="0.7" left="350" top="210" />
+		<Label font="fenix_18" name="total_money_label" text="Total Income" left="50" top="170" />
+		<Label font="fenix_18" name="total_money_value" text="$0 / $10.000" left="350" top="170" />
+		<Label font="fenix_18" name="total_courses_label" text="Total Courses" left="50" top="200" />
+		<Label font="fenix_18" name="total_courses_value" text="0" left="350" top="200" />
 		
-		<AnimButton name="back" align="bottom-left" margin_left="10" margin_bottom="10" width="150" height="100" image="uni_button" image_pushed="uni_button_down">
-			<Label font="komika_title_32" text="Main Menu" size="0.7" align="center" />
+		<AnimButton name="back" align="bottom-left" margin_left="40" margin_bottom="70" width="205" height="76" image="uni_button" image_pushed="uni_button_down">
+			<Label font="fenix_18" color="0;0;0" text="Main Menu" align="center" />
 		</AnimButton>
 		
-		<AnimButton name="again" align="bottom-right" margin_right="10" margin_bottom="10" width="150" height="100" image="uni_button" image_pushed="uni_button_down">
-			<Label font="komika_title_32" text="Again!" size="0.7" align="center" />
+		<AnimButton name="again" align="bottom-right" margin_right="40" margin_bottom="70" width="205" height="76" image="uni_button" image_pushed="uni_button_down">
+			<Label font="fenix_18" color="0;0;0" text="Again!" align="center" />
 		</AnimButton>
 	</Panel>
 </Panel>
