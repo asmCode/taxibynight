@@ -32,6 +32,9 @@ bool SplashScreen::ReleaseResources()
 
 void SplashScreen::Draw(float time, float seconds)
 {
+	if (m_splashScreenTex == NULL)
+		return;
+
 	InterfaceProvider::GetSpriteBatch()->Begin();
 	InterfaceProvider::GetSpriteBatch()->Draw(m_splashScreenTex, 0, 0,
 		TaxiGame::Environment::GetInstance()->GetScreenWidth(),
@@ -46,3 +49,11 @@ void SplashScreen::Update(float time, float seconds)
 		m_gameController->ShowMainMenuScreen();
 }
 
+void SplashScreen::Leave()
+{
+	if (m_splashScreenTex != NULL)
+	{
+		delete m_splashScreenTex;
+		m_splashScreenTex = NULL;
+	}
+}

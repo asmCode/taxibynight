@@ -51,19 +51,19 @@ void MainMenuScreen::Update(float time, float seconds)
 	m_mainMenuPanel->Update(time, seconds);
 }
 
-void MainMenuScreen::HandleTapGesture(const sm::Vec2 &point)
+void MainMenuScreen::HandlePress(int pointId, const sm::Vec2 &point)
 {
-	m_mainMenuPanel->HandleTapGesture(point);
+	m_mainMenuPanel->HandlePress(pointId, point);
 }
 
-void MainMenuScreen::HandlePress(uint32_t pointIndex, const sm::Vec2 &point)
+void MainMenuScreen::HandleRelease(int pointId, const sm::Vec2 &point)
 {
-	m_mainMenuPanel->HandlePress(pointIndex, point);
+	m_mainMenuPanel->HandleRelease(pointId, point);
 }
 
-void MainMenuScreen::HandleRelease(uint32_t pointIndex, const sm::Vec2 &point)
+void MainMenuScreen::HandleMove(int pointId, const sm::Vec2 &point)
 {
-	m_mainMenuPanel->HandleRelease(pointIndex, point);
+	m_mainMenuPanel->HandleMove(pointId, point);
 }
 
 void MainMenuScreen::UpdateStats()

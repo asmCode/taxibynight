@@ -30,8 +30,8 @@ private:
 	Label *m_totalCourses;
 	Label *m_bestReward;
 
-	void HandleTapGesture(const sm::Vec2 &point);
-	void HandlePress(uint32_t pointIndex, const sm::Vec2 &point);
-    void HandleRelease(uint32_t pointIndex, const sm::Vec2 &point);
+	void HandlePress(int pointId, const sm::Vec2 &point);
+    void HandleRelease(int pointId, const sm::Vec2 &point);
+	void HandleMove(int pointId, const sm::Vec2 &point);
 };
 

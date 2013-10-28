@@ -17,8 +17,6 @@ public:
 	void Draw(float time, float seconds);
 	void Update(float time, float seconds);
 
-	void HandleTapGesture(const sm::Vec2 &point);
-
 	void SetStatistics(
 		float earn,
 		int courses,
@@ -31,7 +29,8 @@ private:
 
 	SummaryPanel *m_summaryPanel;
 
-	void HandlePress(uint32_t pointIndex, const sm::Vec2 &point);
-	void HandleRelease(uint32_t pointIndex, const sm::Vec2 &point);
+	void HandlePress(int pointId, const sm::Vec2 &point);
+	void HandleRelease(int pointId, const sm::Vec2 &point);
+	void HandleMove(int pointId, const sm::Vec2 &point);
 };
 

@@ -102,6 +102,9 @@ void Control::SetDefaults()
 	m_marginBottom = 0;
 
 	m_tmpFill = "";
+
+	m_pressState = PressState_Unpressed;
+	m_pressedFingerId = 0;
 }
 
 Control *Control::GetParent()
@@ -207,20 +210,20 @@ std::string Control::GetName() const
 	return m_name;
 }
 
-void Control::HandleTapGesture(const sm::Vec2 &point)
-{
-	if (!visible || !enabled)
-		return;
-	
-	std::list<Control*>::iterator it;
-	for (it = children.begin(); it != children.end(); it++)
-		(*it) ->HandleTapGesture(sm::Vec2(point.x - this->x, point.y - this->y));
-	
-	if (HitTest(point.x, point.y))
-	{
-		OnTouch(point.x - this->x, point.y - this->y);
-	}
-}
+//void Control::HandleTapGesture(const sm::Vec2 &point)
+//{
+//	if (!visible || !enabled)
+//		return;
+//	
+//	std::list<Control*>::iterator it;
+//	for (it = children.begin(); it != children.end(); it++)
+//		(*it) ->HandleTapGesture(sm::Vec2(point.x - this->x, point.y - this->y));
+//	
+//	if (HitTest(point.x, point.y))
+//	{
+//		OnTouch(point.x - this->x, point.y - this->y);
+//	}
+//}
 
 void Control::HandlePanGesture(IGestureHandler::GestureStatus status,
 							   const sm::Vec2 &pos,
@@ -236,34 +239,72 @@ void Control::HandlePanGesture(IGestureHandler::GestureStatus status,
 }
 
 
-void Control::HandlePress(uint32_t pointIndex, const sm::Vec2 &point)
+void Control::HandlePress(int pointId, const sm::Vec2 &point)
 {
 	if (!visible || !enabled)
 		return;
 
 	std::list<Control*>::iterator it;
 	for (it = children.begin(); it != children.end(); it++)
-		(*it) ->HandlePress(pointIndex, sm::Vec2(point.x - this->x, point.y - this->y));
+		(*it) ->HandlePress(pointId, sm::Vec2(point.x - this->x, point.y - this->y));
 	
 	if (HitTest(point.x, point.y))
 	{
-		OnTouchBegin(point.x - this->x, point.y - this->y);
+		if (m_pressState == PressState_Unpressed)
+		{
+			m_pressState = PressState_Pressed;
+			m_pressedFingerId = pointId;
+
+			OnTouchBegin(pointId, point.x - this->x, point.y - this->y);
+		}
 	}
 }
 
-void Control::HandleRelease(uint32_t pointIndex, const sm::Vec2 &point)
+void Control::HandleRelease(int pointId, const sm::Vec2 &point)
 {
 	if (!visible || !enabled)
 		return;
 
 	std::list<Control*>::iterator it;
 	for (it = children.begin(); it != children.end(); it++)
-		(*it) ->HandleRelease(pointIndex, sm::Vec2(point.x - this->x, point.y - this->y));
+		(*it) ->HandleRelease(pointId, sm::Vec2(point.x - this->x, point.y - this->y));
 	
 	if (HitTest(point.x, point.y))
 	{
-		OnTouchEnd(point.x - this->x, point.y - this->y);
-		OnTouch(point.x - this->x, point.y - this->y);
+		if (m_pressState == PressState_Pressed &&
+			m_pressedFingerId == pointId)
+		{
+			m_pressState = PressState_Unpressed;
+			m_pressedFingerId = 0;
+
+			OnTouchEnd(pointId, point.x - this->x, point.y - this->y);
+			OnClicked(pointId, point.x - this->x, point.y - this->y);
+		}
+	}
+}
+
+void Control::HandleMove(int pointId, const sm::Vec2 &point)
+{
+	if (!visible || !enabled)
+		return;
+
+	std::list<Control*>::iterator it;
+	for (it = children.begin(); it != children.end(); it++)
+		(*it) ->HandleMove(pointId, sm::Vec2(point.x - this->x, point.y - this->y));
+	
+	if (HitTest(point.x, point.y))
+	{
+	}
+	else
+	{
+		if (m_pressState == PressState_Pressed &&
+			m_pressedFingerId == pointId)
+		{
+			m_pressState = PressState_Unpressed;
+			m_pressedFingerId = 0;
+
+			OnTouchEnd(pointId, point.x - this->x, point.y - this->y);
+		}
 	}
 }
 
@@ -393,14 +434,24 @@ void Control::OnTouch(int x, int y)
 	ObsCast(IControlEventsObserver, this)->NotifyObservers(&IControlEventsObserver::Clicked, this, x, y);
 }
 
-void Control::OnTouchBegin(int x, int y)
+void Control::OnTouchBegin(int pointId, int x, int y)
 {
 	ObsCast(IControlEventsObserver, this)->NotifyObservers(&IControlEventsObserver::Pressed, this, x, y);
 }
 
-void Control::OnTouchEnd(int x, int y)
+void Control::OnTouchEnd(int pointId, int x, int y)
 {
 	ObsCast(IControlEventsObserver, this)->NotifyObservers(&IControlEventsObserver::Released, this, x, y);
+}
+
+void Control::OnClicked(int pointId, int x, int y)
+{
+	ObsCast(IControlEventsObserver, this)->NotifyObservers(&IControlEventsObserver::Clicked, this, x, y);
+}
+
+void Control::OnTouchMoved(int pointId, int x, int y)
+{
+	//ObsCast(IControlEventsObserver, this)->NotifyObservers(&IControlEventsObserver::Released, this, x, y);
 	//ObsCast(IControlEventsObserver, this)->NotifyObservers(&IControlEventsObserver::Clicked, this, x, y);
 }
 

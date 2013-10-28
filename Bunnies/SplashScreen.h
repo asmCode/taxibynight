@@ -24,5 +24,7 @@ private:
 	Texture *m_splashScreenTex;
 
 	Ticker m_timeout;
+
+	void Leave();
 };
 

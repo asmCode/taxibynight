@@ -208,32 +208,28 @@ void GameScreen::SetFreeMode()
 	m_placeIndicator->SetActive(false);
 }
 
-void GameScreen::HandleTapGesture(const sm::Vec2 &point)
+void GameScreen::HandlePress(int pointId, const sm::Vec2 &point)
 {
-	m_hud->HandleTapGesture(point);
+	m_hud->HandlePress(pointId, point);
 
 	if (m_isPaused)
-		m_pausePanel->HandleTapGesture(point);
+		m_pausePanel->HandlePress(pointId, point);
 }
 
-void GameScreen::HandlePress(uint32_t pointIndex, const sm::Vec2 &point)
+void GameScreen::HandleRelease(int pointId, const sm::Vec2 &point)
 {
-	m_hud->HandlePress(pointIndex, point);
+	m_hud->HandleRelease(pointId, point);
 
 	if (m_isPaused)
-		m_pausePanel->HandlePress(pointIndex, point);
+		m_pausePanel->HandleRelease(pointId, point);
 }
 
-void GameScreen::HandleRelease(uint32_t pointIndex, const sm::Vec2 &point)
+void GameScreen::HandleMove(int pointId, const sm::Vec2 &point)
 {
-	m_hud->HandleRelease(pointIndex, point);
+	m_hud->HandleMove(pointId, point);
 
 	if (m_isPaused)
-		m_pausePanel->HandleRelease(pointIndex, point);
-}
-
-void GameScreen::HandleMove(uint32_t pointIndex, const sm::Vec2 &point)
-{
+		m_pausePanel->HandleMove(pointId, point);
 }
 
 void GameScreen::TurnLeftButtonPressed(bool isPressed)
@@ -270,7 +266,7 @@ void GameScreen::AccelerationButtonPressed(bool isPressed)
 
 void GameScreen::SimulatePress()
 {
-#if 1
+#if 0
 
 	if (GetAsyncKeyState(VK_UP) & 0x8000)
 		AccelerationButtonPressed(true);

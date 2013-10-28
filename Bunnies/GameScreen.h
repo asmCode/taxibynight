@@ -36,9 +36,9 @@ public:
 	void SetOccupiedMode();
 	void SetFreeMode();
 
-	void HandlePress(uint32_t pointIndex, const sm::Vec2 &point);
-    void HandleRelease(uint32_t pointIndex, const sm::Vec2 &point);
-	void HandleMove(uint32_t pointIndex, const sm::Vec2 &point);
+	void HandlePress(int pointId, const sm::Vec2 &point);
+    void HandleRelease(int pointId, const sm::Vec2 &point);
+	void HandleMove(int pointId, const sm::Vec2 &point);
 
 	void TurnLeftButtonPressed(bool isPressed);
 	void TurnRightButtonPressed(bool isPressed);
@@ -83,7 +83,5 @@ private:
 	float m_fpsUpdatesPerSecond;
 
 	void SimulatePress();
-
-	void HandleTapGesture(const sm::Vec2 &point);
 };
 

@@ -133,32 +133,25 @@ void GameController::Update(float time, float seconds)
 	m_activeScreen->Update(time, seconds);
 }
 
-void GameController::HandleTapGesture(const sm::Vec2 &point)
+void GameController::HandlePress(int pointId, const sm::Vec2 &point)
 {
 	assert(m_activeScreen != NULL);
 
-	m_activeScreen->HandleTapGesture(point);
+	m_activeScreen->HandlePress(pointId, point);
 }
 
-void GameController::HandlePress(uint32_t pointIndex, const sm::Vec2 &point)
+void GameController::HandleRelease(int pointId, const sm::Vec2 &point)
 {
 	assert(m_activeScreen != NULL);
 
-	m_activeScreen->HandlePress(pointIndex, point);
+	m_activeScreen->HandleRelease(pointId, point);
 }
 
-void GameController::HandleRelease(uint32_t pointIndex, const sm::Vec2 &point)
+void GameController::HandleMove(int pointId, const sm::Vec2 &point)
 {
 	assert(m_activeScreen != NULL);
 
-	m_activeScreen->HandleRelease(pointIndex, point);
-}
-
-void GameController::HandleMove(uint32_t pointIndex, const sm::Vec2 &point)
-{
-	assert(m_activeScreen != NULL);
-
-	m_activeScreen->HandleMove(pointIndex, point);
+	m_activeScreen->HandleMove(pointId, point);
 }
 
 void GameController::proto_SetStrafeMove(float value)

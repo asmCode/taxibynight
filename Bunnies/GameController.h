@@ -24,10 +24,9 @@ public:
 	void Draw(float time, float seconds);
 	void Update(float time, float seconds);
 
-	void HandleTapGesture(const sm::Vec2 &point);
-	void HandlePress(uint32_t pointIndex, const sm::Vec2 &point);
-    void HandleRelease(uint32_t pointIndex, const sm::Vec2 &point);
-	void HandleMove(uint32_t pointIndex, const sm::Vec2 &point);
+	void HandlePress(int pointId, const sm::Vec2 &point);
+    void HandleRelease(int pointId, const sm::Vec2 &point);
+	void HandleMove(int pointId, const sm::Vec2 &point);
 
 	bool proto_IsInGame();
 	void proto_SetStrafeMove(float value);

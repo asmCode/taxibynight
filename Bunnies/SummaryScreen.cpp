@@ -46,19 +46,19 @@ void SummaryScreen::Update(float time, float seconds)
 	m_summaryPanel->Update(time, seconds);
 }
 
-void SummaryScreen::HandleTapGesture(const sm::Vec2 &point)
+void SummaryScreen::HandlePress(int pointId, const sm::Vec2 &point)
 {
-	m_summaryPanel->HandleTapGesture(point);
+	m_summaryPanel->HandlePress(pointId, point);
 }
 
-void SummaryScreen::HandlePress(uint32_t pointIndex, const sm::Vec2 &point)
+void SummaryScreen::HandleRelease(int pointId, const sm::Vec2 &point)
 {
-	m_summaryPanel->HandlePress(pointIndex, point);
+	m_summaryPanel->HandleRelease(pointId, point);
 }
 
-void SummaryScreen::HandleRelease(uint32_t pointIndex, const sm::Vec2 &point)
+void SummaryScreen::HandleMove(int pointId, const sm::Vec2 &point)
 {
-	m_summaryPanel->HandleRelease(pointIndex, point);
+	m_summaryPanel->HandleMove(pointId, point);
 }
 
 void SummaryScreen::SetStatistics(

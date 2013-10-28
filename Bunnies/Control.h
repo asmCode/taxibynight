@@ -19,8 +19,14 @@ class Control :
 	public virtual IDrawable,
 	public virtual IGestureHandler,
 	public ObserversContainer<IControlEventsObserver*>
-{	
+{
 protected:
+	enum PressState
+	{
+		PressState_Unpressed,
+		PressState_Pressed
+	};
+
 	int x;
 	int y;
 	int width;
@@ -29,6 +35,9 @@ protected:
 	int m_marginRight;
 	int m_marginTop;
 	int m_marginBottom;
+
+	PressState m_pressState;
+	int m_pressedFingerId;
 	
 	float opacity;
 	
@@ -50,8 +59,10 @@ protected:
 	void SetDefaults();
 	
 	virtual void OnTouch(int x, int y);
-	virtual void OnTouchBegin(int x, int y);
-	virtual void OnTouchEnd(int x, int y);
+	virtual void OnTouchBegin(int pointId, int x, int y);
+	virtual void OnTouchEnd(int pointId, int x, int y);
+	virtual void OnClicked(int pointId, int x, int y);
+	virtual void OnTouchMoved(int pointId, int x, int y);
 	virtual void OnDraw(float time, float ms);
 	virtual void OnUpdate(float time, float ms);
 	
@@ -110,9 +121,10 @@ public:
 						  const sm::Vec2 &pos,
 						  const sm::Vec2 &trans,
 						  const sm::Vec2 &velocity);
-	void HandleTapGesture(const sm::Vec2 &point);
-	void HandlePress(uint32_t pointIndex, const sm::Vec2 &point);
-	void HandleRelease(uint32_t pointIndex, const sm::Vec2 &point);
+	//void HandleTapGesture(const sm::Vec2 &point);
+	void HandlePress(int pointIndex, const sm::Vec2 &point);
+	void HandleRelease(int pointIndex, const sm::Vec2 &point);
+	void HandleMove(int pointId, const sm::Vec2 &point);
 
 	virtual bool HitTest(int x, int y) const;
 	

@@ -298,8 +298,6 @@
     <None Include="data\shaders\Outline.vpr" />
     <None Include="data\shaders\OutlineMutating.fpr" />
     <None Include="data\shaders\OutlineMutating.vpr" />
-    <None Include="data\shaders\Skydome.fpr" />
-    <None Include="data\shaders\Skydome.vpr" />
     <None Include="data\shaders\sprite.fpr" />
     <None Include="data\shaders\sprite.vpr" />
   </ItemGroup>
