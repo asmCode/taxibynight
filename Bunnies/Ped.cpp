@@ -2,8 +2,13 @@
 #include "DrawingRoutines.h"
 #include "InterfaceProvider.h"
 #include "Environment.h"
+#include "StreetMap.h"
+#include "StreetSegment.h"
+#include "Street.h"
+#include "Taxi.h"
 
 #include <Graphics/Model.h>
+#include <Utils/Randomizer.h>
 #include <Graphics/Mesh.h>
 #include <Graphics/Texture.h>
 #include <Math/MathUtils.h>
@@ -14,10 +19,14 @@
 
 Ped::Ped()
 {
+	m_speed = 1.0f;
 	Content *content = InterfaceProvider::GetContent();
 
 	m_model = content->Get<Model>("passenger");
 	assert(m_model != NULL);
+
+	m_shadow = content->Get<Model>("ped_shadow");
+	assert(m_shadow != NULL);
 
 	m_pedMaterial = content->Get<Material>("ped");
 	assert(m_pedMaterial != NULL);
@@ -35,6 +44,7 @@ Ped::~Ped()
 
 void Ped::Update(float time, float seconds)
 {
+	jumpVal = 0.0f;
 	sm::Matrix waveMatrix = sm::Matrix::IdentityMatrix();
 
 	if (m_position != m_target)
@@ -43,19 +53,33 @@ void Ped::Update(float time, float seconds)
 		float distance = m_direction.GetLength();
 		m_direction.Normalize();
 
-		sm::Vec3 moveDelta = m_direction * 2.0f *seconds;
+		sm::Vec3 moveDelta = m_direction * 2.0f *seconds * m_speed;
 
 		if (moveDelta.GetLength() > distance)
 			m_position = m_target;
 		else
 			m_position = m_position + moveDelta;
 
-		float jumpVal = sinf(time * 30.0f) * 0.5f + 0.5f;
-		float waveVal = sinf(time * 15.0f);
+		jumpVal = sinf(time * 30.0f * m_speed) * 0.5f + 0.5f;
+		float waveVal = sinf(time * 15.0f * m_speed);
 
 		waveMatrix =
 			sm::Matrix::RotateAxisMatrix(waveVal * 0.15f, 0, 0, 1) *
 			sm::Matrix::TranslateMatrix(0, jumpVal * 0.4f, 0);			
+	}
+	else if (m_position == m_target && !IsPassenger())
+	{
+		static Randomizer random;
+
+		StreetSegment *seg = Street::Instance->GetSegmentAtPosition(m_position);
+		if (seg != NULL)
+		{
+			sm::Vec3 pos, norm;
+			StreetMap::Instance->GetRandomPavementArea(seg->CoordX(), seg->CoordY(), pos, norm);
+
+			m_target = pos;
+			m_speed = random.GetFloat(0.3f, 0.8f);
+		}
 	}
 
 	m_transform =
@@ -66,12 +90,20 @@ void Ped::Update(float time, float seconds)
 
 void Ped::Draw(float time, float seconds)
 {
-	if (IsPassenger())
-		m_model->SetMaterial(m_passengerMaterial);
-	else
-		m_model->SetMaterial(m_pedMaterial);
+	sm::Vec3 color = m_color;
 
-	DrawingRoutines::DrawWithMaterial(m_model->m_meshParts, m_transform);
+	if (IsPassenger() && !Taxi::GetInstance()->IsOccupied())
+		color = sm::Vec3(1, 0, 0);
+
+	DrawingRoutines::DrawPed(m_model->m_meshParts, m_transform, color);
+
+	sm::Vec3 shift = sm::Vec3(-1, 0, 1);
+	shift.SetLength(jumpVal * 0.14f);
+
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	DrawingRoutines::DrawUnlit(m_shadow->m_meshParts, sm::Matrix::TranslateMatrix(m_position + shift));
+	glDisable(GL_BLEND);
 }
 
 const sm::Vec3& Ped::GetPosition() const
@@ -86,7 +118,10 @@ void Ped::ResetPosition(const sm::Vec3 position)
 
 	m_isPassenger = false;
 
-	m_model->SetMaterial(m_pedMaterial);
+	Randomizer random;
+	float v = random.GetFloat(0.3f, 0.8f);
+
+	m_color.Set(v, v, v);
 }
 
 void Ped::SetToPassenger(
@@ -95,14 +130,13 @@ void Ped::SetToPassenger(
 	float time
 	)
 {
+	m_speed = 1.0f;
 	m_positionBeforeApproaching = m_position;
 
 	m_isPassenger = true;
 	m_tripDestination = tripDestination;
 	m_cash = cash;
 	m_timeLimit = time;
-
-	m_model->SetMaterial(m_passengerMaterial);
 }
 
 sm::Vec3 Ped::GetTripDestination() const

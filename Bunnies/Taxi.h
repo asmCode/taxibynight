@@ -49,6 +49,7 @@ private:
 	bool m_isAccelerating;
 
 	Model *m_taxiModel;
+	Model *m_shadow;
 
 	sm::Vec3 m_boundsTopLeft;
 	sm::Vec3 m_boundsTopRight;

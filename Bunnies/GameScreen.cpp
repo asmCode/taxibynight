@@ -146,7 +146,8 @@ void GameScreen::Update(float time, float seconds)
 	//m_manCam->Process(seconds);
 
 	sm::Vec3 taxiPosition = m_taxi->GetPosition();
-	sm::Vec3 camPosition = taxiPosition + sm::Vec3(0, 10, -4);
+	taxiPosition.y = 0.0f;
+	sm::Vec3 camPosition = taxiPosition + sm::Vec3(0, 13, -4);
 	sm::Vec3 camLook = (camPosition - (taxiPosition + sm::Vec3(0, 0, +2))).GetNormalized();
 	m_viewMatrix =
 		sm::Matrix::TranslateMatrix(camPosition) *
@@ -171,7 +172,7 @@ void GameScreen::Update(float time, float seconds)
 
 	DrawingRoutines::SetProjectionMatrix(m_projMatrix);
 	DrawingRoutines::SetViewMatrix(m_viewMatrix);
-	DrawingRoutines::SetLightPosition(camPosition);
+	DrawingRoutines::SetLightPosition(taxiPosition + sm::Vec3(0, 6, 0));
 	DrawingRoutines::SetEyePosition(camPosition);
 
 	if (m_taxi->IsOccupied())

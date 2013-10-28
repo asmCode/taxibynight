@@ -120,7 +120,9 @@ StreetMap::StreetMap(const std::string &dataPath)
 
 			else if ( // skycrapper
 				pixelType == PixelType_Blue)
-				m_streetMap[y * m_width + x] = StreetPiece::PieceType_Skycrapper_1;
+			{
+				m_streetMap[y * m_width + x] = StreetPiece::PieceType_Skycrapper_1 + (rand() % 3);
+			}
 		}
 	}
 
@@ -154,7 +156,7 @@ bool StreetMap::GetRandomPavementArea(uint32_t x, uint32_t y, sm::Vec3 &position
 	StreetPiece::PieceType type = GetPieceType(x, y);
 
 	float streetWidth = 10.0f;
-	float pavementWidth = 1.0f;
+	float pavementWidth = 2.0f;
 
 	switch (type)
 	{
@@ -307,6 +309,8 @@ bool StreetMap::GetRandomPavementArea(uint32_t x, uint32_t y, sm::Vec3 &position
 		return true;
 
 	case StreetPiece::PieceType_Skycrapper_1:
+	case StreetPiece::PieceType_Skycrapper_2:
+	case StreetPiece::PieceType_Skycrapper_3:
 		break;
 	default:
 		break;

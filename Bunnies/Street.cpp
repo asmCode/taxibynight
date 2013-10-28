@@ -29,11 +29,20 @@ Street::Street(PedsManager *pedsManager)
 	m_streetModel = content->Get<Model>("street");
 	assert(m_streetModel != NULL);
 
-	m_skycrapper = content->Get<Model>("skycrapper01");
-	assert(m_skycrapper != NULL);
+	m_skycrapper1 = content->Get<Model>("skycrapper01");
+	assert(m_skycrapper1 != NULL);
+	m_skycrapperTexture1 = content->Get<Texture>("flat_1_diffuse");
+	assert(m_skycrapperTexture1 != NULL);
 
-	m_skycrapperTexture = content->Get<Texture>("flat_1_diffuse");
-	assert(m_skycrapperTexture != NULL);
+	m_skycrapper2 = content->Get<Model>("skycrapper02");
+	assert(m_skycrapper2 != NULL);
+	m_skycrapperTexture2 = content->Get<Texture>("flat_2_diffuse");
+	assert(m_skycrapperTexture2 != NULL);
+
+	m_skycrapper3 = content->Get<Model>("skycrapper03");
+	assert(m_skycrapper3 != NULL);
+	m_skycrapperTexture3 = content->Get<Texture>("flat_3_diffuse");
+	assert(m_skycrapperTexture3 != NULL);
 
 	m_pavementTexture = content->Get<Texture>("street_pavement");
 	assert(m_pavementTexture != NULL);
@@ -114,8 +123,20 @@ Street::Street(PedsManager *pedsManager)
 
 	m_streetPieces[StreetPiece::PieceType_Skycrapper_1] = new StreetPiece(
 		StreetPiece::PieceType_Skycrapper_1,
-		m_skycrapper,
-		m_skycrapperTexture,
+		m_skycrapper1,
+		m_skycrapperTexture1,
+		sm::Matrix::IdentityMatrix());
+
+	m_streetPieces[StreetPiece::PieceType_Skycrapper_2] = new StreetPiece(
+		StreetPiece::PieceType_Skycrapper_2,
+		m_skycrapper2,
+		m_skycrapperTexture2,
+		sm::Matrix::IdentityMatrix());
+
+	m_streetPieces[StreetPiece::PieceType_Skycrapper_3] = new StreetPiece(
+		StreetPiece::PieceType_Skycrapper_3,
+		m_skycrapper3,
+		m_skycrapperTexture3,
 		sm::Matrix::IdentityMatrix());
 
 	m_streetSegments = new StreetSegment*[m_streetMap->GetWidth() * m_streetMap->GetHeight()];
@@ -126,7 +147,29 @@ Street::Street(PedsManager *pedsManager)
 			int index = y * m_streetMap->GetWidth() + x;
 
 			StreetPiece::PieceType streetType = m_streetMap->GetPieceType(x, y);
-			m_streetSegments[index] = new StreetSegment(sm::Vec3(x * 10.0f, 0, y * 10.0f), m_streetPieces[(uint8_t)streetType]);
+
+			sm::Matrix randRotation = sm::Matrix::IdentityMatrix();
+			if (streetType == StreetPiece::PieceType_Skycrapper_1 ||
+				streetType == StreetPiece::PieceType_Skycrapper_2 ||
+				streetType == StreetPiece::PieceType_Skycrapper_3)
+			{
+				float randAngle[4];
+				randAngle[0] = 0;
+				randAngle[1] = MathUtils::PI2 + MathUtils::PI;
+				randAngle[2] = MathUtils::PI2;
+				randAngle[3] = MathUtils::PI;
+
+				static Randomizer random;
+
+				randRotation = sm::Matrix::RotateAxisMatrix(randAngle[random.GetInt(0, 3)], 0, 1, 0);
+			}
+
+			sm::Vec3 pivot = sm::Vec3(x * 10.0f, 0, y * 10.0f);
+			m_streetSegments[index] =
+				new StreetSegment(
+					sm::Matrix::TranslateMatrix(pivot) * randRotation,
+					pivot,
+					m_streetPieces[(uint8_t)streetType]);
 
 			if (m_streetSegments[index]->GetStreetPiece()->HasPavement())
 				m_pavementSegments.push_back(m_streetSegments[index]);
@@ -211,17 +254,12 @@ void Street::Draw(float time, float seconds)
 		{
 			StreetPiece::PieceType streetType = m_streetMap->GetPieceType(x, y);
 
-			if (!m_streetSegments[y * m_streetMap->GetWidth() + x]->IsVisible())
+			StreetSegment *seg = m_streetSegments[y * m_streetMap->GetWidth() + x];
+
+			if (!seg->IsVisible())
 				continue;
 
-			m_streetPieces[streetType]->Draw(sm::Matrix::TranslateMatrix(x * 10, 0, y * 10));
-
-			/*if (streetType == StreetPiece::PieceType_Skycrapper_1)
-				DrawingRoutines::DrawStreet(
-					m_streetModel,
-					m_pavementTexture,
-					sm::Matrix::TranslateMatrix(x * 10, 0, y * 10)
-					);*/
+			m_streetPieces[streetType]->Draw(seg->GetWorldTransform());
 		}
 	}
 }
@@ -321,7 +359,7 @@ bool Street::GetCollistion(const sm::Vec3 &pStart, const sm::Vec3 &pEnd, sm::Vec
 	segs[7] = GetSegment(seg->CoordX() - 1, seg->CoordY() + 1);
 	segs[8] = GetSegment(seg->CoordX() - 1, seg->CoordY() - 1);
 	 
-	float closestDistance = 9999999999;
+	float closestDistance = 99999999.0f;
 	bool collision = false;
 	normal.Set(0, 0, 0);
 
@@ -350,12 +388,17 @@ bool Street::GetCollistion(const sm::Vec3 &pStart, const sm::Vec3 &pEnd, sm::Vec
 				collision = true;
 
 				collisionPoint = segs[i]->GetWorldTransform() * cPoint;
-				normal += cNorm;
+
+				sm::Matrix a = segs[i]->GetWorldTransform();
+				a.a[12] = 0.0f;
+				a.a[13] = 0.0f;
+				a.a[14] = 0.0f;
+				normal += a * cNorm;
 			}
 		}
 	}
 	
-	normal.Normalize();
+	//normal.Normalize();
 
 	return collision;
 

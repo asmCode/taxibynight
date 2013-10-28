@@ -56,6 +56,8 @@ bool StreetPiece::IsCollider() const
 {
 	return
 		m_pieceType == StreetPiece::PieceType_Skycrapper_1 ||
+		m_pieceType == StreetPiece::PieceType_Skycrapper_2 ||
+		m_pieceType == StreetPiece::PieceType_Skycrapper_3 ||
 		m_pieceType == StreetPiece::PieceType_Pavement;
 }
 

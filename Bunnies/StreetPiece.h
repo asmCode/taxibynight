@@ -26,7 +26,9 @@ public:
 		PieceType_TLeft_1,
 		PieceType_TRight_1,
 
-		PieceType_Skycrapper_1
+		PieceType_Skycrapper_1,
+		PieceType_Skycrapper_2,
+		PieceType_Skycrapper_3,
 	};
 
 	StreetPiece(

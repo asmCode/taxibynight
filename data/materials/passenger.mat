@@ -5,7 +5,7 @@
 	<Param Type="Glossiness" Value="0.1" />
 	<Param Type="SpecularLevel" Value="0" />
 	<Textures>
-		<Texture Type="Diffuse" File="passenger.png">
+		<Texture Type="Diffuse" File="guy.png">
 		</Texture>
 	</Textures>
 </Material>

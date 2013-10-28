@@ -9,14 +9,10 @@
 #include <Graphics/OpenglPort.h>
 #include <assert.h>
 
-Shader* DrawingRoutines::m_celShadingShader;
-Shader* DrawingRoutines::m_celShadingMutatingShader;
-Shader* DrawingRoutines::m_outlineShader;
-Shader* DrawingRoutines::m_outlineMutatingShader;
-Shader* DrawingRoutines::m_skydomeShader;
 Shader* DrawingRoutines::m_diffTexShader;
 Shader* DrawingRoutines::m_diffShader;
-Shader* DrawingRoutines::m_grassShader;
+Shader* DrawingRoutines::m_pedShader;
+Shader* DrawingRoutines::m_unlitShader;
 float DrawingRoutines::m_outlineWidth;
 sm::Vec3 DrawingRoutines::m_lightPosition;
 sm::Vec3 DrawingRoutines::m_eyePosition;
@@ -26,51 +22,26 @@ sm::Matrix DrawingRoutines::m_viewProjMatrix;
 
 bool DrawingRoutines::Initialize()
 {
-	m_celShadingShader = InterfaceProvider::GetContent()->Get<Shader>("CelShading");
-	assert(m_celShadingShader != NULL);
-
-	m_celShadingMutatingShader = InterfaceProvider::GetContent()->Get<Shader>("CelShadingMutating");
-	assert(m_celShadingMutatingShader != NULL);
-
-	m_outlineShader = InterfaceProvider::GetContent()->Get<Shader>("Outline");
-	assert(m_outlineShader != NULL);
-
-	m_outlineMutatingShader = InterfaceProvider::GetContent()->Get<Shader>("OutlineMutating");
-	assert(m_outlineMutatingShader != NULL);
-
-	m_skydomeShader = InterfaceProvider::GetContent()->Get<Shader>("Skydome");
-	assert(m_skydomeShader != NULL);
-
 	m_diffTexShader = InterfaceProvider::GetContent()->Get<Shader>("DiffTex");
 	assert(m_diffTexShader != NULL);
 
 	m_diffShader = InterfaceProvider::GetContent()->Get<Shader>("Diff");
 	assert(m_diffShader != NULL);
 
-	m_grassShader = InterfaceProvider::GetContent()->Get<Shader>("Grass");
-	assert(m_grassShader != NULL);
+	m_pedShader = InterfaceProvider::GetContent()->Get<Shader>("Ped");
+	assert(m_pedShader != NULL);
 
-	m_celShadingShader->BindVertexChannel(0, "a_position");
-	m_celShadingShader->BindVertexChannel(1, "a_normal");
-	m_celShadingShader->BindVertexChannel(2, "a_coords");
-	m_celShadingShader->LinkProgram();
+	m_unlitShader = InterfaceProvider::GetContent()->Get<Shader>("Unlit");
+	assert(m_unlitShader != NULL);
 
-	m_celShadingMutatingShader->BindVertexChannel(0, "a_position");
-	m_celShadingMutatingShader->BindVertexChannel(1, "a_normal");
-	m_celShadingMutatingShader->BindVertexChannel(2, "a_coords");
-	m_celShadingMutatingShader->LinkProgram();
+	m_unlitShader->BindVertexChannel(0, "a_position");
+	m_unlitShader->BindVertexChannel(1, "a_coords");
+	m_unlitShader->LinkProgram();
 
-	m_outlineShader->BindVertexChannel(0, "a_position");
-	m_outlineShader->BindVertexChannel(1, "a_normal");
-	m_outlineShader->LinkProgram();
-
-	m_outlineMutatingShader->BindVertexChannel(0, "a_position");
-	m_outlineMutatingShader->BindVertexChannel(1, "a_normal");
-	m_outlineMutatingShader->LinkProgram();
-
-	m_skydomeShader->BindVertexChannel(0, "a_position");
-	m_skydomeShader->BindVertexChannel(2, "a_coords");
-	m_skydomeShader->LinkProgram();
+	m_pedShader->BindVertexChannel(0, "a_position");
+	m_pedShader->BindVertexChannel(1, "a_coords");
+	m_pedShader->BindVertexChannel(3, "a_normal");
+	m_pedShader->LinkProgram();
 
 	m_diffTexShader->BindVertexChannel(0, "a_position");
 	m_diffTexShader->BindVertexChannel(2, "a_coords");
@@ -80,10 +51,6 @@ bool DrawingRoutines::Initialize()
 	m_diffShader->BindVertexChannel(1, "a_coords");
 	m_diffShader->BindVertexChannel(3, "a_normal");
 	m_diffShader->LinkProgram();
-
-	m_grassShader->BindVertexChannel(0, "a_position");
-	m_grassShader->BindVertexChannel(2, "a_coords");
-	m_grassShader->LinkProgram();
 
 	return true;
 }
@@ -120,10 +87,16 @@ void DrawingRoutines::DrawDiff(Model *model, const sm::Matrix &viewMatrix, const
 
 void DrawingRoutines::DrawStreet(Model *model, Texture *diffuseTexture, const sm::Matrix &worldMatrix)
 {
+	glDepthMask(true);
+	glEnable(GL_DEPTH_TEST);
+	glDisable(GL_BLEND);
+
 	assert(model != NULL);
 
 	std::vector<MeshPart*> meshParts;
 	model->GetMeshParts(meshParts);
+
+	Material *material = meshParts[0]->GetMaterial();
 
 	glDepthMask(GL_TRUE);
 	glEnableVertexAttribArray(0); 
@@ -134,6 +107,10 @@ void DrawingRoutines::DrawStreet(Model *model, Texture *diffuseTexture, const sm
 	m_diffShader->SetParameter("u_lightPosition", m_lightPosition);
 	m_diffShader->SetParameter("u_eyePosition", m_lightPosition);
 	m_diffShader->SetTextureParameter("u_diffTex", 0, diffuseTexture->GetId());
+	m_diffShader->SetParameter("u_specularColor", material->specularColor);
+	m_diffShader->SetParameter("u_opacity", material->Opacity());
+	m_diffShader->SetParameter("u_glossiness", material->glossiness * 256.0f);
+	m_diffShader->SetParameter("u_specularLevel", material->specularLevel);
 	for (uint32_t i = 0; i < meshParts.size(); i++)
 	{
 		meshParts[i]->SetupVertexPointers();
@@ -146,32 +123,53 @@ void DrawingRoutines::DrawStreet(Model *model, Texture *diffuseTexture, const sm
 	glDisableVertexAttribArray(3);
 }
 
-void DrawingRoutines::DrawSkydome(Model *model, const sm::Matrix &viewMatrix, const sm::Matrix &projMatrix)
+void DrawingRoutines::DrawUnlit(std::vector<MeshPart*> &meshParts, const sm::Matrix &worldMatrix)
 {
-	assert(model != NULL);
+	glEnableVertexAttribArray(0); 
+	glEnableVertexAttribArray(1); 
+
+	m_unlitShader->UseProgram();
+	m_unlitShader->SetMatrixParameter("u_viewProjMatrix", m_viewProjMatrix);
+	m_unlitShader->SetTextureParameter("u_diffTex", 0, meshParts[0]->GetMaterial()->diffuseTex->GetId());
+
+	for (uint32_t i = 0; i < meshParts.size(); i++)
+	{
+		meshParts[i]->SetupVertexPointers();
+
+		m_unlitShader->SetMatrixParameter("u_worldMatrix", worldMatrix * meshParts[i]->mesh->Transform());
+		meshParts[i]->Draw();
+	}
 
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);
-	glDisableVertexAttribArray(2);
+}
 
-	std::vector<MeshPart*> meshParts;
-	model->GetMeshParts(meshParts);
+void DrawingRoutines::DrawPed(std::vector<MeshPart*> &meshParts, const sm::Matrix &worldMatrix, sm::Vec3 color)
+{
+	glDepthMask(true);
+	glEnable(GL_DEPTH_TEST);
+	glDisable(GL_BLEND);
 
-	glDepthMask(GL_FALSE);
 	glEnableVertexAttribArray(0); 
-	glEnableVertexAttribArray(2);
-	m_skydomeShader->UseProgram();
-	m_skydomeShader->SetMatrixParameter("u_viewMatrix", viewMatrix);
-	m_skydomeShader->SetMatrixParameter("u_projMatrix", projMatrix);
+	glEnableVertexAttribArray(1);
+	glEnableVertexAttribArray(3);
+
+	m_pedShader->UseProgram();
+	m_pedShader->SetMatrixParameter("u_viewProjMatrix", m_viewProjMatrix);
+	m_pedShader->SetParameter("u_lightPosition", m_lightPosition);
+	m_pedShader->SetParameter("u_color", color);
+	m_pedShader->SetTextureParameter("u_diffTex", 0, meshParts[0]->GetMaterial()->diffuseTex->GetId());
+
 	for (uint32_t i = 0; i < meshParts.size(); i++)
 	{
-		m_skydomeShader->SetTextureParameter("u_diffTex", 0, meshParts[i]->GetMaterial()->diffuseTex->GetId());
+		meshParts[i]->SetupVertexPointers();
+
+		m_pedShader->SetMatrixParameter("u_worldMatrix", worldMatrix * meshParts[i]->mesh->Transform());
 		meshParts[i]->Draw();
 	}
 	glDisableVertexAttribArray(0);
-	glDisableVertexAttribArray(2);
-
-	glDepthMask(GL_TRUE);
+	glDisableVertexAttribArray(1);
+	glDisableVertexAttribArray(3);
 }
 
 void DrawingRoutines::DrawSprite(Model *model, const sm::Matrix &viewMatrix, const sm::Matrix &worldMatrix)
@@ -191,31 +189,6 @@ void DrawingRoutines::DrawSprite(Model *model, const sm::Matrix &viewMatrix, con
 		assert(meshParts[i]->GetMaterial()->diffuseTex != NULL);
 
 		m_diffTexShader->SetTextureParameter("u_diffTex", 0, meshParts[i]->GetMaterial()->diffuseTex->GetId());
-		meshParts[i]->Draw();
-	}
-	glDisableVertexAttribArray(0);
-	glDisableVertexAttribArray(2);
-}
-
-void DrawingRoutines::DrawGrass(Model *model, Texture *colorMapTex, const sm::Matrix &viewMatrix, const sm::Matrix &worldMatrix)
-{
-	assert(model != NULL);
-
-	std::vector<MeshPart*> meshParts;
-	model->GetMeshParts(meshParts);
-
-	glEnableVertexAttribArray(0);
-	glEnableVertexAttribArray(2);
-	m_grassShader->UseProgram();
-	m_grassShader->SetMatrixParameter("u_worldMatrix", worldMatrix);
-	m_grassShader->SetMatrixParameter("u_viewProjMatrix", m_projMatrix * viewMatrix);
-	m_grassShader->SetTextureParameter("u_colorMapTex", 1, colorMapTex->GetId());
-	for (uint32_t i = 0; i < meshParts.size(); i++)
-	{
-		assert(meshParts[i]->GetMaterial() != NULL);
-		assert(meshParts[i]->GetMaterial()->diffuseTex != NULL);
-
-		m_grassShader->SetTextureParameter("u_diffTex", 0, meshParts[i]->GetMaterial()->diffuseTex->GetId());
 		meshParts[i]->Draw();
 	}
 	glDisableVertexAttribArray(0);
@@ -314,6 +287,8 @@ bool DrawingRoutines::SetupShader(Material *material, MeshPart *meshPart, const 
 		glDisableVertexAttribArray(2);
 		glEnableVertexAttribArray(3);
 		glDisableVertexAttribArray(4);
+
+		glDepthMask(true);
 		
 		return true;
 	}
@@ -427,6 +402,8 @@ bool DrawingRoutines::SetupShader(Material *material, MeshPart *meshPart, const 
 	//{
 	//	int d = 0;
 	//}
+
+	//glDepthMask(true);
 
 	return false;
 }

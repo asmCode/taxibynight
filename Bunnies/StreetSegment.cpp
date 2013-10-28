@@ -4,12 +4,12 @@
 #include <Math/MathUtils.h>
 #include <assert.h>
 
-StreetSegment::StreetSegment(const sm::Vec3 &pivotPosition, StreetPiece *streetPiece)
+StreetSegment::StreetSegment(const sm::Matrix &worldTransform, const sm::Vec3 &pivotPosition, StreetPiece *streetPiece)
 {
 	m_pivotPosition = pivotPosition;
 	m_streetPiece = streetPiece;
 
-	m_worldMatrix = sm::Matrix::TranslateMatrix(m_pivotPosition);
+	m_worldMatrix = worldTransform;
 }
 
 void StreetSegment::SetVisibility(bool visibility)

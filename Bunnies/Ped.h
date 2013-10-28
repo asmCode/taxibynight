@@ -41,7 +41,14 @@ public:
 private:
 	sm::Matrix m_transform;
 
+	float m_speed;
+
+	float jumpVal;
+
+	sm::Vec3 m_color;
+
 	Model *m_model;
+	Model *m_shadow;
 
 	Animation *m_walkAnim;
 	Animation *m_waveAnim;

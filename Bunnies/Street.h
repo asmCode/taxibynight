@@ -43,11 +43,15 @@ private:
 
 	sm::Vec3 m_taxiPosition;
 	Model *m_streetModel;
-	Model *m_skycrapper;
+	Model *m_skycrapper1;
+	Model *m_skycrapper2;
+	Model *m_skycrapper3;
 
 	std::vector<StreetSegment*> m_pavementSegments;
 
-	Texture *m_skycrapperTexture;
+	Texture *m_skycrapperTexture1;
+	Texture *m_skycrapperTexture2;
+	Texture *m_skycrapperTexture3;
 	Texture *m_pavementTexture;
 
 	StreetMap *m_streetMap;

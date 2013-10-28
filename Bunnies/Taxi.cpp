@@ -32,6 +32,9 @@ Taxi::Taxi() :
 	m_taxiModel = content->Get<Model>("taxi");
 	assert(m_taxiModel != NULL);
 
+	m_shadow = content->Get<Model>("taxi_shadow");
+	assert(m_shadow != NULL);
+
 	m_position.Set(100, 0, 100);
 	m_velocity.Set(0, 0, 0);
 	m_turnDirection.Set(0, 0, -1);
@@ -88,6 +91,9 @@ Taxi::~Taxi()
 
 void Taxi::Update(float time, float seconds)
 {
+	//m_position.y = sinf(time * (((m_speed + 1) / 13.0f) * 1.0f)) * 0.5f + 0.5f;
+	//m_position.y *= 0.5f;
+
 	sm::Vec3 oldPos = m_position;
 
 	if (IsOccupied())
@@ -200,6 +206,11 @@ void Taxi::Update(float time, float seconds)
 void Taxi::Draw(float time, float seconds)
 {
 	DrawingRoutines::DrawWithMaterial(m_taxiModel->m_meshParts, m_worldMatrix);
+
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	DrawingRoutines::DrawUnlit(m_shadow->m_meshParts, sm::Matrix::TranslateMatrix(-0.4f, 0, 0.4f) * m_worldMatrix);
+	glDisable(GL_BLEND);
 }
 
 void Taxi::SetTurn(float turnValue)

@@ -9,7 +9,7 @@ class StreetPiece;
 class StreetSegment
 {
 public:
-	StreetSegment(const sm::Vec3 &pivotPosition, StreetPiece *streetPiece);
+	StreetSegment(const sm::Matrix &worldTransform, const sm::Vec3 &pivotPosition, StreetPiece *streetPiece);
 
 	void SetVisibility(bool visibility);
 
