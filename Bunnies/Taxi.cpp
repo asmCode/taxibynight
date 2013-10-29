@@ -11,6 +11,7 @@
 #include <Graphics/Texture.h>
 #include <Audio/SoundManager.h>
 #include <Math/MathUtils.h>
+#include <Utils/Randomizer.h>
 #include <Graphics/Content/Content.h>
 #include <assert.h>
 
@@ -185,12 +186,32 @@ void Taxi::Update(float time, float seconds)
 
 	sm::Vec3 boundsTopLeftWorldOld = m_worldMatrix * m_boundsTopLeft;
 	sm::Vec3 boundsBottomLeftWorldOld = m_worldMatrix * m_boundsBottomLeft;
+	sm::Vec3 boundsTopRightWorldOld = m_worldMatrix * m_boundsTopRight;
+	sm::Vec3 boundsBottomRightWorldOld = m_worldMatrix * m_boundsBottomRight;
+
 	sm::Vec3 boundsTopLeftWorldNew = newWorldMatrix * m_boundsTopLeft;
+	sm::Vec3 boundsBottomLeftWorldNew = newWorldMatrix * m_boundsBottomLeft;
+	sm::Vec3 boundsTopRightWorldNew = newWorldMatrix * m_boundsTopRight;
+	sm::Vec3 boundsBottomRightWorldNew = newWorldMatrix * m_boundsBottomRight;
 
 	sm::Vec3 collisionNormal;
 	sm::Vec3 collisionPoint;
+
 	if (Street::Instance->GetCollistion(boundsTopLeftWorldOld, boundsTopLeftWorldNew, collisionPoint, collisionNormal))
 	{
+		if (m_speed > 4.0f)
+		{
+			static Randomizer random;
+
+			SoundManager::GetInstance()->PlaySound((SoundManager::Sound)random.GetInt(0, 2));
+		}
+
+		float dot = sm::Vec3::Dot(collisionNormal, m_carDirection.GetReversed());
+		if (dot > 0.8 && m_speed > 3.0f)
+			m_speed = -3.0f;
+		else
+			m_speed *= 1.0f - sm::Vec3::Dot(collisionNormal, m_carDirection.GetReversed());
+
 		collisionPoint += collisionNormal * 0.01f;
 
 		sm::Vec3 toCollisionTarget = collisionPoint - boundsTopLeftWorldOld;
@@ -201,6 +222,98 @@ void Taxi::Update(float time, float seconds)
 		m_carDirection = (collisionPoint - boundsBottomLeftWorldOld).GetNormalized();
 
 		m_position = oldPos + deltaMove;
+
+		m_worldMatrix =
+			sm::Matrix::TranslateMatrix(m_position) *
+			sm::Matrix::CreateLookAt(m_carDirection.GetReversed(), sm::Vec3(0, 1, 0));
+	}
+	else if (Street::Instance->GetCollistion(boundsTopRightWorldOld, boundsTopRightWorldNew, collisionPoint, collisionNormal))
+	{
+		if (m_speed > 4.0f)
+		{
+			static Randomizer random;
+
+			SoundManager::GetInstance()->PlaySound((SoundManager::Sound)random.GetInt(0, 2));
+		}
+
+		float dot = sm::Vec3::Dot(collisionNormal, m_carDirection.GetReversed());
+		if (dot > 0.8 && m_speed > 3.0f)
+			m_speed = -3.0f;
+		else
+			m_speed *= 1.0f - sm::Vec3::Dot(collisionNormal, m_carDirection.GetReversed());
+
+		collisionPoint += collisionNormal * 0.01f;
+
+		sm::Vec3 toCollisionTarget = collisionPoint - boundsTopRightWorldOld;
+		sm::Vec3 fromCollisionTarget = sm::Vec3::Reflect(collisionNormal, toCollisionTarget);
+		sm::Vec3 correntPosition = boundsTopRightWorldOld + toCollisionTarget + fromCollisionTarget;
+		sm::Vec3 deltaMove = collisionPoint - boundsTopRightWorldOld;
+
+		m_carDirection = (collisionPoint - boundsBottomRightWorldOld).GetNormalized();
+
+		m_position = oldPos + deltaMove;
+
+		m_worldMatrix =
+			sm::Matrix::TranslateMatrix(m_position) *
+			sm::Matrix::CreateLookAt(m_carDirection.GetReversed(), sm::Vec3(0, 1, 0));
+	}
+	/*else if (Street::Instance->GetCollistion(boundsBottomRightWorldOld, boundsBottomRightWorldNew, collisionPoint, collisionNormal))
+	{
+		if (m_speed > 4.0f)
+		{
+			static Randomizer random;
+
+			SoundManager::GetInstance()->PlaySound((SoundManager::Sound)random.GetInt(0, 2));
+		}
+
+		float dot = sm::Vec3::Dot(collisionNormal, m_carDirection.GetReversed());
+		if (dot > 0.8 && m_speed > 3.0f)
+			m_speed = -3.0f;
+		else
+			m_speed *= 1.0f - sm::Vec3::Dot(collisionNormal, m_carDirection.GetReversed());
+
+		collisionPoint += collisionNormal * 0.01f;
+
+		sm::Vec3 toCollisionTarget = collisionPoint - boundsBottomRightWorldOld;
+		sm::Vec3 fromCollisionTarget = sm::Vec3::Reflect(collisionNormal, toCollisionTarget);
+		sm::Vec3 correntPosition = boundsBottomRightWorldOld + toCollisionTarget + fromCollisionTarget;
+		sm::Vec3 deltaMove = collisionPoint - boundsBottomRightWorldOld;
+
+		m_carDirection = (boundsTopRightWorldOld - collisionPoint).GetNormalized();
+
+		m_position = oldPos + deltaMove;
+
+		m_worldMatrix =
+			sm::Matrix::TranslateMatrix(m_position) *
+			sm::Matrix::CreateLookAt(m_carDirection.GetReversed(), sm::Vec3(0, 1, 0));
+	}*/
+	else if (Street::Instance->GetCollistion(boundsBottomRightWorldOld, boundsBottomRightWorldNew, collisionPoint, collisionNormal))
+	{
+		if (m_speed > 4.0f)
+		{
+			static Randomizer random;
+
+			SoundManager::GetInstance()->PlaySound((SoundManager::Sound)random.GetInt(0, 2));
+		}
+
+		m_position = oldPos + collisionNormal * 0.1f;
+		m_speed = 0.0f;
+
+		m_worldMatrix =
+			sm::Matrix::TranslateMatrix(m_position) *
+			sm::Matrix::CreateLookAt(m_carDirection.GetReversed(), sm::Vec3(0, 1, 0));
+	}
+	else if (Street::Instance->GetCollistion(boundsBottomLeftWorldOld, boundsBottomLeftWorldNew, collisionPoint, collisionNormal))
+	{
+		if (m_speed > 4.0f)
+		{
+			static Randomizer random;
+
+			SoundManager::GetInstance()->PlaySound((SoundManager::Sound)random.GetInt(0, 2));
+		}
+
+		m_position = oldPos + collisionNormal * 0.1f;
+		m_speed = 0.0f;
 
 		m_worldMatrix =
 			sm::Matrix::TranslateMatrix(m_position) *
