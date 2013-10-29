@@ -5,13 +5,14 @@
 		
 		<Label font="fenix_26" name="earn_label" text="Earn" size="1.0" left="50" top="90" />
 		<Label font="fenix_26" name="earn_value" text="$0" size="1.0" left="350" top="90" />
-		<Label font="fenix_18" name="courses_label" text="Courses" size="1.0" left="50" top="140" />
-		<Label font="fenix_18" name="courses_value" text="0" size="1.0" left="350" top="140" />
+		<Label font="fenix_18" name="record" text="Record!" size="1.0" left="350" top="130" color="241;165;15" />
+		<Label font="fenix_18" name="courses_label" text="Courses" size="1.0" left="50" top="170" />
+		<Label font="fenix_18" name="courses_value" text="0" size="1.0" left="350" top="170" />
 		
-		<Label font="fenix_18" name="total_money_label" text="Total Income" left="50" top="170" />
-		<Label font="fenix_18" name="total_money_value" text="$0 / $10.000" left="350" top="170" />
-		<Label font="fenix_18" name="total_courses_label" text="Total Courses" left="50" top="200" />
-		<Label font="fenix_18" name="total_courses_value" text="0" left="350" top="200" />
+		<Label font="fenix_18" name="total_money_label" text="Total Income" left="50" top="200" />
+		<Label font="fenix_18" name="total_money_value" text="$0 / $10.000" left="350" top="200" />
+		<Label font="fenix_18" name="total_courses_label" text="Total Courses" left="50" top="230" />
+		<Label font="fenix_18" name="total_courses_value" text="0" left="350" top="230" />
 		
 		<AnimButton name="back" align="bottom-left" margin_left="40" margin_bottom="70" width="205" height="76" image="uni_button" image_pushed="uni_button_down">
 			<Label font="fenix_18" color="0;0;0" text="Main Menu" align="center" />

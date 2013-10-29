@@ -28,6 +28,7 @@ private:
 	Label *m_coursesLabel;
 	Label *m_totalEarnLabel;
 	Label *m_totalCoursesLabel;
+	Label *m_recordLabel;
 
 	AnimButton *m_mainMenuButton;
 	AnimButton *m_againButton;

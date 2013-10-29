@@ -42,6 +42,9 @@ SummaryPanel *SummaryPanel::Create(GameController *gameController)
 	ret->m_totalCoursesLabel = dynamic_cast<Label*>(ret->FindChild("total_courses_value"));
 	assert(ret->m_totalCoursesLabel != NULL);
 
+	ret->m_recordLabel = dynamic_cast<Label*>(ret->FindChild("record"));
+	assert(ret->m_recordLabel != NULL);
+
 	ret->m_mainMenuButton = dynamic_cast<AnimButton*>(ret->FindChild("back"));
 	assert(ret->m_mainMenuButton != NULL);
 	ret->m_againButton = dynamic_cast<AnimButton*>(ret->FindChild("again"));
@@ -83,5 +86,5 @@ void SummaryPanel::SetContent(
 	m_coursesLabel->SetText(StringUtils::ToString(courses));
 	m_totalEarnLabel->SetText(std::string("$") + StringUtils::ToString(totalEarn));
 	m_totalCoursesLabel->SetText(StringUtils::ToString(totalCourses));
-	//bool m_record;
+	record ? m_recordLabel->SetVisible(true) : m_recordLabel->SetVisible(false);
 }

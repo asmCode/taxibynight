@@ -14,6 +14,7 @@
 #include "Player.h"
 #include "Billboard.h"
 #include "PlaceIndicator.h"
+#include "Label.h"
 #include <Audio/SoundManager.h>
 #include "HUD.h"
 
@@ -77,6 +78,12 @@ bool GameScreen::Initialize()
 	m_hud = HUD::Create(this);
 	m_pausePanel = PausePanel::Create(this);
 	m_pausePanel->Update(0, 0);
+
+	m_messageLabel = dynamic_cast<Label*>(m_hud->FindChild("message"));
+	m_penaltyLabel = dynamic_cast<Label*>(m_hud->FindChild("penalty"));
+
+	assert(m_messageLabel != NULL);
+	assert(m_penaltyLabel != NULL);
 
 	uint32_t screenWidth = TaxiGame::Environment::GetInstance()->GetScreenWidth();
 	uint32_t screenHeight = TaxiGame::Environment::GetInstance()->GetScreenHeight();
@@ -157,6 +164,24 @@ void GameScreen::Update(float time, float seconds)
 
 	//m_viewMatrix = m_manCam->GetViewMatrix();
 	camPosition = m_viewMatrix.GetInversed() * sm::Vec3(0, 0, 0);
+
+	m_messageLabel->SetVisible(true);
+	if (!Player::Instance->m_tutorialFinished && !Taxi::GetInstance()->IsOccupied())
+		m_messageLabel->SetText("Stop next to red guy");
+	else if (
+		!Player::Instance->m_tutorialFinished && Taxi::GetInstance()->IsOccupied() &&
+		(Taxi::GetInstance()->GetPassengerTarget() - Taxi::GetInstance()->GetPosition()).GetLength() > 15.0f)
+	{
+		m_messageLabel->SetText("Follow the red arrow");
+	}
+	else if (
+		!Player::Instance->m_tutorialFinished && Taxi::GetInstance()->IsOccupied() &&
+		(Taxi::GetInstance()->GetPassengerTarget() - Taxi::GetInstance()->GetPosition()).GetLength() <= 15.0f)
+	{
+		m_messageLabel->SetText("Stop next to red area");
+	}
+	else
+		m_messageLabel->SetVisible(false);
 
 	m_placeIndicator->Update(time, seconds, m_projMatrix * m_viewMatrix);
 	m_hud->Update(time, seconds);
@@ -308,6 +333,7 @@ void GameScreen::EndRound()
 		record = true;
 		Player::Instance->m_bestRoundIncome = m_pedsManager->m_totalMoney;
 	}
+	Player::Instance->m_tutorialFinished = true;
 	Player::Instance->Save();
 
 	m_gameController->ShowSummaryScreen(

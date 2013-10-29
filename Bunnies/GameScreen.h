@@ -14,6 +14,7 @@ class PlaceIndicator;
 class HUD;
 class GameController;
 class PausePanel;
+class Label;
 
 class GameScreen : public IScreen
 {
@@ -53,6 +54,9 @@ public:
 
 private:
 	static GameScreen *m_instance;
+
+	Label *m_messageLabel;
+	Label *m_penaltyLabel;
 
 	PausePanel *m_pausePanel;
 

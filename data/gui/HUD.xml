@@ -1,4 +1,6 @@
 <Panel name="hud" fill="true">
+	<Label font="fenix_18" name="message" align="top" text="Stop next to red guy" margin_top="130" />
+	
 	<AnimButton name="pause" align="top-left" margin_left="3" margin_top="3" width="260" height="151" image="taxometer" image_pushed="taxometer">
 		<Label color="255;0;0" font="digital_bold_24" name="time_left_value" align="top-right" text="00:00" size="1.0" margin_right="15" margin_top="86" />
 		<Label color="255;0;0" font="digital_bold_24" name="reward_value" align="top-right" text="0" size="1.0" margin_right="15" margin_top="28" />
@@ -12,4 +14,5 @@
 	
 	<Label font="fenix_26" name="total_money_label" align="top-right" text="Income:" margin_right="160" margin_top="10" />
 	<Label font="fenix_26" name="total_money_value" align="top-right" text="$0.00" margin_right="10" margin_top="10" />
+	<Label color="255;0;0" font="fenix_26" name="penalty" align="top-right" text="-$2.80" margin_top="50" margin_right="15" />
 </Panel>
