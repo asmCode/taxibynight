@@ -15,6 +15,7 @@
 #include <Utils/Randomizer.h>
 #include <Math/MathUtils.h>
 #include <Graphics/Content/Content.h>
+#include <Audio/SoundManager.h>
 #include <assert.h>
 
 #include <Graphics/OpenglPort.h>
@@ -73,20 +74,27 @@ void PedsManager::Update(float time, float seconds)
 			Ped *ped = GetFreePed();
 			if (ped != NULL)
 			{
-				ped->ResetPosition(m_taxiPosition);
+				ped->ResetPosition(m_taxiPosition + (Taxi::GetInstance()->GetPassengerTarget() - m_taxiPosition).GetNormalized() * 2.0f);
 				ped->SetTarget(Taxi::GetInstance()->GetPassengerTarget());
-				Taxi::GetInstance()->SetFree();
-				GameScreen::GetInstance()->SetFreeMode();
 
-				m_totalCourses++;
-				m_totalMoney += Taxi::GetInstance()->m_revard;
-
-				m_dollarsMultiplier += m_dollarsMultiplierStep;
-				m_secondsMultiplier -= m_secondsMultiplierStep;
-
-				if (m_secondsMultiplier < 0.0f)
-					m_secondsMultiplier = 0.0f;
+				ped->m_fadingToGray = 2.0f;
+				ped->m_speed = 1.0f;
 			}
+
+			SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Doors);
+			SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Money);
+
+			Taxi::GetInstance()->SetFree();
+			GameScreen::GetInstance()->SetFreeMode();
+
+			m_totalCourses++;
+			m_totalMoney += Taxi::GetInstance()->m_revard;
+
+			m_dollarsMultiplier += m_dollarsMultiplierStep;
+			m_secondsMultiplier -= m_secondsMultiplierStep;
+
+			if (m_secondsMultiplier < 0.0f)
+				m_secondsMultiplier = 0.0f;
 		}
 	}
 
@@ -102,6 +110,8 @@ void PedsManager::Update(float time, float seconds)
 		}
 		else if (distanceToTaxi < 1.0)
 		{
+			SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Doors);
+
 			Taxi::GetInstance()->SetOccupied(
 				m_pedApproaching->GetTripDestination(),
 				m_pedApproaching->GetCash(),

@@ -17,6 +17,7 @@ public:
 		Sound_Button,
 		Sound_Money,
 		Sound_Summary,
+		Sound_Doors,
 		
 		SoundsCount // always last
 	};

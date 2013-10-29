@@ -4,6 +4,7 @@
 #include "InterfaceProvider.h"
 #include "GameScreen.h"
 #include "Inflater.h"
+#include <Audio/SoundManager.h>
 //#include "MessageBox.h"
 //#include "SoundManager.h"
 
@@ -40,9 +41,15 @@ PausePanel *PausePanel::Create(GameScreen *gameScreen)
 void PausePanel::Clicked(Control *control, uint32_t x, uint32_t y)
 {
 	if (control->GetName() == "end")
+	{
+		SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Button);
 		m_gameScreen->EndRound();
+	}
 	if (control->GetName() == "resume")
+	{
+		SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Button);
 		m_gameScreen->Resume();
+	}
 }
 
 void PausePanel::OnDraw(float time, float seconds)

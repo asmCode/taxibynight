@@ -19,6 +19,7 @@
 
 Ped::Ped()
 {
+	m_fadingToGray = 0.0f;
 	m_speed = 1.0f;
 	Content *content = InterfaceProvider::GetContent();
 
@@ -82,6 +83,10 @@ void Ped::Update(float time, float seconds)
 		}
 	}
 
+	m_fadingToGray -= seconds;
+	if (m_fadingToGray < 0.0f)
+		m_fadingToGray = 0.0f;
+
 	m_transform =
 		sm::Matrix::TranslateMatrix(m_position) *
 		sm::Matrix::CreateLookAt(m_direction, sm::Vec3(0, 1, 0)) *
@@ -92,8 +97,11 @@ void Ped::Draw(float time, float seconds)
 {
 	sm::Vec3 color = m_color;
 
+	if (m_fadingToGray > 0.0f)
+		color = m_color * (1 - m_fadingToGray / 2.0f) + sm::Vec3(2, 0, 0) * (m_fadingToGray / 2.0f);
+
 	if (IsPassenger() && !Taxi::GetInstance()->IsOccupied())
-		color = sm::Vec3(1, 0, 0);
+		color = sm::Vec3(2, 0, 0);
 
 	DrawingRoutines::DrawPed(m_model->m_meshParts, m_transform, color);
 
@@ -113,15 +121,17 @@ const sm::Vec3& Ped::GetPosition() const
 
 void Ped::ResetPosition(const sm::Vec3 position)
 {
+	m_fadingToGray = 0.0f;
 	m_position = position;
 	m_target = position;
 
 	m_isPassenger = false;
 
 	Randomizer random;
-	float v = random.GetFloat(0.3f, 0.8f);
+	float v = random.GetFloat(0.5f, 1.2f);
 
 	m_color.Set(v, v, v);
+	//m_fadingToGray = 0.0f;
 }
 
 void Ped::SetToPassenger(

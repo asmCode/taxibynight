@@ -12,6 +12,7 @@
 #include <Graphics/TexPart.h>
 #include <Graphics/SpriteBatch.h>
 #include <Graphics/Content/Content.h>
+#include <Audio/SoundManager.h>
 #include <Utils/Log.h>
 //#include "MessageBox.h"
 //#include "SoundManager.h"
@@ -55,9 +56,15 @@ SummaryPanel *SummaryPanel::Create(GameController *gameController)
 void SummaryPanel::Clicked(Control *control, uint32_t x, uint32_t y)
 {
 	if (control == m_mainMenuButton)
+	{
+		SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Button);
 		m_gameController->ShowMainMenuScreen();
-	if (control == m_againButton)
+	}
+	else if (control == m_againButton)
+	{
+		SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Button);
 		m_gameController->ShowGameScreen();
+	}
 }
 
 void SummaryPanel::OnDraw(float time, float seconds)

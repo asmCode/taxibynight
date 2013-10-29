@@ -8,6 +8,7 @@
 #include "GameController.h"
 #include "PedsManager.h"
 #include "Inflater.h"
+#include <Audio/SoundManager.h>
 #include <Graphics/TexPart.h>
 #include <Graphics/Content/Content.h>
 #include <Utils/Log.h>
@@ -62,7 +63,10 @@ HUD *HUD::Create(GameScreen *gameScreen)
 void HUD::Clicked(Control *control, uint32_t x, uint32_t y)
 {
 	if (control->GetName() == "pause")
+	{
+		SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Button);
 		m_gameScreen->ShowPause();
+	}
 }
 
 void HUD::Pressed(Control *control, uint32_t x, uint32_t y)

@@ -32,5 +32,7 @@ private:
 	void HandlePress(int pointId, const sm::Vec2 &point);
 	void HandleRelease(int pointId, const sm::Vec2 &point);
 	void HandleMove(int pointId, const sm::Vec2 &point);
+
+	void Enter();
 };
 

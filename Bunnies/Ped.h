@@ -37,12 +37,11 @@ public:
 
 	float GetCash() const;
 	float GetTimeLimit() const;
+	float m_fadingToGray;
+	float m_speed;
 
 private:
 	sm::Matrix m_transform;
-
-	float m_speed;
-
 	float jumpVal;
 
 	sm::Vec3 m_color;

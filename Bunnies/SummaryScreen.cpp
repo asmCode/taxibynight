@@ -6,6 +6,7 @@
 #include "Environment.h"
 #include <Graphics/Content/Content.h>
 #include <Graphics/SpriteBatch.h>
+#include <Audio/SoundManager.h>
 
 SummaryScreen::SummaryScreen(GameController *gameController) :
 	m_gameController(gameController),
@@ -76,3 +77,7 @@ void SummaryScreen::SetStatistics(
 		record);
 }
 
+void SummaryScreen::Enter()
+{
+	SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Summary);
+}

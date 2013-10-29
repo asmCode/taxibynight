@@ -115,7 +115,7 @@ void Taxi::Update(float time, float seconds)
 	m_speed -= 5.0f * seconds;
 	m_speed = MathUtils::Clamp(m_speed, 0.0f, 12.0f);
 
-	SoundManager::GetInstance()->SetEnginePitch((m_speed / 12.0f) * 4.0f + 1.0f);
+	SoundManager::GetInstance()->SetEnginePitch((m_speed / 12.0f) * 1.0f + 1.0f);
 
 	m_wheelsAngle += 2.0f * m_turnValue * seconds;
 
