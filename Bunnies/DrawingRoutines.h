@@ -46,6 +46,7 @@ private:
 	static Shader *m_diffShader;
 	static Shader *m_pedShader;
 	static Shader *m_unlitShader;
+	static Shader *m_diffLightShader;
 
 	static float m_outlineWidth;
 	static sm::Vec3 m_lightPosition;
