@@ -25,6 +25,7 @@ public:
 	
 	void SetText(const std::string &text);
 	const std::string& GetText();
+	void SetColor(const Color &color);
 	
 	void OnUpdate(float time, float ms);
 	void OnDraw(float time, float ms);

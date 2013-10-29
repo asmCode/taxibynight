@@ -50,7 +50,7 @@ void PedsManager::Reset(const sm::Vec3 &taxiPosition)
 	m_totalMoney = 0.0f;
 
 	m_dollarsPerKm = 1.5f;
-	m_secondsPerKm = 15.0f;
+	m_secondsPerKm = 12.0f;
 	m_dollarsMultiplierStep = 0.10f;
 	m_secondsMultiplierStep = 0.05f;
 	m_dollarsMultiplier = 1.0f;
@@ -149,6 +149,12 @@ void PedsManager::Update(float time, float seconds)
 					m_pedApproaching = NULL;
 				m_peds[i]->Die();
 				SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Die);
+
+				float penalty = MathUtils::Min(m_totalMoney, m_dollarsPerKm * m_dollarsMultiplier * 0.2f);
+				m_totalMoney -= penalty;
+
+				if (penalty > 0)
+					GameScreen::GetInstance()->SetPenalty(-penalty);
 			}
 		}
 	}

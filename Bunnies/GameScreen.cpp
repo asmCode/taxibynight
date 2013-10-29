@@ -28,6 +28,7 @@
 #include <Graphics/SpriteBatch.h>
 #include <Graphics/Content/Content.h>
 #include <Utils/Log.h>
+#include <Utils/StringUtils.h>
 
 #include <Graphics/OpenglPort.h>
 
@@ -40,6 +41,10 @@ GameScreen::GameScreen(GameController *gameController) :
 	m_pedsManager(NULL),
 	m_isPaused(false)
 {
+	m_penaltyProgress = 0.0f;
+	m_penaltyTime = 1.6f;
+	m_penaltyValue = 0;
+
 	m_fps = 0;
 	m_currentFps = 0;
 	m_fpsCooldown = 0.0f;
@@ -124,10 +129,40 @@ void GameScreen::Draw(float time, float seconds)
 	else
 		m_hud->Draw(time, seconds);
 	InterfaceProvider::GetSpriteBatch()->End();
+
+	if (m_penaltyValue != 0.0f)
+	{
+		m_penaltyLabel->SetVisible(true);
+
+		m_penaltyLabel->SetMarginTop((int)(50.0f + (m_penaltyProgress / m_penaltyTime) * 50.0f));
+		m_penaltyLabel->SetColor(Color(255, 0, 0, (uint8_t)((1.0f - m_penaltyProgress / m_penaltyTime) * 255.0f)));
+	}
+	else
+	{
+		m_penaltyLabel->SetVisible(false);
+	}
+}
+
+void GameScreen::SetPenalty(float value)
+{
+	m_penaltyProgress = 0.0f;
+	m_penaltyValue = value;
+	m_penaltyLabel->SetText(std::string("$") + StringUtils::ToString(value));
+	m_penaltyLabel->SetMarginTop(50);
 }
 
 void GameScreen::Update(float time, float seconds)
 {
+	if (m_penaltyValue != 0.0f)
+	{
+		m_penaltyProgress += seconds;
+		if (m_penaltyProgress > m_penaltyTime)
+		{
+			m_penaltyProgress = 0.0f;
+			m_penaltyValue = 0.0f;
+		}
+	}
+
 	SimulatePress();
 
 	if (m_isPaused)
@@ -211,6 +246,10 @@ void GameScreen::Update(float time, float seconds)
 
 void GameScreen::Reset()
 {
+	m_penaltyProgress = 0.0f;
+	m_penaltyTime = 1.6f;
+	m_penaltyValue = 0;
+
 	m_pausePanel->SetVisible(false);
 	m_isPaused = false;
 	SetFreeMode();

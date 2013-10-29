@@ -59,3 +59,8 @@ void Label::RecalculateSize()
 	width = textSize.X;
 	height = textSize.Y;
 }
+
+void Label::SetColor(const Color &color)
+{
+	textColor = color;
+}

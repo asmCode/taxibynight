@@ -52,8 +52,15 @@ public:
 	void Enter();
 	void Leave();
 
+	float m_penaltyProgress;
+	float m_penaltyTime;
+	float m_penaltyValue;
+
+	void SetPenalty(float value);
+
 private:
 	static GameScreen *m_instance;
+
 
 	Label *m_messageLabel;
 	Label *m_penaltyLabel;
