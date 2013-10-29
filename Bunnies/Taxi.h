@@ -6,10 +6,13 @@
 class Model;
 class Mesh;
 class Texture;
+class BoxCollider;
 
 class Taxi
 {
 public:
+	BoxCollider *m_boxCollider;
+
 	Taxi();
 	~Taxi();
 
@@ -38,10 +41,10 @@ public:
 
 	void Reset();
 
-private:
-	static Taxi *m_instance;
-
 	sm::Matrix m_worldMatrix;
+
+public:
+	static Taxi *m_instance;
 
 	bool m_isOccupied;
 

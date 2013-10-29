@@ -59,6 +59,15 @@ Taxi::Taxi() :
 	m_boundsBottomRight.y = 0;
 	m_boundsTopRight.Set(m_boundsBottomRight.x, 0, m_boundsTopLeft.z);
 	m_boundsBottomLeft.Set(m_boundsTopLeft.x, 0, m_boundsBottomRight.z);
+
+	m_boxCollider = new BoxCollider(
+		(m_boundsTopLeft + m_boundsBottomRight) * 0.5f,
+		sm::Vec3(
+			m_boundsTopRight.x - m_boundsTopLeft.x,
+			0, 
+			m_boundsBottomRight.z - m_boundsTopRight.z));
+			
+
 }
 
 void Taxi::Reset()
@@ -209,7 +218,7 @@ void Taxi::Draw(float time, float seconds)
 
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	DrawingRoutines::DrawUnlit(m_shadow->m_meshParts, sm::Matrix::TranslateMatrix(-0.4f, 0, 0.4f) * m_worldMatrix);
+	DrawingRoutines::DrawUnlit(m_shadow->m_meshParts[0], sm::Matrix::TranslateMatrix(-0.4f, 0, 0.4f) * m_worldMatrix);
 	glDisable(GL_BLEND);
 }
 

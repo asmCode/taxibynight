@@ -8,6 +8,7 @@
 #include "Street.h"
 #include "Taxi.h"
 #include "GameScreen.h"
+#include "BoxCollider.h"
 
 #include <Graphics/Model.h>
 #include <Graphics/Mesh.h>
@@ -69,7 +70,7 @@ void PedsManager::Update(float time, float seconds)
 {
 	if (Taxi::GetInstance()->IsOccupied())
 	{
-		if ((Taxi::GetInstance()->GetPosition() - Taxi::GetInstance()->GetPassengerTarget()).GetLength() < 5.0)
+		if ((Taxi::GetInstance()->GetPosition() - Taxi::GetInstance()->GetPassengerTarget()).GetLength() < 5.0 && Taxi::GetInstance()->m_speed < 1.0f)
 		{
 			Ped *ped = GetFreePed();
 			if (ped != NULL)
@@ -103,12 +104,12 @@ void PedsManager::Update(float time, float seconds)
 		sm::Vec3 taxiDirection = m_taxiPosition - m_pedApproaching->GetPosition();
 		float distanceToTaxi = taxiDirection.GetLength();
 
-		if (!m_pedApproaching->IsTaxiInApproachRange(m_taxiPosition))
+		if (!m_pedApproaching->IsTaxiInApproachRange(m_taxiPosition) || Taxi::GetInstance()->m_speed > 1.0f)
 		{
 			m_pedApproaching->CancelApproach();
 			m_pedApproaching = NULL;
 		}
-		else if (distanceToTaxi < 1.0)
+		else if (distanceToTaxi < 1.8 && Taxi::GetInstance()->m_speed < 1.0f)
 		{
 			SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Doors);
 
@@ -132,23 +133,46 @@ void PedsManager::Update(float time, float seconds)
 		sm::Vec3 taxiDirection = m_taxiPosition - m_peds[i]->GetPosition();
 		float distanceToTaxi = taxiDirection.GetLength();
 
-		if (CanPassangerApproachTocar() && m_peds[i]->IsPassenger() && distanceToTaxi < 5.0f)
+		if (CanPassangerApproachTocar() && m_peds[i]->IsPassenger() && distanceToTaxi < 5.0f && !m_peds[i]->m_isDying)
 		{
 			NotifyApproachingToCar(m_peds[i]);
 			m_peds[i]->StartApproach();
 		}
 
 		m_peds[i]->Update(time, seconds);
+
+		if (!m_peds[i]->m_isDying)
+		{
+			if (Taxi::GetInstance()->m_boxCollider->CheckCollision(Taxi::GetInstance()->m_worldMatrix.GetInversed() * m_peds[i]->GetPosition()))
+			{
+				if (m_pedApproaching == m_peds[i])
+					m_pedApproaching = NULL;
+				m_peds[i]->Die();
+				SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Die);
+			}
+		}
 	}
 }
 
 void PedsManager::Draw(float time, float seconds)
 {
+	DrawingRoutines::DrawPedBegin(m_peds[0]->m_model->m_meshParts[0]);
+
 	for (uint32_t i = 0; i < MaxPeds; i++)
 	{
 		if (IsOnVisibleSegment(m_peds[i]))
 			m_peds[i]->Draw(time, seconds);
 	}
+
+	DrawingRoutines::DrawPedEnd();
+
+	DrawingRoutines::DrawUnlitBegin(m_peds[0]->m_shadow->m_meshParts[0]);
+	for (uint32_t i = 0; i < MaxPeds; i++)
+	{
+		if (IsOnVisibleSegment(m_peds[i]) && !m_peds[i]->m_isDying)
+			m_peds[i]->DrawShadow(time, seconds);
+	}
+	DrawingRoutines::DrawUnlitEnd();
 }
 
 //void GetRandomPedPosition(sm::Vec3 &position, sm::Vec3 &direction)

@@ -123,32 +123,51 @@ void DrawingRoutines::DrawStreet(Model *model, Texture *diffuseTexture, const sm
 	glDisableVertexAttribArray(3);
 }
 
-void DrawingRoutines::DrawUnlit(std::vector<MeshPart*> &meshParts, const sm::Matrix &worldMatrix)
+void DrawingRoutines::DrawUnlit(MeshPart* meshPart, const sm::Matrix &worldMatrix)
 {
 	glEnableVertexAttribArray(0); 
 	glEnableVertexAttribArray(1); 
 
 	m_unlitShader->UseProgram();
 	m_unlitShader->SetMatrixParameter("u_viewProjMatrix", m_viewProjMatrix);
-	m_unlitShader->SetTextureParameter("u_diffTex", 0, meshParts[0]->GetMaterial()->diffuseTex->GetId());
+	m_unlitShader->SetTextureParameter("u_diffTex", 0, meshPart->GetMaterial()->diffuseTex->GetId());
 
-	for (uint32_t i = 0; i < meshParts.size(); i++)
-	{
-		meshParts[i]->SetupVertexPointers();
+	meshPart->SetupVertexPointers();
 
-		m_unlitShader->SetMatrixParameter("u_worldMatrix", worldMatrix * meshParts[i]->mesh->Transform());
-		meshParts[i]->Draw();
-	}
+	m_unlitShader->SetMatrixParameter("u_worldMatrix", worldMatrix);
+	meshPart->Draw();
 
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);
 }
 
-void DrawingRoutines::DrawPed(std::vector<MeshPart*> &meshParts, const sm::Matrix &worldMatrix, sm::Vec3 color)
+void DrawingRoutines::DrawUnlitBegin(MeshPart* meshPart)
 {
-	glDepthMask(true);
+	glEnableVertexAttribArray(0); 
+	glEnableVertexAttribArray(1); 
+
+	m_unlitShader->UseProgram();
+	m_unlitShader->SetMatrixParameter("u_viewProjMatrix", m_viewProjMatrix);
+	m_unlitShader->SetTextureParameter("u_diffTex", 0, meshPart->GetMaterial()->diffuseTex->GetId());
+
+	meshPart->SetupVertexPointers();
+}
+
+void DrawingRoutines::DrawUnlitMany(MeshPart* meshPart, const sm::Matrix &worldMatrix)
+{
+	m_unlitShader->SetMatrixParameter("u_worldMatrix", worldMatrix);
+	meshPart->Draw();
+}
+
+void DrawingRoutines::DrawUnlitEnd()
+{
+	glDisableVertexAttribArray(0);
+	glDisableVertexAttribArray(1);
+}
+
+void DrawingRoutines::DrawPedBegin(MeshPart *meshPart)
+{
 	glEnable(GL_DEPTH_TEST);
-	glDisable(GL_BLEND);
 
 	glEnableVertexAttribArray(0); 
 	glEnableVertexAttribArray(1);
@@ -157,19 +176,23 @@ void DrawingRoutines::DrawPed(std::vector<MeshPart*> &meshParts, const sm::Matri
 	m_pedShader->UseProgram();
 	m_pedShader->SetMatrixParameter("u_viewProjMatrix", m_viewProjMatrix);
 	m_pedShader->SetParameter("u_lightPosition", m_lightPosition);
-	m_pedShader->SetParameter("u_color", color);
-	m_pedShader->SetTextureParameter("u_diffTex", 0, meshParts[0]->GetMaterial()->diffuseTex->GetId());
+	m_pedShader->SetTextureParameter("u_diffTex", 0, meshPart->GetMaterial()->diffuseTex->GetId());
 
-	for (uint32_t i = 0; i < meshParts.size(); i++)
-	{
-		meshParts[i]->SetupVertexPointers();
+	meshPart->SetupVertexPointers();
+}
 
-		m_pedShader->SetMatrixParameter("u_worldMatrix", worldMatrix * meshParts[i]->mesh->Transform());
-		meshParts[i]->Draw();
-	}
+void DrawingRoutines::DrawPedEnd()
+{
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);
 	glDisableVertexAttribArray(3);
+}
+
+void DrawingRoutines::DrawPed(MeshPart *meshPart, const sm::Matrix &worldMatrix, sm::Vec4 color)
+{
+	m_pedShader->SetParameter("u_color", color);
+	m_pedShader->SetMatrixParameter("u_worldMatrix", worldMatrix);
+	meshPart->Draw();
 }
 
 void DrawingRoutines::DrawSprite(Model *model, const sm::Matrix &viewMatrix, const sm::Matrix &worldMatrix)

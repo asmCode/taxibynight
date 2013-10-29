@@ -17,6 +17,7 @@ public:
 
 	void Update(float time, float seconds);
 	void Draw(float time, float seconds);
+	void DrawShadow(float time, float seconds);
 
 	void ResetPosition(const sm::Vec3 position);
 	const sm::Vec3& GetPosition() const;
@@ -40,7 +41,13 @@ public:
 	float m_fadingToGray;
 	float m_speed;
 
-private:
+	bool m_isDying;
+	float m_dieProgress;
+	float m_dieTime;
+
+	void Die();
+
+public:
 	sm::Matrix m_transform;
 	float jumpVal;
 

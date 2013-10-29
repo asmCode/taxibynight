@@ -18,6 +18,8 @@ public:
 		sm::Vec3 &collisionPoint,
 		sm::Vec3 &collisionNormal);
 
+	bool CheckCollision(const sm::Vec3 &point);
+
 private:
 	sm::Vec3 m_pivot;
 	sm::Vec3 m_size;

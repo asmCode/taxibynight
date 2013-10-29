@@ -128,3 +128,13 @@ bool BoxCollider::CheckCollision(const sm::Vec3 &bSeg,
 	
 	return true;
 }
+
+
+bool BoxCollider::CheckCollision(const sm::Vec3 &point)
+{
+	return
+		point.x > m_left &&
+		point.x < m_right &&
+		point.z > m_front &&
+		point.z < m_back;
+}

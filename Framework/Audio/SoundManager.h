@@ -18,6 +18,7 @@ public:
 		Sound_Money,
 		Sound_Summary,
 		Sound_Doors,
+		Sound_Die,
 		
 		SoundsCount // always last
 	};

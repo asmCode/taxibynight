@@ -15,20 +15,14 @@ namespace sm
 	class Matrix
 	{
 	public:
+		static Matrix Identity;
+		static Matrix CreateIdentityMatrix();
+
 		float a[16];
 
-		static Matrix IdentityMatrix()
+		static const Matrix& IdentityMatrix()
 		{
-			Matrix matrix;
-			
-			for (int i = 0; i < 16; i++)
-				if (i % 5 == 0)
-					matrix.a[i] = 1.0f;
-				else
-					matrix.a[i] = 0.0f;
-			
-			
-			return matrix;
+			return Identity;
 		}
 		
 		Matrix GetTransposed() const

@@ -19,10 +19,16 @@ public:
 	static void DrawDiff(Model *model, const sm::Matrix &viewMatrix, const sm::Matrix &worldMatrix);
 	static void DrawStreet(Model *model, Texture *diffuseTexture, const sm::Matrix &worldMatrix);
 	static void DrawWithMaterial(std::vector<MeshPart*> &meshParts, const sm::Matrix &worldMatrix);
-	static void DrawUnlit(std::vector<MeshPart*> &meshParts, const sm::Matrix &worldMatrix);
+	static void DrawUnlit(MeshPart* meshPart, const sm::Matrix &worldMatrix);
 	static void DrawSprite(Model *model, const sm::Matrix &viewMatrix, const sm::Matrix &worldMatrix);
 
-	static void DrawPed(std::vector<MeshPart*> &meshParts, const sm::Matrix &worldMatrix, sm::Vec3 color);
+	static void DrawUnlitBegin(MeshPart* meshPart);
+	static void DrawUnlitMany(MeshPart* meshPart, const sm::Matrix &worldMatrix);
+	static void DrawUnlitEnd();
+
+	static void DrawPedBegin(MeshPart *meshPart);
+	static void DrawPed(MeshPart *meshPart, const sm::Matrix &worldMatrix, sm::Vec4 color);
+	static void DrawPedEnd();
 
 	static void SetLightPosition(const sm::Vec3 &lightPosition);
 	static void SetEyePosition(const sm::Vec3 &eyePosition);

@@ -16,7 +16,8 @@ const std::string SoundManager::SoundFiles[] =
 	std::string("button.mp3"),
 	std::string("money.mp3"),
 	std::string("summary.mp3"),
-	std::string("doors.mp3")
+	std::string("doors.mp3"),
+	std::string("die.mp3")
 };
 
 SoundManager *SoundManager::GetInstance()
