@@ -77,6 +77,8 @@ void HUD::Pressed(Control *control, uint32_t x, uint32_t y)
 		m_gameScreen->TurnRightButtonPressed(true);
 	if (control->GetName() == "acc_pedal")
 		m_gameScreen->AccelerationButtonPressed(true);
+	if (control->GetName() == "brake_pedal")
+		m_gameScreen->BreakButtonPressed(true);
 }
 
 void HUD::Released(Control *control, uint32_t x, uint32_t y)
@@ -87,6 +89,8 @@ void HUD::Released(Control *control, uint32_t x, uint32_t y)
 		m_gameScreen->TurnRightButtonPressed(false);
 	if (control->GetName() == "acc_pedal")
 		m_gameScreen->AccelerationButtonPressed(false);
+	if (control->GetName() == "brake_pedal")
+		m_gameScreen->BreakButtonPressed(false);
 }
 
 void HUD::OnDraw(float time, float seconds)
