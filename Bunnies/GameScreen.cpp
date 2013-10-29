@@ -53,6 +53,9 @@ GameScreen::GameScreen(GameController *gameController) :
 
 	m_isTurnRightPressed = false;
 	m_isTurnLeftPressed = false;
+
+	m_isAccPressed = false;
+	m_isBrakePressed = false;
 }
 
 GameScreen::~GameScreen(void)
@@ -322,10 +325,26 @@ void GameScreen::TurnRightButtonPressed(bool isPressed)
 
 void GameScreen::AccelerationButtonPressed(bool isPressed)
 {
-	if (isPressed)
-		m_taxi->Accelerate(true);
-	else
-		m_taxi->Accelerate(false);
+	m_isAccPressed = isPressed;
+
+	if (!m_isAccPressed && !m_isBrakePressed)
+		m_taxi->SetAcceleration(0.0f);
+	else if (m_isAccPressed)
+		m_taxi->SetAcceleration(1.0f);
+	else if (m_isBrakePressed)
+		m_taxi->SetAcceleration(-1.0f);
+}
+
+void GameScreen::BreakButtonPressed(bool isPressed)
+{
+	m_isBrakePressed = isPressed;
+
+	if (!m_isAccPressed && !m_isBrakePressed)
+		m_taxi->SetAcceleration(0.0f);
+	else if (m_isAccPressed)
+		m_taxi->SetAcceleration(1.0f);
+	else if (m_isBrakePressed)
+		m_taxi->SetAcceleration(-1.0f);
 }
 
 void GameScreen::SimulatePress()
@@ -336,6 +355,10 @@ void GameScreen::SimulatePress()
 		AccelerationButtonPressed(true);
 	else
 		AccelerationButtonPressed(false);
+	if (GetAsyncKeyState(VK_DOWN) & 0x8000)
+		BreakButtonPressed(true);
+	else
+		BreakButtonPressed(false);
 
 	if (GetAsyncKeyState(VK_LEFT) & 0x8000)
 		TurnLeftButtonPressed(true);

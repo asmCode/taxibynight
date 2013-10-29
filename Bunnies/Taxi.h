@@ -20,7 +20,7 @@ public:
 	void Draw(float time, float seconds);
 
 	void SetTurn(float turnValue);
-	void Accelerate(bool accelerate);
+	void SetAcceleration(float acc);
 
 	const sm::Vec3& GetPosition() const;
 
@@ -49,7 +49,7 @@ public:
 	bool m_isOccupied;
 
 	float m_turnValue;
-	bool m_isAccelerating;
+	float m_acc;
 
 	Model *m_taxiModel;
 	Model *m_shadow;

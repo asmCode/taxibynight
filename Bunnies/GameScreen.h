@@ -44,6 +44,7 @@ public:
 	void TurnLeftButtonPressed(bool isPressed);
 	void TurnRightButtonPressed(bool isPressed);
 	void AccelerationButtonPressed(bool isPressed);
+	void BreakButtonPressed(bool isPressed);
 
 	void ShowPause();
 	void Resume();
@@ -73,6 +74,9 @@ private:
 
 	bool m_isTurnRightPressed;
 	bool m_isTurnLeftPressed;
+
+	bool m_isAccPressed;
+	bool m_isBrakePressed;
 
 	Street *m_street;
 	Taxi *m_taxi;

@@ -20,7 +20,7 @@ Taxi *Taxi::m_instance;
 
 Taxi::Taxi() :
 	m_turnValue(0.0f),
-	m_isAccelerating(false),
+	m_acc(0.0f),
 	m_speed(0.0f),
 	m_wheelsAngle(0.0f),
 	m_isOccupied(false)
@@ -83,7 +83,7 @@ void Taxi::Reset()
 	m_isOccupied = false;
 
 	m_wheelsAngle = 0.0f;
-	m_isAccelerating = false;
+	m_acc = 0.0f;
 	m_turnValue = 0.0f;
 	m_revard = 0.0f;
 	m_timeLeft = 0.0f;
@@ -116,15 +116,23 @@ void Taxi::Update(float time, float seconds)
 	sm::Matrix turnMatrix;
 	float pivotDistance = 0.0f;
 
-	if (m_isAccelerating)
+	m_speed += m_acc * 5.0f * seconds;
+
+	static float maxSpeed = 14.0f;
+
+	if (m_acc == 0.0f)
 	{
-		m_speed += 10.0f * seconds;
+		m_speed -= MathUtils::Min(MathUtils::Abs(m_speed), 8.0f * seconds) * MathUtils::Sign(m_speed);
 	}
 
-	m_speed -= 5.0f * seconds;
-	m_speed = MathUtils::Clamp(m_speed, 0.0f, 12.0f);
+	if (m_speed > 0.0f && m_acc == -1.0f)
+	{
+		m_speed -= MathUtils::Min(MathUtils::Abs(m_speed), 12.0f * seconds) * MathUtils::Sign(m_speed);
+	}
 
-	SoundManager::GetInstance()->SetEnginePitch((m_speed / 12.0f) * 1.0f + 1.0f);
+	m_speed = MathUtils::Clamp(m_speed, -maxSpeed / 4, maxSpeed);
+
+	SoundManager::GetInstance()->SetEnginePitch((MathUtils::Abs(m_speed) / maxSpeed) * 1.0f + 1.0f);
 
 	m_wheelsAngle += 2.0f * m_turnValue * seconds;
 
@@ -227,9 +235,9 @@ void Taxi::SetTurn(float turnValue)
 	m_turnValue = turnValue;
 }
 
-void Taxi::Accelerate(bool accelerate)
+void Taxi::SetAcceleration(float acc)
 {
-	m_isAccelerating = accelerate;
+	m_acc = acc;
 }
 
 const sm::Vec3& Taxi::GetPosition() const
