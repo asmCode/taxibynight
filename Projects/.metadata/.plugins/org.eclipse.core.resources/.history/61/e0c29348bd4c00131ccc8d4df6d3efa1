@@ -1,0 +1,11 @@
+precision mediump float;
+
+uniform sampler2D u_diffTex;
+
+varying vec2 o_coordsDiff;
+
+void main()
+{		
+	gl_FragColor = texture(u_diffTex, o_coordsDiff);
+}
+

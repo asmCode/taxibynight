@@ -1,0 +1,126 @@
+################################################################################
+# Automatically-generated file. Do not edit!
+################################################################################
+
+# Add inputs and outputs from these tool invocations to the build variables 
+CPP_SRCS += \
+../src/Bunnies/AnimButton.cpp \
+../src/Bunnies/Arrow.cpp \
+../src/Bunnies/Billboard.cpp \
+../src/Bunnies/BoxCollider.cpp \
+../src/Bunnies/Control.cpp \
+../src/Bunnies/DrawingRoutines.cpp \
+../src/Bunnies/Environment.cpp \
+../src/Bunnies/GameController.cpp \
+../src/Bunnies/GameProps.cpp \
+../src/Bunnies/GameScreen.cpp \
+../src/Bunnies/HUD.cpp \
+../src/Bunnies/InfectedBunniesFactory.cpp \
+../src/Bunnies/Inflater.cpp \
+../src/Bunnies/InterfaceProvider.cpp \
+../src/Bunnies/Label.cpp \
+../src/Bunnies/MainMenuPanel.cpp \
+../src/Bunnies/MainMenuScreen.cpp \
+../src/Bunnies/ManCam.cpp \
+../src/Bunnies/PausePanel.cpp \
+../src/Bunnies/Ped.cpp \
+../src/Bunnies/PedsManager.cpp \
+../src/Bunnies/PlaceIndicator.cpp \
+../src/Bunnies/Player.cpp \
+../src/Bunnies/SplashScreen.cpp \
+../src/Bunnies/SpritesMap.cpp \
+../src/Bunnies/Street.cpp \
+../src/Bunnies/StreetMap.cpp \
+../src/Bunnies/StreetPassenger.cpp \
+../src/Bunnies/StreetPiece.cpp \
+../src/Bunnies/StreetSegment.cpp \
+../src/Bunnies/SummaryPanel.cpp \
+../src/Bunnies/SummaryScreen.cpp \
+../src/Bunnies/Taxi.cpp \
+../src/Bunnies/ThrowTrajectory.cpp \
+../src/Bunnies/Ticker.cpp 
+
+OBJS += \
+./src/Bunnies/AnimButton.o \
+./src/Bunnies/Arrow.o \
+./src/Bunnies/Billboard.o \
+./src/Bunnies/BoxCollider.o \
+./src/Bunnies/Control.o \
+./src/Bunnies/DrawingRoutines.o \
+./src/Bunnies/Environment.o \
+./src/Bunnies/GameController.o \
+./src/Bunnies/GameProps.o \
+./src/Bunnies/GameScreen.o \
+./src/Bunnies/HUD.o \
+./src/Bunnies/InfectedBunniesFactory.o \
+./src/Bunnies/Inflater.o \
+./src/Bunnies/InterfaceProvider.o \
+./src/Bunnies/Label.o \
+./src/Bunnies/MainMenuPanel.o \
+./src/Bunnies/MainMenuScreen.o \
+./src/Bunnies/ManCam.o \
+./src/Bunnies/PausePanel.o \
+./src/Bunnies/Ped.o \
+./src/Bunnies/PedsManager.o \
+./src/Bunnies/PlaceIndicator.o \
+./src/Bunnies/Player.o \
+./src/Bunnies/SplashScreen.o \
+./src/Bunnies/SpritesMap.o \
+./src/Bunnies/Street.o \
+./src/Bunnies/StreetMap.o \
+./src/Bunnies/StreetPassenger.o \
+./src/Bunnies/StreetPiece.o \
+./src/Bunnies/StreetSegment.o \
+./src/Bunnies/SummaryPanel.o \
+./src/Bunnies/SummaryScreen.o \
+./src/Bunnies/Taxi.o \
+./src/Bunnies/ThrowTrajectory.o \
+./src/Bunnies/Ticker.o 
+
+CPP_DEPS += \
+./src/Bunnies/AnimButton.d \
+./src/Bunnies/Arrow.d \
+./src/Bunnies/Billboard.d \
+./src/Bunnies/BoxCollider.d \
+./src/Bunnies/Control.d \
+./src/Bunnies/DrawingRoutines.d \
+./src/Bunnies/Environment.d \
+./src/Bunnies/GameController.d \
+./src/Bunnies/GameProps.d \
+./src/Bunnies/GameScreen.d \
+./src/Bunnies/HUD.d \
+./src/Bunnies/InfectedBunniesFactory.d \
+./src/Bunnies/Inflater.d \
+./src/Bunnies/InterfaceProvider.d \
+./src/Bunnies/Label.d \
+./src/Bunnies/MainMenuPanel.d \
+./src/Bunnies/MainMenuScreen.d \
+./src/Bunnies/ManCam.d \
+./src/Bunnies/PausePanel.d \
+./src/Bunnies/Ped.d \
+./src/Bunnies/PedsManager.d \
+./src/Bunnies/PlaceIndicator.d \
+./src/Bunnies/Player.d \
+./src/Bunnies/SplashScreen.d \
+./src/Bunnies/SpritesMap.d \
+./src/Bunnies/Street.d \
+./src/Bunnies/StreetMap.d \
+./src/Bunnies/StreetPassenger.d \
+./src/Bunnies/StreetPiece.d \
+./src/Bunnies/StreetSegment.d \
+./src/Bunnies/SummaryPanel.d \
+./src/Bunnies/SummaryScreen.d \
+./src/Bunnies/Taxi.d \
+./src/Bunnies/ThrowTrajectory.d \
+./src/Bunnies/Ticker.d 
+
+
+# Each subdirectory must supply rules for building sources it contributes
+src/Bunnies/%.o: ../src/Bunnies/%.cpp
+	@echo 'Building file: $<'
+	@echo 'Invoking: C++ Compiler'
+	clang++ -I"pch" -D_DEBUG -I"/home/majak/taxibynight/Projects/TaxiByNight/inc" -I/home/majak/taxibynight/Ext -I"/home/majak/taxibynight/Projects/TaxiByNight/src/Framework" -O0 -g3 -Wall -c -fmessage-length=0 -target i386-tizen-linux-gnueabi -gcc-toolchain /home/majak/tizen-sdk/tools/smart-build-interface/../i386-linux-gnueabi-gcc-4.5/ -ccc-gcc-name i386-linux-gnueabi-g++ -march=i386 -Wno-gnu -fPIE --sysroot="/home/majak/tizen-sdk/platforms/tizen2.2/rootstraps/tizen-emulator-2.2.native" -I"/home/majak/tizen-sdk/platforms/tizen2.2/rootstraps/tizen-emulator-2.2.native/usr/include/libxml2" -I"/home/majak/tizen-sdk/library" -I"/home/majak/tizen-sdk/platforms/tizen2.2/rootstraps/tizen-emulator-2.2.native/usr/include" -I"/home/majak/tizen-sdk/platforms/tizen2.2/rootstraps/tizen-emulator-2.2.native/usr/include/osp" -D_APP_LOG -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o "$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+

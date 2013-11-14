@@ -1,0 +1,16 @@
+attribute vec3 a_position;
+attribute vec2 a_coords;
+
+uniform mat4 u_worldMatrix;
+uniform mat4 u_viewProjMatrix;
+
+varying vec2 o_coordsDiff;
+
+void main()
+{
+	o_coordsDiff = a_coords;
+	
+	vec4 worldPosition = u_worldMatrix * vec4(a_position, 1.0);
+
+	gl_Position = u_viewProjMatrix * worldPosition;
+}

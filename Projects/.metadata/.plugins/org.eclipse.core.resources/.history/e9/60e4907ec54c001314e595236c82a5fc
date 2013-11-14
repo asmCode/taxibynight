@@ -1,0 +1,99 @@
+################################################################################
+# Automatically-generated file. Do not edit!
+################################################################################
+
+# Add inputs and outputs from these tool invocations to the build variables 
+CPP_SRCS += \
+../src/Framework/Graphics/Animation.cpp \
+../src/Framework/Graphics/AnimationLoader.cpp \
+../src/Framework/Graphics/BoundingBox.cpp \
+../src/Framework/Graphics/BoundingSphere.cpp \
+../src/Framework/Graphics/Color.cpp \
+../src/Framework/Graphics/DepthTexture.cpp \
+../src/Framework/Graphics/FontLetter.cpp \
+../src/Framework/Graphics/FontRenderer.cpp \
+../src/Framework/Graphics/Framebuffer.cpp \
+../src/Framework/Graphics/GraphicsEngineFactory.cpp \
+../src/Framework/Graphics/GraphicsEngineWin.cpp \
+../src/Framework/Graphics/Image.cpp \
+../src/Framework/Graphics/ImageUtils.cpp \
+../src/Framework/Graphics/Material.cpp \
+../src/Framework/Graphics/MaterialLoader.cpp \
+../src/Framework/Graphics/Mesh.cpp \
+../src/Framework/Graphics/MeshPart.cpp \
+../src/Framework/Graphics/Model.cpp \
+../src/Framework/Graphics/ModelLoader.cpp \
+../src/Framework/Graphics/Shader.cpp \
+../src/Framework/Graphics/SpriteAnim.cpp \
+../src/Framework/Graphics/SpriteBatch.cpp \
+../src/Framework/Graphics/TexPart.cpp \
+../src/Framework/Graphics/Texture.cpp \
+../src/Framework/Graphics/TextureLoader.cpp \
+../src/Framework/Graphics/VertexInformation.cpp 
+
+OBJS += \
+./src/Framework/Graphics/Animation.o \
+./src/Framework/Graphics/AnimationLoader.o \
+./src/Framework/Graphics/BoundingBox.o \
+./src/Framework/Graphics/BoundingSphere.o \
+./src/Framework/Graphics/Color.o \
+./src/Framework/Graphics/DepthTexture.o \
+./src/Framework/Graphics/FontLetter.o \
+./src/Framework/Graphics/FontRenderer.o \
+./src/Framework/Graphics/Framebuffer.o \
+./src/Framework/Graphics/GraphicsEngineFactory.o \
+./src/Framework/Graphics/GraphicsEngineWin.o \
+./src/Framework/Graphics/Image.o \
+./src/Framework/Graphics/ImageUtils.o \
+./src/Framework/Graphics/Material.o \
+./src/Framework/Graphics/MaterialLoader.o \
+./src/Framework/Graphics/Mesh.o \
+./src/Framework/Graphics/MeshPart.o \
+./src/Framework/Graphics/Model.o \
+./src/Framework/Graphics/ModelLoader.o \
+./src/Framework/Graphics/Shader.o \
+./src/Framework/Graphics/SpriteAnim.o \
+./src/Framework/Graphics/SpriteBatch.o \
+./src/Framework/Graphics/TexPart.o \
+./src/Framework/Graphics/Texture.o \
+./src/Framework/Graphics/TextureLoader.o \
+./src/Framework/Graphics/VertexInformation.o 
+
+CPP_DEPS += \
+./src/Framework/Graphics/Animation.d \
+./src/Framework/Graphics/AnimationLoader.d \
+./src/Framework/Graphics/BoundingBox.d \
+./src/Framework/Graphics/BoundingSphere.d \
+./src/Framework/Graphics/Color.d \
+./src/Framework/Graphics/DepthTexture.d \
+./src/Framework/Graphics/FontLetter.d \
+./src/Framework/Graphics/FontRenderer.d \
+./src/Framework/Graphics/Framebuffer.d \
+./src/Framework/Graphics/GraphicsEngineFactory.d \
+./src/Framework/Graphics/GraphicsEngineWin.d \
+./src/Framework/Graphics/Image.d \
+./src/Framework/Graphics/ImageUtils.d \
+./src/Framework/Graphics/Material.d \
+./src/Framework/Graphics/MaterialLoader.d \
+./src/Framework/Graphics/Mesh.d \
+./src/Framework/Graphics/MeshPart.d \
+./src/Framework/Graphics/Model.d \
+./src/Framework/Graphics/ModelLoader.d \
+./src/Framework/Graphics/Shader.d \
+./src/Framework/Graphics/SpriteAnim.d \
+./src/Framework/Graphics/SpriteBatch.d \
+./src/Framework/Graphics/TexPart.d \
+./src/Framework/Graphics/Texture.d \
+./src/Framework/Graphics/TextureLoader.d \
+./src/Framework/Graphics/VertexInformation.d 
+
+
+# Each subdirectory must supply rules for building sources it contributes
+src/Framework/Graphics/%.o: ../src/Framework/Graphics/%.cpp
+	@echo 'Building file: $<'
+	@echo 'Invoking: C++ Compiler'
+	clang++ -I"pch" -D_DEBUG -I"/home/majak/taxibynight/Projects/TaxiByNight/inc" -I/home/majak/taxibynight/Ext -I"/home/majak/taxibynight/Projects/TaxiByNight/src/Framework" -O0 -g3 -Wall -c -fmessage-length=0 -target i386-tizen-linux-gnueabi -gcc-toolchain /home/majak/tizen-sdk/tools/smart-build-interface/../i386-linux-gnueabi-gcc-4.5/ -ccc-gcc-name i386-linux-gnueabi-g++ -march=i386 -Wno-gnu -fPIE --sysroot="/home/majak/tizen-sdk/platforms/tizen2.2/rootstraps/tizen-emulator-2.2.native" -I"/home/majak/tizen-sdk/platforms/tizen2.2/rootstraps/tizen-emulator-2.2.native/usr/include/libxml2" -I"/home/majak/tizen-sdk/library" -I"/home/majak/tizen-sdk/platforms/tizen2.2/rootstraps/tizen-emulator-2.2.native/usr/include" -I"/home/majak/tizen-sdk/platforms/tizen2.2/rootstraps/tizen-emulator-2.2.native/usr/include/osp" -D_APP_LOG -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o "$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+
