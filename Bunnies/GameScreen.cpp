@@ -1,6 +1,7 @@
 #include "GameScreen.h"
 
 #include "PedsManager.h"
+#include "TrafficManager.h"
 #include "InterfaceProvider.h"
 #include "Environment.h"
 #include "GameProps.h"
@@ -39,6 +40,7 @@ GameScreen::GameScreen(GameController *gameController) :
 	m_street(NULL),
 	m_taxi(NULL),
 	m_pedsManager(NULL),
+	m_trafficManager(NULL),
 	m_isPaused(false)
 {
 	m_penaltyProgress = 0.0f;
@@ -80,6 +82,9 @@ bool GameScreen::Initialize()
 	m_street = new Street(m_pedsManager);
 	m_street->SetInitialVisibility(m_taxi->GetPosition());
 
+	m_trafficManager = new TrafficManager();
+	m_trafficManager->Initialize();
+
 	m_arrow = new Arrow();
 	m_placeIndicator = new PlaceIndicator();
 
@@ -119,6 +124,7 @@ void GameScreen::Draw(float time, float seconds)
 	m_street->Draw(time, seconds);
 	m_taxi->Draw(time, seconds);
 	m_pedsManager->Draw(time, seconds);
+	m_trafficManager->Draw(time, seconds);
 	if (!m_isPaused)
 		m_arrow->Draw(time, seconds);
 	m_placeIndicator->Draw(time, seconds);
@@ -182,6 +188,8 @@ void GameScreen::Update(float time, float seconds)
 	m_pedsManager->SetTaxiPosition(m_taxi->GetPosition());
 	m_pedsManager->Update(time, seconds);
 
+	m_trafficManager->Update(time, seconds);
+
 	if (m_taxi->IsOccupied())
 	{
 		m_arrow->SetDirection((m_taxi->GetPassengerTarget() - m_taxi->GetPosition()).GetNormalized());
@@ -192,7 +200,7 @@ void GameScreen::Update(float time, float seconds)
 
 	sm::Vec3 taxiPosition = m_taxi->GetPosition();
 	taxiPosition.y = 0.0f;
-	sm::Vec3 camPosition = taxiPosition + sm::Vec3(0, 13, -4);
+	sm::Vec3 camPosition = taxiPosition + sm::Vec3(0, 43, -4); // CHANGE
 	sm::Vec3 camLook = (camPosition - (taxiPosition + sm::Vec3(0, 0, +2))).GetNormalized();
 	m_viewMatrix =
 		sm::Matrix::TranslateMatrix(camPosition) *
@@ -350,7 +358,6 @@ void GameScreen::BreakButtonPressed(bool isPressed)
 void GameScreen::SimulatePress()
 {
 #if 1
-
 	if (GetAsyncKeyState(VK_UP) & 0x8000)
 		AccelerationButtonPressed(true);
 	else

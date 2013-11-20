@@ -78,9 +78,11 @@ bool GameController::InitializeGraphics(const std::string &basePath)
 	return true;
 }
 
-bool GameController::Initialize()
+bool GameController::Initialize(ISystemUtils *systemUtils)
 {
 	Log::StartLog(true, false, false);
+
+	m_systemUtils = systemUtils;
 
 	srand(time(NULL));
 
@@ -206,5 +208,34 @@ void GameController::ShowSummaryScreen(
 bool GameController::proto_IsInGame()
 {
 	return dynamic_cast<GameScreen*>(m_activeScreen) != NULL;
+}
+
+void GameController::HandleEnterForeground()
+{
+	SoundManager::GetInstance()->PlayMusic();
+
+	if (m_activeScreen == m_gameScreen)
+		SoundManager::GetInstance()->StartEngine();
+}
+
+void GameController::HandleEnterBackground()
+{
+	SoundManager::GetInstance()->StopMusic();
+
+	if (m_activeScreen == m_gameScreen)
+		SoundManager::GetInstance()->StopEngine();
+}
+
+void GameController::HandleBackButton()
+{
+	if (m_activeScreen == m_mainMenuScreen)
+		m_systemUtils->QuitApplication();
+	else if (m_activeScreen == m_gameScreen)
+		m_gameScreen->ShowPause();
+}
+
+void GameController::HandleMenukButton()
+{
+
 }
 

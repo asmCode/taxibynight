@@ -16,8 +16,8 @@ SteerCamera::SteerCamera()
 //	GetCursorPos(&lastPos);
 
 //	lastMousePos = new POINT();
-	lastMousePos ->x = 0;
-	lastMousePos ->y = 0;
+	//lastMousePos ->x = 0;
+	//lastMousePos ->y = 0;
 }
 
 SteerCamera::~SteerCamera()

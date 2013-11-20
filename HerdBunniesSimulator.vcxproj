@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -21,14 +21,14 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>NotSet</CharacterSet>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -88,9 +88,11 @@
     <ClInclude Include="Bunnies\AnimButton.h" />
     <ClInclude Include="Bunnies\Arrow.h" />
     <ClInclude Include="Bunnies\Billboard.h" />
+    <ClInclude Include="Bunnies\Car.h" />
     <ClInclude Include="Bunnies\PausePanel.h" />
     <ClInclude Include="Bunnies\Player.h" />
     <ClInclude Include="Bunnies\BoxCollider.h" />
+    <ClInclude Include="Bunnies\StreetPath.h" />
     <ClInclude Include="Bunnies\SummaryScreen.h" />
     <ClInclude Include="Bunnies\SummaryPanel.h" />
     <ClInclude Include="Bunnies\Inflater.h" />
@@ -123,6 +125,7 @@
     <ClInclude Include="Bunnies\Taxi.h" />
     <ClInclude Include="Bunnies\ThrowTrajectory.h" />
     <ClInclude Include="Bunnies\Ticker.h" />
+    <ClInclude Include="Bunnies\TrafficManager.h" />
     <ClInclude Include="Framework\Audio\AlAudioPlayer.h" />
     <ClInclude Include="Framework\Audio\AudioPlayerFactory.h" />
     <ClInclude Include="Framework\Audio\BassPlayer.h" />
@@ -209,9 +212,11 @@
     <ClCompile Include="Bunnies\AnimButton.cpp" />
     <ClCompile Include="Bunnies\Arrow.cpp" />
     <ClCompile Include="Bunnies\Billboard.cpp" />
+    <ClCompile Include="Bunnies\Car.cpp" />
     <ClCompile Include="Bunnies\PausePanel.cpp" />
     <ClCompile Include="Bunnies\Player.cpp" />
     <ClCompile Include="Bunnies\BoxCollider.cpp" />
+    <ClCompile Include="Bunnies\StreetPath.cpp" />
     <ClCompile Include="Bunnies\SummaryScreen.cpp" />
     <ClCompile Include="Bunnies\SummaryPanel.cpp" />
     <ClCompile Include="Bunnies\Inflater.cpp" />
@@ -241,6 +246,7 @@
     <ClCompile Include="Bunnies\Taxi.cpp" />
     <ClCompile Include="Bunnies\ThrowTrajectory.cpp" />
     <ClCompile Include="Bunnies\Ticker.cpp" />
+    <ClCompile Include="Bunnies\TrafficManager.cpp" />
     <ClCompile Include="Ext\tinyxml\tinyxml2.cpp" />
     <ClCompile Include="Framework\Audio\AlAudioPlayer.cpp" />
     <ClCompile Include="Framework\Audio\AudioPlayerFactory.cpp" />
@@ -287,20 +293,10 @@
     <ClCompile Include="Framework\XML\XMLNode.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="data\shaders\CelShading.fpr" />
-    <None Include="data\shaders\CelShading.vpr" />
-    <None Include="data\shaders\CelShadingMutating.fpr" />
-    <None Include="data\shaders\CelShadingMutating.vpr" />
     <None Include="data\shaders\Diff.fpr" />
     <None Include="data\shaders\Diff.vpr" />
     <None Include="data\shaders\DiffTex.fpr" />
     <None Include="data\shaders\DiffTex.vpr" />
-    <None Include="data\shaders\Grass.fpr" />
-    <None Include="data\shaders\Grass.vpr" />
-    <None Include="data\shaders\Outline.fpr" />
-    <None Include="data\shaders\Outline.vpr" />
-    <None Include="data\shaders\OutlineMutating.fpr" />
-    <None Include="data\shaders\OutlineMutating.vpr" />
     <None Include="data\shaders\sprite.fpr" />
     <None Include="data\shaders\sprite.vpr" />
   </ItemGroup>

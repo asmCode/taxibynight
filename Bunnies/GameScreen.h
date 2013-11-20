@@ -9,6 +9,7 @@ class ManCam;
 class Taxi;
 class FontRenderer;
 class PedsManager;
+class TrafficManager;
 class Arrow;
 class PlaceIndicator;
 class HUD;
@@ -62,7 +63,6 @@ public:
 private:
 	static GameScreen *m_instance;
 
-
 	Label *m_messageLabel;
 	Label *m_penaltyLabel;
 
@@ -81,6 +81,7 @@ private:
 	Street *m_street;
 	Taxi *m_taxi;
 	PedsManager *m_pedsManager;
+	TrafficManager *m_trafficManager;
 	Arrow *m_arrow;
 	PlaceIndicator *m_placeIndicator;
 	HUD *m_hud;

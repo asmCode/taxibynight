@@ -40,13 +40,16 @@ public:
 	void Draw(const sm::Matrix &transform);
 
 	bool HasPavement() const;
+	bool HasRoad() const;
 	bool IsCollider() const;
+	PieceType GetType() const;
 
 	const sm::Matrix& GetTransform() const;
 
+	Model *m_model;
+
 private:
 	PieceType m_pieceType;
-	Model *m_model;
 	Texture *m_texture;
 	sm::Matrix m_world;
 };

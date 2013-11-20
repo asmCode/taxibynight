@@ -202,7 +202,7 @@ bool Shader::ValidateProgram(GLuint programId)
 			GLchar *_log = new GLchar[logLength];
 			glGetProgramInfoLog(programId, logLength, &logLength, _log);
 			printf("validate log: %s\n", _log);
-			delete _log;
+			delete [] _log;
 			assert(false);
 		}
 	}    

@@ -26,8 +26,17 @@ Street::Street(PedsManager *pedsManager)
 
 	Content *content = InterfaceProvider::GetContent();
 
-	m_streetModel = content->Get<Model>("street");
+	m_streetModel = content->Get<Model>("street_straight");
 	assert(m_streetModel != NULL);
+
+	Model *streetTurn = content->Get<Model>("street_turn");
+	assert(streetTurn != NULL);
+
+	Model *streetTCross = content->Get<Model>("street_t_cross");
+	assert(streetTCross != NULL);
+
+	Model *streetCross = content->Get<Model>("street_cross");
+	assert(streetCross != NULL);
 
 	m_skycrapper1 = content->Get<Model>("skycrapper01");
 	assert(m_skycrapper1 != NULL);
@@ -69,55 +78,55 @@ Street::Street(PedsManager *pedsManager)
 
 	m_streetPieces[StreetPiece::PieceType_TurnUpRight_1] = new StreetPiece(
 		StreetPiece::PieceType_TurnUpRight_1,
-		m_streetModel,
+		streetTurn,
 		content->Get<Texture>("street_1_turn"),
 		sm::Matrix::RotateAxisMatrix(MathUtils::PI2, 0, 1, 0));
 
 	m_streetPieces[StreetPiece::PieceType_TurnUpLeft_1] = new StreetPiece(
 		StreetPiece::PieceType_TurnUpLeft_1,
-		m_streetModel,
+		streetTurn,
 		content->Get<Texture>("street_1_turn"),
 		sm::Matrix::RotateAxisMatrix(MathUtils::PI, 0, 1, 0));
 
 	m_streetPieces[StreetPiece::PieceType_TurnDownRight_1] = new StreetPiece(
 		StreetPiece::PieceType_TurnDownRight_1,
-		m_streetModel,
+		streetTurn,
 		content->Get<Texture>("street_1_turn"),
 		sm::Matrix::IdentityMatrix());
 
 	m_streetPieces[StreetPiece::PieceType_TurnDownLeft_1] = new StreetPiece(
 		StreetPiece::PieceType_TurnDownLeft_1,
-		m_streetModel,
+		streetTurn,
 		content->Get<Texture>("street_1_turn"),
 		sm::Matrix::RotateAxisMatrix(-MathUtils::PI2, 0, 1, 0));
 
 	m_streetPieces[StreetPiece::PieceType_TUp_1] = new StreetPiece(
 		StreetPiece::PieceType_TUp_1,
-		m_streetModel,
+		streetTCross,
 		content->Get<Texture>("street_1_t"),
 		sm::Matrix::RotateAxisMatrix(MathUtils::PI, 0, 1, 0));
 
 	m_streetPieces[StreetPiece::PieceType_TDown_1] = new StreetPiece(
 		StreetPiece::PieceType_TDown_1,
-		m_streetModel,
+		streetTCross,
 		content->Get<Texture>("street_1_t"),
 		sm::Matrix::ScaleMatrix(1, 1, 1));
 
 	m_streetPieces[StreetPiece::PieceType_TLeft_1] = new StreetPiece(
 		StreetPiece::PieceType_TLeft_1,
-		m_streetModel,
+		streetTCross,
 		content->Get<Texture>("street_1_t"),
 		sm::Matrix::RotateAxisMatrix(MathUtils::PI2, 0, 1, 0));
 
 	m_streetPieces[StreetPiece::PieceType_TRight_1] = new StreetPiece(
 		StreetPiece::PieceType_TRight_1,
-		m_streetModel,
+		streetTCross,
 		content->Get<Texture>("street_1_t"),
 		sm::Matrix::RotateAxisMatrix(-MathUtils::PI2, 0, 1, 0));
 
 	m_streetPieces[StreetPiece::PieceType_Cross_1] = new StreetPiece(
 		StreetPiece::PieceType_Cross_1,
-		m_streetModel,
+		streetCross,
 		content->Get<Texture>("street_1_cross"),
 		sm::Matrix::IdentityMatrix());
 
@@ -175,6 +184,9 @@ Street::Street(PedsManager *pedsManager)
 				m_pavementSegments.push_back(m_streetSegments[index]);
 		}
 	}
+
+	for (int i = 0; i < m_streetMap->GetWidth() * m_streetMap->GetHeight(); i++)
+		m_streetSegments[i]->InitializePaths();
 }
 
 Street::~Street()
