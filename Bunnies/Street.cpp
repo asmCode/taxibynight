@@ -2,6 +2,7 @@
 #include "StreetPiece.h"
 #include "StreetSegment.h"
 #include "PedsManager.h"
+#include "TrafficManager.h"
 #include "DrawingRoutines.h"
 #include "InterfaceProvider.h"
 #include "StreetMap.h"
@@ -19,7 +20,8 @@
 
 Street *Street::Instance;
 
-Street::Street(PedsManager *pedsManager)
+Street::Street(PedsManager *pedsManager, TrafficManager* trafficManager) :
+	m_trafficManager(trafficManager)
 {
 	Instance = this;
 	m_pedsManager = pedsManager;
@@ -239,7 +241,10 @@ void Street::Update(float time, float seconds)
 	}
 
 	for (uint32_t i = 0; i < segmentsChanged.size(); i++)
+	{
 		m_pedsManager->NotifyStreetSegmentVisibilityChanged(segmentsChanged[i]);
+		m_trafficManager->NotifyStreetSegmentVisibilityChanged(segmentsChanged[i]);
+	}
 
 	/*if (ix > m_lastTaxiSegment->CoordX() && ix < m_streetMap->GetWidth() - Range)
 	{

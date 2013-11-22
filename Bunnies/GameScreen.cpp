@@ -79,11 +79,12 @@ bool GameScreen::Initialize()
 
 	m_taxi = new Taxi();
 	m_pedsManager = new PedsManager(m_taxi->GetPosition());
-	m_street = new Street(m_pedsManager);
-	m_street->SetInitialVisibility(m_taxi->GetPosition());
 
 	m_trafficManager = new TrafficManager();
 	m_trafficManager->Initialize();
+
+	m_street = new Street(m_pedsManager, m_trafficManager);
+	m_street->SetInitialVisibility(m_taxi->GetPosition());
 
 	m_arrow = new Arrow();
 	m_placeIndicator = new PlaceIndicator();

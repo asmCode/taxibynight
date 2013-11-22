@@ -112,6 +112,11 @@ void Car::GetNewDestination(bool atTheEdge)
 	m_destination = m_streetPath.GetNextPosition();
 }
 
+const sm::Vec3& Car::GetPosition() const
+{
+	return m_position;
+}
+
 const sm::Matrix& Car::GetWorldMatrix() const
 {
 	return m_worldMatrix;

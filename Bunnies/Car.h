@@ -16,6 +16,8 @@ public:
 	void SetInactive();
 	bool IsActive() const;
 
+	const sm::Vec3& GetPosition() const;
+
 	const sm::Matrix& GetWorldMatrix() const;
 
 private:

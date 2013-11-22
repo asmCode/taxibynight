@@ -11,13 +11,14 @@ class StreetMap;
 class StreetPiece;
 class StreetSegment;
 class PedsManager;
+class TrafficManager;
 
 class Street
 {
 public:
 	static Street *Instance;
 
-	Street(PedsManager *pedsManager);
+	Street(PedsManager *pedsManager, TrafficManager* trafficManager);
 	~Street();
 
 	void Update(float time, float seconds);
@@ -40,6 +41,7 @@ private:
 	static const int Range = 2;
 
 	PedsManager *m_pedsManager;
+	TrafficManager *m_trafficManager;
 
 	sm::Vec3 m_taxiPosition;
 	Model *m_streetModel;
