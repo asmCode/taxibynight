@@ -21,14 +21,13 @@ public:
 	void NotifyStreetSegmentVisibilityChanged(StreetSegment *streetSegment);
 
 private:
-	static const int MaxCars = 10;
+	static const int MaxCars = 1;
 
 	int m_activeCarsCount;
 
 	Car* m_cars[MaxCars];
 
 	Model *m_carModel;
-	BoxCollider *m_carCollider;
 
 	bool IsOnVisibleSegment(Car *car);
 

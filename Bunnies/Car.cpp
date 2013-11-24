@@ -3,14 +3,17 @@
 #include "StreetSegment.h"
 #include "StreetPiece.h"
 #include "StreetLights.h"
+#include "BoxCollider.h"
+#include "CollisionManager.h"
 #include <Math/MathUtils.h>
 
-Car::Car() :
+Car::Car(BoxCollider* boxCollider) :
 	m_isActive(false),
 	m_worldMatrix(sm::Matrix::Identity),
 	m_speed(0.0f),
 	m_acceleration(0.0f),
-	m_maxSpeed(30.0f)
+	m_maxSpeed(30.0f),
+	m_boxCollider(boxCollider)
 {
 }
 
@@ -111,6 +114,14 @@ void Car::DriveToDestination(float seconds)
 	m_worldMatrix =
 		sm::Matrix::TranslateMatrix(m_position) *
 		sm::Matrix::CreateLookAt(direction, sm::Vec3(0, 1, 0));
+
+	m_boxCollider->SetTransform(m_worldMatrix);
+
+	if (CollisionManager::GetInstance()->CheckCollision(this))
+	{
+		int chuj = 0;
+		chuj++;
+	}
 }
 
 void Car::GetNewDestination(bool atTheEdge)
@@ -137,4 +148,9 @@ const sm::Vec3& Car::GetPosition() const
 const sm::Matrix& Car::GetWorldMatrix() const
 {
 	return m_worldMatrix;
+}
+
+const Collider* Car::GetCollider() const
+{
+	return m_boxCollider;
 }

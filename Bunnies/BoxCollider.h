@@ -1,10 +1,11 @@
 #ifndef BOX_COLLIDER
 #define BOX_COLLIDER
 
+#include "Collider.h"
 #include <Math/Vec3.h>
 #include <Math/Matrix.h>
 
-class BoxCollider
+class BoxCollider : public Collider
 {
 public:
 	BoxCollider(const sm::Vec3 &pivot, const sm::Vec3 &size);
@@ -20,6 +21,10 @@ public:
 
 	bool CheckCollision(const sm::Vec3 &point);
 
+	ColliderType GetColliderType() const;
+
+	bool CheckCollision(const Collider* collider) const;
+
 private:
 	sm::Vec3 m_pivot;
 	sm::Vec3 m_size;
@@ -28,6 +33,8 @@ private:
 	float m_right;
 	float m_front;
 	float m_back;
+
+	float m_radius;
 };
 
 #endif // BOX_COLLIDER

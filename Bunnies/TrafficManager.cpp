@@ -7,6 +7,7 @@
 #include "Street.h"
 #include "InterfaceProvider.h"
 #include "Taxi.h"
+#include "CollisionManager.h"
 #include <Graphics/Model.h>
 #include <Graphics/Content/Content.h>
 
@@ -23,11 +24,6 @@ TrafficManager::~TrafficManager()
 
 bool TrafficManager::Initialize()
 {
-	for (int i = 0; i < MaxCars; i++)
-	{
-		m_cars[i] = new Car();
-	}
-
 	Content *content = InterfaceProvider::GetContent();
 
 	m_carModel = content->Get<Model>("car01");
@@ -35,13 +31,22 @@ bool TrafficManager::Initialize()
 
 	BoundingBox bbox = m_carModel->m_bbox;
 
-	m_carCollider = new BoxCollider(bbox.center, sm::Vec3(bbox.m_width, bbox.m_height, bbox.m_depth));
+	for (int i = 0; i < MaxCars; i++)
+	{
+		BoxCollider* carCollider = new BoxCollider(bbox.center, sm::Vec3(bbox.m_width, bbox.m_height, bbox.m_depth));
+		m_cars[i] = new Car(carCollider);
+
+		CollisionManager::GetInstance()->AddColliderHolder(m_cars[i]);
+	}
 
 	return true;
 }
 
 void TrafficManager::Update(float time, float seconds)
 {
+	if (m_activeCarsCount == 0)
+		ActivateCar(m_cars[0], Taxi::GetInstance()->GetPosition());
+
 	for (int i = 0; i < MaxCars; i++)
 	{
 		if (!m_cars[i]->IsActive())
@@ -105,7 +110,7 @@ bool TrafficManager::IsOnVisibleSegment(Car *car)
 
 void TrafficManager::ActivateCar(Car *car, const sm::Vec3& position)
 {
-	if (m_activeCarsCount == MaxCars - 1)
+	if (m_activeCarsCount == MaxCars)
 		return;
 
 	car->SetActive(position);

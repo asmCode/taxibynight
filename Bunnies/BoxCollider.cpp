@@ -9,6 +9,8 @@ BoxCollider::BoxCollider(const sm::Vec3 &pivot, const sm::Vec3 &size) :
 	m_right = pivot.x + size.x / 2.0f;
 	m_front = pivot.z - size.z / 2.0f;
 	m_back = pivot.z + size.z / 2.0f;
+
+	m_radius = sm::Vec3(m_left, 0, m_front).GetLength();
 }
 
 const sm::Vec3& BoxCollider::GetPivot() const
@@ -137,4 +139,23 @@ bool BoxCollider::CheckCollision(const sm::Vec3 &point)
 		point.x < m_right &&
 		point.z > m_front &&
 		point.z < m_back;
+}
+
+bool BoxCollider::CheckCollision(const Collider *collider) const
+{
+	if (collider->GetColliderType() != ColliderType_Box)
+		return false; // TODO dawaj wiecej colliderow
+
+	const BoxCollider* box = dynamic_cast<const BoxCollider*>(collider);
+
+	float dist =
+		((box->m_transform * box->m_pivot) -
+		(m_transform * m_pivot)).GetLength();
+
+	return dist <= box->m_radius + m_radius;
+}
+
+ColliderType BoxCollider::GetColliderType() const
+{
+	return ColliderType_Box;
 }

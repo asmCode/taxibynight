@@ -1,6 +1,7 @@
 #ifndef TAXI
 #define TAXI
 
+#include "IColliderHolder.h"
 #include <Math/Matrix.h>
 
 class Model;
@@ -8,7 +9,7 @@ class Mesh;
 class Texture;
 class BoxCollider;
 
-class Taxi
+class Taxi : public IColliderHolder
 {
 public:
 	BoxCollider *m_boxCollider;
@@ -40,6 +41,8 @@ public:
 	float m_timeLeft;
 
 	void Reset();
+
+	const Collider* GetCollider() const;
 
 	sm::Matrix m_worldMatrix;
 

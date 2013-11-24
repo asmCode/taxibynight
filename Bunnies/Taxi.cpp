@@ -184,6 +184,8 @@ void Taxi::Update(float time, float seconds)
 		sm::Matrix::TranslateMatrix(m_position) *
 		sm::Matrix::CreateLookAt(m_carDirection.GetReversed(), sm::Vec3(0, 1, 0));
 
+	m_boxCollider->SetTransform(newWorldMatrix);
+
 	sm::Vec3 boundsTopLeftWorldOld = m_worldMatrix * m_boundsTopLeft;
 	sm::Vec3 boundsBottomLeftWorldOld = m_worldMatrix * m_boundsBottomLeft;
 	sm::Vec3 boundsTopRightWorldOld = m_worldMatrix * m_boundsTopRight;
@@ -382,3 +384,9 @@ sm::Vec3 Taxi::GetPassengerTarget() const
 {
 	return m_passengerTarget;
 }
+
+const Collider* Taxi::GetCollider() const
+{
+	return m_boxCollider;
+}
+

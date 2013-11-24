@@ -5,6 +5,7 @@
 #include "InterfaceProvider.h"
 #include "Environment.h"
 #include "GameProps.h"
+#include "CollisionManager.h"
 //#include "ManCam.h"
 #include "Street.h"
 #include "GameController.h"
@@ -78,6 +79,7 @@ bool GameScreen::Initialize()
 	//m_manCam = new ManCam();
 
 	m_taxi = new Taxi();
+	CollisionManager::GetInstance()->AddColliderHolder(m_taxi);
 	m_pedsManager = new PedsManager(m_taxi->GetPosition());
 
 	m_trafficManager = new TrafficManager();

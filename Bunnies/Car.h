@@ -1,13 +1,16 @@
 #pragma once
 
+#include "IColliderHolder.h"
 #include "StreetPath.h"
 #include <Math/Vec3.h>
 #include <Math/Matrix.h>
 
-class Car
+class BoxCollider;
+
+class Car : public IColliderHolder
 {
 public:
-	Car();
+	Car(BoxCollider* boxCollider);
 	~Car();
 
 	void Update(float time, float seconds);
@@ -19,12 +22,13 @@ public:
 	const sm::Vec3& GetPosition() const;
 
 	const sm::Matrix& GetWorldMatrix() const;
+	const Collider* GetCollider() const;
 
 private:
 	bool m_isActive;
 
 	StreetPath m_streetPath;
-
+	BoxCollider* m_boxCollider;
 	sm::Matrix m_worldMatrix;
 
 	float m_acceleration;
