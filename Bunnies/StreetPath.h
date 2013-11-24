@@ -4,6 +4,7 @@
 #include <vector>
 
 class StreetSegment;
+class StreetLights;
 
 class StreetPath
 {
@@ -17,6 +18,9 @@ public:
 	sm::Vec3 GetEnd();
 	bool IsAtTheEnd() const;
 	void AddPosition(const sm::Vec3& position);
+	void SetStreetLights(StreetLights *streetLights);
+	bool CanDrive() const;
+	int GetIndex() const;
 	StreetSegment* GetContinousSegment() const;
 
 private:
@@ -25,5 +29,7 @@ private:
 	std::vector<sm::Vec3> m_positions;
 
 	StreetSegment *m_continousStreetSegment;
+
+	StreetLights *m_streetLights;
 };
 

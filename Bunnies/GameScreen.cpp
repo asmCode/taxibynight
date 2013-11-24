@@ -123,6 +123,8 @@ void GameScreen::Draw(float time, float seconds)
 	glDisable(GL_BLEND);
 
 	m_street->Draw(time, seconds);
+	m_street->DrawStreetLights(time, seconds);
+	m_street->DrawStreetLightsSprites(time, seconds);
 	m_taxi->Draw(time, seconds);
 	m_pedsManager->Draw(time, seconds);
 	m_trafficManager->Draw(time, seconds);
@@ -201,7 +203,7 @@ void GameScreen::Update(float time, float seconds)
 
 	sm::Vec3 taxiPosition = m_taxi->GetPosition();
 	taxiPosition.y = 0.0f;
-	sm::Vec3 camPosition = taxiPosition + sm::Vec3(0, 43, -4); // CHANGE
+	sm::Vec3 camPosition = taxiPosition + sm::Vec3(0, 12, -4); // CHANGE
 	sm::Vec3 camLook = (camPosition - (taxiPosition + sm::Vec3(0, 0, +2))).GetNormalized();
 	m_viewMatrix =
 		sm::Matrix::TranslateMatrix(camPosition) *

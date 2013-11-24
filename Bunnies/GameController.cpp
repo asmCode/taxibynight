@@ -9,6 +9,7 @@
 #include "Player.h"
 #include "Environment.h"
 #include "Control.h"
+#include "Sprite.h"
 #include "DrawingRoutines.h"
 #include "InterfaceProvider.h"
 #include <Graphics/IGraphicsEngine.h>
@@ -16,6 +17,7 @@
 #include <Graphics/Model.h>
 #include <Graphics/Animation.h>
 #include <Graphics/SpriteBatch.h>
+#include <Graphics/Shader.h>
 #include <Graphics/FontRenderer.h>
 #include <Audio/SoundManager.h>
 #include <Utils/Log.h>
@@ -72,6 +74,13 @@ bool GameController::InitializeGraphics(const std::string &basePath)
 	InterfaceProvider::m_fonts["digital_bold_24"] = FontRenderer::LoadFromFile((basePath + "data/fonts/digital_bold_24.xml").c_str(), spriteBatch);
 	InterfaceProvider::m_fonts["fenix_18"] = FontRenderer::LoadFromFile((basePath + "data/fonts/fenix_18.xml").c_str(), spriteBatch);
 	InterfaceProvider::m_fonts["fenix_26"] = FontRenderer::LoadFromFile((basePath + "data/fonts/fenix_26.xml").c_str(), spriteBatch);
+
+	Shader *spriteShader = m_content->Get<Shader>("Sprite2");
+	assert(spriteShader != NULL);
+	spriteShader->BindVertexChannel(0, "a_position");
+	spriteShader->LinkProgram();
+
+	Sprite::Initialize(spriteShader);
 
 	Control::SetSpriteBatch(spriteBatch);
 	

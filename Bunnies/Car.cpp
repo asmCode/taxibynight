@@ -2,6 +2,7 @@
 #include "Street.h"
 #include "StreetSegment.h"
 #include "StreetPiece.h"
+#include "StreetLights.h"
 #include <Math/MathUtils.h>
 
 Car::Car() :
@@ -53,20 +54,36 @@ bool Car::IsActive() const
 
 bool Car::CanDrive()
 {
-	return true;
+	return m_streetPath.CanDrive();
 }
 
 void Car::DriveToDestination(float seconds)
 {
 	if (CanDrive())
 	{
-		if (m_speed != m_maxSpeed)
-			m_acceleration = 10.0f;
+		StreetLights *siblingStreetLights = m_streetPath.GetContinousSegment()->GetLights(m_position);
+
+		if (siblingStreetLights != NULL && !siblingStreetLights->CanDrive())
+		{
+			if (m_speed > 5.0f)
+				m_acceleration = -30.0f;
+			else
+				m_acceleration = 30.0f;
+		}
+		else
+		{
+			if (m_speed != m_maxSpeed)
+				m_acceleration = 10.0f;
+			else
+				m_acceleration = 0.0f;
+		}
 	}
 	else
 	{
 		if (m_speed > 0.0f)
-			m_acceleration = -20.0f;
+			m_acceleration = -50.0f;
+		else
+			m_acceleration = 0.0f;
 	}
 
 	m_speed = MathUtils::Clamp(m_speed + m_acceleration * seconds, 0.0f, m_maxSpeed);

@@ -23,6 +23,8 @@ public:
 
 	void Update(float time, float seconds);
 	void Draw(float time, float seconds);
+	void DrawStreetLights(float time, float seconds);
+	void DrawStreetLightsSprites(float time, float seconds);
 
 	StreetPiece* GetStreetPiece(uint8_t type);
 
@@ -49,12 +51,16 @@ private:
 	Model *m_skycrapper2;
 	Model *m_skycrapper3;
 
+	Model *m_streetLightsModel;
+
 	std::vector<StreetSegment*> m_pavementSegments;
 
 	Texture *m_skycrapperTexture1;
 	Texture *m_skycrapperTexture2;
 	Texture *m_skycrapperTexture3;
 	Texture *m_pavementTexture;
+
+	Texture *m_lightTexture;
 
 	StreetMap *m_streetMap;
 

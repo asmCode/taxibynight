@@ -1,12 +1,14 @@
 #include "Street.h"
 #include "StreetPiece.h"
 #include "StreetSegment.h"
+#include "StreetLights.h"
 #include "PedsManager.h"
 #include "TrafficManager.h"
 #include "DrawingRoutines.h"
 #include "InterfaceProvider.h"
 #include "StreetMap.h"
 #include "Environment.h"
+#include "Sprite.h"
 
 #include <Utils/Randomizer.h>
 #include <Graphics/Model.h>
@@ -27,6 +29,12 @@ Street::Street(PedsManager *pedsManager, TrafficManager* trafficManager) :
 	m_pedsManager = pedsManager;
 
 	Content *content = InterfaceProvider::GetContent();
+
+	m_lightTexture = content->Get<Texture>("circle");
+	assert(m_lightTexture != NULL);
+
+	m_streetLightsModel = content->Get<Model>("lights");
+	assert(m_streetLightsModel != NULL);
 
 	m_streetModel = content->Get<Model>("street_straight");
 	assert(m_streetModel != NULL);
@@ -188,7 +196,7 @@ Street::Street(PedsManager *pedsManager, TrafficManager* trafficManager) :
 	}
 
 	for (int i = 0; i < m_streetMap->GetWidth() * m_streetMap->GetHeight(); i++)
-		m_streetSegments[i]->InitializePaths();
+		m_streetSegments[i]->Initialize();
 }
 
 Street::~Street()
@@ -201,13 +209,26 @@ void Street::Update(float time, float seconds)
 	if (streetSegment == NULL) // out of map
 		return;
 
-	if (streetSegment == m_lastTaxiSegment)
-		return;
-
 	int ix = streetSegment->CoordX();
 	int iy = streetSegment->CoordY();
 
 	std::vector<StreetSegment*> segmentsChanged;
+
+	for (int y = iy - Range - 1; y <= iy + Range + 1; y++)
+	{
+		for (int x = ix - Range - 1; x <= ix + Range + 1; x++)
+		{
+			if (x < 0 || x >= m_streetMap->GetWidth() || y < 0 || y >= m_streetMap->GetHeight())
+				continue;
+
+			StreetSegment *ss = GetSegment(x, y);
+
+			ss->Update(seconds);
+		}
+	}
+
+	if (streetSegment == m_lastTaxiSegment)
+		return;
 
 	for (int y = iy - Range - 1; y <= iy + Range + 1; y++)
 	{
@@ -279,6 +300,84 @@ void Street::Draw(float time, float seconds)
 			m_streetPieces[streetType]->Draw(seg->GetWorldTransform());
 		}
 	}
+}
+
+void Street::DrawStreetLights(float time, float seconds)
+{
+	StreetSegment *centerSegment = GetSegmentAtPosition(m_taxiPosition);
+	assert(centerSegment != NULL);
+
+	int ix = centerSegment->CoordX();
+	int iy = centerSegment->CoordY();
+
+	for (int y = iy - Range - 1; y <= iy + Range + 1; y++)
+	{
+		for (int x = ix - Range - 1; x <= ix + Range + 1; x++)
+		{
+			if (x < 0 || x >= m_streetMap->GetWidth() || y < 0 || y >= m_streetMap->GetHeight())
+				continue;
+
+			StreetSegment *ss = GetSegment(x, y);
+
+			StreetLights **streetLights = ss->GetStreetLights();
+
+			for (int i = 0; i < StreetSegment::MaxLights; i++)
+			{
+				if (streetLights[i] != NULL)
+				{
+					DrawingRoutines::DrawWithMaterial(m_streetLightsModel->m_meshParts, streetLights[i]->GetTransform());
+				}
+			}
+		}
+	}
+}
+
+void Street::DrawStreetLightsSprites(float time, float seconds)
+{
+	Sprite::Setup();
+	Sprite::SetTexture(m_lightTexture);
+
+	StreetSegment *centerSegment = GetSegmentAtPosition(m_taxiPosition);
+	assert(centerSegment != NULL);
+
+	int ix = centerSegment->CoordX();
+	int iy = centerSegment->CoordY();
+
+	for (int y = iy - Range - 1; y <= iy + Range + 1; y++)
+	{
+		for (int x = ix - Range - 1; x <= ix + Range + 1; x++)
+		{
+			if (x < 0 || x >= m_streetMap->GetWidth() || y < 0 || y >= m_streetMap->GetHeight())
+				continue;
+
+			StreetSegment *ss = GetSegment(x, y);
+
+			StreetLights **streetLights = ss->GetStreetLights();
+
+			for (int i = 0; i < StreetSegment::MaxLights; i++)
+			{
+				if (streetLights[i] != NULL)
+				{
+					switch (streetLights[i]->GetLightColor())
+					{
+					case StreetLights::LightColor_Red: Sprite::SetColor(sm::Vec4(1, 0, 0, 1)); break;
+					case StreetLights::LightColor_Orange: Sprite::SetColor(sm::Vec4(1, 0.5f, 0.0f, 1)); break;
+					case StreetLights::LightColor_Green: Sprite::SetColor(sm::Vec4(0, 1, 0, 1)); break;
+					}
+
+					Sprite::Draw(
+						DrawingRoutines::GetProjMatrix() *
+						DrawingRoutines::GetViewMatrix() *
+						streetLights[i]->GetTransform() *
+						sm::Matrix::TranslateMatrix(0, 0.1f, 0) *
+						sm::Matrix::RotateAxisMatrix(MathUtils::PI2, 1, 0, 0) *
+						sm::Matrix::ScaleMatrix(1, 1, 1));
+				}
+			}
+		}
+	}
+
+	Sprite::Clean();
 }
 
 StreetPiece* Street::GetStreetPiece(uint8_t type)

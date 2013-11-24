@@ -1,5 +1,6 @@
 #include "StreetSegment.h"
 #include "StreetPiece.h"
+#include "StreetLights.h"
 #include "Street.h"
 
 #include <Utils/Randomizer.h>
@@ -7,14 +8,23 @@
 #include <Graphics/Mesh.h>
 #include <Graphics/Model.h>
 #include <Utils/Log.h>
+#include <memory.h>
 #include <assert.h>
 
-StreetSegment::StreetSegment(const sm::Matrix &worldTransform, const sm::Vec3 &pivotPosition, StreetPiece *streetPiece)
+const float StreetSegment::LightsInterval = 4.0f;
+
+StreetSegment::StreetSegment(const sm::Matrix &worldTransform, const sm::Vec3 &pivotPosition, StreetPiece *streetPiece) :
+	m_lightsCount(0),
+	m_orangeCooldown(0.0f),
+	m_lightsChangeCooldown(0.0f),
+	m_greenLightsIndex(0)
 {
 	m_pivotPosition = pivotPosition;
 	m_streetPiece = streetPiece;
 
 	m_worldMatrix = worldTransform;
+
+	memset(m_streetLights, 0, sizeof(StreetLights*) * MaxLights);
 }
 
 void StreetSegment::SetVisibility(bool visibility)
@@ -37,6 +47,40 @@ const sm::Vec3& StreetSegment::GetPivotPosition() const
 	return m_pivotPosition;
 }
 
+void StreetSegment::Update(float seconds)
+{
+	if (m_lightsCount == 0)
+		return;
+
+	m_lightsChangeCooldown -= seconds;
+	if (m_lightsChangeCooldown <= 0.0f)
+	{
+		m_lightsChangeCooldown = LightsInterval;
+		m_orangeCooldown = 1.0f;
+		m_greenLightsIndex++;
+		m_greenLightsIndex %= m_lightsCount;
+	}
+
+	if (m_orangeCooldown > 0.0f)
+		m_orangeCooldown -= seconds;
+
+	int index = 0;
+	for (int i = 0; i < MaxLights; i++)
+	{
+		if (m_streetLights[i] != NULL)
+		{
+			if (m_orangeCooldown > 0.0f)
+				m_streetLights[i]->SetLightColor(StreetLights::LightColor_Orange);
+			else if (index == m_greenLightsIndex)
+				m_streetLights[i]->SetLightColor(StreetLights::LightColor_Green);
+			else
+				m_streetLights[i]->SetLightColor(StreetLights::LightColor_Red);
+
+			index++;
+		}
+	}
+}
+
 uint32_t StreetSegment::CoordX() const
 {
 	return (uint32_t)((m_pivotPosition.x + 5.0f) / 10.0f);
@@ -45,6 +89,11 @@ uint32_t StreetSegment::CoordX() const
 uint32_t StreetSegment::CoordY() const
 {
 	return (uint32_t)((m_pivotPosition.z + 5.0f) / 10.0f);
+}
+
+StreetLights** StreetSegment::GetStreetLights()
+{
+	return m_streetLights;
 }
 
 const sm::Matrix& StreetSegment::GetWorldTransform() const
@@ -81,9 +130,19 @@ StreetPath StreetSegment::GetRandomPathAtPosition(const sm::Vec3& position)
 
 	int index = random.GetInt(0, streetPathPool.size() - 1);
 
-	Log::LogT("peeked path at index %d of %d paths", index, streetPathPool.size());
-
 	return *streetPathPool[index];
+}
+
+StreetLights* StreetSegment::GetLights(const sm::Vec3& position)
+{
+	SegmentSide side = GetSegmentSide(position);
+	return m_streetLights[(int)side];
+}
+
+void StreetSegment::Initialize()
+{
+	InitializeLights();
+	InitializePaths();
 }
 
 void StreetSegment::InitializePaths()
@@ -148,5 +207,73 @@ void StreetSegment::InitializePaths()
 		{
 			assert(false);
 		}
+
+		StreetLights *lights = GetClosestLights(m_streetPaths[i].GetBeginning());
+		m_streetPaths[i].SetStreetLights(lights);
+	}
+}
+
+void StreetSegment::InitializeLights()
+{
+	if (!m_streetPiece->HasRoad())
+		return;
+
+	for (int i = 0; i < MaxLights; i++)
+	{
+		char lightMeshName[32];
+		sprintf(lightMeshName, "data.lights.%d", i);
+
+		Mesh *lightMesh = m_streetPiece->m_model->FindMesh(lightMeshName);
+		if (lightMesh == NULL)
+			break;
+
+		sm::Matrix m_streetLightsTransform = m_worldMatrix * (m_streetPiece->GetTransform() * lightMesh->m_worldMatrix);
+
+		SegmentSide side = GetSegmentSide(m_streetLightsTransform * sm::Vec3(0, 0, 0));
+
+		assert(m_streetLights[(int)side] == NULL);
+		m_streetLights[(int)side] = new StreetLights(m_streetLightsTransform);
+
+		m_lightsCount++;
+	}
+}
+
+StreetLights* StreetSegment::GetClosestLights(const sm::Vec3& position)
+{
+	StreetLights* streetLight = NULL;
+	float minDist = 99999.0f;
+
+	for (int i = 0; i < MaxLights; i++)
+	{
+		if (m_streetLights[i] == NULL)
+			continue;
+
+		float dist = (m_streetLights[i]->GetPosition() - position).GetLength();
+		if (dist < minDist)
+		{
+			minDist = dist;
+			streetLight = m_streetLights[i];
+		}
+	}
+
+	return streetLight;
+}
+
+StreetSegment::SegmentSide StreetSegment::GetSegmentSide(const sm::Vec3& position)
+{
+	sm::Vec3 compass = position - m_pivotPosition;
+
+	if (compass.x < 0 && MathUtils::Abs(compass.x) > MathUtils::Abs(compass.z))
+		return StreetSegment::SegmentSide_Left;
+	else if (compass.x > 0 && MathUtils::Abs(compass.x) > MathUtils::Abs(compass.z))
+		return StreetSegment::SegmentSide_Right;
+	else if (compass.z < 0 && MathUtils::Abs(compass.z) > MathUtils::Abs(compass.x))
+		return StreetSegment::SegmentSide_Top;
+	else if (compass.z > 0 && MathUtils::Abs(compass.z) > MathUtils::Abs(compass.x))
+		return StreetSegment::SegmentSide_Bottom;
+	else
+	{
+		assert(false);
+		return StreetSegment::SegmentSide_Top;
 	}
 }

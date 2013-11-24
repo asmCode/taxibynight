@@ -92,6 +92,8 @@
     <ClInclude Include="Bunnies\PausePanel.h" />
     <ClInclude Include="Bunnies\Player.h" />
     <ClInclude Include="Bunnies\BoxCollider.h" />
+    <ClInclude Include="Bunnies\Sprite.h" />
+    <ClInclude Include="Bunnies\StreetLights.h" />
     <ClInclude Include="Bunnies\StreetPath.h" />
     <ClInclude Include="Bunnies\SummaryScreen.h" />
     <ClInclude Include="Bunnies\SummaryPanel.h" />
@@ -216,6 +218,8 @@
     <ClCompile Include="Bunnies\PausePanel.cpp" />
     <ClCompile Include="Bunnies\Player.cpp" />
     <ClCompile Include="Bunnies\BoxCollider.cpp" />
+    <ClCompile Include="Bunnies\Sprite.cpp" />
+    <ClCompile Include="Bunnies\StreetLights.cpp" />
     <ClCompile Include="Bunnies\StreetPath.cpp" />
     <ClCompile Include="Bunnies\SummaryScreen.cpp" />
     <ClCompile Include="Bunnies\SummaryPanel.cpp" />

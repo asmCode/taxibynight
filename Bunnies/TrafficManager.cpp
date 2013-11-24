@@ -67,6 +67,7 @@ void TrafficManager::NotifyStreetSegmentVisibilityChanged(StreetSegment *streetS
 	if (!streetSegment->GetStreetPiece()->HasRoad())
 		return;
 
+	// CHANGE
 	int carsToSet = 1;
 
 	if (streetSegment->IsVisible())

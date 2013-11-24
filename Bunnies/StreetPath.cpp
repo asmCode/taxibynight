@@ -1,7 +1,9 @@
 #include "StreetPath.h"
+#include "StreetLights.h"
 
 StreetPath::StreetPath() :
-	m_index(0)
+	m_index(0),
+	m_streetLights(NULL)
 {
 }
 
@@ -45,6 +47,21 @@ bool StreetPath::IsAtTheEnd() const
 void StreetPath::AddPosition(const sm::Vec3& position)
 {
 	m_positions.push_back(position);
+}
+
+void StreetPath::SetStreetLights(StreetLights *streetLights)
+{
+	m_streetLights = streetLights;
+}
+
+bool StreetPath::CanDrive() const
+{
+	return m_streetLights == NULL || m_streetLights->GetLightColor() == StreetLights::LightColor_Green;
+}
+
+int StreetPath::GetIndex() const
+{
+	return m_index;
 }
 
 StreetSegment* StreetPath::GetContinousSegment() const
