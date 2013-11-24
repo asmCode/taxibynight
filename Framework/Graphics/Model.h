@@ -1,5 +1,6 @@
 #pragma once
 
+#include "BoundingBox.h"
 #include <Math/Matrix.h>
 #include <vector>
 
@@ -14,6 +15,7 @@ public:
 
 public:
 	sm::Matrix m_baseTransform;
+	BoundingBox m_bbox;
 
 	Model();
 	~Model();
@@ -31,4 +33,6 @@ public:
 	void SetMaterial(Material *material);
 
 	Model *CreateReference();
+
+	void RecalculateBoundingBox();
 };

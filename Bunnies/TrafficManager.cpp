@@ -1,6 +1,7 @@
 #include "TrafficManager.h"
 #include "Car.h"
 #include "DrawingRoutines.h"
+#include "BoxCollider.h"
 #include "StreetSegment.h"
 #include "StreetPiece.h"
 #include "Street.h"
@@ -9,7 +10,8 @@
 #include <Graphics/Model.h>
 #include <Graphics/Content/Content.h>
 
-TrafficManager::TrafficManager()
+TrafficManager::TrafficManager() :
+	m_activeCarsCount(0)
 {
 }
 
@@ -31,6 +33,10 @@ bool TrafficManager::Initialize()
 	m_carModel = content->Get<Model>("car01");
 	assert(m_carModel != NULL);
 
+	BoundingBox bbox = m_carModel->m_bbox;
+
+	m_carCollider = new BoxCollider(bbox.center, sm::Vec3(bbox.m_width, bbox.m_height, bbox.m_depth));
+
 	return true;
 }
 
@@ -43,7 +49,7 @@ void TrafficManager::Update(float time, float seconds)
 
 		if (m_cars[i]->IsActive() && !IsOnVisibleSegment(m_cars[i]))
 		{
-			m_cars[i]->SetInactive();
+			DeactivateCar(m_cars[i]);
 			break;
 		}
 
@@ -78,7 +84,7 @@ void TrafficManager::NotifyStreetSegmentVisibilityChanged(StreetSegment *streetS
 		{
 			if (!m_cars[carIndex]->IsActive())
 			{
-				m_cars[carIndex]->SetActive(streetSegment->GetPivotPosition());
+				ActivateCar(m_cars[carIndex], streetSegment->GetPivotPosition());
 
 				carsToSet--;
 			}
@@ -97,3 +103,23 @@ bool TrafficManager::IsOnVisibleSegment(Car *car)
 	return false;
 }
 
+void TrafficManager::ActivateCar(Car *car, const sm::Vec3& position)
+{
+	if (m_activeCarsCount == MaxCars - 1)
+		return;
+
+	car->SetActive(position);
+	
+	m_activeCarsCount++;
+
+	assert(m_activeCarsCount <= MaxCars);
+}
+
+void TrafficManager::DeactivateCar(Car *car)
+{
+	car->SetInactive();
+
+	m_activeCarsCount--;
+
+	assert(m_activeCarsCount >= 0);
+}

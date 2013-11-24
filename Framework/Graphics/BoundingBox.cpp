@@ -2,6 +2,7 @@
 #include "Vertex.h"
 #include "VertexInformation.h"
 #include <Math/Vec3.h>
+#include <Math/MathUtils.h>
 #include <assert.h>
 
 BoundingBox BoundingBox::FromVertices(const void *vertices, unsigned count, uint8_t vertexType, float scale)
@@ -52,10 +53,35 @@ BoundingBox BoundingBox::FromVertices(const void *vertices, unsigned count, uint
 	bbox.maxZ *= scale;
 	bbox.minZ *= scale;
 
-	bbox.center.Set(
-		(bbox.maxX + bbox.minX) / 2.0f,
-		(bbox.maxY + bbox.minY) / 2.0f,
-		(bbox.maxZ + bbox.minZ) / 2.0f);
+	bbox.RecalculateCenter();
+
+	return bbox;
+}
+
+void BoundingBox::RecalculateCenter()
+{
+	m_width = MathUtils::Abs(maxX - minX);
+	m_height = MathUtils::Abs(maxY - minY);
+	m_depth = MathUtils::Abs(maxZ - minZ);
+
+	center.Set(
+		(maxX + minX) / 2.0f,
+		(maxY + minY) / 2.0f,
+		(maxZ + minZ) / 2.0f);
+}
+
+BoundingBox BoundingBox::CreateEmpty()
+{
+	BoundingBox bbox;
+
+	bbox.minX = 0;
+	bbox.maxX = 0;
+	bbox.minY = 0;
+	bbox.maxY = 0;
+	bbox.minZ = 0;
+	bbox.maxZ = 0;
+
+	bbox.center.Set(0, 0, 0);
 
 	return bbox;
 }
@@ -91,4 +117,16 @@ void BoundingBox::SetBBoxVerticle(unsigned index, const sm::Vec3 &v)
 	case 6: maxX = v.x; minY = v.y; maxZ = v.z; break;
 	case 7: minX = v.x; minY = v.y; maxZ = v.z; break;
 	}
+}
+
+void BoundingBox::Add(const BoundingBox& bbox)
+{
+	minX = MathUtils::Min(minX, bbox.minX);
+	maxX = MathUtils::Max(maxX, bbox.maxX);
+	minY = MathUtils::Min(minY, bbox.minY);
+	maxY = MathUtils::Max(maxY, bbox.maxY);
+	minZ = MathUtils::Min(minZ, bbox.minZ);
+	maxZ = MathUtils::Max(maxZ, bbox.maxZ);
+
+	RecalculateCenter();
 }

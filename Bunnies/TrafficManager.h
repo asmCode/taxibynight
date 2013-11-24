@@ -1,8 +1,11 @@
 #pragma once
 
+#include <Math/Vec3.h>
+
 class Car;
 class Model;
 class StreetSegment;
+class BoxCollider;
 
 class TrafficManager
 {
@@ -20,10 +23,16 @@ public:
 private:
 	static const int MaxCars = 10;
 
+	int m_activeCarsCount;
+
 	Car* m_cars[MaxCars];
 
 	Model *m_carModel;
+	BoxCollider *m_carCollider;
 
 	bool IsOnVisibleSegment(Car *car);
+
+	void ActivateCar(Car *car, const sm::Vec3& position);
+	void DeactivateCar(Car *car);
 };
 

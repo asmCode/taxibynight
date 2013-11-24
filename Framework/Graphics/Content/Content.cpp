@@ -91,6 +91,7 @@ void Content::CombineResources()
 	{
 		std::vector<MeshPart*> meshParts;
 		modelsIt->second->GetMeshParts(meshParts);
+		modelsIt->second->RecalculateBoundingBox();
 
 		for (uint32_t i = 0; i < meshParts.size(); i++)
 			meshParts[i]->SetMaterial(Get<Material>(meshParts[i]->materialName));

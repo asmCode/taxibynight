@@ -66,3 +66,12 @@ Model *Model::CreateReference()
 	return model;
 }
 
+void Model::RecalculateBoundingBox()
+{
+	if (m_meshParts.size() == 0)
+		m_bbox = BoundingBox::CreateEmpty();
+
+	m_bbox = *m_meshParts[0]->bbox;
+	for (unsigned int i = 1; i < m_meshParts.size(); i++)
+		m_bbox.Add(*m_meshParts[i]->bbox);
+}
