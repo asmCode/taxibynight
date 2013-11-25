@@ -42,5 +42,6 @@ private:
 	bool CanDrive();
 	void DriveToDestination(float seconds);
 	void GetNewDestination(bool atTheEdge);
+	bool GetDistanceToCollision(float &distToCollision);
 };
 

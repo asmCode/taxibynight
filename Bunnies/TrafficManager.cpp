@@ -41,11 +41,14 @@ bool TrafficManager::Initialize()
 
 	return true;
 }
-
+	
 void TrafficManager::Update(float time, float seconds)
 {
 	if (m_activeCarsCount == 0)
-		ActivateCar(m_cars[0], Taxi::GetInstance()->GetPosition());
+	{
+		//ActivateCar(m_cars[0], Taxi::GetInstance()->GetPosition());
+		//ActivateCar(m_cars[1], Taxi::GetInstance()->GetPosition() + sm::Vec3(5, 0, 0));
+	}
 
 	for (int i = 0; i < MaxCars; i++)
 	{

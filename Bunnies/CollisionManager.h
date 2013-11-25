@@ -4,6 +4,8 @@
 #include <vector>
 
 class IColliderHolder;
+class Collider;
+class CollisionInfo;
 
 class CollisionManager
 {
@@ -15,7 +17,8 @@ public:
 	static CollisionManager* GetInstance();
 
 	void AddColliderHolder(IColliderHolder* colliderHolder);
-	bool CheckCollision(IColliderHolder *collisionHolder);
+	bool CheckCollision(IColliderHolder *collisionHolder, CollisionInfo& collisionInfo, Collider *exclude = NULL);
+	bool CheckCollision(const Collider *collider, CollisionInfo& collisionInfo, Collider *exclude = NULL);
 
 private:
 	CollisionManager();

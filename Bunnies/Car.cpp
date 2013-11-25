@@ -1,10 +1,12 @@
 #include "Car.h"
 #include "Street.h"
 #include "StreetSegment.h"
+#include "CollisionInfo.h"
 #include "StreetPiece.h"
 #include "StreetLights.h"
 #include "BoxCollider.h"
 #include "CollisionManager.h"
+#include <Utils/Log.h>
 #include <Math/MathUtils.h>
 
 Car::Car(BoxCollider* boxCollider) :
@@ -12,7 +14,7 @@ Car::Car(BoxCollider* boxCollider) :
 	m_worldMatrix(sm::Matrix::Identity),
 	m_speed(0.0f),
 	m_acceleration(0.0f),
-	m_maxSpeed(30.0f),
+	m_maxSpeed(10.0f),
 	m_boxCollider(boxCollider)
 {
 }
@@ -62,6 +64,32 @@ bool Car::CanDrive()
 
 void Car::DriveToDestination(float seconds)
 {
+	float distToCollision = 0.0f;
+	if (GetDistanceToCollision(distToCollision))
+	{
+		if (m_speed > 4.0f && distToCollision < 10.0f)
+		{
+			m_acceleration = (1.0f - (distToCollision / 10.0f)) * -50.0f;
+		}
+		else
+		{
+			m_acceleration = 3.0f;
+		}
+
+		//Log::LogT("dist %.02f", distToCollision);
+
+		if (distToCollision < 4.0f)
+		{
+			m_acceleration = 0.0f;
+			m_speed = 0.0f;
+		}
+	}
+	else
+	{
+		m_acceleration = 10.0f;
+	}
+
+	/*
 	if (CanDrive())
 	{
 		StreetLights *siblingStreetLights = m_streetPath.GetContinousSegment()->GetLights(m_position);
@@ -88,6 +116,7 @@ void Car::DriveToDestination(float seconds)
 		else
 			m_acceleration = 0.0f;
 	}
+	*/
 
 	m_speed = MathUtils::Clamp(m_speed + m_acceleration * seconds, 0.0f, m_maxSpeed);
 
@@ -117,11 +146,12 @@ void Car::DriveToDestination(float seconds)
 
 	m_boxCollider->SetTransform(m_worldMatrix);
 
-	if (CollisionManager::GetInstance()->CheckCollision(this))
-	{
-		int chuj = 0;
-		chuj++;
-	}
+
+	//if (CollisionManager::GetInstance()->CheckCollision(this))
+	//{
+	//	int chuj = 0;
+	//	chuj++;
+	//}
 }
 
 void Car::GetNewDestination(bool atTheEdge)
@@ -154,3 +184,20 @@ const Collider* Car::GetCollider() const
 {
 	return m_boxCollider;
 }
+
+bool Car::GetDistanceToCollision(float &distToCollision)
+{
+	BoxCollider bbox(m_boxCollider->GetPivot() + sm::Vec3(0, 0, +4), m_boxCollider->GetSize() + sm::Vec3(0, 0, +8.0f));
+	bbox.SetTransform(m_worldMatrix);
+
+	CollisionInfo collisionInfo;
+
+	if (CollisionManager::GetInstance()->CheckCollision(&bbox, collisionInfo, m_boxCollider))
+	{
+		distToCollision = (collisionInfo.m_colliderPosition - m_position).GetLength();
+		return true;
+	}
+
+	return false;
+}
+

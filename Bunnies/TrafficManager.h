@@ -21,7 +21,7 @@ public:
 	void NotifyStreetSegmentVisibilityChanged(StreetSegment *streetSegment);
 
 private:
-	static const int MaxCars = 1;
+	static const int MaxCars = 10;
 
 	int m_activeCarsCount;
 

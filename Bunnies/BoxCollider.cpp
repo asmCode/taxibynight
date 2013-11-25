@@ -10,6 +10,11 @@ BoxCollider::BoxCollider(const sm::Vec3 &pivot, const sm::Vec3 &size) :
 	m_front = pivot.z - size.z / 2.0f;
 	m_back = pivot.z + size.z / 2.0f;
 
+	m_colliderVertices[0].Set(m_left, 0, m_front);
+	m_colliderVertices[1].Set(m_right, 0, m_front);
+	m_colliderVertices[2].Set(m_left, 0, m_back);
+	m_colliderVertices[3].Set(m_right, 0, m_back);
+
 	m_radius = sm::Vec3(m_left, 0, m_front).GetLength();
 }
 
@@ -132,7 +137,7 @@ bool BoxCollider::CheckCollision(const sm::Vec3 &bSeg,
 }
 
 
-bool BoxCollider::CheckCollision(const sm::Vec3 &point)
+bool BoxCollider::CheckCollision(const sm::Vec3 &point) const
 {
 	return
 		point.x > m_left &&
@@ -152,7 +157,24 @@ bool BoxCollider::CheckCollision(const Collider *collider) const
 		((box->m_transform * box->m_pivot) -
 		(m_transform * m_pivot)).GetLength();
 
-	return dist <= box->m_radius + m_radius;
+	if (dist > box->m_radius + m_radius)
+		return false;
+
+	sm::Matrix toAabb = m_transformInverted * box->m_transform;
+
+	for (int i = 0; i < 4; i++)
+	{
+		sm::Vec3 testPoint = toAabb * box->m_colliderVertices[i];
+		if (CheckCollision(testPoint))
+			return true;
+	}
+
+	return false;
+}
+
+sm::Vec3 BoxCollider::GetPosition() const
+{
+	return m_transform * m_pivot;
 }
 
 ColliderType BoxCollider::GetColliderType() const

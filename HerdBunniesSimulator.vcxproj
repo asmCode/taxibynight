@@ -91,8 +91,10 @@
     <ClInclude Include="Bunnies\Car.h" />
     <ClInclude Include="Bunnies\ColliderType.h" />
     <ClInclude Include="Bunnies\Collider.h" />
+    <ClInclude Include="Bunnies\CollisionInfo.h" />
     <ClInclude Include="Bunnies\CollisionManager.h" />
     <ClInclude Include="Bunnies\IColliderHolder.h" />
+    <ClInclude Include="Bunnies\LightsCollider.h" />
     <ClInclude Include="Bunnies\PausePanel.h" />
     <ClInclude Include="Bunnies\Player.h" />
     <ClInclude Include="Bunnies\BoxCollider.h" />
@@ -221,6 +223,7 @@
     <ClCompile Include="Bunnies\Car.cpp" />
     <ClCompile Include="Bunnies\Collider.cpp" />
     <ClCompile Include="Bunnies\CollisionManager.cpp" />
+    <ClCompile Include="Bunnies\LightsCollider.cpp" />
     <ClCompile Include="Bunnies\PausePanel.cpp" />
     <ClCompile Include="Bunnies\Player.cpp" />
     <ClCompile Include="Bunnies\BoxCollider.cpp" />

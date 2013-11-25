@@ -19,11 +19,13 @@ public:
 		sm::Vec3 &collisionPoint,
 		sm::Vec3 &collisionNormal);
 
-	bool CheckCollision(const sm::Vec3 &point);
+	bool CheckCollision(const sm::Vec3 &point) const;
 
 	ColliderType GetColliderType() const;
 
 	bool CheckCollision(const Collider* collider) const;
+
+	sm::Vec3 GetPosition() const;
 
 private:
 	sm::Vec3 m_pivot;
@@ -33,6 +35,8 @@ private:
 	float m_right;
 	float m_front;
 	float m_back;
+
+	sm::Vec3 m_colliderVertices[4];
 
 	float m_radius;
 };
