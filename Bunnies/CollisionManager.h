@@ -3,7 +3,6 @@
 
 #include <vector>
 
-class IColliderHolder;
 class Collider;
 class CollisionInfo;
 
@@ -16,14 +15,13 @@ public:
 
 	static CollisionManager* GetInstance();
 
-	void AddColliderHolder(IColliderHolder* colliderHolder);
-	bool CheckCollision(IColliderHolder *collisionHolder, CollisionInfo& collisionInfo, Collider *exclude = NULL);
+	void AddCollider(const Collider* collider);
 	bool CheckCollision(const Collider *collider, CollisionInfo& collisionInfo, Collider *exclude = NULL);
 
 private:
 	CollisionManager();
 
-	std::vector<IColliderHolder*> m_colliderHolders;
+	std::vector<const Collider*> m_colliders;
 };
 
 #endif // !COLLISION_MANAGER

@@ -10,6 +10,7 @@ class BoxCollider : public Collider
 public:
 	BoxCollider(const sm::Vec3 &pivot, const sm::Vec3 &size);
 
+	void SetPivot(const sm::Vec3& pivot);
 	const sm::Vec3& GetPivot() const;
 	const sm::Vec3& GetSize() const;
 
@@ -23,7 +24,7 @@ public:
 
 	ColliderType GetColliderType() const;
 
-	bool CheckCollision(const Collider* collider) const;
+	bool CheckCollision(const Collider* collider, CollisionInfo& collisionInfo) const;
 
 	sm::Vec3 GetPosition() const;
 

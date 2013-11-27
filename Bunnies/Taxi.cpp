@@ -67,8 +67,7 @@ Taxi::Taxi() :
 			m_boundsTopRight.x - m_boundsTopLeft.x,
 			0, 
 			m_boundsBottomRight.z - m_boundsTopRight.z));
-			
-
+	m_boxCollider->SetColliderId(ColliderId_Taxi);
 }
 
 void Taxi::Reset()

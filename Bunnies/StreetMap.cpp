@@ -20,7 +20,7 @@ StreetMap::StreetMap(const std::string &dataPath)
 	uint8_t *data;
 	uint32_t bytesCount;
 
-	if (!ImageLoader::LoadFromFile(dataPath + "textures/street_map2.png", data, m_width, m_height, bytesCount))
+	if (!ImageLoader::LoadFromFile(dataPath + "textures/street_map3.png", data, m_width, m_height, bytesCount))
 	{
 		assert(false);
 		return;

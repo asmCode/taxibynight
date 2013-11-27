@@ -1,6 +1,5 @@
 #include "CollisionManager.h"
 #include "Collider.h"
-#include "IColliderHolder.h"
 #include "CollisionInfo.h"
 #include <stddef.h>
 
@@ -22,32 +21,27 @@ CollisionManager* CollisionManager::GetInstance()
 	return m_instance;
 }
 
-void CollisionManager::AddColliderHolder(IColliderHolder* colliderHolder)
+void CollisionManager::AddCollider(const Collider* collider)
 {
-	m_colliderHolders.push_back(colliderHolder);
-}
-
-bool CollisionManager::CheckCollision(IColliderHolder *collisionHolder, CollisionInfo& collisionInfo, Collider *exclude)
-{
-	const Collider* sourceCollider = collisionHolder->GetCollider();
-	assert(sourceCollider != NULL);
-
-	return CheckCollision(sourceCollider, collisionInfo, exclude);
+	m_colliders.push_back(collider);
 }
 
 bool CollisionManager::CheckCollision(const Collider *collider, CollisionInfo& collisionInfo, Collider *exclude)
 {
-	for (size_t i = 0; i < m_colliderHolders.size(); i++)
+	for (size_t i = 0; i < m_colliders.size(); i++)
 	{
-		const Collider* destinationCollider = m_colliderHolders[i]->GetCollider();
+		const Collider* destinationCollider = m_colliders[i];
 		assert(destinationCollider != NULL);
 
 		if (collider == destinationCollider || exclude == destinationCollider)
 			continue;
 
-		if (collider->CheckCollision(destinationCollider))
+		if (collider->CheckCollision(destinationCollider, collisionInfo))
 		{
-			collisionInfo.m_colliderPosition = destinationCollider->GetPosition();
+			return true;
+		}
+		else if (destinationCollider->CheckCollision(collider, collisionInfo))
+		{
 			return true;
 		}
 	}

@@ -89,6 +89,7 @@
     <ClInclude Include="Bunnies\Arrow.h" />
     <ClInclude Include="Bunnies\Billboard.h" />
     <ClInclude Include="Bunnies\Car.h" />
+    <ClInclude Include="Bunnies\ColliderId.h" />
     <ClInclude Include="Bunnies\ColliderType.h" />
     <ClInclude Include="Bunnies\Collider.h" />
     <ClInclude Include="Bunnies\CollisionInfo.h" />

@@ -50,5 +50,19 @@ Matrix Matrix::CreateLookAt2(const sm::Vec3 &direction, const sm::Vec3 &up)
 	return rot;
 }
 
+Vec3 Matrix::TransformNormal(const Vec3& normal)
+{
+	Vec3 ret;
+
+	for (int i = 0; i < 3; i++)
+	{
+		float val = 0.0f;
+		for (int k = 0; k < 3; k++)
+			val += a[(k * 4) + i] * normal[k];
+		ret[i] = val;
+	}
+
+	return ret;
 }
 
+}

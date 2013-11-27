@@ -1,7 +1,9 @@
 #include "StreetSegment.h"
 #include "StreetPiece.h"
 #include "StreetLights.h"
+#include "LightsCollider.h"
 #include "Street.h"
+#include "CollisionManager.h"
 
 #include <Utils/Randomizer.h>
 #include <Math/MathUtils.h>
@@ -229,10 +231,18 @@ void StreetSegment::InitializeLights()
 
 		sm::Matrix m_streetLightsTransform = m_worldMatrix * (m_streetPiece->GetTransform() * lightMesh->m_worldMatrix);
 
-		SegmentSide side = GetSegmentSide(m_streetLightsTransform * sm::Vec3(0, 0, 0));
+		sm::Vec3 lightsPosition = m_streetLightsTransform * sm::Vec3(0, 0, 0);
+
+		SegmentSide side = GetSegmentSide(lightsPosition);
 
 		assert(m_streetLights[(int)side] == NULL);
 		m_streetLights[(int)side] = new StreetLights(m_streetLightsTransform);
+
+		sm::Vec3 colliderPosition = m_streetLightsTransform * sm::Vec3(2, 0, 0);
+		sm::Vec3 colliderDirection = m_streetLightsTransform.TransformNormal(sm::Vec3(0, 0, -1));
+
+		LightsCollider* lightsCollider = new LightsCollider(colliderPosition, colliderDirection);
+		CollisionManager::GetInstance()->AddCollider(lightsCollider);
 
 		m_lightsCount++;
 	}

@@ -1,4 +1,5 @@
 #include "BoxCollider.h"
+#include "CollisionInfo.h"
 #include <Math/MathUtils.h>
 
 BoxCollider::BoxCollider(const sm::Vec3 &pivot, const sm::Vec3 &size) :
@@ -16,6 +17,11 @@ BoxCollider::BoxCollider(const sm::Vec3 &pivot, const sm::Vec3 &size) :
 	m_colliderVertices[3].Set(m_right, 0, m_back);
 
 	m_radius = sm::Vec3(m_left, 0, m_front).GetLength();
+}
+
+void BoxCollider::SetPivot(const sm::Vec3& pivot)
+{
+	m_pivot = pivot;
 }
 
 const sm::Vec3& BoxCollider::GetPivot() const
@@ -146,7 +152,7 @@ bool BoxCollider::CheckCollision(const sm::Vec3 &point) const
 		point.z < m_back;
 }
 
-bool BoxCollider::CheckCollision(const Collider *collider) const
+bool BoxCollider::CheckCollision(const Collider *collider, CollisionInfo& collisionInfo) const
 {
 	if (collider->GetColliderType() != ColliderType_Box)
 		return false; // TODO dawaj wiecej colliderow
@@ -162,12 +168,26 @@ bool BoxCollider::CheckCollision(const Collider *collider) const
 
 	sm::Matrix toAabb = m_transformInverted * box->m_transform;
 
+	float minDist = 99999.0f;
+
+	bool isCollision = false;
 	for (int i = 0; i < 4; i++)
 	{
 		sm::Vec3 testPoint = toAabb * box->m_colliderVertices[i];
 		if (CheckCollision(testPoint))
-			return true;
+		{
+			float dist = (m_pivot - testPoint).GetLength();
+			if (dist < minDist)
+			{
+				minDist = dist;
+				collisionInfo.m_colliderPosition = m_transform * testPoint;
+				isCollision = true;
+			}
+		}
 	}
+
+	if (isCollision)
+		return true;
 
 	return false;
 }

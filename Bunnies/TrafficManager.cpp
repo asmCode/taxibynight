@@ -36,7 +36,7 @@ bool TrafficManager::Initialize()
 		BoxCollider* carCollider = new BoxCollider(bbox.center, sm::Vec3(bbox.m_width, bbox.m_height, bbox.m_depth));
 		m_cars[i] = new Car(carCollider);
 
-		CollisionManager::GetInstance()->AddColliderHolder(m_cars[i]);
+		CollisionManager::GetInstance()->AddCollider(m_cars[i]->GetCollider());
 	}
 
 	return true;
@@ -46,8 +46,8 @@ void TrafficManager::Update(float time, float seconds)
 {
 	if (m_activeCarsCount == 0)
 	{
-		//ActivateCar(m_cars[0], Taxi::GetInstance()->GetPosition());
-		//ActivateCar(m_cars[1], Taxi::GetInstance()->GetPosition() + sm::Vec3(5, 0, 0));
+		ActivateCar(m_cars[0], Taxi::GetInstance()->GetPosition());
+		ActivateCar(m_cars[1], Taxi::GetInstance()->GetPosition() + sm::Vec3(5, 0, 0));
 	}
 
 	for (int i = 0; i < MaxCars; i++)

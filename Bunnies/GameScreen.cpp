@@ -79,7 +79,7 @@ bool GameScreen::Initialize()
 	//m_manCam = new ManCam();
 
 	m_taxi = new Taxi();
-	CollisionManager::GetInstance()->AddColliderHolder(m_taxi);
+	CollisionManager::GetInstance()->AddCollider(m_taxi->GetCollider());
 	m_pedsManager = new PedsManager(m_taxi->GetPosition());
 
 	m_trafficManager = new TrafficManager();

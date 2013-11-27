@@ -26,6 +26,14 @@
 #include <stdlib.h>
 #include <assert.h>
 
+// TEMP
+#include <Graphics/IDrawable.h>
+#include <vector>
+std::vector<IDrawable*> debugDrawables;
+Model *debugSphere;
+
+std::vector<sm::Vec3> debugSpheres;
+
 GameController::GameController(IGraphicsEngine *graphicsEngine) :
 	m_graphicsEngine(graphicsEngine),
 	m_splashScreen(NULL),
@@ -74,6 +82,9 @@ bool GameController::InitializeGraphics(const std::string &basePath)
 	InterfaceProvider::m_fonts["digital_bold_24"] = FontRenderer::LoadFromFile((basePath + "data/fonts/digital_bold_24.xml").c_str(), spriteBatch);
 	InterfaceProvider::m_fonts["fenix_18"] = FontRenderer::LoadFromFile((basePath + "data/fonts/fenix_18.xml").c_str(), spriteBatch);
 	InterfaceProvider::m_fonts["fenix_26"] = FontRenderer::LoadFromFile((basePath + "data/fonts/fenix_26.xml").c_str(), spriteBatch);
+
+	debugSphere = m_content->Get<Model>("debug_sphere");
+	assert(debugSphere != NULL);
 
 	Shader *spriteShader = m_content->Get<Shader>("Sprite2");
 	assert(spriteShader != NULL);
@@ -135,6 +146,13 @@ void GameController::Draw(float time, float seconds)
 	assert(m_activeScreen != NULL);
 
 	m_activeScreen->Draw(time, seconds);
+
+	for (int i = 0; i < debugDrawables.size(); i++)
+		debugDrawables[i]->Draw(time, seconds);
+
+	for (int i = 0; i < debugSpheres.size(); i++)
+		DrawingRoutines::DrawWithMaterial(debugSphere->m_meshParts, sm::Matrix::TranslateMatrix(debugSpheres[i]) * sm::Matrix::ScaleMatrix(0.2f, 0.2f, 0.2f));
+	debugSpheres.clear();
 }
 
 void GameController::Update(float time, float seconds)
