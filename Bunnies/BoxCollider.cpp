@@ -16,7 +16,7 @@ BoxCollider::BoxCollider(const sm::Vec3 &pivot, const sm::Vec3 &size) :
 	m_colliderVertices[2].Set(m_left, 0, m_back);
 	m_colliderVertices[3].Set(m_right, 0, m_back);
 
-	m_radius = sm::Vec3(m_left, 0, m_front).GetLength();
+	m_radius = (m_colliderVertices[0] - m_colliderVertices[3]).GetLength() / 2;
 }
 
 void BoxCollider::SetPivot(const sm::Vec3& pivot)
@@ -146,10 +146,10 @@ bool BoxCollider::CheckCollision(const sm::Vec3 &bSeg,
 bool BoxCollider::CheckCollision(const sm::Vec3 &point) const
 {
 	return
-		point.x > m_left &&
-		point.x < m_right &&
-		point.z > m_front &&
-		point.z < m_back;
+		point.x >= m_left &&
+		point.x <= m_right &&
+		point.z >= m_front &&
+		point.z <= m_back;
 }
 
 bool BoxCollider::CheckCollision(const Collider *collider, CollisionInfo& collisionInfo) const

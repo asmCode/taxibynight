@@ -21,3 +21,8 @@ ColliderId Collider::GetColliderId() const
 {
 	return m_colliderId;
 }
+
+const sm::Matrix& Collider::GetTransform() const
+{
+	return m_transform;
+}

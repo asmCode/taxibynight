@@ -84,7 +84,7 @@ void Car::DriveToDestination(float seconds)
 
 		//Log::LogT("dist %.02f", distToCollision);
 
-		if (distToCollision < 2.0f)
+		if (distToCollision < 3.0f)
 		{
 			m_acceleration = 0.0f;
 			m_speed = 0.0f;
@@ -186,13 +186,13 @@ const Collider* Car::GetCollider() const
 
 bool Car::GetDistanceToCollision(float &distToCollision)
 {
-	BoxCollider bbox(m_boxCollider->GetPivot() + sm::Vec3(0, 0, 0), m_boxCollider->GetSize() + sm::Vec3(0, 0, 0.0f));
+	BoxCollider bbox(m_boxCollider->GetPivot() + sm::Vec3(0, 0, 4), m_boxCollider->GetSize() + sm::Vec3(0, 0, 8.0f));
 	bbox.SetPivot(m_boxCollider->GetPivot());
 	bbox.SetColliderId(ColliderId_Car);
 	bbox.SetTransform(m_worldMatrix);
 
 	// TEMP
-	debugSpheres.push_back(m_worldMatrix * (m_boxCollider->GetPivot() + sm::Vec3(0, 2, 0)));
+	//debugSpheres.push_back(m_worldMatrix * (m_boxCollider->GetPivot() + sm::Vec3(0, 2, 0)));
 
 	CollisionInfo collisionInfo;
 

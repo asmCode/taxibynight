@@ -241,7 +241,7 @@ void StreetSegment::InitializeLights()
 		sm::Vec3 colliderPosition = m_streetLightsTransform * sm::Vec3(2, 0, 0);
 		sm::Vec3 colliderDirection = m_streetLightsTransform.TransformNormal(sm::Vec3(0, 0, -1));
 
-		LightsCollider* lightsCollider = new LightsCollider(colliderPosition, colliderDirection);
+		LightsCollider* lightsCollider = new LightsCollider(colliderPosition, colliderDirection, m_streetLights[(int)side]);
 		CollisionManager::GetInstance()->AddCollider(lightsCollider);
 
 		m_lightsCount++;

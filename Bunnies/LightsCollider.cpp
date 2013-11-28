@@ -1,23 +1,18 @@
 #include "LightsCollider.h"
 #include "CollisionInfo.h"
+#include "StreetLights.h"
 #include <Math/MathUtils.h>
 
 // TEMP
 #include <vector>
-#include <Graphics/IDrawable.h>
-#include <Graphics/Model.h>
-#include "DrawingRoutines.h"
-extern std::vector<IDrawable*> debugDrawables;
-extern Model *debugSphere;
+extern std::vector<sm::Vec3> debugSpheres;
 
-LightsCollider::LightsCollider(const sm::Vec3 &position, const sm::Vec3 &direction) :
+LightsCollider::LightsCollider(const sm::Vec3 &position, const sm::Vec3 &direction, StreetLights* streetLights) :
 	m_position(position),
-	m_direction(direction)
+	m_direction(direction),
+	m_streetLights(streetLights)
 {
 	SetColliderId(ColliderId_StreetLights);
-
-	// TEMP
-	//debugDrawables.push_back(this);
 }
 
 ColliderType LightsCollider::GetColliderType() const
@@ -27,6 +22,9 @@ ColliderType LightsCollider::GetColliderType() const
 
 bool LightsCollider::CheckCollision(const Collider* collider, CollisionInfo& collisionInfo) const
 {
+	if (m_streetLights->CanDrive())
+		return false;
+
 	if (collider->GetColliderId() == ColliderId_Taxi)
 		return false;
 
@@ -50,14 +48,4 @@ bool LightsCollider::CheckCollision(const Collider* collider, CollisionInfo& col
 sm::Vec3 LightsCollider::GetPosition() const
 {
 	return m_position;
-}
-
-// TEMP
-void LightsCollider::Draw(float time, float seconds)
-{
-	DrawingRoutines::DrawWithMaterial(debugSphere->m_meshParts,
-		sm::Matrix::TranslateMatrix(m_position) * sm::Matrix::ScaleMatrix(0.4f, 0.4f, 0.4f));
-
-	DrawingRoutines::DrawWithMaterial(debugSphere->m_meshParts,
-		sm::Matrix::TranslateMatrix(m_position + m_direction * 2) * sm::Matrix::ScaleMatrix(0.4f, 0.4f, 0.4f));
 }

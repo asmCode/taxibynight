@@ -5,13 +5,12 @@
 #include <Math/Vec3.h>
 #include <Math/Matrix.h>
 
-// TEMO
-#include <Graphics/IDrawable.h>
+class StreetLights;
 
-class LightsCollider : public Collider, public IDrawable
+class LightsCollider : public Collider
 {
 public:
-	LightsCollider(const sm::Vec3 &position, const sm::Vec3 &direction);
+	LightsCollider(const sm::Vec3 &position, const sm::Vec3 &directio, StreetLights* streetLights);
 
 	ColliderType GetColliderType() const;
 
@@ -19,11 +18,10 @@ public:
 
 	sm::Vec3 GetPosition() const;
 
-	void Draw(float time, float seconds);
-
 private:
 	sm::Vec3 m_position;
 	sm::Vec3 m_direction;
+	StreetLights* m_streetLights;
 };
 
 #endif // LIGHTS_COLLIDER

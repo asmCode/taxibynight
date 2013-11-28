@@ -28,7 +28,8 @@ public:
 
 	sm::Vec3 GetPosition() const;
 
-private:
+// CHANGE
+public:
 	sm::Vec3 m_pivot;
 	sm::Vec3 m_size;
 

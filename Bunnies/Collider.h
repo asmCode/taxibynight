@@ -18,6 +18,7 @@ public:
 
 	virtual ColliderType GetColliderType() const = 0;
 	virtual ColliderId GetColliderId() const;
+	const sm::Matrix& GetTransform() const;
 
 	virtual bool CheckCollision(const Collider* collider, CollisionInfo& collisionInfo) const = 0;
 	virtual sm::Vec3 GetPosition() const = 0;
