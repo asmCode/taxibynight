@@ -70,7 +70,7 @@ void PedsManager::Update(float time, float seconds)
 {
 	if (Taxi::GetInstance()->IsOccupied())
 	{
-		if ((Taxi::GetInstance()->GetPosition() - Taxi::GetInstance()->GetPassengerTarget()).GetLength() < 5.0 && Taxi::GetInstance()->m_speed < 1.0f)
+		if ((Taxi::GetInstance()->GetPosition() - Taxi::GetInstance()->GetPassengerTarget()).GetLength() < 5.0 && Taxi::GetInstance()->GetSpeed() < 1.0f)
 		{
 			Ped *ped = GetFreePed();
 			if (ped != NULL)
@@ -104,12 +104,12 @@ void PedsManager::Update(float time, float seconds)
 		sm::Vec3 taxiDirection = m_taxiPosition - m_pedApproaching->GetPosition();
 		float distanceToTaxi = taxiDirection.GetLength();
 
-		if (!m_pedApproaching->IsTaxiInApproachRange(m_taxiPosition) || Taxi::GetInstance()->m_speed > 1.0f)
+		if (!m_pedApproaching->IsTaxiInApproachRange(m_taxiPosition) || Taxi::GetInstance()->GetSpeed() > 1.0f)
 		{
 			m_pedApproaching->CancelApproach();
 			m_pedApproaching = NULL;
 		}
-		else if (distanceToTaxi < 1.8 && Taxi::GetInstance()->m_speed < 1.0f)
+		else if (distanceToTaxi < 1.8 && Taxi::GetInstance()->GetSpeed() < 1.0f)
 		{
 			SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Doors);
 
@@ -143,7 +143,7 @@ void PedsManager::Update(float time, float seconds)
 
 		if (!m_peds[i]->m_isDying)
 		{
-			if (Taxi::GetInstance()->m_boxCollider->CheckCollision(Taxi::GetInstance()->m_worldMatrix.GetInversed() * m_peds[i]->GetPosition()))
+			if (Taxi::GetInstance()->m_boxCollider->CheckCollision(Taxi::GetInstance()->GetTransform().GetInversed() * m_peds[i]->GetPosition()))
 			{
 				if (m_pedApproaching == m_peds[i])
 					m_pedApproaching = NULL;

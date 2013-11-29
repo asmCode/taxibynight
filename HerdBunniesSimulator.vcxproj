@@ -87,6 +87,7 @@
     <ClInclude Include="BunniesView\TimeControl.h" />
     <ClInclude Include="Bunnies\AnimButton.h" />
     <ClInclude Include="Bunnies\Arrow.h" />
+    <ClInclude Include="Bunnies\BaseCar.h" />
     <ClInclude Include="Bunnies\Billboard.h" />
     <ClInclude Include="Bunnies\Car.h" />
     <ClInclude Include="Bunnies\ColliderId.h" />
@@ -220,6 +221,7 @@
     <ClCompile Include="BunniesView\WinMain.cpp" />
     <ClCompile Include="Bunnies\AnimButton.cpp" />
     <ClCompile Include="Bunnies\Arrow.cpp" />
+    <ClCompile Include="Bunnies\BaseCar.cpp" />
     <ClCompile Include="Bunnies\Billboard.cpp" />
     <ClCompile Include="Bunnies\Car.cpp" />
     <ClCompile Include="Bunnies\Collider.cpp" />

@@ -203,7 +203,7 @@ float Animation::GetAnimLength()
 		scale->GetKeyframe(scale->GetKeysCount() - 1, scaleTime, vdummy, bdummy);
 
 	float maxAnimLength = 0;
-	for (int i = 0; i < subAnims.size(); i++)
+	for (unsigned int i = 0; i < subAnims.size(); i++)
 	{
 		float length = subAnims[i]->GetAnimLength();
 		if (length > maxAnimLength)

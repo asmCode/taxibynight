@@ -121,7 +121,7 @@ GLuint Shader::CompileShader(GLenum shaderType, const char* file)
 	}
 	
 	fileStream.seekg(0, std::ios::end);
-	unsigned fileSize = fileStream.tellg();
+	unsigned fileSize = static_cast<unsigned>(fileStream.tellg());
 	fileStream.seekg(0, std::ios::beg);
 	
 	char *fileContent = new char[fileSize + 1];

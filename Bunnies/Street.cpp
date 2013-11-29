@@ -195,7 +195,7 @@ Street::Street(PedsManager *pedsManager, TrafficManager* trafficManager) :
 		}
 	}
 
-	for (int i = 0; i < m_streetMap->GetWidth() * m_streetMap->GetHeight(); i++)
+	for (unsigned int i = 0; i < m_streetMap->GetWidth() * m_streetMap->GetHeight(); i++)
 		m_streetSegments[i]->Initialize();
 }
 
@@ -218,7 +218,7 @@ void Street::Update(float time, float seconds)
 	{
 		for (int x = ix - Range - 1; x <= ix + Range + 1; x++)
 		{
-			if (x < 0 || x >= m_streetMap->GetWidth() || y < 0 || y >= m_streetMap->GetHeight())
+			if (x < 0 || x >= (int)m_streetMap->GetWidth() || y < 0 || y >= (int)m_streetMap->GetHeight())
 				continue;
 
 			StreetSegment *ss = GetSegment(x, y);
@@ -234,7 +234,7 @@ void Street::Update(float time, float seconds)
 	{
 		for (int x = ix - Range - 1; x <= ix + Range + 1; x++)
 		{
-			if (x < 0 || x >= m_streetMap->GetWidth() || y < 0 || y >= m_streetMap->GetHeight())
+			if (x < 0 || x >= (int)m_streetMap->GetWidth() || y < 0 || y >= (int)m_streetMap->GetHeight())
 				continue;
 
 			StreetSegment *ss = GetSegment(x, y);
@@ -314,7 +314,7 @@ void Street::DrawStreetLights(float time, float seconds)
 	{
 		for (int x = ix - Range - 1; x <= ix + Range + 1; x++)
 		{
-			if (x < 0 || x >= m_streetMap->GetWidth() || y < 0 || y >= m_streetMap->GetHeight())
+			if (x < 0 || x >= (int)m_streetMap->GetWidth() || y < 0 || y >= (int)m_streetMap->GetHeight())
 				continue;
 
 			StreetSegment *ss = GetSegment(x, y);
@@ -347,7 +347,7 @@ void Street::DrawStreetLightsSprites(float time, float seconds)
 	{
 		for (int x = ix - Range - 1; x <= ix + Range + 1; x++)
 		{
-			if (x < 0 || x >= m_streetMap->GetWidth() || y < 0 || y >= m_streetMap->GetHeight())
+			if (x < 0 || x >= (int)m_streetMap->GetWidth() || y < 0 || y >= (int)m_streetMap->GetHeight())
 				continue;
 
 			StreetSegment *ss = GetSegment(x, y);
@@ -402,7 +402,7 @@ StreetSegment* Street::GetSegmentAtPosition(const sm::Vec3 &position) const
 	int32_t y;
 	GetSegmentCoords(position, x, y);
 
-	if (x < 0 || y < 0 || x >= m_streetMap->GetWidth() || y >= m_streetMap->GetHeight())
+	if (x < 0 || y < 0 || x >= (int)m_streetMap->GetWidth() || y >= (int)m_streetMap->GetHeight())
 		return NULL;
 
 	return m_streetSegments[y * m_streetMap->GetWidth() + x];
@@ -410,7 +410,7 @@ StreetSegment* Street::GetSegmentAtPosition(const sm::Vec3 &position) const
 
 StreetSegment* Street::GetSegment(int x, int y) const
 {
-	if (x < 0 || x >= m_streetMap->GetWidth() || y < 0 || y >= m_streetMap->GetHeight())
+	if (x < 0 || x >= (int)m_streetMap->GetWidth() || y < 0 || y >= (int)m_streetMap->GetHeight())
 		return NULL;
 
 	return m_streetSegments[y * m_streetMap->GetWidth() + x];

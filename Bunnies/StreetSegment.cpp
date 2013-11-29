@@ -191,7 +191,7 @@ void StreetSegment::InitializePaths()
 		}
 	}
 
-	for (int i = 0; i < m_streetPaths.size(); i++)
+	for (unsigned int i = 0; i < m_streetPaths.size(); i++)
 	{
 		sm::Vec3 endPosition = m_streetPaths[i].GetEnd();
 

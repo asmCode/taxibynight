@@ -135,7 +135,7 @@ void FontRenderer::DrawString(const char *text, unsigned x, unsigned y, const Co
 
 	unsigned xShift = x;
 	unsigned yShift = y;
-	unsigned rowHeight = texLetters['A'].Size.Y * scale;
+	unsigned rowHeight = (unsigned)((float)texLetters['A'].Size.Y * scale);
 	for (unsigned i = 0; i < strlen(text); i++)
 	{
 		if (text[i] == '\n')
@@ -153,7 +153,7 @@ void FontRenderer::DrawString(const char *text, unsigned x, unsigned y, const Co
 			yShift,
 			(int)((float)letter.Coords.ImageRect.Width * scale),
 			(int)((float)letter.Coords.ImageRect.Height * scale));//, letter.Size.X, letter.Size.Y);
-		xShift += letter.Size.X * scale;
+		xShift += (int)(letter.Size.X * scale);
 		
 	}
 	//m_spriteBatch ->Draw(texLetters[text[0]].Coords.Tex, Color(255, 0, 0), 0, 40);
