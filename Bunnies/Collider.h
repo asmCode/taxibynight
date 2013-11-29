@@ -23,7 +23,12 @@ public:
 	virtual bool CheckCollision(const Collider* collider, CollisionInfo& collisionInfo) const = 0;
 	virtual sm::Vec3 GetPosition() const = 0;
 
+	void SetColliderActive(bool active);
+	bool IsColliderActive() const;
+
 protected:
+	bool m_isColliderActive;
+
 	sm::Matrix m_transform;
 	sm::Matrix m_transformInverted;
 

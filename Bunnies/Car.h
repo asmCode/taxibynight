@@ -6,6 +6,7 @@
 #include <Math/Matrix.h>
 
 class BoxCollider;
+class BaseCar;
 
 class Car : public IColliderHolder
 {
@@ -25,19 +26,14 @@ public:
 	const Collider* GetCollider() const;
 
 private:
+	BaseCar* m_baseCar;
+
 	bool m_isActive;
 
 	StreetPath m_streetPath;
 	BoxCollider* m_boxCollider;
-	sm::Matrix m_worldMatrix;
 
-	float m_acceleration;
 	sm::Vec3 m_destination;
-	sm::Vec3 m_position;
-
-	float m_speed;
-
-	float m_maxSpeed;
 
 	bool CanDrive();
 	void DriveToDestination(float seconds);

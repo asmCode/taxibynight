@@ -6,7 +6,7 @@
 class BaseCar
 {
 public:
-	BaseCar(float axesWidth, float axesDistance);
+	BaseCar(float axesWidth, float axesDistance, float maxSpeed);
 
 	virtual ~BaseCar();
 
@@ -19,6 +19,8 @@ public:
 
 	const sm::Matrix& GetTransform() const;
 
+	const sm::Vec3& GetCarDirection() const;
+
 	sm::Matrix m_worldMatrix;
 
 	sm::Vec3 GetWheelsWorldDirection() const;
@@ -28,12 +30,17 @@ public:
 	void SetPosition(const sm::Vec3& position);
 
 	void SetWheelsWorldDirection(const sm::Vec3& direction);
+	void SetWheelsAngle(float wheelsAngle);
 
 	float GetSpeed() const;
 	float GetMaxSpeed() const;
 
+	void SetCarDirection(const sm::Vec3& carDirection);
+
 	const sm::Matrix& GetLeftWheelTransform() const;
 	const sm::Matrix& GetRightWheelTransform() const;
+
+	float GetAxesDistance() const;
 
 protected:
 	float m_maxSpeed;

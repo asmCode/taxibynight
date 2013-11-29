@@ -1,9 +1,20 @@
 #include "Collider.h"
 
 Collider::Collider() :
-	m_colliderId(ColliderId_Default)
+	m_colliderId(ColliderId_Default),
+	m_isColliderActive(true)
 {
 
+}
+
+void Collider::SetColliderActive(bool active)
+{
+	m_isColliderActive = active;
+}
+
+bool Collider::IsColliderActive() const
+{
+	return m_isColliderActive;
 }
 
 void Collider::SetTransform(const sm::Matrix& transform)

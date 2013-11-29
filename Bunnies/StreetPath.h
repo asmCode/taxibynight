@@ -22,6 +22,7 @@ public:
 	bool CanDrive() const;
 	int GetIndex() const;
 	StreetSegment* GetContinousSegment() const;
+	sm::Vec3 GetPositionAtIndex(int index);
 
 private:
 	int m_index;

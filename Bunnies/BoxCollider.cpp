@@ -154,6 +154,9 @@ bool BoxCollider::CheckCollision(const sm::Vec3 &point) const
 
 bool BoxCollider::CheckCollision(const Collider *collider, CollisionInfo& collisionInfo) const
 {
+	if (!collider->IsColliderActive() || !IsColliderActive())
+		return false;
+
 	if (collider->GetColliderType() != ColliderType_Box)
 		return false; // TODO dawaj wiecej colliderow
 

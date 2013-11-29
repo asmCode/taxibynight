@@ -150,6 +150,7 @@ void GameController::Draw(float time, float seconds)
 	for (int i = 0; i < debugDrawables.size(); i++)
 		debugDrawables[i]->Draw(time, seconds);
 
+	glClear(GL_DEPTH_BUFFER_BIT);
 	for (int i = 0; i < debugSpheres.size(); i++)
 		DrawingRoutines::DrawWithMaterial(debugSphere->m_meshParts, sm::Matrix::TranslateMatrix(debugSpheres[i]) * sm::Matrix::ScaleMatrix(0.2f, 0.2f, 0.2f));
 	debugSpheres.clear();

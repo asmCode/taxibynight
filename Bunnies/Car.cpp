@@ -5,6 +5,7 @@
 #include "StreetPiece.h"
 #include "StreetLights.h"
 #include "BoxCollider.h"
+#include "BaseCar.h"
 #include "CollisionManager.h"
 #include <Utils/Log.h>
 #include <Math/MathUtils.h>
@@ -16,13 +17,11 @@ extern std::vector<sm::Vec3> debugSpheres;
 
 Car::Car(BoxCollider* boxCollider) :
 	m_isActive(false),
-	m_worldMatrix(sm::Matrix::Identity),
-	m_speed(0.0f),
-	m_acceleration(0.0f),
-	m_maxSpeed(10.0f),
 	m_boxCollider(boxCollider)
 {
 	m_boxCollider->SetColliderId(ColliderId_Car);
+
+	m_baseCar = new BaseCar(1.1f, 1.56f, 10.0f);
 }
 
 Car::~Car()
@@ -31,9 +30,11 @@ Car::~Car()
 
 void Car::Update(float time, float seconds)
 {
-	float distance = (m_destination - m_position).GetLength();
+	sm::Vec3 frontAxisPosition = (m_baseCar->GetPosition() + m_baseCar->GetCarDirection() * (m_baseCar->GetAxesDistance() / 2.0f));
 
-	if (distance < 1.0f)
+	float distance = (m_destination - frontAxisPosition).GetLength();
+
+	if (distance < 2.0f)
 		GetNewDestination(true);
 
 	DriveToDestination(seconds);
@@ -41,21 +42,28 @@ void Car::Update(float time, float seconds)
 
 void Car::SetActive(const sm::Vec3 &initialPosition)
 {
+	m_boxCollider->SetColliderActive(true);
+
 	m_isActive = true;
 
-	m_position = initialPosition;
-	m_destination = m_position;
-
-	StreetSegment *ss = Street::Instance->GetSegmentAtPosition(m_position);
+	StreetSegment *ss = Street::Instance->GetSegmentAtPosition(initialPosition);
 	assert(ss != NULL);
 	assert(ss->GetStreetPiece()->HasRoad());
 
-	m_streetPath = ss->GetRandomPathAtPosition(m_position);
+	m_streetPath = ss->GetRandomPathAtPosition(initialPosition);
+
+	m_baseCar->SetPosition(m_streetPath.GetNextPosition());
+	m_destination = m_streetPath.GetNextPosition();
+	m_baseCar->SetSpeed(0.0f);
+	m_baseCar->SetAcceleration(0.0f);
+	m_baseCar->SetCarDirection((m_destination - m_streetPath.GetBeginning()).GetNormalized());
+	m_baseCar->SetWheelsAngle(0.0f);
 }
 
 void Car::SetInactive()
 {
 	m_isActive = false;
+	m_boxCollider->SetColliderActive(false);
 }
 
 bool Car::IsActive() const
@@ -73,26 +81,28 @@ void Car::DriveToDestination(float seconds)
 	float distToCollision = 0.0f;
 	if (GetDistanceToCollision(distToCollision))
 	{
-		if (m_speed > 2.0f && distToCollision < 10.0f)
+		if (m_baseCar->GetSpeed() > 3.0f && distToCollision < 10.0f)
 		{
-			m_acceleration = (1.0f - (distToCollision / 10.0f)) * -50.0f;
+			m_baseCar->SetAcceleration(-4.0f);
+		}
+		else if (m_baseCar->GetSpeed() < 3.0f && distToCollision < 10.0f)
+		{
+			m_baseCar->SetAcceleration(0.4f);
 		}
 		else
-		{
-			m_acceleration = 3.0f;
-		}
+			m_baseCar->SetAcceleration(0.0f);
 
 		//Log::LogT("dist %.02f", distToCollision);
 
-		if (distToCollision < 3.0f)
+		if (distToCollision < 3.0f && m_baseCar->GetSpeed() > 0.0f)
 		{
-			m_acceleration = 0.0f;
-			m_speed = 0.0f;
+			m_baseCar->SetAcceleration(-8.0f);
+			//m_baseCar->SetSpeed(0.0f);
 		}
 	}
 	else
 	{
-		m_acceleration = 10.0f;
+		m_baseCar->SetAcceleration(0.8f);
 	}
 
 	/*
@@ -124,33 +134,18 @@ void Car::DriveToDestination(float seconds)
 	}
 	*/
 
-	m_speed = MathUtils::Clamp(m_speed + m_acceleration * seconds, 0.0f, m_maxSpeed);
+	sm::Vec3 frontAxisPosition = (m_baseCar->GetPosition() + m_baseCar->GetCarDirection() * (m_baseCar->GetAxesDistance() / 2.0f));
+	sm::Vec3 wheelsDirection = (m_destination - frontAxisPosition).GetNormalized();
+	debugSpheres.push_back(frontAxisPosition);
+	debugSpheres.push_back(frontAxisPosition + wheelsDirection);
+	debugSpheres.push_back(m_destination);
 
-	sm::Vec3 direction = m_destination - m_position;
-	float distance = direction.GetLength();
-	direction.Normalize();
+	m_baseCar->SetWheelsWorldDirection(wheelsDirection);
+	m_baseCar->Update(0.0f, seconds);
+	if (m_baseCar->GetSpeed() < 0.0f)
+		m_baseCar->SetSpeed(0.0f);
 
-	sm::Vec3 moveVector;
-
-	if (distance < 0.01f) // BETON!!!
-	{
-		//direction = sm::Vec3(0, 0, 1);
-		moveVector.Set(0, 0, 0);
-
-		m_position = m_destination;
-	}
-	else
-	{
-		moveVector = direction * m_speed;
-	}
-
-	m_position += moveVector * seconds;
-
-	m_worldMatrix =
-		sm::Matrix::TranslateMatrix(m_position) *
-		sm::Matrix::CreateLookAt(direction, sm::Vec3(0, 1, 0));
-
-	m_boxCollider->SetTransform(m_worldMatrix);
+	m_boxCollider->SetTransform(m_baseCar->GetTransform());
 }
 
 void Car::GetNewDestination(bool atTheEdge)
@@ -163,7 +158,7 @@ void Car::GetNewDestination(bool atTheEdge)
 		if (ss == NULL)
 			return;
 
-		m_streetPath = ss->GetRandomPathAtPosition(m_position);
+		m_streetPath = ss->GetRandomPathAtPosition(m_baseCar->GetPosition());
 	}
 
 	m_destination = m_streetPath.GetNextPosition();
@@ -171,12 +166,12 @@ void Car::GetNewDestination(bool atTheEdge)
 
 const sm::Vec3& Car::GetPosition() const
 {
-	return m_position;
+	return m_baseCar->GetPosition();
 }
 
 const sm::Matrix& Car::GetWorldMatrix() const
 {
-	return m_worldMatrix;
+	return m_baseCar->GetTransform();
 }
 
 const Collider* Car::GetCollider() const
@@ -186,10 +181,10 @@ const Collider* Car::GetCollider() const
 
 bool Car::GetDistanceToCollision(float &distToCollision)
 {
-	BoxCollider bbox(m_boxCollider->GetPivot() + sm::Vec3(0, 0, 4), m_boxCollider->GetSize() + sm::Vec3(0, 0, 8.0f));
+	BoxCollider bbox(m_boxCollider->GetPivot() + sm::Vec3(0, 0, -4), m_boxCollider->GetSize() + sm::Vec3(0, 0, 8.0f));
 	bbox.SetPivot(m_boxCollider->GetPivot());
 	bbox.SetColliderId(ColliderId_Car);
-	bbox.SetTransform(m_worldMatrix);
+	bbox.SetTransform(m_baseCar->GetTransform());
 
 	// TEMP
 	//debugSpheres.push_back(m_worldMatrix * (m_boxCollider->GetPivot() + sm::Vec3(0, 2, 0)));
@@ -202,7 +197,7 @@ bool Car::GetDistanceToCollision(float &distToCollision)
 		// TEMP
 		debugSpheres.push_back(collisionInfo.m_colliderPosition + sm::Vec3(0, 1, 0));
 
-		distToCollision = (collisionInfo.m_colliderPosition - m_position).GetLength();
+		distToCollision = (collisionInfo.m_colliderPosition - m_baseCar->GetPosition()).GetLength();
 		return true;
 	}
 

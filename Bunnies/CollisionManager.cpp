@@ -39,10 +39,12 @@ bool CollisionManager::CheckCollision(const Collider *collider, CollisionInfo& c
 		if (collider == destinationCollider || exclude == destinationCollider)
 			continue;
 
+		/*
 		debugSpheres.push_back(collider->GetTransform() * ((BoxCollider*)collider)->m_colliderVertices[0]);
 		debugSpheres.push_back(collider->GetTransform() * ((BoxCollider*)collider)->m_colliderVertices[1]);
 		debugSpheres.push_back(collider->GetTransform() * ((BoxCollider*)collider)->m_colliderVertices[2]);
 		debugSpheres.push_back(collider->GetTransform() * ((BoxCollider*)collider)->m_colliderVertices[3]);
+		*/
 
 		if (collider->CheckCollision(destinationCollider, collisionInfo))
 		{

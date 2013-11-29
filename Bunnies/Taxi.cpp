@@ -53,7 +53,8 @@ Taxi::Taxi() :
 
 	m_baseCar = new BaseCar(
 		m_baseFrontRightWheelPosition.x - m_baseFrontLeftWheelPosition.x,
-		m_baseBackLeftWheelPosition.z - m_baseFrontLeftWheelPosition.z);
+		m_baseBackLeftWheelPosition.z - m_baseFrontLeftWheelPosition.z,
+		14.0f);
 
 	m_baseCar->SetPosition(sm::Vec3(100, 0, 100));
 }

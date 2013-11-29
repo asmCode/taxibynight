@@ -7,14 +7,14 @@
 #include <vector>
 extern std::vector<sm::Vec3> debugSpheres;
 
-BaseCar::BaseCar(float axesWidth, float axesDistance) :
+BaseCar::BaseCar(float axesWidth, float axesDistance, float maxSpeed) :
 	m_axesWidth(axesWidth),
 	m_axesDistance(axesDistance),
 	m_turnValue(0.0f),
 	m_acc(0.0f),
 	m_speed(0.0f),
 	m_wheelsAngle(0.0f),
-	m_maxSpeed(14.0f)
+	m_maxSpeed(maxSpeed)
 {
 	m_position.Set(100, 0, 100);
 	m_carDirection.Set(0, 0, -1);
@@ -92,8 +92,8 @@ void BaseCar::Update(float time, float seconds)
 	else
 		m_position += m_carDirection * m_speed * seconds;
 
-	debugSpheres.push_back(m_position);
-	debugSpheres.push_back(turnPivot);
+	//debugSpheres.push_back(m_position);
+	//debugSpheres.push_back(turnPivot);
 
 	m_worldMatrix =
 		sm::Matrix::TranslateMatrix(m_position) *
@@ -138,6 +138,11 @@ const sm::Matrix& BaseCar::GetTransform() const
 	return m_worldMatrix;
 }
 
+const sm::Vec3& BaseCar::GetCarDirection() const
+{
+	return m_carDirection;
+}
+
 float BaseCar::GetSpeed() const
 {
 	return m_speed;
@@ -163,3 +168,17 @@ void BaseCar::SetWheelsWorldDirection(const sm::Vec3& direction)
 	m_wheelsAngle = sm::Vec3::GetAngle(direction, m_carDirection) * MathUtils::Sign((direction * m_carDirection).y);
 }
 
+void BaseCar::SetWheelsAngle(float wheelsAngle)
+{
+	m_wheelsAngle = wheelsAngle;
+}
+
+void BaseCar::SetCarDirection(const sm::Vec3& carDirection)
+{
+	m_carDirection = carDirection;
+}
+
+float BaseCar::GetAxesDistance() const
+{
+	return m_axesDistance;
+}

@@ -68,3 +68,10 @@ StreetSegment* StreetPath::GetContinousSegment() const
 {
 	return m_continousStreetSegment;
 }
+
+sm::Vec3 StreetPath::GetPositionAtIndex(int index)
+{
+	assert(index < m_positions.size());
+
+	return m_positions[index];
+}
