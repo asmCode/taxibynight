@@ -23,6 +23,7 @@ public:
 	void SetAcceleration(float acc);
 
 	const sm::Vec3& GetPosition() const;
+	const sm::Vec3& GetDirection() const;
 
 	bool IsOccupied() const;
 
@@ -45,6 +46,7 @@ public:
 
 public:
 	static Taxi *m_instance;
+	static float MaxSpeed;
 
 	bool m_isOccupied;
 

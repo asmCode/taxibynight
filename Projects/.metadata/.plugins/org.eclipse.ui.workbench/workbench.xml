@@ -17,13 +17,14 @@
 <coolItem id="org.eclipse.ui.DefaultTextEditor" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="org.eclipse.ui.edit.text.actionSet.presentation" itemType="typeToolBarContribution" x="68" y="30"/>
 <coolItem id="org.eclipse.wst.xml.ui.perspective.NewFileToolBar" itemType="typeToolBarContribution" x="-1" y="-1"/>
-<coolItem id="org.eclipse.wst.xml.ui.design.DesignToolBar" itemType="typeToolBarContribution" x="-1" y="-1"/>
+<coolItem id="org.eclipse.wst.xml.ui.design.DesignToolBar" itemType="typeToolBarContribution" x="68" y="30"/>
 <coolItem id="org.tizen.gcov.actionSet" itemType="typeToolBarContribution" x="40" y="30"/>
 <coolItem id="org.tizen.nativeappcommon.contentassist.SLPCEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="org.tizen.web.browser.actionSet" itemType="typeToolBarContribution" x="40" y="30"/>
 <coolItem id="group.nav" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="184" y="30"/>
 <coolItem id="group.editor" itemType="typeGroupMarker"/>
+<coolItem id="org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="group.help" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.help" itemType="typeToolBarContribution" x="-1" y="-1"/>
 </coolbarLayout>
@@ -40,21 +41,25 @@
 <part id="4"/>
 <part id="5"/>
 <part id="6"/>
+<part id="7"/>
+<part id="8"/>
+<part id="9"/>
+<part id="10"/>
+<part id="11"/>
+<part id="12"/>
+<part id="13"/>
+<part id="14"/>
+<part id="15"/>
+<part id="16"/>
+<part id="17"/>
+<part id="18"/>
 </presentation>
 </folder>
 </info>
 </editorArea>
 <editor id="org.tizen.nativeappcommon.contentassist.SLPCEditor" name="GlesShader.cpp" partName="GlesShader.cpp" path="/home/majak/taxibynight/Projects/TaxiByNight/src/GlesShader.cpp" title="GlesShader.cpp" tooltip="TaxiByNight/src/GlesShader.cpp" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/TaxiByNight/src/GlesShader.cpp"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="9435" selectionTopPixel="6443"/>
-</editor>
-<editor id="org.tizen.nativeappcommon.contentassist.SLPCEditor" name="GameController.cpp" partName="GameController.cpp" path="/home/majak/taxibynight/Projects/TaxiByNight/src/Bunnies/GameController.cpp" title="GameController.cpp" tooltip="TaxiByNight/src/Bunnies/GameController.cpp" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/TaxiByNight/src/Bunnies/GameController.cpp"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="5913" selectionTopPixel="3340"/>
-</editor>
-<editor id="org.tizen.nativeappcommon.contentassist.SLPCEditor" name="GameController.h" partName="GameController.h" path="/home/majak/taxibynight/Projects/TaxiByNight/src/Bunnies/GameController.h" title="GameController.h" tooltip="TaxiByNight/src/Bunnies/GameController.h" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/TaxiByNight/src/Bunnies/GameController.h"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="503" selectionTopPixel="340"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="9720" selectionTopPixel="6443"/>
 </editor>
 <editor id="org.tizen.nativeappcommon.contentassist.SLPCEditor" name="IGameController.h" partName="IGameController.h" path="/home/majak/taxibynight/Projects/TaxiByNight/src/Bunnies/IGameController.h" title="IGameController.h" tooltip="TaxiByNight/src/Bunnies/IGameController.h" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/TaxiByNight/src/Bunnies/IGameController.h"/>
@@ -68,9 +73,64 @@
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/TaxiByNight/src/Bunnies/ISystemUtils.h"/>
 <editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="0"/>
 </editor>
-<editor activePart="true" focus="true" id="org.tizen.nativeappcommon.contentassist.SLPCEditor" name="GlesShaderEntry.cpp" partName="GlesShaderEntry.cpp" path="/home/majak/taxibynight/Projects/TaxiByNight/src/GlesShaderEntry.cpp" title="GlesShaderEntry.cpp" tooltip="TaxiByNight/src/GlesShaderEntry.cpp" workbook="DefaultEditorWorkbook">
+<editor id="org.tizen.nativeappcommon.contentassist.SLPCEditor" name="GameController.cpp" partName="GameController.cpp" path="/home/majak/taxibynight/Projects/TaxiByNight/src/Bunnies/GameController.cpp" title="GameController.cpp" tooltip="TaxiByNight/src/Bunnies/GameController.cpp" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/TaxiByNight/src/Bunnies/GameController.cpp"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="3127" selectionTopPixel="1054"/>
+</editor>
+<editor id="org.tizen.nativeappcommon.contentassist.SLPCEditor" name="SpritesMap.cpp" partName="SpritesMap.cpp" path="/home/majak/taxibynight/Projects/TaxiByNight/src/Bunnies/SpritesMap.cpp" title="SpritesMap.cpp" tooltip="TaxiByNight/src/Bunnies/SpritesMap.cpp" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/TaxiByNight/src/Bunnies/SpritesMap.cpp"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="451" selectionTopPixel="255"/>
+</editor>
+<editor id="org.tizen.nativeappcommon.contentassist.SLPCEditor" name="SpritesMap.h" partName="SpritesMap.h" path="/home/majak/taxibynight/Projects/TaxiByNight/src/Bunnies/SpritesMap.h" title="SpritesMap.h" tooltip="TaxiByNight/src/Bunnies/SpritesMap.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/TaxiByNight/src/Bunnies/SpritesMap.h"/>
+<editorState selectionHorizontalPixel="0" selectionLength="12" selectionOffset="171" selectionTopPixel="0"/>
+</editor>
+<editor id="org.tizen.nativeappcommon.contentassist.SLPCEditor" name="XMLLoader.h" partName="XMLLoader.h" path="/home/majak/taxibynight/Projects/TaxiByNight/src/Framework/XML/XMLLoader.h" title="XMLLoader.h" tooltip="TaxiByNight/src/Framework/XML/XMLLoader.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/TaxiByNight/src/Framework/XML/XMLLoader.h"/>
+<editorState selectionHorizontalPixel="0" selectionLength="12" selectionOffset="162" selectionTopPixel="0"/>
+</editor>
+<editor id="org.tizen.nativeappcommon.contentassist.SLPCEditor" name="XMLLoader.cpp" partName="XMLLoader.cpp" path="/home/majak/taxibynight/Projects/TaxiByNight/src/Framework/XML/XMLLoader.cpp" title="XMLLoader.cpp" tooltip="TaxiByNight/src/Framework/XML/XMLLoader.cpp" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/TaxiByNight/src/Framework/XML/XMLLoader.cpp"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="792" selectionTopPixel="361"/>
+</editor>
+<editor id="org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart" name="HUD.xml" partName="HUD.xml" path="/home/majak/taxibynight/Projects/TaxiByNight/res/data/gui/HUD.xml" title="HUD.xml" tooltip="TaxiByNight/res/data/gui/HUD.xml" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/TaxiByNight/res/data/gui/HUD.xml"/>
+</editor>
+<editor id="org.tizen.nativeappcommon.contentassist.SLPCEditor" name="Camera.cpp" partName="Camera.cpp" path="/home/majak/taxibynight/Projects/TaxiByNight/src/Bunnies/Camera.cpp" title="Camera.cpp" tooltip="TaxiByNight/src/Bunnies/Camera.cpp" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/TaxiByNight/src/Bunnies/Camera.cpp"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="19" selectionTopPixel="0"/>
+</editor>
+<editor id="org.tizen.nativeappcommon.contentassist.SLPCEditor" name="Camera.h" partName="Camera.h" path="/home/majak/taxibynight/Projects/TaxiByNight/src/Bunnies/Camera.h" title="Camera.h" tooltip="TaxiByNight/src/Bunnies/Camera.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/TaxiByNight/src/Bunnies/Camera.h"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="366" selectionTopPixel="0"/>
+</editor>
+<editor id="org.tizen.nativeappcommon.contentassist.SLPCEditor" name="GameScreen.cpp" partName="GameScreen.cpp" path="/home/majak/taxibynight/Projects/TaxiByNight/src/Bunnies/GameScreen.cpp" title="GameScreen.cpp" tooltip="TaxiByNight/src/Bunnies/GameScreen.cpp" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/TaxiByNight/src/Bunnies/GameScreen.cpp"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="5164" selectionTopPixel="5187"/>
+</editor>
+<editor id="org.tizen.nativeappcommon.contentassist.SLPCEditor" name="Taxi.h" partName="Taxi.h" path="/home/majak/taxibynight/Projects/TaxiByNight/src/Bunnies/Taxi.h" title="Taxi.h" tooltip="TaxiByNight/src/Bunnies/Taxi.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/TaxiByNight/src/Bunnies/Taxi.h"/>
+<editorState selectionHorizontalPixel="0" selectionLength="11" selectionOffset="349" selectionTopPixel="789"/>
+</editor>
+<editor id="org.tizen.nativeappcommon.contentassist.SLPCEditor" name="Taxi.cpp" partName="Taxi.cpp" path="/home/majak/taxibynight/Projects/TaxiByNight/src/Bunnies/Taxi.cpp" title="Taxi.cpp" tooltip="TaxiByNight/src/Bunnies/Taxi.cpp" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/TaxiByNight/src/Bunnies/Taxi.cpp"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="11031" selectionTopPixel="5831"/>
+</editor>
+<editor id="org.tizen.nativeappcommon.contentassist.SLPCEditor" name="Matrix.cpp" partName="Matrix.cpp" path="/home/majak/taxibynight/Projects/TaxiByNight/src/Framework/Math/Matrix.cpp" title="Matrix.cpp" tooltip="TaxiByNight/src/Framework/Math/Matrix.cpp" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/TaxiByNight/src/Framework/Math/Matrix.cpp"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="358" selectionTopPixel="511"/>
+</editor>
+<editor id="org.tizen.nativeappcommon.contentassist.SLPCEditor" name="Matrix.h" partName="Matrix.h" path="/home/majak/taxibynight/Projects/TaxiByNight/src/Framework/Math/Matrix.h" title="Matrix.h" tooltip="TaxiByNight/src/Framework/Math/Matrix.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/TaxiByNight/src/Framework/Math/Matrix.h"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="3709" selectionTopPixel="3547"/>
+</editor>
+<editor id="org.tizen.nativeappcommon.contentassist.SLPCEditor" name="GlesShaderEntry.cpp" partName="GlesShaderEntry.cpp" path="/home/majak/taxibynight/Projects/TaxiByNight/src/GlesShaderEntry.cpp" title="GlesShaderEntry.cpp" tooltip="TaxiByNight/src/GlesShaderEntry.cpp" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/TaxiByNight/src/GlesShaderEntry.cpp"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="983" selectionTopPixel="561"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1019" selectionTopPixel="561"/>
+</editor>
+<editor activePart="true" focus="true" id="org.tizen.nativeappcommon.contentassist.SLPCEditor" name="Arrow.cpp" partName="Arrow.cpp" path="/home/majak/taxibynight/Projects/TaxiByNight/src/Bunnies/Arrow.cpp" title="Arrow.cpp" tooltip="TaxiByNight/src/Bunnies/Arrow.cpp" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/TaxiByNight/src/Bunnies/Arrow.cpp"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="740"/>
 </editor>
 </editors>
 <views>
@@ -86,8 +146,12 @@
 <viewState/>
 </view>
 <view id="org.tizen.web.advanceddeclarationview.ui.AdvancedDeclarationView" partName="Declaration"/>
-<view id="%tizenunittestResultViewId" partName="Test Result"/>
-<view id="org.tizen.injector.view.InjectorView" partName="Event Injector"/>
+<view id="%tizenunittestResultViewId" partName="Test Result">
+<viewState/>
+</view>
+<view id="org.tizen.injector.view.InjectorView" partName="Event Injector">
+<viewState/>
+</view>
 <view id="org.eclipse.debug.ui.BreakpointView" partName="Breakpoints">
 <viewState/>
 </view>
@@ -95,19 +159,34 @@
 <viewState/>
 </view>
 <view id="org.tizen.webuibuilder.ui.views.PagesView" partName="Pages"/>
-<view id="org.eclipse.ui.views.TaskList" partName="Tasks"/>
+<view id="org.eclipse.ui.views.TaskList" partName="Tasks">
+<viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.completionField" categoryGroup="none" markerContentGenerator="org.eclipse.ui.ide.tasksGenerator" partName="Tasks">
+<columnWidths org.eclipse.ui.ide.completionField="40" org.eclipse.ui.ide.descriptionField="350" org.eclipse.ui.ide.locationField="105" org.eclipse.ui.ide.markerType="105" org.eclipse.ui.ide.pathField="140" org.eclipse.ui.ide.priorityField="35" org.eclipse.ui.ide.resourceField="105"/>
+<visible IMemento.internal.id="org.eclipse.ui.ide.completionField"/>
+<visible IMemento.internal.id="org.eclipse.ui.ide.priorityField"/>
+<visible IMemento.internal.id="org.eclipse.ui.ide.descriptionField"/>
+<visible IMemento.internal.id="org.eclipse.ui.ide.resourceField"/>
+<visible IMemento.internal.id="org.eclipse.ui.ide.pathField"/>
+<visible IMemento.internal.id="org.eclipse.ui.ide.locationField"/>
+<visible IMemento.internal.id="org.eclipse.ui.ide.markerType"/>
+</viewState>
+</view>
 <view id="org.eclipse.ui.views.ContentOutline" partName="Outline">
 <viewState/>
 </view>
 <view id="org.eclipse.ui.navigator.ProjectExplorer" partName="Project Explorer">
 <viewState CommonNavigator.LINKING_ENABLED="0" org.eclipse.cdt.ui.cview.groupincludes="false" org.eclipse.cdt.ui.cview.groupmacros="false" org.eclipse.cdt.ui.editor.CUChildren="true" org.eclipse.ui.navigator.resources.workingSets.showTopLevelWorkingSets="0"/>
 </view>
-<view id="org.cfeclipse.cfml.snippets.views.SnippetsView" partName="Snippet Tree View"/>
 <view id="org.eclipse.ui.views.PropertySheet" partName="Properties">
 <viewState/>
 </view>
 <view id="org.eclipse.ui.views.ProblemView" partName="Problems">
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
+<expanded>
+<category IMemento.internal.id="Warnings"/>
+<category IMemento.internal.id="Errors"/>
+<category IMemento.internal.id="Warnings (2 items)"/>
+</expanded>
 <columnWidths org.eclipse.ui.ide.locationField="105" org.eclipse.ui.ide.markerType="105" org.eclipse.ui.ide.pathField="140" org.eclipse.ui.ide.resourceField="105" org.eclipse.ui.ide.severityAndDescriptionField="1076"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.severityAndDescriptionField"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.resourceField"/>
@@ -122,9 +201,12 @@
 <view id="org.tizen.common.connection.explorer.ConnectionExplorer" partName="Connection Explorer">
 <viewState/>
 </view>
+<view id="org.tizen.nativecpp.csviewer.view.CallStackView" partName="Call Stack">
+<viewState/>
+</view>
 <view id="org.eclipse.wst.server.ui.ServersView" partName="Servers"/>
 </views>
-<perspectives activePart="org.eclipse.ui.navigator.ProjectExplorer" activePerspective="org.tizen.nativeapp.perspective">
+<perspectives activePart="org.tizen.common.connection.log.LogView" activePerspective="org.tizen.nativeapp.perspective">
 <perspective editorAreaTrimState="2" editorAreaVisible="1" fixed="0" version="0.016">
 <descriptor class="org.tizen.web.project.ui.perspective.WebWidgetPerspectiveFactory" id="org.tizen.web.ui.perspective.WebWidget" label="Tizen Web"/>
 <alwaysOnActionSet id="org.eclipse.mylyn.context.ui.actionSet"/>
@@ -243,17 +325,14 @@
 <hide_toolbar_item_id id="org.eclipse.jdt.ui.actions.OpenProjectWizard"/>
 <hide_toolbar_item_id id="org.eclipse.ui.edit.text.toggleShowSelectedElementOnly"/>
 <view id="org.eclipse.ui.navigator.ProjectExplorer"/>
-<view id="org.eclipse.ui.views.ContentOutline"/>
-<view id="org.cfeclipse.cfml.snippets.views.SnippetsView"/>
-<view id="org.tizen.injector.view.InjectorView"/>
-<view id="org.eclipse.ui.views.ProgressView"/>
 <view id="org.eclipse.ui.views.ProblemView"/>
 <view id="org.eclipse.ui.views.TaskList"/>
-<view id="org.eclipse.ui.console.ConsoleView"/>
 <view id="org.tizen.common.connection.log.LogView"/>
 <view id="%tizenunittestResultViewId"/>
+<view id="org.tizen.nativecpp.csviewer.view.CallStackView"/>
 <view id="org.tizen.common.connection.explorer.ConnectionExplorer"/>
 <view id="%tizenunittestExplorerViewId"/>
+<view id="org.eclipse.ui.views.ProgressView"/>
 <fastViewBars/>
 <layout>
 <mainWindow>
@@ -278,26 +357,23 @@
 <info part="org.eclipse.ui.editorss" ratio="0.18324937" ratioLeft="291" ratioRight="1297" relationship="2" relative="topLeft"/>
 <info folder="true" part="topRight" ratio="0.9122581" ratioLeft="1414" ratioRight="136" relationship="2" relative="org.eclipse.ui.editorss">
 <folder activePageID="org.eclipse.ui.views.ProgressView" appearance="2" expanded="2">
-<page content="org.eclipse.ui.views.ContentOutline" label="Outline"/>
-<page content="org.cfeclipse.cfml.snippets.views.SnippetsView" label="Snippet Tree View"/>
-<page content="org.tizen.injector.view.InjectorView" label="Event Injector"/>
 <page content="org.eclipse.ui.views.ProgressView" label="Progress"/>
+<page content="org.eclipse.ui.views.ContentOutline" label="LabelNotFound"/>
+<page content="org.cfeclipse.cfml.snippets.views.SnippetsView" label="LabelNotFound"/>
+<page content="org.tizen.injector.view.InjectorView" label="LabelNotFound"/>
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
 <part id="0"/>
-<part id="1"/>
-<part id="2"/>
-<part id="3"/>
 </presentation>
 </folder>
 </info>
-<info folder="true" part="bottom" ratio="0.5424084" ratioLeft="518" ratioRight="437" relationship="4" relative="org.eclipse.ui.editorss">
-<folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">
+<info folder="true" part="bottom" ratio="0.4115684" ratioLeft="370" ratioRight="529" relationship="4" relative="org.eclipse.ui.editorss">
+<folder activePageID="org.tizen.common.connection.log.LogView" appearance="2" expanded="2">
 <page content="org.eclipse.ui.views.ProblemView" label="Problems"/>
 <page content="org.eclipse.ui.views.TaskList" label="Tasks"/>
-<page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
 <page content="org.tizen.common.connection.log.LogView" label="Log"/>
 <page content="%tizenunittestResultViewId" label="Test Result"/>
-<page content="org.tizen.nativecpp.csviewer.view.CallStackView" label="LabelNotFound"/>
+<page content="org.tizen.nativecpp.csviewer.view.CallStackView" label="Call Stack"/>
+<page content="org.eclipse.ui.console.ConsoleView" label="LabelNotFound"/>
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
 <part id="0"/>
 <part id="1"/>
@@ -374,6 +450,7 @@
 <view id="org.eclipse.ui.views.ProblemView"/>
 <view id="org.eclipse.cdt.debug.ui.executablesView"/>
 <view id="org.tizen.common.connection.log.LogView"/>
+<view id="org.eclipse.ui.views.ProgressView"/>
 <view id="org.eclipse.debug.ui.DebugView"/>
 <view id="org.eclipse.wst.server.ui.ServersView"/>
 <view id="org.eclipse.debug.ui.VariableView"/>
@@ -409,6 +486,7 @@
 <page content="org.eclipse.ui.views.ProblemView" label="Problems"/>
 <page content="org.eclipse.cdt.debug.ui.executablesView" label="Executables"/>
 <page content="org.tizen.common.connection.log.LogView" label="Log"/>
+<page content="org.eclipse.ui.views.ProgressView" label="Progress"/>
 <page content="org.eclipse.ui.views.BookmarkView" label="LabelNotFound"/>
 <page content="org.eclipse.ui.views.PropertySheet" label="LabelNotFound"/>
 <page content="org.eclipse.jdt.debug.ui.DisplayView" label="LabelNotFound"/>
@@ -421,6 +499,7 @@
 <part id="2"/>
 <part id="3"/>
 <part id="4"/>
+<part id="5"/>
 </presentation>
 </folder>
 </info>
@@ -457,166 +536,164 @@
 <workingSets/>
 <navigationHistory>
 <editors>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.tizen.nativeappcommon.contentassist.SLPCEditor" path="/TaxiByNight/src/Framework/Audio/SoundManager.cpp"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.tizen.nativeappcommon.contentassist.SLPCEditor" path="/TaxiByNight/src/Bunnies/Camera.cpp"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.tizen.nativeappcommon.contentassist.SLPCEditor" path="/TaxiByNight/src/Framework/Math/Matrix.h"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.tizen.nativeappcommon.contentassist.SLPCEditor" path="/TaxiByNight/src/Framework/Math/Matrix.cpp"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.tizen.nativeappcommon.contentassist.SLPCEditor" path="/TaxiByNight/src/Bunnies/GameScreen.cpp"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.tizen.nativeappcommon.contentassist.SLPCEditor" path="/TaxiByNight/src/Bunnies/Taxi.h"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.tizen.nativeappcommon.contentassist.SLPCEditor" path="/TaxiByNight/src/Bunnies/Taxi.cpp"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.tizen.nativeappcommon.contentassist.SLPCEditor" path="/TaxiByNight/src/GlesShaderEntry.cpp"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.tizen.nativeappcommon.contentassist.SLPCEditor" path="/TaxiByNight/src/Bunnies/GameController.h"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.tizen.nativeappcommon.contentassist.SLPCEditor" path="/TaxiByNight/src/Bunnies/IGameController.h"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.tizen.nativeappcommon.contentassist.SLPCEditor" path="/TaxiByNight/src/Bunnies/GameController.cpp"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.tizen.nativeappcommon.contentassist.SLPCEditor" path="/TaxiByNight/src/GlesShader.cpp"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/TaxiByNight/src/Bunnies/ISystemUtils"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/TaxiByNight/src/Bunnies/ISystemUtils.h"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.tizen.nativeappcommon.contentassist.SLPCEditor" path="/TaxiByNight/src/Bunnies/ISystemUtils.h"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.tizen.nativeappcommon.contentassist.SLPCEditor" path="/TaxiByNight/inc/GlesShader.h"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.tizen.nativeappcommon.contentassist.SLPCEditor" path="/TaxiByNight/src/Bunnies/Arrow.cpp"/>
 </editors>
-<item historyLabel="GlesShader.cpp" index="5">
-<position info="not_deleted" x="4464" y="0"/>
+<item historyLabel="GameScreen.cpp" index="3">
+<position info="not_deleted" x="5238" y="0"/>
 </item>
-<item historyLabel="GlesShaderEntry.cpp" index="1">
+<item historyLabel="GameScreen.cpp" index="3">
+<position info="not_deleted" x="5179" y="0"/>
+</item>
+<item historyLabel="GameScreen.cpp" index="3">
+<position info="not_deleted" x="4978" y="0"/>
+</item>
+<item historyLabel="Taxi.h" index="4">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="Taxi.h" index="4">
+<position info="not_deleted" x="357" y="0"/>
+</item>
+<item historyLabel="Taxi.cpp" index="5">
+<position info="not_deleted" x="11031" y="0"/>
+</item>
+<item historyLabel="Taxi.h" index="4">
+<position info="not_deleted" x="349" y="11"/>
+</item>
+<item historyLabel="Taxi.cpp" index="5">
+<position info="not_deleted" x="11031" y="0"/>
+</item>
+<item historyLabel="GameScreen.cpp" index="3">
+<position info="not_deleted" x="4978" y="0"/>
+</item>
+<item historyLabel="GameScreen.cpp" index="3">
+<position info="not_deleted" x="5013" y="0"/>
+</item>
+<item historyLabel="Camera.cpp" index="0">
 <position/>
 </item>
-<item historyLabel="SoundManager.cpp" index="0">
-<position info="not_deleted" x="1919" y="0"/>
+<item historyLabel="Matrix.cpp" index="2">
+<position info="not_deleted" x="632" y="0"/>
 </item>
-<item historyLabel="GameController.cpp" index="4">
-<position info="not_deleted" x="5711" y="0"/>
+<item historyLabel="Taxi.cpp" index="5">
+<position info="not_deleted" x="11031" y="0"/>
 </item>
-<item historyLabel="GlesShaderEntry.cpp" index="1">
+<item historyLabel="Camera.cpp" index="0">
 <position/>
 </item>
-<item historyLabel="GameController.cpp" index="4">
-<position info="not_deleted" x="5492" y="0"/>
+<item historyLabel="Camera.cpp" index="0">
+<position/>
 </item>
-<item historyLabel="GameController.h" index="2">
+<item historyLabel="Camera.cpp" index="0">
+<position info="not_deleted" x="714" y="0"/>
+</item>
+<item historyLabel="Camera.cpp" index="0">
+<position info="not_deleted" x="99" y="0"/>
+</item>
+<item historyLabel="Matrix.cpp" index="2">
+<position info="not_deleted" x="632" y="0"/>
+</item>
+<item historyLabel="Taxi.cpp" index="5">
+<position info="not_deleted" x="11031" y="0"/>
+</item>
+<item historyLabel="Camera.cpp" index="0">
+<position info="not_deleted" x="99" y="0"/>
+</item>
+<item historyLabel="Matrix.cpp" index="2">
+<position info="not_deleted" x="632" y="0"/>
+</item>
+<item historyLabel="Camera.cpp" index="0">
+<position info="not_deleted" x="99" y="0"/>
+</item>
+<item historyLabel="GameScreen.cpp" index="3">
+<position info="not_deleted" x="5229" y="0"/>
+</item>
+<item historyLabel="Camera.cpp" index="0">
+<position info="not_deleted" x="156" y="13"/>
+</item>
+<item historyLabel="Camera.cpp" index="0">
+<position info="not_deleted" x="207" y="0"/>
+</item>
+<item historyLabel="Camera.cpp" index="0">
+<position/>
+</item>
+<item historyLabel="Matrix.cpp" index="2">
+<position info="not_deleted" x="19" y="0"/>
+</item>
+<item historyLabel="Matrix.h" index="1">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="GameController.cpp" index="4">
-<position info="not_deleted" x="5492" y="0"/>
+<item historyLabel="Matrix.cpp" index="2">
+<position info="not_deleted" x="1571" y="0"/>
 </item>
-<item historyLabel="GlesShader.cpp" index="5">
-<position info="not_deleted" x="5208" y="0"/>
-</item>
-<item historyLabel="ISystemUtils" index="6">
-<position info="not_deleted" x="14" y="0"/>
-</item>
-<item historyLabel="ISystemUtils.h" index="7">
-<position info="not_deleted" x="41" y="0"/>
-</item>
-<item historyLabel="GlesShader.cpp" index="5">
-<position info="not_deleted" x="5208" y="0"/>
-</item>
-<item historyLabel="ISystemUtils" index="6">
+<item historyLabel="Matrix.h" index="1">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="GlesShader.cpp" index="5">
-<position info="not_deleted" x="5208" y="0"/>
+<item historyLabel="Matrix.cpp" index="2">
+<position info="not_deleted" x="1571" y="0"/>
 </item>
-<item historyLabel="ISystemUtils.h" index="8">
-<position info="not_deleted" x="0" y="0"/>
+<item historyLabel="Camera.cpp" index="0">
+<position/>
 </item>
-<item historyLabel="ISystemUtils.h" index="8">
-<position info="not_deleted" x="101" y="0"/>
+<item historyLabel="Matrix.cpp" index="2">
+<position info="not_deleted" x="632" y="0"/>
 </item>
-<item historyLabel="ISystemUtils.h" index="8">
-<position info="not_deleted" x="156" y="0"/>
+<item historyLabel="GameScreen.cpp" index="3">
+<position info="not_deleted" x="5228" y="0"/>
 </item>
-<item historyLabel="GameController.h" index="2">
-<position info="not_deleted" x="316" y="0"/>
+<item historyLabel="Camera.cpp" index="0">
+<position info="not_deleted" x="551" y="0"/>
 </item>
-<item historyLabel="IGameController.h" index="3">
-<position info="not_deleted" x="220" y="0"/>
-</item>
-<item historyLabel="GameController.h" index="2">
-<position info="not_deleted" x="316" y="0"/>
-</item>
-<item historyLabel="GameController.h" index="2">
-<position info="not_deleted" x="100" y="0"/>
-</item>
-<item historyLabel="GameController.h" index="2">
-<position info="not_deleted" x="425" y="10"/>
-</item>
-<item historyLabel="GameController.cpp" index="4">
-<position info="not_deleted" x="929" y="8"/>
-</item>
-<item historyLabel="GameController.h" index="2">
-<position info="not_deleted" x="1413" y="18"/>
-</item>
-<item historyLabel="GameController.cpp" index="4">
-<position info="not_deleted" x="2873" y="0"/>
-</item>
-<item historyLabel="IGameController.h" index="3">
-<position info="not_deleted" x="220" y="0"/>
-</item>
-<item historyLabel="IGameController.h" index="3">
-<position info="not_deleted" x="86" y="0"/>
-</item>
-<item historyLabel="GameController.cpp" index="4">
-<position info="not_deleted" x="2873" y="0"/>
-</item>
-<item historyLabel="GameController.h" index="2">
-<position info="not_deleted" x="503" y="0"/>
-</item>
-<item historyLabel="GameController.cpp" index="4">
-<position info="not_deleted" x="5913" y="0"/>
-</item>
-<item historyLabel="GlesShader.cpp" index="5">
-<position info="not_deleted" x="549" y="0"/>
-</item>
-<item historyLabel="GlesShader.h" index="9">
-<position info="not_deleted" x="634" y="0"/>
-</item>
-<item historyLabel="ISystemUtils.h" index="8">
-<position info="not_deleted" x="108" y="35"/>
-</item>
-<item historyLabel="GlesShader.h" index="9">
-<position info="not_deleted" x="2384" y="31"/>
-</item>
-<item historyLabel="GlesShader.cpp" index="5">
-<position info="not_deleted" x="549" y="0"/>
-</item>
-<item historyLabel="GlesShader.cpp" index="5">
-<position info="not_deleted" x="4071" y="6"/>
-</item>
-<item historyLabel="GlesShader.h" index="9">
-<position info="not_deleted" x="929" y="16"/>
-</item>
-<item historyLabel="GlesShader.cpp" index="5">
-<position info="not_deleted" x="4066" y="16"/>
-</item>
-<item historyLabel="GlesShader.cpp" index="5">
-<position info="not_deleted" x="5413" y="0"/>
-</item>
-<item historyLabel="IGameController.h" index="3">
-<position info="not_deleted" x="303" y="0"/>
-</item>
-<item historyLabel="GlesShader.h" index="9">
-<position info="not_deleted" x="81" y="0"/>
-</item>
-<item historyLabel="ISystemUtils.h" index="8">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="GlesShader.cpp" index="5">
-<position info="not_deleted" x="5413" y="0"/>
-</item>
-<item historyLabel="GlesShader.h" index="9">
-<position info="not_deleted" x="67" y="0"/>
-</item>
-<item historyLabel="GlesShader.cpp" index="5">
-<position info="not_deleted" x="3451" y="0"/>
-</item>
-<item historyLabel="GlesShaderEntry.cpp" index="1">
-<position info="not_deleted" x="1123" y="0"/>
-</item>
-<item historyLabel="GlesShader.cpp" index="5">
-<position info="not_deleted" x="9435" y="0"/>
-</item>
-<item historyLabel="GlesShaderEntry.cpp" index="1">
+<item historyLabel="GlesShaderEntry.cpp" index="6">
 <position info="not_deleted" x="1019" y="0"/>
 </item>
-<item historyLabel="GlesShaderEntry.cpp" index="1">
-<position info="not_deleted" x="1260" y="0"/>
+<item historyLabel="Camera.cpp" index="0">
+<position info="not_deleted" x="630" y="0"/>
 </item>
-<item active="true" historyLabel="GlesShaderEntry.cpp" index="1">
-<position info="not_deleted" x="1019" y="0"/>
+<item historyLabel="Matrix.cpp" index="2">
+<position info="not_deleted" x="1079" y="0"/>
+</item>
+<item historyLabel="Matrix.h" index="1">
+<position info="not_deleted" x="8466" y="35"/>
+</item>
+<item historyLabel="Matrix.cpp" index="2">
+<position info="not_deleted" x="434" y="0"/>
+</item>
+<item historyLabel="Matrix.h" index="1">
+<position info="not_deleted" x="85" y="111"/>
+</item>
+<item historyLabel="Matrix.cpp" index="2">
+<position info="not_deleted" x="1420" y="0"/>
+</item>
+<item historyLabel="Camera.cpp" index="0">
+<position info="not_deleted" x="19" y="0"/>
+</item>
+<item historyLabel="Matrix.cpp" index="2">
+<position info="not_deleted" x="358" y="0"/>
+</item>
+<item historyLabel="Matrix.h" index="1">
+<position info="not_deleted" x="3709" y="0"/>
+</item>
+<item historyLabel="GameScreen.cpp" index="3">
+<position info="not_deleted" x="5164" y="0"/>
+</item>
+<item historyLabel="Camera.cpp" index="0">
+<position info="not_deleted" x="19" y="0"/>
+</item>
+<item historyLabel="Matrix.h" index="1">
+<position info="not_deleted" x="3709" y="0"/>
+</item>
+<item historyLabel="Matrix.cpp" index="2">
+<position info="not_deleted" x="358" y="0"/>
+</item>
+<item active="true" historyLabel="Arrow.cpp" index="7">
+<position info="not_deleted" x="0" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -636,47 +713,47 @@
 </trimLayout>
 </window>
 <mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.tizen.nativeappcommon.contentassist.SLPCEditor" name="Arrow.cpp" tooltip="TaxiByNight/src/Bunnies/Arrow.cpp">
+<persistable path="/TaxiByNight/src/Bunnies/Arrow.cpp"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.tizen.nativeappcommon.contentassist.SLPCEditor" name="GlesShaderEntry.cpp" tooltip="TaxiByNight/src/GlesShaderEntry.cpp">
 <persistable path="/TaxiByNight/src/GlesShaderEntry.cpp"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.tizen.nativeappcommon.contentassist.SLPCEditor" name="ISystemUtils.h" tooltip="TaxiByNight/src/Bunnies/ISystemUtils.h">
-<persistable path="/TaxiByNight/src/Bunnies/ISystemUtils.h"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.tizen.nativeappcommon.contentassist.SLPCEditor" name="Matrix.h" tooltip="TaxiByNight/src/Framework/Math/Matrix.h">
+<persistable path="/TaxiByNight/src/Framework/Math/Matrix.h"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.tizen.nativeappcommon.contentassist.SLPCEditor" name="GlesShader.h" tooltip="TaxiByNight/inc/GlesShader.h">
-<persistable path="/TaxiByNight/inc/GlesShader.h"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.tizen.nativeappcommon.contentassist.SLPCEditor" name="Matrix.cpp" tooltip="TaxiByNight/src/Framework/Math/Matrix.cpp">
+<persistable path="/TaxiByNight/src/Framework/Math/Matrix.cpp"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.tizen.nativeappcommon.contentassist.SLPCEditor" name="IGameController.h" tooltip="TaxiByNight/src/Bunnies/IGameController.h">
-<persistable path="/TaxiByNight/src/Bunnies/IGameController.h"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.tizen.nativeappcommon.contentassist.SLPCEditor" name="Taxi.cpp" tooltip="TaxiByNight/src/Bunnies/Taxi.cpp">
+<persistable path="/TaxiByNight/src/Bunnies/Taxi.cpp"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="ISystemUtils" tooltip="TaxiByNight/src/Bunnies/ISystemUtils">
-<persistable path="/TaxiByNight/src/Bunnies/ISystemUtils"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.tizen.nativeappcommon.contentassist.SLPCEditor" name="Taxi.h" tooltip="TaxiByNight/src/Bunnies/Taxi.h">
+<persistable path="/TaxiByNight/src/Bunnies/Taxi.h"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.tizen.nativeappcommon.contentassist.SLPCEditor" name="GameController.h" tooltip="TaxiByNight/src/Bunnies/GameController.h">
-<persistable path="/TaxiByNight/src/Bunnies/GameController.h"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.tizen.nativeappcommon.contentassist.SLPCEditor" name="MainMenuPanel.cpp" tooltip="TaxiByNight/src/Bunnies/MainMenuPanel.cpp">
+<persistable path="/TaxiByNight/src/Bunnies/MainMenuPanel.cpp"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.tizen.nativeappcommon.contentassist.SLPCEditor" name="GameController.cpp" tooltip="TaxiByNight/src/Bunnies/GameController.cpp">
-<persistable path="/TaxiByNight/src/Bunnies/GameController.cpp"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.tizen.nativeappcommon.contentassist.SLPCEditor" name="GameScreen.cpp" tooltip="TaxiByNight/src/Bunnies/GameScreen.cpp">
+<persistable path="/TaxiByNight/src/Bunnies/GameScreen.cpp"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.tizen.nativeappcommon.contentassist.SLPCEditor" name="GlesShader.cpp" tooltip="TaxiByNight/src/GlesShader.cpp">
-<persistable path="/TaxiByNight/src/GlesShader.cpp"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.tizen.nativeappcommon.contentassist.SLPCEditor" name="Camera.h" tooltip="TaxiByNight/src/Bunnies/Camera.h">
+<persistable path="/TaxiByNight/src/Bunnies/Camera.h"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.tizen.nativeappcommon.contentassist.SLPCEditor" name="SoundManager.cpp" tooltip="TaxiByNight/src/Framework/Audio/SoundManager.cpp">
-<persistable path="/TaxiByNight/src/Framework/Audio/SoundManager.cpp"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.tizen.nativeappcommon.contentassist.SLPCEditor" name="Camera.cpp" tooltip="TaxiByNight/src/Bunnies/Camera.cpp">
+<persistable path="/TaxiByNight/src/Bunnies/Camera.cpp"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.tizen.nativeappcommon.contentassist.SLPCEditor" name="TizenAudioPlayer.cpp" tooltip="TaxiByNight/src/Framework/Audio/TizenAudioPlayer.cpp">
-<persistable path="/TaxiByNight/src/Framework/Audio/TizenAudioPlayer.cpp"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.tizen.nativecpp.misc.ManifestEditor" name="manifest.xml" tooltip="TaxiByNight/manifest.xml">
+<persistable path="/TaxiByNight/manifest.xml"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.tizen.nativeappcommon.contentassist.SLPCEditor" name="TizenAudioPlayer.h" tooltip="TaxiByNight/src/Framework/Audio/TizenAudioPlayer.h">
-<persistable path="/TaxiByNight/src/Framework/Audio/TizenAudioPlayer.h"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart" name="HUD.xml" tooltip="TaxiByNight/res/data/gui/HUD.xml">
+<persistable path="/TaxiByNight/res/data/gui/HUD.xml"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.tizen.nativeappcommon.contentassist.SLPCEditor" name="AudioPlayerFactory.cpp" tooltip="TaxiByNight/src/Framework/Audio/AudioPlayerFactory.cpp">
-<persistable path="/TaxiByNight/src/Framework/Audio/AudioPlayerFactory.cpp"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.tizen.nativeappcommon.contentassist.SLPCEditor" name="XMLLoader.cpp" tooltip="TaxiByNight/src/Framework/XML/XMLLoader.cpp">
+<persistable path="/TaxiByNight/src/Framework/XML/XMLLoader.cpp"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.tizen.nativeappcommon.contentassist.SLPCEditor" name="AudioPlayerFactory.h" tooltip="TaxiByNight/src/Framework/Audio/AudioPlayerFactory.h">
-<persistable path="/TaxiByNight/src/Framework/Audio/AudioPlayerFactory.h"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.systemExternalEditor" name="city_ambient.mp3" tooltip="TaxiByNight/res/data/audio/city_ambient.mp3">
-<persistable path="/TaxiByNight/res/data/audio/city_ambient.mp3"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.tizen.nativeappcommon.contentassist.SLPCEditor" name="XMLLoader.h" tooltip="TaxiByNight/src/Framework/XML/XMLLoader.h">
+<persistable path="/TaxiByNight/src/Framework/XML/XMLLoader.h"/>
 </file>
 </mruList>
 </workbench>

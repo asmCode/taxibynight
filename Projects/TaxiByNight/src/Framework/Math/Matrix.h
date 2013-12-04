@@ -342,7 +342,7 @@ namespace sm
 			sm::Matrix rot = sm::Matrix::IdentityMatrix();
 
 			sm::Vec3 right = (direction * up).GetNormalized();
-			sm::Vec3 yAxis = right * direction;
+			//sm::Vec3 yAxis = right * direction;
 
 			rot.a[0] = right.x;
 			rot.a[1] = right.y;

@@ -40,7 +40,7 @@ public:
 	float m_secondsMultiplier;
 
 private:
-	static const uint32_t MaxPeds = 100;
+	static const uint32_t MaxPeds = 50;
 	static const float TaxiViewRange;
 	static const uint32_t PassangerPerPeds = 10; // every x ped is a passenger
 

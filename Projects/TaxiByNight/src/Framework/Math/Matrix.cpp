@@ -35,6 +35,15 @@ Matrix Matrix::CreateLookAt2(const sm::Vec3 &direction, const sm::Vec3 &up)
 	sm::Vec3 right = (direction * up).GetNormalized();
 	sm::Vec3 yAxis = (right * direction).GetNormalized();
 
+	//sm::Vec3 right = (up * direction).GetNormalized();
+	//sm::Vec3 yAxis = (right * direction).GetNormalized();
+
+	//sm::Vec3 right = (direction * up).GetNormalized();
+	//sm::Vec3 yAxis = (direction * right).GetNormalized();
+
+	//sm::Vec3 right = (up * direction).GetNormalized();
+	//sm::Vec3 yAxis = (direction * right).GetNormalized();
+/*
 	rot.a[0] = right.x;
 	rot.a[1] = right.y;
 	rot.a[2] = right.z;
@@ -46,9 +55,27 @@ Matrix Matrix::CreateLookAt2(const sm::Vec3 &direction, const sm::Vec3 &up)
 	rot.a[8] = direction.x;
 	rot.a[9] = direction.y;
 	rot.a[10] = direction.z;
+	*/
+
+	rot.a[0] = right.x;
+	rot.a[4] = right.y;
+	rot.a[8] = right.z;
+
+	rot.a[1] = yAxis.x;
+	rot.a[5] = yAxis.y;
+	rot.a[9] = yAxis.z;
+
+	rot.a[2] = direction.x;
+	rot.a[6] = direction.y;
+	rot.a[10] = direction.z;
 
 	return rot;
 }
 
 }
 
+
+//[0] [4] [8]  [12]     [0]
+//[1] [5] [9]  [13]     [1]
+//[2] [6] [10] [14]     [2]
+//[3] [7] [11] [15]     [3]

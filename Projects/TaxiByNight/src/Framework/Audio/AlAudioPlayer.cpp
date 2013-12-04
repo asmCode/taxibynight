@@ -88,6 +88,8 @@ AlAudioPlayer::ConvertError(ALenum error)
 	default:
 		return E_FAILURE;
 	}
+
+	return E_FAILURE;
 }
 /**
  * Construct OpenAL based player.
