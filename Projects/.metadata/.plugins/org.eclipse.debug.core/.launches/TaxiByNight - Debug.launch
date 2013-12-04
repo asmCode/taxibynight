@@ -2,7 +2,7 @@
 <launchConfiguration type="org.tizen.nativecommon.launch.TizenLaunchConfigurationType">
 <booleanAttribute key="org.eclipse.cdt.debug.mi.core.AUTO_SOLIB" value="false"/>
 <stringAttribute key="org.eclipse.cdt.debug.mi.core.HOST" value="127.0.0.1"/>
-<stringAttribute key="org.eclipse.cdt.debug.mi.core.PORT" value="26242"/>
+<stringAttribute key="org.eclipse.cdt.debug.mi.core.PORT" value="26142"/>
 <booleanAttribute key="org.eclipse.cdt.debug.mi.core.REMOTE_TCP" value="true"/>
 <listAttribute key="org.eclipse.cdt.debug.mi.core.SOLIB_PATH">
 <listEntry value="/home/majak/taxibynight/Projects/TaxiByNight/lib"/>

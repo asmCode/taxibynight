@@ -7,10 +7,10 @@
 	<sprite name="start_game_btn_down" file="gui01" bounds="512,0,360,150" />
 	<sprite name="start_game_btn" file="gui01" bounds="512,150,360,150" />
 	
-	<sprite name="arrow_left" file="gui01" bounds="0,0,128,128" />
-	<sprite name="arrow_right" file="gui01" bounds="128,0,128,128" />
-	<sprite name="arrow_up" file="gui01" bounds="256,0,128,128" />
-	<sprite name="arrow_down" file="gui01" bounds="384,0,128,128" />
+	<sprite name="arrow_left" file="gui02" bounds="568,0,180,180" />
+	<sprite name="arrow_right" file="gui02" bounds="748,0,180,180" />
+	<sprite name="arrow_up" file="gui02" bounds="568,180,180,180" />
+	<sprite name="arrow_down" file="gui02" bounds="748,180,180,180" />
 	
 	<sprite name="uni_button" file="gui01" bounds="0,407,205,76" />
 	<sprite name="uni_button_down" file="gui01" bounds="0,483,205,76" />

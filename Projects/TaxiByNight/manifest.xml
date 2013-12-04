@@ -3,6 +3,8 @@
     <Id>lw1gsJ0yVL</Id>
     <Version>2.2.0</Version>
     <Type>C++App</Type>
+    <Author>Szymon Majewski</Author>
+    <Url>http://semiseriousgames.com</Url>
     <Requirements>
         <Feature Name="http://tizen.org/feature/screen.size.normal">true</Feature>
     </Requirements>
@@ -16,7 +18,7 @@
                 <DisplayName Locale="eng-GB">Taxi by Night</DisplayName>
             </DisplayNames>
             <Icons>
-                <Icon Section="MainMenu" Type="Xhigh">mainmenu.png</Icon>
+                <Icon Section="MainMenu" Type="Xhigh">ikona.png</Icon>
             </Icons>
             <LaunchConditions/>
         </UiApp>
