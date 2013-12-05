@@ -1,7 +1,7 @@
 
-**** Build of configuration Release for project TaxiByNight ****
+**** Build of configuration Debug for project TaxiByNight ****
 
-/home/majak/tizen-sdk/tools/smart-build-interface/bin/sbi action tizen-device-2.2.native_llvm31.armel.cpp.app -- make -options="all" -cliprojpath="" -clisdkpath="" -cliunitprojpath="" -cliappid="" 
+/home/majak/tizen-sdk/tools/smart-build-interface/bin/sbi action tizen-device-2.2.native_llvm31.armel.cpp.app -- make -options="-k -j6 all" -cliprojpath="" -clisdkpath="" -cliunitprojpath="" -cliappid="" 
 Checking prerequisite...
 Checking make... ok
 make: Nothing to be done for `all'.

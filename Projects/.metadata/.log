@@ -1985,3 +1985,12 @@ org.eclipse.core.internal.resources.ResourceException: Resource '/TaxiByNight/Re
 !MESSAGE Resource '/TaxiByNight/Release/sources.mk' does not exist.
 !SUBENTRY 1 org.eclipse.core.resources 4 368 2013-12-05 02:27:24.363
 !MESSAGE Resource '/TaxiByNight/Release/sources.mk' does not exist.
+!SESSION 2013-12-05 19:56:35.086 -----------------------------------------------
+eclipse.buildId=2.2.0
+java.version=1.6.0_45
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=linux, ARCH=x86, WS=gtk, NL=en
+Command-line arguments:  -os linux -ws gtk -arch x86
+
+!ENTRY org.tizen.common.ui.Startup 1 0 2013-12-05 19:56:46.630
+!MESSAGE SDK Information: Path [/home/majak/tizen-sdk], Data Path [/home/majak/tizen-sdk-data], Platform Path [/home/majak/tizen-sdk/platforms/tizen2.2]

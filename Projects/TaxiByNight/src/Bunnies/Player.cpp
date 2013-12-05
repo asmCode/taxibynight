@@ -12,6 +12,7 @@ Player::Player(const std::string &path) :
 	m_totalCourses(0),
 	m_bestRoundIncome(0.0f),
 	m_tutorialFinished(false),
+	m_firstRun(true),
 	m_path(path)
 {
 	Instance = this;
@@ -37,6 +38,8 @@ void Player::Load()
 			m_bestRoundIncome = child->GetValueAsInt32();
 		else if (child->GetName() == "TutorialFinished")
 			m_tutorialFinished = child->GetValueAsBool();
+		else if (child->GetName() == "FirstRun")
+			m_firstRun = child->GetValueAsBool();
 	}
 }
 
@@ -49,6 +52,7 @@ void Player::Save()
 	xml += "\t<TotalCourses>"; xml += StringUtils::ToString(m_totalCourses); xml += "</TotalCourses>\n";
 	xml += "\t<BestRoundIncome>"; xml += StringUtils::ToString(m_bestRoundIncome); xml += "</BestRoundIncome>\n";
 	xml += "\t<TutorialFinished>"; xml += m_tutorialFinished ? "true" : "false"; xml += "</TutorialFinished>\n";
+	xml += "\t<FirstRun>"; xml += m_firstRun ? "true" : "false"; xml += "</FirstRun>\n";
 	xml += "</Player>\n";
 
 	Path::WriteTextFile(m_path.c_str(), xml);

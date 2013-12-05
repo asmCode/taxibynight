@@ -16,6 +16,7 @@ public:
 	float m_bestRoundIncome;
 	int m_totalCourses;
 	bool m_tutorialFinished;
+	bool m_firstRun;
 
 private:
 	std::string m_path;
