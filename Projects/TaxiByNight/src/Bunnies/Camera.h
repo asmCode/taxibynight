@@ -15,6 +15,7 @@ public:
 
 	const Matrix& GetViewMatrix();
 	const Vec3& GetPosition() const;
+	const Vec3& GetLookDirection() const;
 
 	virtual void SetPosition(const Vec3& position);
 	virtual void SetLookDirection(const Vec3& direction);

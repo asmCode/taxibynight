@@ -29,6 +29,11 @@ const Vec3& Camera::GetPosition() const
 	return m_position;
 }
 
+const Vec3& Camera::GetLookDirection() const
+{
+	return m_lookDirection;
+}
+
 void Camera::SetPosition(const Vec3& position)
 {
 	m_position = position;

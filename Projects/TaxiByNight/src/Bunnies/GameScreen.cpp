@@ -187,8 +187,36 @@ void GameScreen::Update(float time, float seconds)
 
 	if (m_taxi->IsOccupied())
 	{
-		m_arrow->SetDirection((m_taxi->GetPassengerTarget() - m_taxi->GetPosition()).GetNormalized());
+		sm::Vec3 camDir = m_camera.GetLookDirection();
+		camDir.y = 0.0f;
+		camDir.Normalize();
+
+		sm::Vec3 pedTrgDir = (m_taxi->GetPassengerTarget() - m_taxi->GetPosition()).GetNormalized();
+
+		float ang = -sm::Vec3::GetAngle(camDir, sm::Vec3(0, 0, -1));
+
+		//if (ang > 0.001f)
+		{
+			sm::Vec3 axis = (camDir * sm::Vec3(0, 0, -1)).GetNormalized();
+			Log::LogT("angle: %.4f, y: %.4f", ang, axis.y);
+			pedTrgDir = sm::Matrix::RotateAxisMatrix(ang, axis) * pedTrgDir;
+		}
+
+		m_arrow->SetDirection(pedTrgDir.GetReversed());
 		m_arrow->Update(time, seconds);
+
+		/*
+		sm::Vec3 pedTrgCamPos = m_viewMatrix.GetTransposed() * m_taxi->GetPassengerTarget();
+		pedTrgCamPos.y = 0.0f;
+
+		sm::Vec3 pedTrgDir = (pedTrgCamPos - m_taxi->GetPosition()).GetNormalized();
+
+//		float ang = sm::Vec3::GetAngle(pedTrgDir, camDir);
+//		sm::Vec3 axis = (pedTrgDir * camDir).GetNormalized();
+
+		m_arrow->SetDirection(pedTrgDir);
+		m_arrow->Update(time, seconds);
+		*/
 	}
 
 	//m_manCam->Process(seconds);

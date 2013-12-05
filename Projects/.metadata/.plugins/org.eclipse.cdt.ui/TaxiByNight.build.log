@@ -5,31 +5,12 @@
 Checking prerequisite...
 Checking make... ok
 Building file: ../src/Bunnies/GameScreen.cpp
-Building file: ../src/Bunnies/HUD.cpp
-Building file: ../src/Bunnies/PedsManager.cpp
-Building file: ../src/Bunnies/Street.cpp
-Invoking: C++ Compiler
 Invoking: C++ Compiler
 clang++ -I"pch" -D_DEBUG -I"/home/majak/taxibynight/Projects/TaxiByNight/inc" -I/home/majak/taxibynight/Ext -I"/home/majak/taxibynight/Projects/TaxiByNight/src/Framework" -O0 -g3 -Wall -c -fmessage-length=0 -target arm-tizen-linux-gnueabi -gcc-toolchain /home/majak/tizen-sdk/tools/smart-build-interface/../arm-linux-gnueabi-gcc-4.5/ -ccc-gcc-name arm-linux-gnueabi-g++ -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -mtune=cortex-a8 -Wno-gnu -fPIE --sysroot="/home/majak/tizen-sdk/platforms/tizen2.2/rootstraps/tizen-device-2.2.native" -I"/home/majak/tizen-sdk/platforms/tizen2.2/rootstraps/tizen-device-2.2.native/usr/include/libxml2" -I"/home/majak/tizen-sdk/library" -I"/home/majak/tizen-sdk/platforms/tizen2.2/rootstraps/tizen-device-2.2.native/usr/include" -I"/home/majak/tizen-sdk/platforms/tizen2.2/rootstraps/tizen-device-2.2.native/usr/include/osp" -D_APP_LOG -MMD -MP -MF"src/Bunnies/GameScreen.d" -MT"src/Bunnies/GameScreen.d" -o "src/Bunnies/GameScreen.o" "../src/Bunnies/GameScreen.cpp"
-Invoking: C++ Compiler
-clang++ -I"pch" -D_DEBUG -I"/home/majak/taxibynight/Projects/TaxiByNight/inc" -I/home/majak/taxibynight/Ext -I"/home/majak/taxibynight/Projects/TaxiByNight/src/Framework" -O0 -g3 -Wall -c -fmessage-length=0 -target arm-tizen-linux-gnueabi -gcc-toolchain /home/majak/tizen-sdk/tools/smart-build-interface/../arm-linux-gnueabi-gcc-4.5/ -ccc-gcc-name arm-linux-gnueabi-g++ -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -mtune=cortex-a8 -Wno-gnu -fPIE --sysroot="/home/majak/tizen-sdk/platforms/tizen2.2/rootstraps/tizen-device-2.2.native" -I"/home/majak/tizen-sdk/platforms/tizen2.2/rootstraps/tizen-device-2.2.native/usr/include/libxml2" -I"/home/majak/tizen-sdk/library" -I"/home/majak/tizen-sdk/platforms/tizen2.2/rootstraps/tizen-device-2.2.native/usr/include" -I"/home/majak/tizen-sdk/platforms/tizen2.2/rootstraps/tizen-device-2.2.native/usr/include/osp" -D_APP_LOG -MMD -MP -MF"src/Bunnies/HUD.d" -MT"src/Bunnies/HUD.d" -o "src/Bunnies/HUD.o" "../src/Bunnies/HUD.cpp"
-../src/Bunnies/Street.cpp:249:13: warning: unused variable 'world' [-Wunused-variable]
-Invoking: C++ Compiler
-        sm::Matrix world = sm::Matrix::IdentityMatrix();
-                   ^
 ../src/Bunnies/GameScreen.cpp:42:2: warning: field 'm_pedsManager' will be initialized after field 'm_isPaused' [-Wreorder]
         m_pedsManager(NULL),
         ^
-clang++ -I"pch" -D_DEBUG -I"/home/majak/taxibynight/Projects/TaxiByNight/inc" -I/home/majak/taxibynight/Ext -I"/home/majak/taxibynight/Projects/TaxiByNight/src/Framework" -O0 -g3 -Wall -c -fmessage-length=0 -target arm-tizen-linux-gnueabi -gcc-toolchain /home/majak/tizen-sdk/tools/smart-build-interface/../arm-linux-gnueabi-gcc-4.5/ -ccc-gcc-name arm-linux-gnueabi-g++ -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -mtune=cortex-a8 -Wno-gnu -fPIE --sysroot="/home/majak/tizen-sdk/platforms/tizen2.2/rootstraps/tizen-device-2.2.native" -I"/home/majak/tizen-sdk/platforms/tizen2.2/rootstraps/tizen-device-2.2.native/usr/include/libxml2" -I"/home/majak/tizen-sdk/library" -I"/home/majak/tizen-sdk/platforms/tizen2.2/rootstraps/tizen-device-2.2.native/usr/include" -I"/home/majak/tizen-sdk/platforms/tizen2.2/rootstraps/tizen-device-2.2.native/usr/include/osp" -D_APP_LOG -MMD -MP -MF"src/Bunnies/PedsManager.d" -MT"src/Bunnies/PedsManager.d" -o "src/Bunnies/PedsManager.o" "../src/Bunnies/PedsManager.cpp"
 1 warning generated.
-1 warning generated.
-clang++ -I"pch" -D_DEBUG -I"/home/majak/taxibynight/Projects/TaxiByNight/inc" -I/home/majak/taxibynight/Ext -I"/home/majak/taxibynight/Projects/TaxiByNight/src/Framework" -O0 -g3 -Wall -c -fmessage-length=0 -target arm-tizen-linux-gnueabi -gcc-toolchain /home/majak/tizen-sdk/tools/smart-build-interface/../arm-linux-gnueabi-gcc-4.5/ -ccc-gcc-name arm-linux-gnueabi-g++ -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -mtune=cortex-a8 -Wno-gnu -fPIE --sysroot="/home/majak/tizen-sdk/platforms/tizen2.2/rootstraps/tizen-device-2.2.native" -I"/home/majak/tizen-sdk/platforms/tizen2.2/rootstraps/tizen-device-2.2.native/usr/include/libxml2" -I"/home/majak/tizen-sdk/library" -I"/home/majak/tizen-sdk/platforms/tizen2.2/rootstraps/tizen-device-2.2.native/usr/include" -I"/home/majak/tizen-sdk/platforms/tizen2.2/rootstraps/tizen-device-2.2.native/usr/include/osp" -D_APP_LOG -MMD -MP -MF"src/Bunnies/Street.d" -MT"src/Bunnies/Street.d" -o "src/Bunnies/Street.o" "../src/Bunnies/Street.cpp"
-Finished building: ../src/Bunnies/PedsManager.cpp
- 
-Finished building: ../src/Bunnies/HUD.cpp
- 
-Finished building: ../src/Bunnies/Street.cpp
- 
 Finished building: ../src/Bunnies/GameScreen.cpp
  
 Building target: TaxiByNight.exe
