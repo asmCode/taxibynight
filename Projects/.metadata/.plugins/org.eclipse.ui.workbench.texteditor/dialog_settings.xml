@@ -3,26 +3,26 @@
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="312" key="DIALOG_WIDTH"/>
 		<item value="251" key="DIALOG_Y_ORIGIN"/>
-		<item value="437" key="DIALOG_HEIGHT"/>
 		<item value="1496" key="DIALOG_X_ORIGIN"/>
+		<item value="437" key="DIALOG_HEIGHT"/>
 		<item value="1|Ubuntu|11.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="true" key="wrap"/>
-		<item value="false" key="isRegEx"/>
 		<item value="false" key="casesensitive"/>
+		<item value="false" key="isRegEx"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="GetPo" key="selection"/>
+		<item value="sm::Vec3 camDir = m_camera.GetLookDirection();" key="selection"/>
 		<list key="findhistory">
-			<item value="getpo"/>
-			<item value="m_viewMatrix"/>
-			<item value="m_view"/>
-			<item value="loadfr"/>
-			<item value="spritesma"/>
-			<item value="initializegra"/>
-			<item value="clear"/>
-			<item value="glcle"/>
+			<item value="sm::Vec3 camDir = m_camera.GetLookDirection();"/>
+			<item value="draw("/>
+			<item value="correntPosition"/>
+			<item value="m_turnValue"/>
+			<item value="14"/>
+			<item value="desti"/>
+			<item value="resetca"/>
+			<item value="resetcaa"/>
 		</list>
 		<list key="replacehistory">
 		</list>
