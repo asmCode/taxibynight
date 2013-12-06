@@ -15,7 +15,13 @@
 	<sprite name="uni_button" file="gui01" bounds="0,407,205,76" />
 	<sprite name="uni_button_down" file="gui01" bounds="0,483,205,76" />
 	
-	<sprite name="leaderboard_button" file="gui01" bounds="0,407,205,76" />
-	<sprite name="leaderboard_button_down" file="gui01" bounds="0,483,205,76" />
-	<sprite name="leaderboard" file="gui01" bounds="374,529,650,495" />
+	<sprite name="leaderboard_button" file="gui02" bounds="0,470,529,114" />
+	<sprite name="leaderboard_button_down" file="gui02" bounds="0,584,529,114" />
+	<sprite name="leaderboard" file="gui02" bounds="1048,0,1000,468" />
+	<sprite name="leaderboard_offline" file="gui02" bounds="568,360,450,400" />
+	
+	<sprite name="you" file="gui02" bounds="0,698,70,170" />
+	<sprite name="you_down" file="gui02" bounds="70,698,70,170" />
+	<sprite name="top" file="gui02" bounds="140,698,70,170" />
+	<sprite name="top_down" file="gui02" bounds="210,698,70,170" />
 </map>
