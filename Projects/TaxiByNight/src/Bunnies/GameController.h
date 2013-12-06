@@ -13,6 +13,7 @@ class SplashScreen;
 class MainMenuScreen;
 class ComicsScreen;
 class SummaryScreen;
+class LeaderboardScreen;
 class Content;
 
 class GameController : public IGameController
@@ -41,6 +42,7 @@ public:
 	void proto_SetLookTarget(const sm::Vec3 &lookTarget);
 
 	void ShowGameScreen();
+	void ShowLeaderboard();
 	void ShowMainMenuScreen();
 	void ShowSummaryScreen(
 		float earn,
@@ -55,6 +57,7 @@ private:
 	MainMenuScreen *m_mainMenuScreen;
 	SummaryScreen *m_summaryScreen;
 	ComicsScreen *m_comicsScreen;
+	LeaderboardScreen *m_leaderboardScreen;
 
 	IGraphicsEngine *m_graphicsEngine;
 	Content *m_content;

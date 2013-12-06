@@ -14,4 +14,8 @@
 	
 	<sprite name="uni_button" file="gui01" bounds="0,407,205,76" />
 	<sprite name="uni_button_down" file="gui01" bounds="0,483,205,76" />
+	
+	<sprite name="leaderboard_button" file="gui01" bounds="0,407,205,76" />
+	<sprite name="leaderboard_button_down" file="gui01" bounds="0,483,205,76" />
+	<sprite name="leaderboard" file="gui01" bounds="374,529,650,495" />
 </map>

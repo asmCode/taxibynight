@@ -14,6 +14,10 @@ public:
 
 	static std::string ToString(float val);
 	static std::string ToString(int val);
+
+	static std::string ToBase64(const std::string& str);
+	static std::string FromBase64(const std::string& base64);
+
 };
 
 #endif // STRING_UTILS_H

@@ -1,14 +1,15 @@
 <Panel name="main_menu" fill="true">
 	<!--<Image name="background" image="main_menu_bg" fill="true" />-->
 	<Image image="town" width="650" height="495" align="right" margin_right="10" />
-	<Panel width="512" height="480" align="left" margin_left="20">
+	<Panel width="512" height="680" align="left" margin_left="20">
 		<!--<Image image="uni_button" fill="true" />-->
 		
 		<Image image="title" width="512" height="128" align="top" margin_top="0" />
 		
 		<AnimButton name="start_game_btn" align="top" margin_top="150" width="360" height="150" image="start_game_btn" image_pushed="start_game_btn_down" />
+		<AnimButton name="leaderboard_button" align="bottom" margin_top="250" width="360" height="150" image="leaderboard_button" image_pushed="leaderboard_button_down" />
 		
-		<Panel align="bottom" width="480" height="180" margin_bottom="0">
+		<Panel align="top" width="480" height="180" margin_top="300">
 			<Label font="fenix_26" name="total_income_label" align="bottom-left" text="Total Income:" size="1.0" margin_bottom="90" />
 			<Label font="fenix_26" name="total_income_value" align="bottom-right" text="0" size="1.0" margin_bottom="90" />
 		

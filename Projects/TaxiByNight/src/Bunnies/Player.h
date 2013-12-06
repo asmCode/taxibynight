@@ -12,6 +12,8 @@ public:
 	void Load();
 	void Save();
 
+	int m_id;
+	std::string m_name;
 	float m_totalMoney;
 	float m_bestRoundIncome;
 	int m_totalCourses;

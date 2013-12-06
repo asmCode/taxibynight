@@ -6,12 +6,14 @@
 #include "MainMenuScreen.h"
 #include "SummaryScreen.h"
 #include "ComicsScreen.h"
+#include "LeaderboardScreen.h"
 #include "SpritesMap.h"
 #include "Player.h"
 #include "Environment.h"
 #include "Control.h"
 #include "DrawingRoutines.h"
 #include "InterfaceProvider.h"
+#include "Leaderboard.h"
 #include <Graphics/IGraphicsEngine.h>
 #include <Graphics/Content/Content.h>
 #include <Graphics/Model.h>
@@ -77,7 +79,7 @@ bool GameController::InitializeGraphics(const std::string &basePath)
 	InterfaceProvider::m_fonts["fenix_26"] = FontRenderer::LoadFromFile((basePath + "data/fonts/fenix_26.xml").c_str(), spriteBatch);
 
 	Control::SetSpriteBatch(spriteBatch);
-	
+
 	return true;
 }
 
@@ -123,7 +125,19 @@ bool GameController::Initialize(ISystemUtils *systemUtils)
 	if (!m_comicsScreen->InitResources())
 		return false;
 
-	m_activeScreen = m_splashScreen;
+	m_leaderboardScreen = new LeaderboardScreen(this);
+	if (!m_leaderboardScreen->InitResources())
+		return false;
+
+	Leaderboard::GetInstance()->SendPlayerPoints(
+		player->m_id,
+		player->m_name,
+		player->m_totalMoney,
+		player->m_totalCourses);
+
+	//m_activeScreen = m_splashScreen;
+	m_activeScreen = m_leaderboardScreen;
+	m_activeScreen->Enter();
 
 	return true;
 }
@@ -207,6 +221,13 @@ void GameController::ShowMainMenuScreen()
 	m_activeScreen->Enter();
 }
 
+void GameController::ShowLeaderboard()
+{
+	m_activeScreen->Leave();
+	m_activeScreen = m_leaderboardScreen;
+	m_activeScreen->Enter();
+}
+
 void GameController::ShowSummaryScreen(
 	float earn,
 	int courses,
@@ -253,6 +274,8 @@ void GameController::HandleBackButton()
 		m_systemUtils->QuitApplication();
 	else if (m_activeScreen == m_gameScreen)
 		m_gameScreen->ShowPause();
+	else if (m_activeScreen == m_leaderboardScreen)
+		ShowMainMenuScreen();
 }
 
 void GameController::HandleMenukButton()

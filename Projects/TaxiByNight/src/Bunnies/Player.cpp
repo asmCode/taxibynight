@@ -8,6 +8,8 @@
 Player *Player::Instance;
 
 Player::Player(const std::string &path) :
+	m_id(0),
+	m_name("unnamed"),
 	m_totalMoney(0.0f),
 	m_totalCourses(0),
 	m_bestRoundIncome(0.0f),
@@ -40,6 +42,10 @@ void Player::Load()
 			m_tutorialFinished = child->GetValueAsBool();
 		else if (child->GetName() == "FirstRun")
 			m_firstRun = child->GetValueAsBool();
+		else if (child->GetName() == "Id")
+			m_id = child->GetValueAsInt32();
+		else if (child->GetName() == "Name")
+			m_name = StringUtils::FromBase64(child->GetValueAsString());
 	}
 }
 
@@ -48,6 +54,8 @@ void Player::Save()
 	std::string xml;
 
 	xml += "<Player>\n";
+	xml += "\t<Id>"; xml += StringUtils::ToString(m_id); xml += "</Id>\n";
+	xml += "\t<Name>"; xml += StringUtils::ToBase64(m_name); xml += "</Name>\n";
 	xml += "\t<TotalMoney>"; xml += StringUtils::ToString(m_totalMoney); xml += "</TotalMoney>\n";
 	xml += "\t<TotalCourses>"; xml += StringUtils::ToString(m_totalCourses); xml += "</TotalCourses>\n";
 	xml += "\t<BestRoundIncome>"; xml += StringUtils::ToString(m_bestRoundIncome); xml += "</BestRoundIncome>\n";

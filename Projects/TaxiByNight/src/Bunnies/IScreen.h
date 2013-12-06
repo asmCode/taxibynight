@@ -2,8 +2,9 @@
 #define _ISCREEN_
 
 #include <UI/IGestureHandler.h>
+#include <UI/ITouchObserver.h>
 
-class IScreen : public IGestureHandler
+class IScreen : public IGestureHandler, public ITouchObserver
 {
 public:
 	virtual ~IScreen() {}

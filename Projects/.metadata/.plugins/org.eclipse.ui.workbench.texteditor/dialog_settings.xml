@@ -3,28 +3,30 @@
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="312" key="DIALOG_WIDTH"/>
 		<item value="251" key="DIALOG_Y_ORIGIN"/>
-		<item value="1496" key="DIALOG_X_ORIGIN"/>
 		<item value="437" key="DIALOG_HEIGHT"/>
+		<item value="1496" key="DIALOG_X_ORIGIN"/>
 		<item value="1|Ubuntu|11.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="true" key="wrap"/>
-		<item value="false" key="casesensitive"/>
 		<item value="false" key="isRegEx"/>
+		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="sm::Vec3 camDir = m_camera.GetLookDirection();" key="selection"/>
+		<item value="Enter" key="selection"/>
 		<list key="findhistory">
-			<item value="sm::Vec3 camDir = m_camera.GetLookDirection();"/>
-			<item value="draw("/>
-			<item value="correntPosition"/>
-			<item value="m_turnValue"/>
-			<item value="14"/>
-			<item value="desti"/>
-			<item value="resetca"/>
-			<item value="resetcaa"/>
+			<item value="enter"/>
+			<item value="LeaderboardScreen"/>
+			<item value="handleba"/>
+			<item value="back"/>
+			<item value="levelfi"/>
+			<item value="onleve"/>
+			<item value="sendpla"/>
+			<item value="touch"/>
 		</list>
 		<list key="replacehistory">
+			<item value="LeaderboardScreen"/>
+			<item value="ComicsScreen"/>
 		</list>
 	</section>
 </section>

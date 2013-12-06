@@ -79,6 +79,7 @@ public:
 	
 	Control *GetParent();
 	void AddChild(Control *control);
+	void RemoveChild(Control *control);
 	
 	void SetX(int x);
 	void SetY(int y);
