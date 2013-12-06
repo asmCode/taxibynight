@@ -78,6 +78,8 @@ FontRenderer* FontRenderer::LoadFromFile(const char *path, SpriteBatch *spriteBa
 	assert(spriteBatch != NULL);
 
  	FontLetter texLetters[256];
+ 	memset(texLetters, 0, sizeof(FontLetter) * 256);
+
 
 	XMLNode *xmlDoc = XMLLoader::LoadFromFile(path);
 	if (xmlDoc == NULL)
@@ -146,6 +148,9 @@ void FontRenderer::DrawString(const char *text, unsigned x, unsigned y, const Co
 		}
 		
 		FontLetter letter = texLetters[text[i]];
+		if (letter.Coords.Tex == NULL)
+			continue;
+
 		m_spriteBatch ->Draw(
 			letter.Coords,
 			color,

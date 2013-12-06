@@ -7,6 +7,7 @@ AnimButton::AnimButton(const std::string &name,
 					   TexPart pushedState) :
 	Control(name)
 {
+	m_checked = false;
 	this->x = x;
 	this->y = y;
 	this->width = normalState.ImageRect.Width;
@@ -21,9 +22,14 @@ void AnimButton::OnDraw(float time, float ms)
 {
 	sm::Vec2 globalPos = GetGlobalPos();
 
-	TexPart image = m_pressState == PressState_Pressed ? pushedState : normalState;
+	TexPart image = m_pressState == PressState_Pressed || m_checked ? pushedState : normalState;
 	
 	spriteBatch ->Draw(image, (int)globalPos.x, (int)globalPos.y, width, height);
+}
+
+void AnimButton::SetChecked(bool checked)
+{
+	m_checked = checked;
 }
 
 //void AnimButton::OnTouchBegin(int x, int y)

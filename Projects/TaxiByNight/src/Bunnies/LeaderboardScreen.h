@@ -11,6 +11,7 @@
 class Control;
 class GameController;
 class Label;
+class AnimButton;
 
 class LeaderboardScreen : public IScreen, public ILeaderboardObserver, public IControlEventsObserver, public IScreenKeyboardObserver
 {
@@ -37,16 +38,19 @@ public:
 	void ClearTable();
 
 private:
-	static const int RowHeight = 35;
-	static const int PlaceColumnShift = 24;
-	static const int NameColumnShift = 130;
-	static const int PointsColumnShift = 390;
-	static const int LevelColumnShift = 560;
+	static const int RowHeight = 33;
+	static const int PlaceColumnShift = 174;
+	static const int NameColumnShift = 300;
+	static const int PointsColumnShift = 845;
+	static const int LevelColumnShift = 1030;
 
 	Control* m_changeNameButton;
 	Control* m_backButton;
 	Control* m_refreshButton;
 	Label* m_playerNameLabel;
+
+	AnimButton* m_topButton;
+	AnimButton* m_youButton;
 
 	GameController *m_gameController;
 

@@ -14,9 +14,9 @@ using namespace Tizen::Base::Utility;
 
 Leaderboard* Leaderboard::m_instance;
 const std::string Leaderboard::HostAddress = "http://semiseriousgames.com";
-const std::string Leaderboard::AddUserAddress = "http://semiseriousgames.com/taxibynight/server/ladder/Points.php?id=%d&n=%s&r=%sf&c=%d";
+const std::string Leaderboard::AddUserAddress = "http://semiseriousgames.com/taxibynight/server/ladder/Points.php?id=%d&n=%s&r=%s&c=%d";
 const std::string Leaderboard::TopAddress = "http://semiseriousgames.com/taxibynight/server/ladder/LadderTop.php?l=%d";
-const std::string Leaderboard::UserSurroundingAddress = "http://semiseriousgames.com/taxibynight/server/ladder/LadderSurr.php?r=%sf&l=%d";
+const std::string Leaderboard::UserSurroundingAddress = "http://semiseriousgames.com/taxibynight/server/ladder/LadderSurr.php?r=%s&l=%d";
 
 Leaderboard::Leaderboard()
 {
@@ -199,7 +199,7 @@ void Leaderboard::FetchArrayFromRasult(std::vector<PlayerStats>& array, XMLNode*
 			stats.m_name = name;
 		}
 		if (child->HasAttrib("r"))
-			stats.m_reward = child->GetAttribAsInt32("r");
+			stats.m_reward = child->GetAttribAsFloat("r");
 		if (child->HasAttrib("c"))
 			stats.m_courses = child->GetAttribAsInt32("c");
 

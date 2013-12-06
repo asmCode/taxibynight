@@ -18,7 +18,7 @@ public:
 	int m_id;
 	int m_place;
 	std::string m_name;
-	int m_reward;
+	float m_reward;
 	int m_courses;
 };
 

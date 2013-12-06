@@ -135,9 +135,7 @@ bool GameController::Initialize(ISystemUtils *systemUtils)
 		player->m_totalMoney,
 		player->m_totalCourses);
 
-	//m_activeScreen = m_splashScreen;
-	m_activeScreen = m_leaderboardScreen;
-	m_activeScreen->Enter();
+	m_activeScreen = m_splashScreen;
 
 	return true;
 }

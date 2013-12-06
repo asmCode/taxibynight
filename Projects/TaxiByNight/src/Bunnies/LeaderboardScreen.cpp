@@ -8,6 +8,7 @@
 #include "Environment.h"
 #include "Control.h"
 #include "Label.h"
+#include "AnimButton.h"
 #include "Player.h"
 #include "ScreenKeyboard.h"
 #include <Utils/Log.h>
@@ -38,6 +39,8 @@ bool LeaderboardScreen::InitResources()
 		return false;
 	}
 
+	m_topButton = dynamic_cast<AnimButton*>(m_leaderboardPanel->FindChild("top"));
+	m_youButton = dynamic_cast<AnimButton*>(m_leaderboardPanel->FindChild("you"));
 	m_changeNameButton = m_leaderboardPanel->FindChild("change_name");
 	m_backButton = m_leaderboardPanel->FindChild("back");
 	m_refreshButton = m_leaderboardPanel->FindChild("refresh");
@@ -48,6 +51,8 @@ bool LeaderboardScreen::InitResources()
 	assert(m_refreshButton != NULL);
 	assert(m_playerNameLabel != NULL);
 
+	ObsCast(IControlEventsObserver, m_topButton)->AddObserver(this);
+	ObsCast(IControlEventsObserver, m_youButton)->AddObserver(this);
 	ObsCast(IControlEventsObserver, m_changeNameButton)->AddObserver(this);
 	ObsCast(IControlEventsObserver, m_backButton)->AddObserver(this);
 	ObsCast(IControlEventsObserver, m_refreshButton)->AddObserver(this);
@@ -56,6 +61,9 @@ bool LeaderboardScreen::InitResources()
 
 	Leaderboard::GetInstance()->AddObserver(this);
 	ScreenKeyboard::GetInstance()->SetObserver(this);
+
+	m_topButton->SetChecked(true);
+	m_youButton->SetChecked(false);
 
 	return true;
 }
@@ -160,7 +168,7 @@ void LeaderboardScreen::SetPlayerStats(const std::vector<PlayerStats>& playerSta
 
 	FontRenderer *font = InterfaceProvider::GetFontRenderer("fenix_18");
 
-	int yBase = 80;
+	int yBase = 216;
 
 	for (unsigned int i = 0; i < playerStats.size(); i++)
 	{
@@ -179,7 +187,7 @@ void LeaderboardScreen::SetPlayerStats(const std::vector<PlayerStats>& playerSta
 
 		Label* nameLabel = new Label("", playerStats[i].m_name, font, 1.0f, color, NameColumnShift, yPos);
 
-		sprintf(numberStr, "%d", playerStats[i].m_reward);
+		sprintf(numberStr, "$%.2f", playerStats[i].m_reward);
 		Label* pointsLabel = new Label("", numberStr, font, 1.0f, color, PointsColumnShift, yPos);
 
 		sprintf(numberStr, "%d", playerStats[i].m_courses);
@@ -201,14 +209,39 @@ void LeaderboardScreen::Clicked(Control *control, uint32_t x, uint32_t y)
 {
 	if (control == m_backButton)
 	{
+		SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Button);
 		m_gameController->ShowMainMenuScreen();
 	}
 	else if (control == m_refreshButton)
 	{
+		SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Button);
+		Leaderboard::GetInstance()->SendPlayerPoints(
+			Player::Instance->m_id,
+			Player::Instance->m_name,
+			Player::Instance->m_totalMoney,
+			Player::Instance->m_totalCourses);
+
+		RefreshCurrentView();
+	}
+	else if (control == m_topButton)
+	{
+		SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Button);
+		m_topButton->SetChecked(true);
+		m_youButton->SetChecked(false);
+		SetTab(LeaderboardScreen::Tab_Top);
+		RefreshCurrentView();
+	}
+	else if (control == m_youButton)
+	{
+		SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Button);
+		m_topButton->SetChecked(false);
+		m_youButton->SetChecked(true);
+		SetTab(LeaderboardScreen::Tab_You);
 		RefreshCurrentView();
 	}
 	else if (control == m_changeNameButton)
 	{
+		SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Button);
 		ScreenKeyboard::GetInstance()->SetText(Player::Instance->m_name);
 		ScreenKeyboard::GetInstance()->Show();
 	}
@@ -241,6 +274,8 @@ void LeaderboardScreen::ScreenKeyboardDone(const std::string& text)
 
 		m_playerNameLabel->SetText(playerName);
 	}
+
+	RefreshCurrentView();
 }
 
 void LeaderboardScreen::ScreenKeyboardCanceled()
