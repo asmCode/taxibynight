@@ -12,7 +12,9 @@ class CollisionTester
 public:
 	static bool TestCollision(RectCollider* c1, RectCollider* c2);
 	static bool TestCollision(RectCollider* c1, CircleCollider* c2);
+	static bool TestCollision(RectCollider* c1, const sm::Vec2& c2);
 	static bool TestCollision(CircleCollider* c1, CircleCollider* c2);
+	static bool TestCollision(CircleCollider* c1, const sm::Vec2& c2);
 
 private:
 	static void GetProjectionBounds(
@@ -26,6 +28,14 @@ private:
 		float e1Max,
 		float e2Min,
 		float e2Max,
+		float &penetrationValue // less than zero, if first collider
+								// should be moved to left (or second collider to right)
+		);
+
+	static bool TestEdgeCollision(
+		float e1Min,
+		float e1Max,
+		float point,
 		float &penetrationValue // less than zero, if first collider
 								// should be moved to left (or second collider to right)
 		);

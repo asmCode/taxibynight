@@ -105,6 +105,96 @@ bool CollisionTester::TestCollision(RectCollider* c1, CircleCollider* c2)
 	return true;
 }
 
+bool CollisionTester::TestCollision(RectCollider* c1, const sm::Vec2& c2)
+{
+	assert(c1 != NULL);
+
+	c1->UpdateData();
+
+	sm::Vec2 axises[] =
+	{
+		c1->m_axis1,
+		c1->m_axis2,
+	};
+
+	float e1Min;
+	float e1Max;
+	float penetration;
+	float minPenetration;
+	float c2Projection;
+	sm::Vec2 mtv(0, 0);
+
+	for (unsigned char i = 0; i < 2; i++)
+	{
+		c2Projection = sm::Vec2::Dot(axises[i], c2);
+
+		GetProjectionBounds(axises[i], c1->m_points, e1Min, e1Max);
+
+		if (!TestEdgeCollision(e1Min, e1Max, c2Projection, penetration))
+			return false;
+		else
+		{
+			if (MathUtils::Abs(penetration) < MathUtils::Abs(minPenetration))
+			{
+				minPenetration = penetration;
+				mtv = axises[i] * minPenetration;
+			}
+		}
+	}
+
+	debugSpheres.push_back(sm::Vec3(0, 0, 0));
+	debugSpheres.push_back(sm::Vec3(mtv.x, mtv.y, 0));
+
+	return true;
+}
+
+bool CollisionTester::TestCollision(CircleCollider* c1, CircleCollider* c2)
+{
+	assert(c1 != NULL);
+	assert(c2 != NULL);
+
+	c1->UpdateData();
+	c2->UpdateData();
+
+	float collisionDistance = c1->m_radius + c2->m_radius;
+	sm::Vec2 direction = c1->m_worldPosition - c2->m_worldPosition;
+	float distance = direction.GetLength();
+
+	if (distance > collisionDistance)
+		return false;
+
+	direction.Normalize();
+
+	sm::Vec2 mtv = direction * (collisionDistance - distance);
+
+	debugSpheres.push_back(sm::Vec3(0, 0, 0));
+	debugSpheres.push_back(sm::Vec3(mtv.x, mtv.y, 0));
+
+	return true;
+}
+
+bool CollisionTester::TestCollision(CircleCollider* c1, const sm::Vec2& c2)
+{
+	assert(c1 != NULL);
+
+	c1->UpdateData();
+
+	sm::Vec2 direction = c1->m_worldPosition - c2;
+	float distance = direction.GetLength();
+
+	if (distance > c1->m_radius)
+		return false;
+
+	direction.Normalize();
+
+	sm::Vec2 mtv = direction * (c1->m_radius - distance);
+
+	debugSpheres.push_back(sm::Vec3(0, 0, 0));
+	debugSpheres.push_back(sm::Vec3(mtv.x, mtv.y, 0));
+
+	return true;
+}
+
 void CollisionTester::GetProjectionBounds(
 	const sm::Vec2& axis,
 	const sm::Vec2 points[4],
@@ -139,6 +229,29 @@ bool CollisionTester::TestEdgeCollision(
 
 	float shiftLeft = MathUtils::Abs(e1Min - e2Max);
 	float shiftRight = MathUtils::Abs(e2Min - e1Max);
+
+	penetrationValue = MathUtils::Min(shiftLeft, shiftRight);
+
+	// if first collider must be shifted to left, then notify it as a negative value
+	if (shiftRight < shiftLeft)
+		penetrationValue = -penetrationValue;
+
+	return true;
+}
+
+bool CollisionTester::TestEdgeCollision(
+	float e1Min,
+	float e1Max,
+	float point,
+	float &penetrationValue)
+{
+	// point outside region
+	if (point < e1Min ||
+		point > e1Max)
+		return false;
+
+	float shiftLeft = MathUtils::Abs(e1Min - point);
+	float shiftRight = MathUtils::Abs(e1Max - point);
 
 	penetrationValue = MathUtils::Min(shiftLeft, shiftRight);
 
