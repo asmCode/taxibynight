@@ -1,15 +1,16 @@
 #include "CollisionTester.h"
 #include "RectCollider.h"
 #include "CircleCollider.h"
+#include "CollisionInfo2d.h"
 #include <Math/MathUtils.h>
 #include <stddef.h>
 #include <assert.h>
 #include <limits>
 
-#include <vector>
-extern std::vector<sm::Vec3> debugSpheres;
+//#include <vector>
+//extern std::vector<sm::Vec3> debugSpheres;
 
-bool CollisionTester::TestCollision(RectCollider* c1, RectCollider* c2)
+bool CollisionTester::TestCollision(RectCollider* c1, RectCollider* c2, CollisionInfo2d& collisionInfo)
 {
 	assert(c1 != NULL);
 	assert(c2 != NULL);
@@ -50,13 +51,13 @@ bool CollisionTester::TestCollision(RectCollider* c1, RectCollider* c2)
 		}
 	}
 
-	debugSpheres.push_back(sm::Vec3(0, 0, 0));
-	debugSpheres.push_back(sm::Vec3(mtv.x, mtv.y, 0));
+	collisionInfo.m_firstColliderEscapeVector = mtv;
+	collisionInfo.m_firstColliderPenetrationValue = MathUtils::Abs(minPenetration);
 
 	return true;
 }
 
-bool CollisionTester::TestCollision(RectCollider* c1, CircleCollider* c2)
+bool CollisionTester::TestCollision(RectCollider* c1, CircleCollider* c2, CollisionInfo2d& collisionInfo)
 {
 	assert(c1 != NULL);
 	assert(c2 != NULL);
@@ -99,13 +100,13 @@ bool CollisionTester::TestCollision(RectCollider* c1, CircleCollider* c2)
 		}
 	}
 
-	debugSpheres.push_back(sm::Vec3(0, 0, 0));
-	debugSpheres.push_back(sm::Vec3(mtv.x, mtv.y, 0));
+	collisionInfo.m_firstColliderEscapeVector = mtv;
+	collisionInfo.m_firstColliderPenetrationValue = MathUtils::Abs(minPenetration);
 
 	return true;
 }
 
-bool CollisionTester::TestCollision(RectCollider* c1, const sm::Vec2& c2)
+bool CollisionTester::TestCollision(RectCollider* c1, const sm::Vec2& c2, CollisionInfo2d& collisionInfo)
 {
 	assert(c1 != NULL);
 
@@ -142,13 +143,13 @@ bool CollisionTester::TestCollision(RectCollider* c1, const sm::Vec2& c2)
 		}
 	}
 
-	debugSpheres.push_back(sm::Vec3(0, 0, 0));
-	debugSpheres.push_back(sm::Vec3(mtv.x, mtv.y, 0));
+	collisionInfo.m_firstColliderEscapeVector = mtv;
+	collisionInfo.m_firstColliderPenetrationValue = MathUtils::Abs(minPenetration);
 
 	return true;
 }
 
-bool CollisionTester::TestCollision(CircleCollider* c1, CircleCollider* c2)
+bool CollisionTester::TestCollision(CircleCollider* c1, CircleCollider* c2, CollisionInfo2d& collisionInfo)
 {
 	assert(c1 != NULL);
 	assert(c2 != NULL);
@@ -167,13 +168,13 @@ bool CollisionTester::TestCollision(CircleCollider* c1, CircleCollider* c2)
 
 	sm::Vec2 mtv = direction * (collisionDistance - distance);
 
-	debugSpheres.push_back(sm::Vec3(0, 0, 0));
-	debugSpheres.push_back(sm::Vec3(mtv.x, mtv.y, 0));
+	collisionInfo.m_firstColliderEscapeVector = mtv;
+	collisionInfo.m_firstColliderPenetrationValue = MathUtils::Abs(collisionDistance - distance);
 
 	return true;
 }
 
-bool CollisionTester::TestCollision(CircleCollider* c1, const sm::Vec2& c2)
+bool CollisionTester::TestCollision(CircleCollider* c1, const sm::Vec2& c2, CollisionInfo2d& collisionInfo)
 {
 	assert(c1 != NULL);
 
@@ -189,8 +190,8 @@ bool CollisionTester::TestCollision(CircleCollider* c1, const sm::Vec2& c2)
 
 	sm::Vec2 mtv = direction * (c1->m_radius - distance);
 
-	debugSpheres.push_back(sm::Vec3(0, 0, 0));
-	debugSpheres.push_back(sm::Vec3(mtv.x, mtv.y, 0));
+	collisionInfo.m_firstColliderEscapeVector = mtv;
+	collisionInfo.m_firstColliderPenetrationValue = MathUtils::Abs(c1->m_radius - distance);
 
 	return true;
 }

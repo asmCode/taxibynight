@@ -6,15 +6,16 @@
 
 class RectCollider;
 class CircleCollider;
+class CollisionInfo2d;
 
 class CollisionTester
 {
 public:
-	static bool TestCollision(RectCollider* c1, RectCollider* c2);
-	static bool TestCollision(RectCollider* c1, CircleCollider* c2);
-	static bool TestCollision(RectCollider* c1, const sm::Vec2& c2);
-	static bool TestCollision(CircleCollider* c1, CircleCollider* c2);
-	static bool TestCollision(CircleCollider* c1, const sm::Vec2& c2);
+	static bool TestCollision(RectCollider* c1, RectCollider* c2, CollisionInfo2d& collisionInfo);
+	static bool TestCollision(RectCollider* c1, CircleCollider* c2, CollisionInfo2d& collisionInfo);
+	static bool TestCollision(RectCollider* c1, const sm::Vec2& c2, CollisionInfo2d& collisionInfo);
+	static bool TestCollision(CircleCollider* c1, CircleCollider* c2, CollisionInfo2d& collisionInfo);
+	static bool TestCollision(CircleCollider* c1, const sm::Vec2& c2, CollisionInfo2d& collisionInfo);
 
 private:
 	static void GetProjectionBounds(
