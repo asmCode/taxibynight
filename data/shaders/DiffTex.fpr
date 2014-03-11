@@ -1,3 +1,5 @@
+precision mediump float;
+
 uniform sampler2D u_diffTex;
 
 varying vec2 v_coords;

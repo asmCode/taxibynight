@@ -18,6 +18,7 @@
 #include <Graphics/OpenglPort.h>
 
 Taxi *Taxi::m_instance;
+float Taxi::MaxSpeed = 14.0f;
 
 Taxi::Taxi() :
 	m_turnValue(0.0f),
@@ -119,8 +120,6 @@ void Taxi::Update(float time, float seconds)
 
 	m_speed += m_acc * 5.0f * seconds;
 
-	static float maxSpeed = 14.0f;
-
 	if (m_acc == 0.0f)
 	{
 		m_speed -= MathUtils::Min(MathUtils::Abs(m_speed), 8.0f * seconds) * MathUtils::Sign(m_speed);
@@ -131,11 +130,11 @@ void Taxi::Update(float time, float seconds)
 		m_speed -= MathUtils::Min(MathUtils::Abs(m_speed), 12.0f * seconds) * MathUtils::Sign(m_speed);
 	}
 
-	m_speed = MathUtils::Clamp(m_speed, -maxSpeed / 4, maxSpeed);
+	m_speed = MathUtils::Clamp(m_speed, -MaxSpeed / 4, MaxSpeed);
 
-	SoundManager::GetInstance()->SetEnginePitch((MathUtils::Abs(m_speed) / maxSpeed) * 1.0f + 1.0f);
+	SoundManager::GetInstance()->SetEnginePitch((MathUtils::Abs(m_speed) / MaxSpeed) * 1.0f + 1.0f);
 
-	m_wheelsAngle += 2.0f * m_turnValue * seconds;
+	m_wheelsAngle += 2.0f * m_turnValue * seconds * 0.7f;
 
 	m_wheelsAngle = MathUtils::Clamp(m_wheelsAngle, -MathUtils::PI4, MathUtils::PI4);
 
@@ -356,6 +355,11 @@ void Taxi::SetAcceleration(float acc)
 const sm::Vec3& Taxi::GetPosition() const
 {
 	return m_position;
+}
+
+const sm::Vec3& Taxi::GetDirection() const
+{
+	return m_carDirection;
 }
 
 bool Taxi::IsOccupied() const

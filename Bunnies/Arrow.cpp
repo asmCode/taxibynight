@@ -56,7 +56,7 @@ void Arrow::Draw(float time, float seconds)
 	glClear(GL_DEPTH_BUFFER_BIT);
 	glViewport((width - arrowWidth) / 2, height - arrowWidth, arrowWidth, arrowWidth);
 
-	sm::Vec3 camPosition(0, 12, -6);
+	sm::Vec3 camPosition(0, 12, -5);
 	sm::Vec3 camLook = (camPosition - (sm::Vec3(0, 0, 0))).GetNormalized();
 	sm::Matrix viewMatrix =
 		sm::Matrix::TranslateMatrix(camPosition) *

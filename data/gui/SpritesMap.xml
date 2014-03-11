@@ -7,11 +7,21 @@
 	<sprite name="start_game_btn_down" file="gui01" bounds="512,0,360,150" />
 	<sprite name="start_game_btn" file="gui01" bounds="512,150,360,150" />
 	
-	<sprite name="arrow_left" file="gui01" bounds="0,0,128,128" />
-	<sprite name="arrow_right" file="gui01" bounds="128,0,128,128" />
-	<sprite name="arrow_up" file="gui01" bounds="256,0,128,128" />
-	<sprite name="arrow_down" file="gui01" bounds="384,0,128,128" />
+	<sprite name="arrow_left" file="gui02" bounds="568,0,180,180" />
+	<sprite name="arrow_right" file="gui02" bounds="748,0,180,180" />
+	<sprite name="arrow_up" file="gui02" bounds="568,180,180,180" />
+	<sprite name="arrow_down" file="gui02" bounds="748,180,180,180" />
 	
 	<sprite name="uni_button" file="gui01" bounds="0,407,205,76" />
 	<sprite name="uni_button_down" file="gui01" bounds="0,483,205,76" />
+	
+	<sprite name="leaderboard_button" file="gui02" bounds="0,470,529,114" />
+	<sprite name="leaderboard_button_down" file="gui02" bounds="0,584,529,114" />
+	<sprite name="leaderboard" file="gui02" bounds="1048,0,1000,468" />
+	<sprite name="leaderboard_offline" file="gui02" bounds="568,360,450,400" />
+	
+	<sprite name="you" file="gui02" bounds="0,698,70,170" />
+	<sprite name="you_down" file="gui02" bounds="70,698,70,170" />
+	<sprite name="top" file="gui02" bounds="140,698,70,170" />
+	<sprite name="top_down" file="gui02" bounds="210,698,70,170" />
 </map>

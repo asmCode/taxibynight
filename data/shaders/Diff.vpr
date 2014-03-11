@@ -1,8 +1,6 @@
-#version 400
-
-layout (location = 0) in vec3 a_position;
-layout (location = 1) in vec2 a_coordsDiff;
-layout (location = 3) in vec3 a_normal;
+attribute vec3 a_position;
+attribute vec2 a_coordsDiff;
+attribute vec3 a_normal;
 
 uniform mat4 u_worldMatrix;
 uniform mat4 u_viewProjMatrix;

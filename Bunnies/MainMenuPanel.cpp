@@ -28,7 +28,11 @@ MainMenuPanel *MainMenuPanel::Create(GameController *gameController)
 	Control *startButton = content->FindChild("start_game_btn");
 	assert(startButton != NULL);
 
+	Control *leaderButton = content->FindChild("leaderboard_button");
+	assert(leaderButton != NULL);
+
 	ObsCast(IControlEventsObserver, startButton)->AddObserver(ret);
+	ObsCast(IControlEventsObserver, leaderButton)->AddObserver(ret);
 
 	ret->AddChild(content);
 
@@ -41,6 +45,11 @@ void MainMenuPanel::Clicked(Control *control, uint32_t x, uint32_t y)
 	{
 		SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Button);
 		m_gameController->ShowGameScreen();
+	}
+	else if (control->GetName() == "leaderboard_button")
+	{
+		SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Button);
+		m_gameController->ShowLeaderboard();
 	}
 }
 

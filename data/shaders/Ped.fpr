@@ -1,4 +1,4 @@
-//precision mediump float;
+precision mediump float;
 
 uniform sampler2D u_diffTex;
 
@@ -15,6 +15,6 @@ void main()
 	
 	float diffValue = max(dot(lightDirection, normal), 0.5);
 	
-	gl_FragColor = texture(u_diffTex, o_coordsDiff) * u_color * diffValue;
+	gl_FragColor = texture2D(u_diffTex, o_coordsDiff) * u_color * diffValue;
 }
 

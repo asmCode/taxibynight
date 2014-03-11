@@ -20,6 +20,7 @@ void Content::LoadTextures(const std::string &fullPath)
 {
 	std::vector<std::string> filesNames;
 	Path::GetAllFiles(filesNames, fullPath, "*.png");
+	//Path::GetAllFiles(filesNames, fullPath, "*.jpg");
 
 	for (uint32_t i = 0 ; i < filesNames.size(); i++)
 	{

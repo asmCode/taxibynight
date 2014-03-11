@@ -2,6 +2,7 @@
 
 #include "IScreen.h"
 #include <Math/Matrix.h>
+#include "SpringCamera.h"
 
 class IShapesRenderer;
 class Street;
@@ -63,6 +64,8 @@ private:
 	static GameScreen *m_instance;
 
 
+	sm::SpringCamera m_camera;
+
 	Label *m_messageLabel;
 	Label *m_penaltyLabel;
 
@@ -98,5 +101,7 @@ private:
 	float m_fpsUpdatesPerSecond;
 
 	void SimulatePress();
+
+	void ResetCamera();
 };
 

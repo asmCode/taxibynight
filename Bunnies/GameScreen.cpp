@@ -5,6 +5,7 @@
 #include "Environment.h"
 #include "GameProps.h"
 //#include "ManCam.h"
+#include "Camera.h"
 #include "Street.h"
 #include "GameController.h"
 #include "DrawingRoutines.h"
@@ -13,6 +14,7 @@
 #include "Arrow.h"
 #include "Player.h"
 #include "Billboard.h"
+#include "Leaderboard.h"
 #include "PlaceIndicator.h"
 #include "Label.h"
 #include <Audio/SoundManager.h>
@@ -97,6 +99,8 @@ bool GameScreen::Initialize()
 	uint32_t screenHeight = TaxiGame::Environment::GetInstance()->GetScreenHeight();
 
 	m_projMatrix = sm::Matrix::PerspectiveMatrix(MathUtils::PI / 2.0f, static_cast<float>(screenWidth) / static_cast<float>(screenHeight), 0.1f, 1000.0f);
+
+	ResetCamera();
 
 	return true;
 }
@@ -184,7 +188,22 @@ void GameScreen::Update(float time, float seconds)
 
 	if (m_taxi->IsOccupied())
 	{
-		m_arrow->SetDirection((m_taxi->GetPassengerTarget() - m_taxi->GetPosition()).GetNormalized());
+		sm::Vec3 camDir = m_camera.GetLookDirection();
+		camDir.y = 0.0f;
+		camDir.Normalize();
+
+		sm::Vec3 pedTrgDir = (m_taxi->GetPassengerTarget() - m_taxi->GetPosition()).GetNormalized();
+
+		float ang = -sm::Vec3::GetAngle(camDir, sm::Vec3(0, 0, -1));
+
+		if (MathUtils::Abs(ang) > 0.001f)
+		{
+			sm::Vec3 axis = (camDir * sm::Vec3(0, 0, -1)).GetNormalized();
+			//Log::LogT("angle: %.4f, y: %.4f", ang, axis.y);
+			pedTrgDir = sm::Matrix::RotateAxisMatrix(ang, axis) * pedTrgDir;
+		}
+
+		m_arrow->SetDirection(pedTrgDir.GetReversed());
 		m_arrow->Update(time, seconds);
 	}
 
@@ -193,15 +212,26 @@ void GameScreen::Update(float time, float seconds)
 	sm::Vec3 taxiPosition = m_taxi->GetPosition();
 	taxiPosition.y = 0.0f;
 	sm::Vec3 camPosition = taxiPosition + sm::Vec3(0, 13, -4);
-	sm::Vec3 camLook = (camPosition - (taxiPosition + sm::Vec3(0, 0, +2))).GetNormalized();
-	m_viewMatrix =
-		sm::Matrix::TranslateMatrix(camPosition) *
-		sm::Matrix::CreateLookAt2(camLook, sm::Vec3(0, 1, 0));
+//	sm::Vec3 camLook = (camPosition - (taxiPosition + sm::Vec3(0, 0, +2))).GetNormalized();
+//	m_viewMatrix =
+//		sm::Matrix::TranslateMatrix(camPosition) *
+//		sm::Matrix::CreateLookAt2(camLook, sm::Vec3(0, 1, 0));
+//
+//	m_viewMatrix = m_viewMatrix.GetInversed();
+//
+//	//m_viewMatrix = m_manCam->GetViewMatrix();
+//	camPosition = m_viewMatrix.GetInversed() * sm::Vec3(0, 0, 0);
 
-	m_viewMatrix = m_viewMatrix.GetInversed();
+	camPosition = taxiPosition - m_taxi->GetDirection() * 2;
+	camPosition.y += 13;
 
-	//m_viewMatrix = m_manCam->GetViewMatrix();
-	camPosition = m_viewMatrix.GetInversed() * sm::Vec3(0, 0, 0);
+	float fixLook = 3.0f * (m_taxi->m_speed / Taxi::MaxSpeed);
+
+	m_camera.SetDestinationPosition(camPosition);
+	m_camera.SetDestinationLookDirection(((taxiPosition + m_taxi->GetDirection() * (3 + fixLook)) - camPosition).GetNormalized());
+	//m_camera.SetRoll(-m_taxi->m_wheelsAngle * 0.1f);
+	m_camera.Update(seconds);
+	m_viewMatrix = m_camera.GetViewMatrix();
 
 	m_messageLabel->SetVisible(true);
 	if (!Player::Instance->m_tutorialFinished && !Taxi::GetInstance()->IsOccupied())
@@ -259,6 +289,8 @@ void GameScreen::Reset()
 	m_taxi->Reset();
 	m_pedsManager->Reset(m_taxi->GetPosition());
 	m_street->SetInitialVisibility(m_taxi->GetPosition());
+
+	ResetCamera();
 }
 
 void GameScreen::SetOccupiedMode()
@@ -349,8 +381,7 @@ void GameScreen::BreakButtonPressed(bool isPressed)
 
 void GameScreen::SimulatePress()
 {
-#if 1
-
+#if 0
 	if (GetAsyncKeyState(VK_UP) & 0x8000)
 		AccelerationButtonPressed(true);
 	else
@@ -398,6 +429,12 @@ void GameScreen::EndRound()
 	Player::Instance->m_tutorialFinished = true;
 	Player::Instance->Save();
 
+	Leaderboard::GetInstance()->SendPlayerPoints(
+		Player::Instance->m_id,
+		Player::Instance->m_name,
+		Player::Instance->m_totalMoney,
+		Player::Instance->m_totalCourses);
+
 	m_gameController->ShowSummaryScreen(
 		m_pedsManager->m_totalMoney,
 		m_pedsManager->m_totalCourses,
@@ -414,4 +451,19 @@ void GameScreen::Enter()
 void GameScreen::Leave()
 {
 	SoundManager::GetInstance()->StopEngine();
+}
+
+void GameScreen::ResetCamera()
+{
+	sm::Vec3 taxiPosition = m_taxi->GetPosition();
+
+	sm::Vec3 camPosition = taxiPosition - m_taxi->GetDirection() * 5;
+	camPosition.y += 13;
+
+	sm::Vec3 camDirection = ((taxiPosition + m_taxi->GetDirection() * 2) - camPosition).GetNormalized();
+
+	m_camera.SetPosition(camPosition);
+	m_camera.SetDestinationPosition(camPosition);
+	m_camera.SetLookDirection(camDirection);
+	m_camera.SetDestinationLookDirection(camDirection);
 }

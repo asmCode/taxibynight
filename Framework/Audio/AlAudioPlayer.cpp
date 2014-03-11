@@ -88,6 +88,8 @@ AlAudioPlayer::ConvertError(ALenum error)
 	default:
 		return E_FAILURE;
 	}
+
+	return E_FAILURE;
 }
 /**
  * Construct OpenAL based player.
@@ -220,7 +222,7 @@ void AlAudioPlayer::FillAlBuffer(ByteBuffer &srcBuf, ALuint alBuffer)
 	}
 
 	ByteBuffer __pcmBuf;
-	__pcmBuf.Construct(MAX_AL_BUFFER_SIZE * 10);
+	__pcmBuf.Construct(MAX_AL_BUFFER_SIZE * 100);
 
 	while ( srcBuf.GetRemaining() > 0)
 	{

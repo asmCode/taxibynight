@@ -32,6 +32,7 @@ private:
 
 	AnimButton *m_mainMenuButton;
 	AnimButton *m_againButton;
+	AnimButton *m_leaderButton;
 
 	bool m_record;
 

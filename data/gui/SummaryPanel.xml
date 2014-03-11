@@ -1,6 +1,6 @@
 <Panel name="summary_panel" fill="true">
 	<Image image="town" tmp_fill="wypelnij" align="top" width="650" height="495"/>
-	<Panel name="summary_panel" align="center" width="568" height="470">
+	<Panel name="summary_panel" align="top" width="568" height="470" margin_top="70">
 		<Image name="summary_screen_content_bg" image="summary_screen_bg" fill="true" />
 		
 		<Label font="fenix_26" name="earn_label" text="Earn" size="1.0" left="50" top="90" />
@@ -22,4 +22,6 @@
 			<Label font="fenix_18" color="0;0;0" text="Again!" align="center" />
 		</AnimButton>
 	</Panel>
+	
+	<AnimButton name="leaderboard_button" align="bottom" margin_bottom="40" width="529" height="114" image="leaderboard_button" image_pushed="leaderboard_button_down" />
 </Panel>

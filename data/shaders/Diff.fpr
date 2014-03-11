@@ -1,6 +1,4 @@
-#version 400
-
-layout( location = 0 ) out vec4 FragColor;
+precision mediump float;
 
 uniform sampler2D u_diffTex;
 
@@ -25,11 +23,11 @@ void main()
 	float diffValue = max(dot(lightDirection, normal), 0.0);
 	float specValue = pow(max(dot(halfVector, normal), 0.0), u_glossiness) * u_specularLevel;
 	
-	vec4 diffColor = texture(u_diffTex, o_coordsDiff);
+	vec4 diffColor = texture2D(u_diffTex, o_coordsDiff);
 	diffColor.xyz *= diffValue;
 	diffColor.w *= u_opacity;
 	diffColor.xyz += u_specularColor * specValue;
 	
-	FragColor = diffColor;
+	gl_FragColor = diffColor;
 }
 

@@ -49,9 +49,12 @@ SummaryPanel *SummaryPanel::Create(GameController *gameController)
 	assert(ret->m_mainMenuButton != NULL);
 	ret->m_againButton = dynamic_cast<AnimButton*>(ret->FindChild("again"));
 	assert(ret->m_againButton != NULL);
+	ret->m_leaderButton = dynamic_cast<AnimButton*>(ret->FindChild("leaderboard_button"));
+	assert(ret->m_leaderButton != NULL);
 
 	ObsCast(IControlEventsObserver, ret->m_mainMenuButton)->AddObserver(ret);
 	ObsCast(IControlEventsObserver, ret->m_againButton)->AddObserver(ret);
+	ObsCast(IControlEventsObserver, ret->m_leaderButton)->AddObserver(ret);
 
 	return ret;
 }
@@ -67,6 +70,11 @@ void SummaryPanel::Clicked(Control *control, uint32_t x, uint32_t y)
 	{
 		SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Button);
 		m_gameController->ShowGameScreen();
+	}
+	else if (control == m_leaderButton)
+	{
+		SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Button);
+		m_gameController->ShowLeaderboard();
 	}
 }
 

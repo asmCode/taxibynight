@@ -51,7 +51,7 @@ void TizenAudioPlayer::SetLoop(bool loop)
 
 void TizenAudioPlayer::SetVolume(float vol)
 {
-	m_player.SetVolume(vol);
+	m_player.SetVolume(vol * 100.0f);
 }
 
 float TizenAudioPlayer::GetVolume() const

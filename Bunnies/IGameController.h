@@ -6,13 +6,14 @@
 #include <string>
 
 class Player;
+class ISystemUtils;
 
 class IGameController : public IGestureHandler
 {
 public:
 	virtual ~IGameController() {}
 
-	virtual bool Initialize() = 0;
+	virtual bool Initialize(ISystemUtils *systemUtils) = 0;
 
 	virtual void Draw(float time, float seconds) = 0;
 	virtual void Update(float time, float seconds) = 0;
@@ -21,6 +22,11 @@ public:
 	virtual void proto_SetStrafeMove(float value) = 0;
 	virtual void proto_SetForwardMove(float value) = 0;
 	virtual void proto_SetLookTarget(const sm::Vec3 &lookTarget) = 0;
+
+	virtual void HandleEnterForeground() = 0;
+	virtual void HandleEnterBackground() = 0;
+	virtual void HandleBackButton() = 0;
+	virtual void HandleMenukButton() = 0;
 };
 
 #endif

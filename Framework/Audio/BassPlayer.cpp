@@ -1,4 +1,7 @@
+#ifdef _WIN32
+
 #include "BassPlayer.h"
+#include <stddef.h>
 #include <assert.h>
 
 bool BassPlayer::m_isInitialized;
@@ -82,3 +85,5 @@ void BassPlayer::SetPitch(float pitch)
 {
 	BASS_ChannelSetAttribute(mp3Stream, BASS_ATTRIB_FREQ, 44100.0f * pitch);
 }
+
+#endif

@@ -5,12 +5,15 @@
 #include "SplashScreen.h"
 #include "MainMenuScreen.h"
 #include "SummaryScreen.h"
+#include "ComicsScreen.h"
+#include "LeaderboardScreen.h"
 #include "SpritesMap.h"
 #include "Player.h"
 #include "Environment.h"
 #include "Control.h"
 #include "DrawingRoutines.h"
 #include "InterfaceProvider.h"
+#include "Leaderboard.h"
 #include <Graphics/IGraphicsEngine.h>
 #include <Graphics/Content/Content.h>
 #include <Graphics/Model.h>
@@ -30,6 +33,7 @@ GameController::GameController(IGraphicsEngine *graphicsEngine) :
 	m_mainMenuScreen(NULL),
 	m_summaryScreen(NULL),
 	m_gameScreen(NULL),
+	m_comicsScreen(NULL),
 	m_activeScreen(NULL)
 {
 }
@@ -49,6 +53,7 @@ bool GameController::InitializeGraphics(const std::string &basePath)
 	InterfaceProvider::m_content = m_content;
 	m_content->LoadTextures(basePath + "data/gui/");
 	m_content->LoadTextures(basePath + "data/textures/");
+	m_content->LoadTextures(basePath + "data/textures/comics/");
 	m_content->LoadShaders(basePath + "data/shaders/");
 	m_content->LoadModels(basePath + "data/models/");
 	m_content->LoadAnimations(basePath + "data/animations/");
@@ -74,13 +79,15 @@ bool GameController::InitializeGraphics(const std::string &basePath)
 	InterfaceProvider::m_fonts["fenix_26"] = FontRenderer::LoadFromFile((basePath + "data/fonts/fenix_26.xml").c_str(), spriteBatch);
 
 	Control::SetSpriteBatch(spriteBatch);
-	
+
 	return true;
 }
 
-bool GameController::Initialize()
+bool GameController::Initialize(ISystemUtils *systemUtils)
 {
 	Log::StartLog(true, false, false);
+
+	m_systemUtils = systemUtils;
 
 	srand(time(NULL));
 
@@ -113,6 +120,20 @@ bool GameController::Initialize()
 	m_summaryScreen = new SummaryScreen(this);
 	if (!m_summaryScreen->InitResources())
 		return false;
+
+	m_comicsScreen = new ComicsScreen(this);
+	if (!m_comicsScreen->InitResources())
+		return false;
+
+	m_leaderboardScreen = new LeaderboardScreen(this);
+	if (!m_leaderboardScreen->InitResources())
+		return false;
+
+	Leaderboard::GetInstance()->SendPlayerPoints(
+		player->m_id,
+		player->m_name,
+		player->m_totalMoney,
+		player->m_totalCourses);
 
 	m_activeScreen = m_splashScreen;
 
@@ -168,10 +189,24 @@ void GameController::proto_SetLookTarget(const sm::Vec3 &lookTarget)
 
 void GameController::ShowGameScreen()
 {
-	m_gameScreen->Reset();
+	IScreen* screen = NULL;
+
+	if (Player::Instance->m_firstRun)
+	{
+		Player::Instance->m_firstRun = false;
+		Player::Instance->Save();
+
+		screen = m_comicsScreen;
+	}
+	else
+	{
+		m_gameScreen->Reset();
+
+		screen = m_gameScreen;
+	}
 
 	m_activeScreen->Leave();
-	m_activeScreen = m_gameScreen;
+	m_activeScreen = screen;
 	m_activeScreen->Enter();
 }
 
@@ -181,6 +216,13 @@ void GameController::ShowMainMenuScreen()
 
 	m_activeScreen->Leave();
 	m_activeScreen = m_mainMenuScreen;
+	m_activeScreen->Enter();
+}
+
+void GameController::ShowLeaderboard()
+{
+	m_activeScreen->Leave();
+	m_activeScreen = m_leaderboardScreen;
 	m_activeScreen->Enter();
 }
 
@@ -206,5 +248,36 @@ void GameController::ShowSummaryScreen(
 bool GameController::proto_IsInGame()
 {
 	return dynamic_cast<GameScreen*>(m_activeScreen) != NULL;
+}
+
+void GameController::HandleEnterForeground()
+{
+	SoundManager::GetInstance()->PlayMusic();
+
+	if (m_activeScreen == m_gameScreen)
+		SoundManager::GetInstance()->StartEngine();
+}
+
+void GameController::HandleEnterBackground()
+{
+	SoundManager::GetInstance()->StopMusic();
+
+	if (m_activeScreen == m_gameScreen)
+		SoundManager::GetInstance()->StopEngine();
+}
+
+void GameController::HandleBackButton()
+{
+	if (m_activeScreen == m_mainMenuScreen)
+		m_systemUtils->QuitApplication();
+	else if (m_activeScreen == m_gameScreen)
+		m_gameScreen->ShowPause();
+	else if (m_activeScreen == m_leaderboardScreen)
+		ShowMainMenuScreen();
+}
+
+void GameController::HandleMenukButton()
+{
+
 }
 

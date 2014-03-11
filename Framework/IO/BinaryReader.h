@@ -2,6 +2,7 @@
 #define BINARY_READER
 
 #include <string>
+#include <memory.h>
 
 class BinaryReader
 {
@@ -11,7 +12,8 @@ public:
 	template <typename T>
 	T Read()
 	{
-		T val = *((T*)m_mem);
+		T val;
+		memcpy(&val, m_mem, sizeof(T));
 		m_mem = (T*)m_mem + 1;
 		return val;
 	}

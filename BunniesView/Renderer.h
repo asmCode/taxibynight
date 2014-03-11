@@ -4,12 +4,13 @@
 #include <gl\glu.h>
 
 #include "OpenglWindow.h"
+#include "../Bunnies/ISystemUtils.h"
 
 #include "Input.h"
 
 #include <fstream>
 
-class Renderer : public IInputObserver
+class Renderer : public IInputObserver, public ISystemUtils
 {
 private:
 	OpenglWindow *glwnd;
@@ -21,6 +22,8 @@ private:
 	void KeyDown(int keyCode);
 	void KeyUp(int keyCode);
 	void MouseMove(int x, int y, int xShift, int yShift);
+
+	void QuitApplication();
 
 public:
 	Renderer(OpenglWindow *glwnd);

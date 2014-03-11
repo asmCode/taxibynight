@@ -42,7 +42,7 @@ void Renderer::Initialize()
 	TaxiGame::Environment::GetInstance()->SetScreenSize(ScreenWidth, ScreenHeight);
 	TaxiGame::Environment::GetInstance()->SetBasePath(std::string(currentDir) + "/");
 
-	bool success = gctrl->Initialize();
+	bool success = gctrl->Initialize(NULL);
 	assert(success != NULL);
 }
 
@@ -189,3 +189,7 @@ void Renderer::Render(float time, float seconds)
 	glwnd ->SwapBuffers();
 }
 
+void Renderer::QuitApplication()
+{
+
+}
