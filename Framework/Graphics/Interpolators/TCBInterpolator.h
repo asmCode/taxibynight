@@ -12,9 +12,9 @@ private:
 	void GetVectors(float time, float &normalizedTime, Type &pt1, Type &pt2, Type &tn1, Type &tn2)
 	{
 		//key on right side
-		std::vector<KeyFrame<Type>*>::iterator rk;
+		typename std::vector<KeyFrame<Type>*>::iterator rk;
 
-		for (rk = keys.begin(); rk != keys.end(); rk++)
+		for (rk = this->keys.begin(); rk != this->keys.end(); rk++)
 			if ((*rk) ->time >= time)
 				break;
 
@@ -24,24 +24,24 @@ private:
 		pt1 = (*(rk - 1)) ->value;
 		pt2 = (*rk) ->value;
 
-		if ((rk - 1) != keys.begin() && !(*(rk - 2)) ->stopKey)
+		if ((rk - 1) != this->keys.begin() && !(*(rk - 2)) ->stopKey)
 			tn1 = (Type)((pt2 - (*(rk - 2)) ->value) * 0.5f);
 		else
 			tn1 = (Type)((pt2 - pt1) * 1.5f);
 
-		if ((rk + 1) != keys.end() && !(*rk) ->stopKey)
+		if ((rk + 1) != this->keys.end() && !(*rk) ->stopKey)
 			tn2 = (Type)(((*(rk + 1)) ->value - pt1) * 0.5f);
 		else
 			tn2 = (Type)(((*rk) ->value - (*(rk - 1)) ->value) * 1.5f);
 
-		if (keys.size() == 2)
+		if (this->keys.size() == 2)
 			tn1 = tn2 = pt2 - pt1;
 		else
 		{
-			if ((rk - 1) == keys.begin())
+			if ((rk - 1) == this->keys.begin())
 				tn1 = (Type)(tn1 - (tn2 * 0.5f));
 
-			if ((rk + 1) == keys.end())
+			if ((rk + 1) == this->keys.end())
 				tn2 = (Type)(tn2 - (tn1 * 0.5f));
 		}
 	}
@@ -49,26 +49,26 @@ private:
 public:
 	void GetValue(float time, Type &value)
 	{
-		if (keys.size() == 0)
+		if (this->keys.size() == 0)
 			return;
 
-		if (time <= (*keys.begin()) ->time)
+		if (time <= (*this->keys.begin()) ->time)
 		{
-			value = (*keys.begin()) ->value;
+			value = (*this->keys.begin()) ->value;
 			return;
 		}
 
-		if (time >= (*(keys.end() - 1)) ->time)
+		if (time >= (*(this->keys.end() - 1)) ->time)
 		{
-			value = (*(keys.end() - 1)) ->value;
+			value = (*(this->keys.end() - 1)) ->value;
 			return;
 		}
 
 		// check if stop key
 		//key on right side
-		std::vector<KeyFrame<Type>*>::iterator rk;
+		typename std::vector<KeyFrame<Type>*>::iterator rk;
 
-		for (rk = keys.begin(); rk != keys.end(); rk++)
+		for (rk = this->keys.begin(); rk != this->keys.end(); rk++)
 			if ((*rk) ->time >= time)
 				break;
 

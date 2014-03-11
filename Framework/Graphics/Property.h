@@ -1,14 +1,15 @@
 #pragma once
 
-#include <Graphics\Interpolators\StateInterpolator.h>
-#include <Graphics\Interpolators\TCBInterpolator.h>
-#include <Graphics\Interpolators\LinearInterpolator.h>
+#include <Graphics/Interpolators/StateInterpolator.h>
+#include <Graphics/Interpolators/TCBInterpolator.h>
+#include <Graphics/Interpolators/LinearInterpolator.h>
 
 #include <Math/Vec3.h>
 
 #include <string>
 #include <stdint.h>
 #include <assert.h>
+#include <memory.h>
 
 class Property
 {
@@ -27,7 +28,7 @@ public:
 		AnimationType_None,		// no animation
 		AnimationType_State,	// state animation, no interpolation between keyframes
 		AnimationType_Linear,	// linear animation for floats and vectors
-		AnimationType_TCB		// Kochanek–Bartels spline interpolation for floats and vectors
+		AnimationType_TCB		// Kochanekï¿½Bartels spline interpolation for floats and vectors
 	};
 
 	Property(

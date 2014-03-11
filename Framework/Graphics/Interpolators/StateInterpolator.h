@@ -10,28 +10,28 @@ class StateInterpolator : public Interpolator<Type>
 public:
 	void GetValue(float time, Type &value)
 	{
-		if (keys.size() == 0)
+		if (this->keys.size() == 0)
 		{
 			//value = defaultValue;
 			return;
 		}
 
-		if (time <= (*keys.begin()) ->time)
+		if (time <= (*this->keys.begin()) ->time)
 		{
-			value = (*keys.begin()) ->value;
+			value = (*this->keys.begin()) ->value;
 			return;
 		}
 
-		if (time >= (*(keys.end() - 1)) ->time)
+		if (time >= (*(this->keys.end() - 1)) ->time)
 		{
-			value = (*(keys.end() - 1)) ->value;
+			value = (*(this->keys.end() - 1)) ->value;
 			return;
 		}
 
 		//key on right side
-		std::vector<KeyFrame<Type>*>::iterator rk;
+		typename std::vector<KeyFrame<Type>*>::iterator rk;
 
-		for (rk = keys.begin(); rk != keys.end(); rk++)
+		for (rk = this->keys.begin(); rk != this->keys.end(); rk++)
 			if ((*rk) ->time > time)
 				break;
 

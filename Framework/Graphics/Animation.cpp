@@ -1,6 +1,7 @@
 #include "Animation.h"
 #include "Model.h"
 #include "Mesh.h"
+#include <Math/MathUtils.h>
 
 Animation::Animation(void) :
 	m_animLength(-1.0f)
@@ -210,7 +211,7 @@ float Animation::GetAnimLength()
 			maxAnimLength = length;
 	}
 
-	m_animLength = max(max(max(posTime, rotTime), scaleTime), maxAnimLength);
+	m_animLength = MathUtils::Max(MathUtils::Max(MathUtils::Max(posTime, rotTime), scaleTime), maxAnimLength);
 
 	return m_animLength;
 }

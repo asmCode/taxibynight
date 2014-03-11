@@ -2,6 +2,7 @@
 
 #include <Math/Matrix.h>
 #include <vector>
+#include <string>
 
 class Mesh;
 class MeshPart;

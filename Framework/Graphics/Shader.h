@@ -4,10 +4,8 @@
 #include "../Math/Matrix.h"
 #include "../Math/Vec3.h"
 #include "../Math/Vec4.h"
+#include "OpenglPort.h"
 #include <string>
-#include <Windows.h>
-#include <GL/glew.h>
-#include <gl/gl.h>
 
 class Shader
 {

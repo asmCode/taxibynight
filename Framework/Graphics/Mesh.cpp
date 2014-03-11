@@ -8,10 +8,9 @@
 #include "Material.h"
 #include "MeshPart.h"
 
-#include <Math\Matrix.h>
+#include <Math/Matrix.h>
 
-#include <gl/glew.h>
-
+#include "OpenglPort.h"
 
 Mesh::Mesh()
 {

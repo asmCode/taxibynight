@@ -142,11 +142,10 @@ GLuint Shader::CompileShader(GLenum shaderType, const char* file)
     GLint logLength;
     glGetShaderiv(shaderId, GL_INFO_LOG_LENGTH, &logLength);
     if (logLength > 0) {
-        GLchar *log = (GLchar *)malloc(logLength);
+        GLchar *log = new GLchar[logLength];
         glGetShaderInfoLog(shaderId, logLength, &logLength, log);
-		OutputDebugStringA(log);
-		//Log::LogT("shader log: %s", log);
-        free(log);
+		Log::LogT("shader log: %s", log);
+        delete [] log;
     }
 #endif
     
@@ -170,10 +169,10 @@ void Shader::LinkProgram()
     GLint logLength;
     glGetProgramiv(m_programId, GL_INFO_LOG_LENGTH, &logLength);
     if (logLength > 0) {
-        GLchar *log = (GLchar *)malloc(logLength);
+        GLchar *log = new GLchar[logLength];
         glGetProgramInfoLog(m_programId, logLength, &logLength, log);
-        printf("Program link log:\n%s", log);
-        free(log);
+        Log::LogT("Program link log: %s", log);
+        delete [] log;
     }
 #endif
 
@@ -197,7 +196,7 @@ bool Shader::ValidateProgram(GLuint programId)
 	if (status != GL_TRUE)
 	{
 		glGetProgramiv(programId, GL_INFO_LOG_LENGTH, &logLength);
-		if (logLength > 0)
+		if (logLength > 10)
 		{
 			GLchar *_log = new GLchar[logLength];
 			glGetProgramInfoLog(programId, logLength, &logLength, _log);

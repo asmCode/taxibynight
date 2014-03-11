@@ -37,8 +37,8 @@ public:
 	template <typename T>
 	T* Get(const std::string &name)
 	{
-		std::map<std::string, T*> &resourcesMap = GetContentMap<T>();
-		std::map<std::string, T*>::iterator it = resourcesMap.find(name);
+		typename std::map<std::string, T*> &resourcesMap = GetContentMap<T>();
+		typename std::map<std::string, T*>::iterator it = resourcesMap.find(name);
 		if (it == resourcesMap.end())
 			return NULL;
 
@@ -55,42 +55,7 @@ private:
 	std::map<std::string, Material*> m_materials;
 
 	template <typename T>
-	std::map<std::string, T*>& GetContentMap()
-	{
-		assert(false);
-
-		return m_textures; // just to hide warning
-	}
-
-	template <>
-	std::map<std::string, Texture*>& GetContentMap<Texture>()
-	{
-		return m_textures;
-	}
-
-	template <>
-	std::map<std::string, Shader*>& GetContentMap<Shader>()
-	{
-		return m_shaders;
-	}
-
-	template <>
-	std::map<std::string, Model*>& GetContentMap<Model>()
-	{
-		return m_models;
-	}
-
-	template <>
-	std::map<std::string, Animation*>& GetContentMap<Animation>()
-	{
-		return m_animations;
-	}
-
-	template <>
-	std::map<std::string, Material*>& GetContentMap<Material>()
-	{
-		return m_materials;
-	}
+	std::map<std::string, T*>& GetContentMap();
 };
 
 #endif // CONTENT

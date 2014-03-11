@@ -1,7 +1,5 @@
 #pragma once
 
-#include <windows.h>
-
 #include <vector>
 #include "KeyFrame.h"
 #include "IInterpolator.h"
@@ -10,7 +8,7 @@ template <class Type>
 class Interpolator : public IInterpolator<Type>
 {
 protected:
-	std::vector<KeyFrame<Type>*> keys;
+	typename std::vector<KeyFrame<Type>*> keys;
 
 public:
 	void AddKeyframe(float time, Type value, bool stopKey)
@@ -20,7 +18,7 @@ public:
 		key ->value = value;
 		key ->stopKey = stopKey;
 
-		std::vector<KeyFrame<Type>*>::iterator i;
+		typename std::vector<KeyFrame<Type>*>::iterator i;
 		for (i = keys.begin(); i != keys.end(); i++)
 			if ((*i) ->time >= key ->time)
 				break;

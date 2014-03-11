@@ -3,9 +3,8 @@
 #include "../Math/Vec3.h"
 #include "Shader.h"
 
-#include <Windows.h>
-#include <gl/gl.h>
-#include <glext.h>
+#include "OpenglPort.h"
+
 #include <memory.h>
 #include <assert.h>
 

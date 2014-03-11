@@ -1,7 +1,7 @@
 #include "AnimationLoader.h"
 #include "Animation.h"
-#include <IO\BinaryReader.h>
-#include <IO\Path.h>
+#include <IO/BinaryReader.h>
+#include <IO/Path.h>
 
 Animation* AnimationLoader::LoadFromFile(const std::string &path)
 {
@@ -165,10 +165,10 @@ IInterpolator<sm::Quat>* AnimationLoader::LoadQuatAnim(BinaryReader &br, sm::Qua
 		sm::Quat rot;
 		rot.RotateToQuat(angle, axis);
 
-		if (abs(angle) > 7.0f)
+		if (fabs(angle) > 7.0f)
 		{
 			ownAnim = true;
-			angleScale = abs(angle) / (3.1415f * 8.0f);
+			angleScale = fabs(angle) / (3.1415f * 8.0f);
 		}
 
 		if (i == 0)

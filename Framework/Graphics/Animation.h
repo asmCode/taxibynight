@@ -1,8 +1,8 @@
 #pragma once
 
-#include <Math\Vec3.h>
-#include <Math\Quat.h>
-#include <Math\Matrix.h>
+#include <Math/Vec3.h>
+#include <Math/Quat.h>
+#include <Math/Matrix.h>
 #include <vector>
 
 #include "Interpolators/InterpolatorFactory.h"

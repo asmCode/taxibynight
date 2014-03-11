@@ -20,13 +20,16 @@ void Content::LoadTextures(const std::string &fullPath)
 {
 	std::vector<std::string> filesNames;
 	Path::GetAllFiles(filesNames, fullPath, "*.png");
-	//Path::GetAllFiles(filesNames, fullPath, "*.jpg");
+	Path::GetAllFiles(filesNames, fullPath, "*.jpg");
 
 	for (uint32_t i = 0 ; i < filesNames.size(); i++)
 	{
 		Path path(fullPath + filesNames[i]);
 
-		m_textures[path.GetFilename()] = m_graphicsEngine->LoadTexture(path.GetFullPath());
+		Texture *tex = m_graphicsEngine->LoadTexture(path.GetFullPath());
+
+		if (tex != NULL)
+			m_textures[path.GetFilename()] = tex;
 	}
 }
 
@@ -106,5 +109,35 @@ void Content::CombineResources()
 		materialsIt->second->opacityTex = Get<Texture>(materialsIt->second->opacityTexName);
 		// materialsIt->second->environmentTex = Get<CubeTexture>(materialsIt->second->environmentTexName); not implemented yet
 	}
+}
+
+template <>
+std::map<std::string, Texture*>& Content::GetContentMap<Texture>()
+{
+	return m_textures;
+}
+
+template <>
+std::map<std::string, Shader*>& Content::GetContentMap<Shader>()
+{
+	return m_shaders;
+}
+
+template <>
+std::map<std::string, Model*>& Content::GetContentMap<Model>()
+{
+	return m_models;
+}
+
+template <>
+std::map<std::string, Animation*>& Content::GetContentMap<Animation>()
+{
+	return m_animations;
+}
+
+template <>
+std::map<std::string, Material*>& Content::GetContentMap<Material>()
+{
+	return m_materials;
 }
 

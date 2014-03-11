@@ -1,5 +1,8 @@
 #include "DepthTexture.h"
 
+#include "OpenglPort.h"
+#include <stddef.h>
+
 DepthTexture::DepthTexture(int width, int height)
 {
 	this ->width = width;

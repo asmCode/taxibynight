@@ -12,8 +12,8 @@
 // TODO: temporary include?
 #include "Property.h"
 
-#include <IO\BinaryReader.h>
-#include <IO\Path.h>
+#include <IO/BinaryReader.h>
+#include <IO/Path.h>
 
 #include <sstream>
 
@@ -126,8 +126,8 @@ MeshPart *ModelLoader::LoadMeshPart(BinaryReader &br)
 Property* ModelLoader::LoadProperty(BinaryReader &br)
 {
 	std::string name = br.Read<std::string>();
-	Property::PropertyType type = (Property::PropertyType)br.Read<BYTE>();
-	Property::AnimationType animType = (Property::AnimationType)br.Read<BYTE>();
+	Property::PropertyType type = (Property::PropertyType)br.Read<uint8_t>();
+	Property::AnimationType animType = (Property::AnimationType)br.Read<uint8_t>();
 
 	Property *prop = new Property(name, type, animType);
 
