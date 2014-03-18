@@ -2,8 +2,8 @@
 #ifndef _MATHUTILS_
 #define _MATHUTILS_
 
-#include <Math/Vec3.h>
-#include <Math/Vec2.h>
+#include "../Math/Vec3.h"
+#include "../Math/Vec2.h"
 
 class MathUtils
 {

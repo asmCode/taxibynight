@@ -2,8 +2,8 @@
 #include <sstream>
 #include <time.h>
 #include <stdarg.h>
-#include <Windows.h>
-#include <debugapi.h>
+//#include <Windows.h>
+//#include <debugapi.h>
 
 const char* Log::DefaultLogFileName = "log.txt";
 bool Log::logToConsole;
@@ -68,7 +68,7 @@ void Log::LogT(const char *formatString, ...)
 	UpdateLog();
 	
 	if (logToConsole)
-		OutputDebugStringA(logSStream.str().c_str());
+		//OutputDebugStringA(logSStream.str().c_str());
 
 	if (logToFile)
 	{

@@ -1,8 +1,8 @@
 #ifndef MATERIAL
 #define MATERIAL
 
-#include <Math/Vec3.h>
-#include <Math/Vec4.h>
+#include "../Math/Vec3.h"
+#include "../Math/Vec4.h"
 #include <string>
 
 #include "Texture.h"

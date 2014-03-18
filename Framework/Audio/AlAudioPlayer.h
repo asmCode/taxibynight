@@ -1,4 +1,4 @@
-#ifndef _WIN32
+#ifdef _TIZEN
 
 #include "IAudioPlayer.h"
 #include <new>
