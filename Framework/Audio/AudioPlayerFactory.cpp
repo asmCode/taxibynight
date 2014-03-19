@@ -1,17 +1,26 @@
 #include "AudioPlayerFactory.h"
 
-#ifndef _WIN32
-#include "AlAudioPlayer.h"
-#include "TizenAudioPlayer.h"
-#else
+#include "DummyAudioPlayer.h"
+
+#ifdef _WIN32
 #include "BassPlayer.h"
+#elif _TIZEN
+#include "AlAudioPlayer.h"
 #endif
 
 #include <assert.h>
 
+IAudioPlayer* AudioPlayerFactory::CreateAudioPlayer(const std::string &file,
+													bool stereo,
+													bool loadIntoMemory)
+{
+	return new DummyAudioPlayer();
+}
+
+
 IAudioPlayer* AudioPlayerFactory::CreateAlAudioPlayer(const std::string &file, bool stereo)
 {
-#ifndef _WIN32
+#ifdef _TIZEN
 	if (!AlAudioPlayer::IsInitialized())
 	{
 		if (!AlAudioPlayer::Initialize())
@@ -23,25 +32,27 @@ IAudioPlayer* AudioPlayerFactory::CreateAlAudioPlayer(const std::string &file, b
 	
 	return AlAudioPlayer::LoadFromFile(file, stereo);
 #else
-	return CreateBassPlayer(file);
+	return NULL;
 #endif
 }
 
 IAudioPlayer* AudioPlayerFactory::CreateTizenAudioPlayer(const std::string &file)
 {
-#ifndef _WIN32
+#ifdef _TIZEN
 	return TizenAudioPlayer::LoadFromFile(file);
 #else
-	return CreateBassPlayer(file);
+	return NULL;
 #endif
 }
 
-#ifdef _WIN32
 IAudioPlayer* AudioPlayerFactory::CreateBassPlayer(const std::string &file)
 {
+#ifdef _WIN32
 	BassPlayer *player = new BassPlayer();
 	player->LoadMusic(file.c_str());
-
+	
 	return player;
-}
+#else
+	return NULL;
 #endif
+}

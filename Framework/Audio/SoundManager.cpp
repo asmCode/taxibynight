@@ -44,18 +44,18 @@ SoundManager::~SoundManager()
 
 bool SoundManager::Initialize(const std::string &audioPath)
 {
-	music = AudioPlayerFactory::CreateTizenAudioPlayer(audioPath + "city_ambient.mp3");
+	music = AudioPlayerFactory::CreateAudioPlayer(audioPath + "city_ambient.mp3", true, false);
 	music->SetLoop(true);
 	music->SetVolume(0.6f);
 	
-	m_engine = AudioPlayerFactory::CreateAlAudioPlayer(audioPath + "engine.mp3", false);
+	m_engine = AudioPlayerFactory::CreateAudioPlayer(audioPath + "engine.mp3", false, true);
 	m_engine->SetLoop(true);
 	m_engine->SetVolume(0.4f);
 
 	for (unsigned i = 0; i < SoundsCount; i++)
 	{
 		Log::LogT("loading: %s", SoundFiles[i].c_str());
-		sounds[i] = AudioPlayerFactory::CreateAlAudioPlayer(audioPath + SoundFiles[i], false);
+		sounds[i] = AudioPlayerFactory::CreateAudioPlayer(audioPath + SoundFiles[i], false, true);
 		sounds[i]->SetVolume(soundVolume);
 	}
 	

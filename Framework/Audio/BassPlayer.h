@@ -1,3 +1,5 @@
+#ifdef _WIN32
+
 #pragma once
 
 #include "IAudioPlayer.h"
@@ -25,3 +27,5 @@ public:
 	void SetPosition(float time);
 	float GetPosition();
 };
+
+#endif

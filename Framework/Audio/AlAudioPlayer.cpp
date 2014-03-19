@@ -1,4 +1,4 @@
-#ifndef _WIN32
+#ifdef _TIZEN
 #include "AlAudioPlayer.h"
 #include <math.h>
 #include <FIo.h>

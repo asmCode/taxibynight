@@ -1,8 +1,7 @@
 #include "Texture.h"
 #include <vector>
 #include <string>
-#include <gl/gl.h>
-#include <glext.h>
+#include "OpenglPort.h"
 
 class PVRTexture : public Texture
 {
