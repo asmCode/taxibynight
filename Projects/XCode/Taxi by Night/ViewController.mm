@@ -7,6 +7,8 @@
 //
 
 #import "ViewController.h"
+#include "../../../Bunnies/InfectedBunniesFactory.h"
+#include <string>
 
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
 
@@ -113,6 +115,24 @@ GLfloat gCubeVertexData[216] =
     view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
     
     [self setupGL];
+	
+	[self InitializeGame];
+}
+
+- (void) InitializeGame
+{
+	std::string basePath = [[[NSBundle mainBundle] bundlePath] UTF8String];
+	
+	NSFileManager *fileMng = [NSFileManager defaultManager];
+	NSError *err = nil;
+	NSURL *appropriateForUrl = [NSURL fileURLWithPath:@"." isDirectory:YES];
+	NSURL *docPathUrl = [fileMng URLForDirectory:NSDocumentDirectory
+										inDomain:NSUserDomainMask
+							   appropriateForURL:appropriateForUrl
+										  create:YES
+										   error:&err];
+	
+	std::string docPath = [[docPathUrl path] UTF8String];
 }
 
 - (void)dealloc
