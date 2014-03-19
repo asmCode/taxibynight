@@ -1,0 +1,24 @@
+<Panel name="leaderboard_panel" fill="true">
+	<Image image="town" tmp_fill="wypelnij" align="top" width="650" height="495"/>
+	
+	<Image image="leaderboard" align="center" width="1000" height="468">
+		<AnimButton name="top" align="top-left" margin_left="-70" margin_top="10" width="70" height="170" image="top" image_pushed="top_down" />
+		<AnimButton name="you" align="top-left" margin_left="-70" margin_top="180" width="70" height="170" image="you" image_pushed="you_down" />
+	</Image>
+	
+	<Label font="fenix_26" text="Player Name:" size="1.0" align="top-left" margin_left="20" margin_top="20" />
+	<Label name="player_name" font="fenix_26" text="MajakTheCoder" size="1.0" align="top-left" margin_left="300" margin_top="20" />
+	
+	<AnimButton name="change_name" align="top-right" margin_right="20" margin_top="20" width="205" height="76" image="uni_button" image_pushed="uni_button_down">
+		<Label font="fenix_18" color="0;0;0" text="Change Name" align="center" />
+	</AnimButton>
+	<AnimButton name="back" align="bottom-left" margin_left="20" margin_bottom="20" width="205" height="76" image="uni_button" image_pushed="uni_button_down">
+		<Label font="fenix_18" color="0;0;0" text="Back" align="center" />
+	</AnimButton>
+	<AnimButton name="refresh" align="bottom-right" margin_right="20" margin_bottom="20" width="205" height="76" image="uni_button" image_pushed="uni_button_down">
+		<Label font="fenix_18" color="0;0;0" text="Refresh" align="center" />
+	</AnimButton>
+
+	<Panel align="center" width="568" height="470">
+	</Panel>
+</Panel>
