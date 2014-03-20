@@ -5,6 +5,7 @@
 #include "../Math/Matrix.h"
 #include "../Math/Vec3.h"
 #include "Color.h"
+#include "../Core/stdint.h"
 
 class Shader;
 
@@ -36,6 +37,7 @@ public:
 
 private:
 	Shader *m_shader;
+	uint32_t m_vboId;
 
 	sm::Matrix m_mvp;
 

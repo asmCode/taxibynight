@@ -35,6 +35,11 @@ SpriteBatch::SpriteBatch(Shader *shader, const sm::Matrix &mvp) :
 	m_isDepth(false),
 	m_isBlend(false)
 {
+	glGenBuffers(1, &m_vboId);
+	glBindBuffer(GL_ARRAY_BUFFER, m_vboId);
+	glBufferData(GL_ARRAY_BUFFER, 8 * 2 * sizeof(float), NULL, GL_DYNAMIC_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	
 	assert(m_shader != NULL);
 
 	m_shader->BindVertexChannel(0, "a_position");
@@ -44,6 +49,8 @@ SpriteBatch::SpriteBatch(Shader *shader, const sm::Matrix &mvp) :
 
 void SpriteBatch::Begin()
 {
+	glBindBuffer(GL_ARRAY_BUFFER, m_vboId);
+	
 	m_shader->UseProgram();
 	m_shader->SetMatrixParameter("u_mvp", m_mvp);
 	m_shader->SetParameter("u_color", 1, 1, 1, 1);
@@ -62,11 +69,13 @@ void SpriteBatch::Begin()
 
 void SpriteBatch::End()
 {
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	
 	if (m_isDepth) glEnable(GL_DEPTH_TEST);
 	if (!m_isBlend) glDisable(GL_BLEND);
 
 	glDisableVertexAttribArray(0);
-	glEnableVertexAttribArray(1);
+	glDisableVertexAttribArray(1);
 }
 
 void SpriteBatch::Draw(const Color &color, int x, int y, int width, int height)
@@ -203,9 +212,14 @@ void SpriteBatch::Draw(Texture *tex,
 		  const unsigned char *colorMask)
 {
 	m_shader->SetTextureParameter("u_tex", 0, tex->GetId());
+	
+	int size = 8 * sizeof(float);
+	
+	glBufferSubData(GL_ARRAY_BUFFER, 0, size, verts);
+	glBufferSubData(GL_ARRAY_BUFFER, size, size, coords);
 
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_TRUE, 0, verts);
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_TRUE, 0, coords);
+	glVertexAttribPointer(0, 2, GL_FLOAT, GL_TRUE, 0, reinterpret_cast<void*>(0));
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_TRUE, 0, reinterpret_cast<void*>(size));
 	
 	if (colorMask != NULL)
 	{

@@ -8,6 +8,8 @@
 
 #import "ViewController.h"
 #include "../../../Bunnies/InfectedBunniesFactory.h"
+#include "../../../Bunnies/Environment.h"
+#include <Graphics/GraphicsEngineFactory.h>
 #include <string>
 
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
@@ -115,13 +117,14 @@ GLfloat gCubeVertexData[216] =
     view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
     
     [self setupGL];
-	
-	[self InitializeGame];
 }
+
+IGameController *m_game;
 
 - (void) InitializeGame
 {
 	std::string basePath = [[[NSBundle mainBundle] bundlePath] UTF8String];
+	basePath = basePath + "/";
 	
 	NSFileManager *fileMng = [NSFileManager defaultManager];
 	NSError *err = nil;
@@ -133,6 +136,15 @@ GLfloat gCubeVertexData[216] =
 										   error:&err];
 	
 	std::string docPath = [[docPathUrl path] UTF8String];
+	
+	TaxiGame::Environment::GetInstance()->SetBasePath(basePath);
+	TaxiGame::Environment::GetInstance()->SetWritePath(docPath);
+	
+	TaxiGame::Environment::GetInstance()->SetScreenSize(960, 640);
+	
+	IGraphicsEngine *graphicsEngine = GraphicsEngineFactory::Create();
+	m_game = InfectedBunniesFactory::Create(graphicsEngine);
+	m_game->Initialize(NULL);
 }
 
 - (void)dealloc
@@ -167,6 +179,8 @@ GLfloat gCubeVertexData[216] =
     [EAGLContext setCurrentContext:self.context];
     
     [self loadShaders];
+	
+	[self InitializeGame];
     
     self.effect = [[GLKBaseEffect alloc] init];
     self.effect.light0.enabled = GL_TRUE;
@@ -233,27 +247,31 @@ GLfloat gCubeVertexData[216] =
     _modelViewProjectionMatrix = GLKMatrix4Multiply(projectionMatrix, modelViewMatrix);
     
     _rotation += self.timeSinceLastUpdate * 0.5f;
+	
+	m_game->Update(0.1f, 0.1f);
 }
 
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
 {
-    glClearColor(0.65f, 0.65f, 0.65f, 1.0f);
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
-    glBindVertexArrayOES(_vertexArray);
-    
-    // Render the object with GLKit
-    [self.effect prepareToDraw];
-    
-    glDrawArrays(GL_TRIANGLES, 0, 36);
-    
-    // Render the object again with ES2
-    glUseProgram(_program);
-    
-    glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX], 1, 0, _modelViewProjectionMatrix.m);
-    glUniformMatrix3fv(uniforms[UNIFORM_NORMAL_MATRIX], 1, 0, _normalMatrix.m);
-    
-    glDrawArrays(GL_TRIANGLES, 0, 36);
+//    glBindVertexArrayOES(_vertexArray);
+//    
+//    // Render the object with GLKit
+//    [self.effect prepareToDraw];
+//    
+//    glDrawArrays(GL_TRIANGLES, 0, 36);
+//    
+//    // Render the object again with ES2
+//    glUseProgram(_program);
+//    
+//    glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX], 1, 0, _modelViewProjectionMatrix.m);
+//    glUniformMatrix3fv(uniforms[UNIFORM_NORMAL_MATRIX], 1, 0, _normalMatrix.m);
+//    
+//    glDrawArrays(GL_TRIANGLES, 0, 36);
+//	
+	m_game->Draw(0.1f, 0.1f);
 }
 
 #pragma mark -  OpenGL ES 2 shader compilation
@@ -383,6 +401,8 @@ GLfloat gCubeVertexData[216] =
     if (status == 0) {
         return NO;
     }
+	
+    [self validateProgram:prog];
     
     return YES;
 }

@@ -16,7 +16,11 @@ Shader::~Shader()
 
 Shader* Shader::LoadFromFile(const char *vertexShaderFile,
 							 const char *fragmentShaderFile)
-{	
+{
+	printf("compiling shaders:\n");
+	printf("vertex: %s\n", vertexShaderFile);
+	printf("fragment: %s\n", fragmentShaderFile);
+	
 	Shader *shader = new Shader();
 	
 	shader->m_vertShaderId = CompileShader(GL_VERTEX_SHADER, vertexShaderFile);
@@ -138,7 +142,6 @@ GLuint Shader::CompileShader(GLenum shaderType, const char* file)
 	glShaderSource(shaderId, 1, (const GLchar**)cipa, NULL);
     glCompileShader(shaderId);
     
-#ifdef _DEBUG
     GLint logLength;
     glGetShaderiv(shaderId, GL_INFO_LOG_LENGTH, &logLength);
     if (logLength > 0) {
@@ -147,7 +150,6 @@ GLuint Shader::CompileShader(GLenum shaderType, const char* file)
 		Log::LogT("shader log: %s", log);
         delete [] log;
     }
-#endif
     
 	GLint status;
     glGetShaderiv(shaderId, GL_COMPILE_STATUS, &status);
@@ -165,7 +167,6 @@ void Shader::LinkProgram()
 	GLint status;
     glLinkProgram(m_programId);
     
-#if defined(_DEBUG)
     GLint logLength;
     glGetProgramiv(m_programId, GL_INFO_LOG_LENGTH, &logLength);
     if (logLength > 0) {
@@ -174,7 +175,6 @@ void Shader::LinkProgram()
         Log::LogT("Program link log: %s", log);
         delete [] log;
     }
-#endif
 
 	glGetProgramiv(m_programId, GL_LINK_STATUS, &status);
     if (status != GL_TRUE)
@@ -201,8 +201,8 @@ bool Shader::ValidateProgram(GLuint programId)
 			GLchar *_log = new GLchar[logLength];
 			glGetProgramInfoLog(programId, logLength, &logLength, _log);
 			printf("validate log: %s\n", _log);
+			//assert(false);
 			delete _log;
-			assert(false);
 		}
 	}    
     

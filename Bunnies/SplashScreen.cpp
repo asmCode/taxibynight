@@ -21,6 +21,9 @@ SplashScreen::~SplashScreen(void)
 bool SplashScreen::InitResources()
 {
 	m_splashScreenTex = InterfaceProvider::GetContent()->Get<Texture>("SplashScreen");
+	m_splashScreenTex->BindTexture();
+	m_splashScreenTex->SetWrappingMode(Texture::Wrap_ClampToEdge);
+	m_splashScreenTex->SetFilterModel(Texture::Filter_Linear, Texture::Filter_Linear);
 
 	return true;
 }

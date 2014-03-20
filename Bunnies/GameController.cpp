@@ -85,7 +85,7 @@ bool GameController::InitializeGraphics(const std::string &basePath)
 
 bool GameController::Initialize(ISystemUtils *systemUtils)
 {
-	Log::StartLog(true, false, false);
+	Log::StartLog(true);
 
 	m_systemUtils = systemUtils;
 
