@@ -15,6 +15,7 @@
 #include <assert.h>
 #include "BoxCollider.h"
 
+#include <Utils/Log.h>
 #include <Graphics/OpenglPort.h>
 
 Street *Street::Instance;
@@ -247,6 +248,8 @@ void Street::Update(float time, float seconds)
 void Street::Draw(float time, float seconds)
 {
 	sm::Matrix world = sm::Matrix::IdentityMatrix();
+	
+	//int v = 0;
 
 	for (uint32_t y = 0; y < m_streetMap->GetHeight(); y++)
 	{
@@ -259,9 +262,12 @@ void Street::Draw(float time, float seconds)
 			if (!seg->IsVisible())
 				continue;
 
+	//		v++;
 			m_streetPieces[streetType]->Draw(seg->GetWorldTransform());
 		}
 	}
+	
+	//Log::LogT("visible segments: %d", v);
 }
 
 StreetPiece* Street::GetStreetPiece(uint8_t type)

@@ -1,5 +1,6 @@
 #include "DrawingRoutines.h"
 #include "InterfaceProvider.h"
+#include "Effects/DiffLightEffect.h"
 #include <Graphics/Content/Content.h>
 #include <Graphics/Shader.h>
 #include <Graphics/MeshPart.h>
@@ -14,6 +15,7 @@ Shader* DrawingRoutines::m_diffShader;
 Shader* DrawingRoutines::m_diffLightShader;
 Shader* DrawingRoutines::m_pedShader;
 Shader* DrawingRoutines::m_unlitShader;
+DiffLightEffect* DrawingRoutines::m_diffLightEffect;
 float DrawingRoutines::m_outlineWidth;
 sm::Vec3 DrawingRoutines::m_lightPosition;
 sm::Vec3 DrawingRoutines::m_eyePosition;
@@ -61,6 +63,8 @@ bool DrawingRoutines::Initialize()
 	m_diffShader->BindVertexChannel(1, "a_coords");
 	m_diffShader->BindVertexChannel(3, "a_normal");
 	m_diffShader->LinkProgram();
+	
+	m_diffLightEffect = new DiffLightEffect(m_diffLightShader);
 
 	return true;
 }
@@ -103,21 +107,20 @@ void DrawingRoutines::DrawStreet(Model *model, Texture *diffuseTexture, const sm
 
 	assert(model != NULL);
 
-	Material *material = model->m_meshParts[0]->GetMaterial();
-
 	glEnableVertexAttribArray(0); 
 	glEnableVertexAttribArray(1);
 	glEnableVertexAttribArray(3);
-	m_diffLightShader->UseProgram();
-	m_diffLightShader->SetMatrixParameter("u_viewProjMatrix", m_viewProjMatrix);
-	m_diffLightShader->SetParameter("u_lightPosition", m_lightPosition);
-	m_diffLightShader->SetTextureParameter("u_diffTex", 0, diffuseTexture->GetId());
+	
+	m_diffLightEffect->Begin();
+	m_diffLightEffect->SetViewProjMatrix(m_viewProjMatrix);
+	m_diffLightEffect->SetLightPosition(m_lightPosition);
+	m_diffLightEffect->SetTexture(diffuseTexture);
 
 	for (uint32_t i = 0; i < model->m_meshParts.size(); i++)
 	{
 		model->m_meshParts[i]->SetupVertexPointers();
 
-		m_diffLightShader->SetMatrixParameter("u_worldMatrix", worldMatrix);
+		m_diffLightEffect->SetWorldMatrix(worldMatrix);
 		model->m_meshParts[i]->Draw();
 	}
 

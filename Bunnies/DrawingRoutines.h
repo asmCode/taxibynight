@@ -10,6 +10,7 @@ class Model;
 class MeshPart;
 class Texture;
 class Material;
+class DiffLightEffect;
 
 class DrawingRoutines
 {
@@ -47,6 +48,8 @@ private:
 	static Shader *m_pedShader;
 	static Shader *m_unlitShader;
 	static Shader *m_diffLightShader;
+	
+	static DiffLightEffect* m_diffLightEffect;
 
 	static float m_outlineWidth;
 	static sm::Vec3 m_lightPosition;

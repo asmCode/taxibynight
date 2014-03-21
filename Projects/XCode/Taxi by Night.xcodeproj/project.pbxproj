@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AE64F6F718DBBCE6005F6D56 /* DiffLightEffect.h in Sources */ = {isa = PBXBuildFile; fileRef = AE64F6F618DBBCE6005F6D56 /* DiffLightEffect.h */; };
+		AE64F6F918DBBE17005F6D56 /* DiffLightEffect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AE64F6F518DBBCE6005F6D56 /* DiffLightEffect.cpp */; };
 		AE8E712418D008B400ECF0E7 /* AlAudioPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AE8E709718D008B300ECF0E7 /* AlAudioPlayer.cpp */; };
 		AE8E712518D008B400ECF0E7 /* AudioPlayerFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AE8E709918D008B300ECF0E7 /* AudioPlayerFactory.cpp */; };
 		AE8E712618D008B400ECF0E7 /* BassPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AE8E709B18D008B300ECF0E7 /* BassPlayer.cpp */; };
@@ -124,6 +126,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AE64F6F518DBBCE6005F6D56 /* DiffLightEffect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DiffLightEffect.cpp; path = ../../../Bunnies/Effects/DiffLightEffect.cpp; sourceTree = "<group>"; };
+		AE64F6F618DBBCE6005F6D56 /* DiffLightEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DiffLightEffect.h; path = ../../../Bunnies/Effects/DiffLightEffect.h; sourceTree = "<group>"; };
 		AE8E709718D008B300ECF0E7 /* AlAudioPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AlAudioPlayer.cpp; sourceTree = "<group>"; };
 		AE8E709818D008B300ECF0E7 /* AlAudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlAudioPlayer.h; sourceTree = "<group>"; };
 		AE8E709918D008B300ECF0E7 /* AudioPlayerFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioPlayerFactory.cpp; sourceTree = "<group>"; };
@@ -395,6 +399,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AE64F6F818DBBCF2005F6D56 /* Effects */ = {
+			isa = PBXGroup;
+			children = (
+				AE64F6F518DBBCE6005F6D56 /* DiffLightEffect.cpp */,
+				AE64F6F618DBBCE6005F6D56 /* DiffLightEffect.h */,
+			);
+			name = Effects;
+			sourceTree = "<group>";
+		};
 		AE8E709518D0083A00ECF0E7 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
@@ -702,6 +715,7 @@
 		AEC2804518D91565003D9E6E /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				AE64F6F818DBBCF2005F6D56 /* Effects */,
 				AEC2812418D9264A003D9E6E /* AnimButton.cpp */,
 				AEC2812518D9264A003D9E6E /* Arrow.cpp */,
 				AEC2812618D9264A003D9E6E /* Billboard.cpp */,
@@ -911,6 +925,7 @@
 				AE8E713218D008B400ECF0E7 /* Framebuffer.cpp in Sources */,
 				AE8E713D18D008B400ECF0E7 /* PVRTexture.cpp in Sources */,
 				AEC2819A18D9264A003D9E6E /* PedsManager.cpp in Sources */,
+				AE64F6F918DBBE17005F6D56 /* DiffLightEffect.cpp in Sources */,
 				AEC281A718D9264A003D9E6E /* SummaryScreen.cpp in Sources */,
 				AEC2819E18D9264A003D9E6E /* SplashScreen.cpp in Sources */,
 				AE8E714F18D008B400ECF0E7 /* XMLLoader.cpp in Sources */,
@@ -980,6 +995,7 @@
 				AEC2818418D9264A003D9E6E /* BoxCollider.cpp in Sources */,
 				AE8E714018D008B400ECF0E7 /* SpriteBatch.cpp in Sources */,
 				AE8E713118D008B400ECF0E7 /* FontRenderer.cpp in Sources */,
+				AE64F6F718DBBCE6005F6D56 /* DiffLightEffect.h in Sources */,
 				AEC2819918D9264A003D9E6E /* Ped.cpp in Sources */,
 				AEC2818E18D9264A003D9E6E /* HUD.cpp in Sources */,
 				AE8E713518D008B400ECF0E7 /* Image.cpp in Sources */,

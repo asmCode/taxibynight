@@ -105,7 +105,9 @@ GLfloat gCubeVertexData[216] =
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    [self view].multipleTouchEnabled = YES;
+	self.preferredFramesPerSecond = 300;
+	
     self.context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
 
     if (!self.context) {
@@ -248,7 +250,7 @@ IGameController *m_game;
     
     _rotation += self.timeSinceLastUpdate * 0.5f;
 	
-	m_game->Update(0.1f, 0.1f);
+	m_game->Update(self.timeSinceFirstResume, self.timeSinceLastUpdate);
 }
 
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
@@ -271,7 +273,7 @@ IGameController *m_game;
 //    
 //    glDrawArrays(GL_TRIANGLES, 0, 36);
 //	
-	m_game->Draw(0.1f, 0.1f);
+	m_game->Draw(self.timeSinceFirstResume, self.timeSinceLastUpdate);
 }
 
 #pragma mark -  OpenGL ES 2 shader compilation
@@ -426,6 +428,42 @@ IGameController *m_game;
     }
     
     return YES;
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	for (UITouch* touch in touches)
+	{
+		CGPoint location = [touch locationInView:[self view]];
+		location.x *= [self view].contentScaleFactor;
+		location.y *= [self view].contentScaleFactor;
+		
+		m_game->HandlePress(reinterpret_cast<uint32_t>(touch), sm::Vec2(location.x, location.y));
+	}
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	for (UITouch* touch in touches)
+	{
+		CGPoint location = [touch locationInView:[self view]];
+		location.x *= [self view].contentScaleFactor;
+		location.y *= [self view].contentScaleFactor;
+		
+		m_game->HandleMove(reinterpret_cast<uint32_t>(touch), sm::Vec2(location.x, location.y));
+	}
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	for (UITouch* touch in touches)
+	{
+		CGPoint location = [touch locationInView:[self view]];
+		location.x *= [self view].contentScaleFactor;
+		location.y *= [self view].contentScaleFactor;
+		
+		m_game->HandleRelease(reinterpret_cast<uint32_t>(touch), sm::Vec2(location.x, location.y));
+	}
 }
 
 @end

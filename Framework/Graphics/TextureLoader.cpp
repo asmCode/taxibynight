@@ -22,7 +22,7 @@ Texture* TextureLoader::Load(const std::string &path)
 		bytesCount * 8,
 		data,
 		Texture::Wrap_ClampToEdge,
-		Texture::Filter_LinearMipmapLinear,
+		Texture::Filter_Linear,
 		Texture::Filter_Linear,
 		true);
 	

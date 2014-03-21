@@ -121,8 +121,8 @@ void GameScreen::Draw(float time, float seconds)
 	glDisable(GL_BLEND);
 
 	m_street->Draw(time, seconds);
-	m_taxi->Draw(time, seconds);
-	m_pedsManager->Draw(time, seconds);
+//	m_taxi->Draw(time, seconds);
+	//m_pedsManager->Draw(time, seconds);
 	if (!m_isPaused)
 		m_arrow->Draw(time, seconds);
 	m_placeIndicator->Draw(time, seconds);

@@ -21,13 +21,27 @@ public:
 	void BindVertexChannel(unsigned channel, const char *name);
 	
 	void SetParameter(const char *name, float val);
+	void SetParameter(uint32_t location, float val);
+	
 	void SetParameter(const char *name, float val1, float val2, float val3);
+	void SetParameter(uint32_t location, float val1, float val2, float val3);
+	
 	void SetParameter(const char *name, float val1, float val2, float val3, float val4);
+	void SetParameter(uint32_t location, float val1, float val2, float val3, float val4);
 	
 	void SetParameter(const char *name, const sm::Vec3 &val);
+	void SetParameter(uint32_t location, const sm::Vec3 &val);
+	
 	void SetParameter(const char *name, const sm::Vec4 &val);
+	void SetParameter(uint32_t location, const sm::Vec4 &val);
+	
 	void SetTextureParameter(const char *name, unsigned channel, unsigned texId);
+	void SetTextureParameter(uint32_t location, unsigned channel, unsigned texId);
+	
 	void SetMatrixParameter(const char *name, const sm::Matrix &matrix);
+	void SetMatrixParameter(uint32_t location, const sm::Matrix &matrix);
+	
+	uint32_t GetUniformLocation(const std::string& name) const;
 
 	void LinkProgram();
 	

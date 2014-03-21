@@ -67,12 +67,22 @@ void Shader::SetParameter(const char *name, float val)
 	glUniform1f(uniformParam, val);
 }
 
+void Shader::SetParameter(uint32_t location, float val)
+{
+	glUniform1f(location, val);
+}
+
 void Shader::SetParameter(const char *name, float val1, float val2, float val3)
 {
 	int uniformParam = glGetUniformLocation(m_programId, name);
 	assert(uniformParam != -1);
 	
 	glUniform3f(uniformParam, val1, val2, val3);
+}
+
+void Shader::SetParameter(uint32_t location, float val1, float val2, float val3)
+{
+	glUniform3f(location, val1, val2, val3);
 }
 
 void Shader::SetParameter(const char *name, float val1, float val2, float val3, float val4)
@@ -84,9 +94,19 @@ void Shader::SetParameter(const char *name, float val1, float val2, float val3, 
 	glUniform4f(uniformParam, val1, val2, val3, val4);
 }
 
+void Shader::SetParameter(uint32_t location, float val1, float val2, float val3, float val4)
+{
+	glUniform4f(location, val1, val2, val3, val4);
+}
+
 void Shader::SetParameter(const char *name, const sm::Vec3 &val)
 {
 	SetParameter(name, val.x, val.y, val.z);
+}
+
+void Shader::SetParameter(uint32_t location, const sm::Vec3 &val)
+{
+	SetParameter(location, val.x, val.y, val.z);
 }
 
 void Shader::SetParameter(const char *name, const sm::Vec4 &val)
@@ -107,12 +127,25 @@ void Shader::SetTextureParameter(const char *name, unsigned channel, unsigned te
 	
 }
 
+void Shader::SetTextureParameter(uint32_t location, unsigned channel, unsigned texId)
+{
+	glActiveTexture(GL_TEXTURE0 + channel);
+	glBindTexture(GL_TEXTURE_2D, texId);
+	
+	glUniform1i(location, channel);
+}
+
 void Shader::SetMatrixParameter(const char *name, const sm::Matrix &matrix)
 {
 	int uniformParam = glGetUniformLocation(m_programId, name);
 	assert(uniformParam != -1);
 	
 	glUniformMatrix4fv(uniformParam, 1, false, matrix);
+}
+
+void Shader::SetMatrixParameter(uint32_t location, const sm::Matrix &matrix)
+{
+	glUniformMatrix4fv(location, 1, false, matrix);
 }
 
 GLuint Shader::CompileShader(GLenum shaderType, const char* file)
@@ -209,3 +242,7 @@ bool Shader::ValidateProgram(GLuint programId)
     return status == GL_TRUE;
 }
 
+uint32_t Shader::GetUniformLocation(const std::string& name) const
+{
+	return glGetUniformLocation(m_programId, name.c_str());
+}
