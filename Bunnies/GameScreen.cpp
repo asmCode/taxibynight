@@ -117,12 +117,14 @@ bool GameScreen::ReleaseResources()
 
 void GameScreen::Draw(float time, float seconds)
 {
+	glPushGroupMarkerEXT(0, "GameScreen::Draw()");
+	
 	glEnable(GL_DEPTH_TEST);
 	glDisable(GL_BLEND);
 
 	m_street->Draw(time, seconds);
-//	m_taxi->Draw(time, seconds);
-	//m_pedsManager->Draw(time, seconds);
+	m_taxi->Draw(time, seconds);
+	m_pedsManager->Draw(time, seconds);
 	if (!m_isPaused)
 		m_arrow->Draw(time, seconds);
 	m_placeIndicator->Draw(time, seconds);
@@ -148,6 +150,8 @@ void GameScreen::Draw(float time, float seconds)
 	{
 		m_penaltyLabel->SetVisible(false);
 	}
+	
+	glPopGroupMarkerEXT();
 }
 
 void GameScreen::SetPenalty(float value)

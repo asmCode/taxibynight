@@ -99,21 +99,23 @@ void DrawingRoutines::DrawDiff(Model *model, const sm::Matrix &viewMatrix, const
 	glDisableVertexAttribArray(3);
 }
 
-void DrawingRoutines::DrawStreet(Model *model, Texture *diffuseTexture, const sm::Matrix &worldMatrix)
+void DrawingRoutines::DrawStreetBegin()
 {
 	glDepthMask(true);
 	glEnable(GL_DEPTH_TEST);
 	glDisable(GL_BLEND);
-
-	assert(model != NULL);
-
-	glEnableVertexAttribArray(0); 
+	
+	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
 	glEnableVertexAttribArray(3);
 	
 	m_diffLightEffect->Begin();
 	m_diffLightEffect->SetViewProjMatrix(m_viewProjMatrix);
 	m_diffLightEffect->SetLightPosition(m_lightPosition);
+}
+
+void DrawingRoutines::DrawStreet(Model *model, Texture *diffuseTexture, const sm::Matrix &worldMatrix)
+{
 	m_diffLightEffect->SetTexture(diffuseTexture);
 
 	for (uint32_t i = 0; i < model->m_meshParts.size(); i++)
@@ -123,7 +125,10 @@ void DrawingRoutines::DrawStreet(Model *model, Texture *diffuseTexture, const sm
 		m_diffLightEffect->SetWorldMatrix(worldMatrix);
 		model->m_meshParts[i]->Draw();
 	}
+}
 
+void DrawingRoutines::DrawStreetEnd()
+{
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);
 	glDisableVertexAttribArray(3);

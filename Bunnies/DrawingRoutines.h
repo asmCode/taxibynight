@@ -18,7 +18,11 @@ public:
 	static bool Initialize();
 
 	static void DrawDiff(Model *model, const sm::Matrix &viewMatrix, const sm::Matrix &worldMatrix);
+	
+	static void DrawStreetBegin();
 	static void DrawStreet(Model *model, Texture *diffuseTexture, const sm::Matrix &worldMatrix);
+	static void DrawStreetEnd();
+	
 	static void DrawWithMaterial(std::vector<MeshPart*> &meshParts, const sm::Matrix &worldMatrix);
 	static void DrawUnlit(MeshPart* meshPart, const sm::Matrix &worldMatrix);
 	static void DrawSprite(Model *model, const sm::Matrix &viewMatrix, const sm::Matrix &worldMatrix);

@@ -22,6 +22,7 @@ public:
 	{
 		Filter_Nearest				= GL_NEAREST,
 		Filter_Linear				= GL_LINEAR,
+		Filter_LinearMipmapNearest	= GL_LINEAR_MIPMAP_NEAREST,
 		Filter_LinearMipmapLinear	= GL_LINEAR_MIPMAP_LINEAR
 	};
 

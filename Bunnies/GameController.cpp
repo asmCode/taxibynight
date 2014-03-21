@@ -59,6 +59,17 @@ bool GameController::InitializeGraphics(const std::string &basePath)
 	m_content->LoadAnimations(basePath + "data/animations/");
 	m_content->LoadMaterials(basePath + "data/materials/");
 	m_content->CombineResources();
+	
+	Texture *gui01 = m_content->Get<Texture>("gui01");
+	gui01->BindTexture();
+	gui01->SetFilterModel(Texture::Filter_LinearMipmapLinear, Texture::Filter_Linear);
+	gui01->GenerateMipmaps();
+	
+	Texture *gui02 = m_content->Get<Texture>("gui02");
+	gui02->BindTexture();
+	gui02->SetFilterModel(Texture::Filter_LinearMipmapLinear, Texture::Filter_Linear);
+	gui02->GenerateMipmaps();
+
 
 	DrawingRoutines::Initialize();
 	DrawingRoutines::SetProjectionMatrix(sm::Matrix::PerspectiveMatrix(45.0f, static_cast<float>(screenWidth) / static_cast<float>(screenHeight), 0.1f, 1000.0f));

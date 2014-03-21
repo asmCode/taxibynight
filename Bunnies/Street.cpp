@@ -247,6 +247,8 @@ void Street::Update(float time, float seconds)
 
 void Street::Draw(float time, float seconds)
 {
+	DrawingRoutines::DrawStreetBegin();
+	
 	sm::Matrix world = sm::Matrix::IdentityMatrix();
 	
 	//int v = 0;
@@ -266,6 +268,8 @@ void Street::Draw(float time, float seconds)
 			m_streetPieces[streetType]->Draw(seg->GetWorldTransform());
 		}
 	}
+	
+	DrawingRoutines::DrawStreetEnd();
 	
 	//Log::LogT("visible segments: %d", v);
 }
