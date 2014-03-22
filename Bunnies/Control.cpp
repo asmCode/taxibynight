@@ -4,6 +4,7 @@
 #include <Graphics/SpriteBatch.h>
 #include <Graphics/TexPart.h>
 #include <Graphics/Color.h>
+#include <Utils/Log.h>
 
 SpriteBatch *Control::spriteBatch;
 
@@ -274,17 +275,16 @@ void Control::HandleRelease(int pointId, const sm::Vec2 &point)
 	for (it = children.begin(); it != children.end(); it++)
 		(*it) ->HandleRelease(pointId, sm::Vec2(point.x - this->x, point.y - this->y));
 	
-	if (HitTest(point.x, point.y))
+	if (m_pressState == PressState_Pressed &&
+		m_pressedFingerId == pointId)
 	{
-		if (m_pressState == PressState_Pressed &&
-			m_pressedFingerId == pointId)
-		{
-			m_pressState = PressState_Unpressed;
-			m_pressedFingerId = 0;
-
-			OnTouchEnd(pointId, point.x - this->x, point.y - this->y);
+		m_pressState = PressState_Unpressed;
+		m_pressedFingerId = 0;
+		
+		OnTouchEnd(pointId, point.x - this->x, point.y - this->y);
+		
+		if (HitTest(point.x, point.y))
 			OnClicked(pointId, point.x - this->x, point.y - this->y);
-		}
 	}
 }
 

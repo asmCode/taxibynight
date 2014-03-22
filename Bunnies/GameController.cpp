@@ -70,6 +70,10 @@ bool GameController::InitializeGraphics(const std::string &basePath)
 	gui02->SetFilterModel(Texture::Filter_LinearMipmapLinear, Texture::Filter_Linear);
 	gui02->GenerateMipmaps();
 
+	Texture *comicsPage = m_content->Get<Texture>("page0");
+	comicsPage->BindTexture();
+	comicsPage->SetWrappingMode(Texture::Wrap_ClampToEdge);
+	comicsPage->SetFilterModel(Texture::Filter_Linear, Texture::Filter_Linear);
 
 	DrawingRoutines::Initialize();
 	DrawingRoutines::SetProjectionMatrix(sm::Matrix::PerspectiveMatrix(45.0f, static_cast<float>(screenWidth) / static_cast<float>(screenHeight), 0.1f, 1000.0f));

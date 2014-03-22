@@ -6,9 +6,9 @@ uniform mat4 u_worldMatrix;
 uniform mat4 u_viewProjMatrix;
 uniform vec3 u_lightPosition;
 
-varying lowp vec2 o_coords;
-varying lowp vec3 o_normal;
-varying lowp vec3 o_lightDirection;
+varying vec2 o_coords;
+varying vec3 o_normal;
+varying vec3 o_lightDirection;
 
 void main()
 {
