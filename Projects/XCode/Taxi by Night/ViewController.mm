@@ -64,7 +64,10 @@ IGameController *m_game;
 	TaxiGame::Environment::GetInstance()->SetBasePath(basePath);
 	TaxiGame::Environment::GetInstance()->SetWritePath(docPath);
 	
-	TaxiGame::Environment::GetInstance()->SetScreenSize(960, 640);
+	TaxiGame::Environment::GetInstance()->SetScreenSize(self.view.bounds.size.height * self.view.contentScaleFactor,
+														self.view.bounds.size.width * self.view.contentScaleFactor);
+	NSLog(@"screen size = %.4f x %.4f", self.view.bounds.size.width, self.view.bounds.size.height);
+	NSLog(@"scale factor = %.4f", self.view.contentScaleFactor);
 	
 	IGraphicsEngine *graphicsEngine = GraphicsEngineFactory::Create();
 	m_game = InfectedBunniesFactory::Create(graphicsEngine);
@@ -126,9 +129,7 @@ IGameController *m_game;
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-	NSLog(@"****** Touch Began");
-	
+{	
 	[super touchesBegan:touches withEvent:event];
 	
 	for (UITouch* touch in touches)
@@ -143,8 +144,6 @@ IGameController *m_game;
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
-	NSLog(@"****** Touch Moved");
-	
 	[super touchesMoved:touches withEvent:event];
 	
 	for (UITouch* touch in touches)
@@ -159,8 +158,6 @@ IGameController *m_game;
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-	NSLog(@"****** Touch Ended");
-	
 	[super touchesEnded:touches withEvent:event];
 	
 	for (UITouch* touch in touches)
