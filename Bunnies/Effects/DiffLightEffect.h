@@ -3,6 +3,7 @@
 
 #include <Math/Matrix.h>
 #include <Math/Vec3.h>
+#include <Core/stdint.h>
 
 class Shader;
 class Texture;

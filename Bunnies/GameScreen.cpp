@@ -117,7 +117,9 @@ bool GameScreen::ReleaseResources()
 
 void GameScreen::Draw(float time, float seconds)
 {
+#if __APPLE__
 	glPushGroupMarkerEXT(0, "GameScreen::Draw()");
+#endif
 	
 	glEnable(GL_DEPTH_TEST);
 	glDisable(GL_BLEND);
@@ -151,7 +153,9 @@ void GameScreen::Draw(float time, float seconds)
 		m_penaltyLabel->SetVisible(false);
 	}
 	
+#if __APPLE__
 	glPopGroupMarkerEXT();
+#endif
 }
 
 void GameScreen::SetPenalty(float value)

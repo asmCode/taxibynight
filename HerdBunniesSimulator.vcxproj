@@ -90,6 +90,7 @@
     <ClInclude Include="Bunnies\Billboard.h" />
     <ClInclude Include="Bunnies\Camera.h" />
     <ClInclude Include="Bunnies\ComicsScreen.h" />
+    <ClInclude Include="Bunnies\Effects\DiffLightEffect.h" />
     <ClInclude Include="Bunnies\HttpCommunication.h" />
     <ClInclude Include="Bunnies\Leaderboard.h" />
     <ClInclude Include="Bunnies\LeaderboardScreen.h" />
@@ -133,6 +134,7 @@
     <ClInclude Include="Framework\Audio\AlAudioPlayer.h" />
     <ClInclude Include="Framework\Audio\AudioPlayerFactory.h" />
     <ClInclude Include="Framework\Audio\BassPlayer.h" />
+    <ClInclude Include="Framework\Audio\DummyAudioPlayer.h" />
     <ClInclude Include="Framework\Audio\IAudioPlayer.h" />
     <ClInclude Include="Framework\Audio\SoundManager.h" />
     <ClInclude Include="Framework\Graphics\Animation.h" />
@@ -177,7 +179,6 @@
     <ClInclude Include="Framework\Graphics\Shader.h" />
     <ClInclude Include="Framework\Graphics\SpriteAnim.h" />
     <ClInclude Include="Framework\Graphics\SpriteBatch.h" />
-    <ClInclude Include="Framework\Graphics\SteerCamera.h" />
     <ClInclude Include="Framework\Graphics\TexPart.h" />
     <ClInclude Include="Framework\Graphics\Texture.h" />
     <ClInclude Include="Framework\Graphics\TextureLoader.h" />
@@ -218,6 +219,7 @@
     <ClCompile Include="Bunnies\Billboard.cpp" />
     <ClCompile Include="Bunnies\Camera.cpp" />
     <ClCompile Include="Bunnies\ComicsScreen.cpp" />
+    <ClCompile Include="Bunnies\Effects\DiffLightEffect.cpp" />
     <ClCompile Include="Bunnies\HttpCommunication.cpp" />
     <ClCompile Include="Bunnies\Leaderboard.cpp" />
     <ClCompile Include="Bunnies\LeaderboardScreen.cpp" />
@@ -259,6 +261,7 @@
     <ClCompile Include="Framework\Audio\AlAudioPlayer.cpp" />
     <ClCompile Include="Framework\Audio\AudioPlayerFactory.cpp" />
     <ClCompile Include="Framework\Audio\BassPlayer.cpp" />
+    <ClCompile Include="Framework\Audio\DummyAudioPlayer.cpp" />
     <ClCompile Include="Framework\Audio\SoundManager.cpp" />
     <ClCompile Include="Framework\Graphics\Animation.cpp" />
     <ClCompile Include="Framework\Graphics\AnimationLoader.cpp" />
@@ -283,7 +286,6 @@
     <ClCompile Include="Framework\Graphics\Shader.cpp" />
     <ClCompile Include="Framework\Graphics\SpriteAnim.cpp" />
     <ClCompile Include="Framework\Graphics\SpriteBatch.cpp" />
-    <ClCompile Include="Framework\Graphics\SteerCamera.cpp" />
     <ClCompile Include="Framework\Graphics\TexPart.cpp" />
     <ClCompile Include="Framework\Graphics\Texture.cpp" />
     <ClCompile Include="Framework\Graphics\TextureLoader.cpp" />
@@ -307,6 +309,8 @@
     <None Include="data\shaders\CelShadingMutating.vpr" />
     <None Include="data\shaders\Diff.fpr" />
     <None Include="data\shaders\Diff.vpr" />
+    <None Include="data\shaders\DiffLight.fpr" />
+    <None Include="data\shaders\DiffLight.vpr" />
     <None Include="data\shaders\DiffTex.fpr" />
     <None Include="data\shaders\DiffTex.vpr" />
     <None Include="data\shaders\Grass.fpr" />
@@ -315,8 +319,14 @@
     <None Include="data\shaders\Outline.vpr" />
     <None Include="data\shaders\OutlineMutating.fpr" />
     <None Include="data\shaders\OutlineMutating.vpr" />
+    <None Include="data\shaders\Ped.fpr" />
+    <None Include="data\shaders\Ped.vpr" />
     <None Include="data\shaders\sprite.fpr" />
     <None Include="data\shaders\sprite.vpr" />
+    <None Include="data\shaders\Sprite2.fpr" />
+    <None Include="data\shaders\Sprite2.vpr" />
+    <None Include="data\shaders\Unlit.fpr" />
+    <None Include="data\shaders\Unlit.vpr" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
