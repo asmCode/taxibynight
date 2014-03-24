@@ -135,6 +135,7 @@
     <ClInclude Include="Framework\Audio\AudioPlayerFactory.h" />
     <ClInclude Include="Framework\Audio\BassPlayer.h" />
     <ClInclude Include="Framework\Audio\DummyAudioPlayer.h" />
+    <ClInclude Include="Framework\Audio\FModAudioPlayer.h" />
     <ClInclude Include="Framework\Audio\IAudioPlayer.h" />
     <ClInclude Include="Framework\Audio\SoundManager.h" />
     <ClInclude Include="Framework\Graphics\Animation.h" />
@@ -262,6 +263,7 @@
     <ClCompile Include="Framework\Audio\AudioPlayerFactory.cpp" />
     <ClCompile Include="Framework\Audio\BassPlayer.cpp" />
     <ClCompile Include="Framework\Audio\DummyAudioPlayer.cpp" />
+    <ClCompile Include="Framework\Audio\FModAudioPlayer.cpp" />
     <ClCompile Include="Framework\Audio\SoundManager.cpp" />
     <ClCompile Include="Framework\Graphics\Animation.cpp" />
     <ClCompile Include="Framework\Graphics\AnimationLoader.cpp" />

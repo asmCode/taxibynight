@@ -8,13 +8,15 @@
 #include "AlAudioPlayer.h"
 #endif
 
+#include "FModAudioPlayer.h"
+
 #include <assert.h>
 
 IAudioPlayer* AudioPlayerFactory::CreateAudioPlayer(const std::string &file,
 													bool stereo,
 													bool loadIntoMemory)
 {
-	return new DummyAudioPlayer();
+	return new FModAudioPlayer(file, stereo, loadIntoMemory);
 }
 
 

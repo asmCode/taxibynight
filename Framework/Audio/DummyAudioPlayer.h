@@ -5,6 +5,7 @@
 
 class DummyAudioPlayer : public IAudioPlayer
 {
+public:
 	void Play();
 	void Stop();
 	
