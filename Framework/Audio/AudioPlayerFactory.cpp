@@ -3,7 +3,6 @@
 #include "DummyAudioPlayer.h"
 
 #ifdef _WIN32
-#include "BassPlayer.h"
 #elif _TIZEN
 #include "AlAudioPlayer.h"
 #endif
@@ -16,7 +15,17 @@ IAudioPlayer* AudioPlayerFactory::CreateAudioPlayer(const std::string &file,
 													bool stereo,
 													bool loadIntoMemory)
 {
-	return new FModAudioPlayer(file, stereo, loadIntoMemory);
+	IAudioPlayer *player = new FModAudioPlayer();
+	if (player == NULL)
+		return NULL;
+
+	if (!player->LoadFromFile(file, stereo, loadIntoMemory))
+	{
+		delete player;
+		return NULL;
+	}
+
+	return player;
 }
 
 
@@ -47,14 +56,3 @@ IAudioPlayer* AudioPlayerFactory::CreateTizenAudioPlayer(const std::string &file
 #endif
 }
 
-IAudioPlayer* AudioPlayerFactory::CreateBassPlayer(const std::string &file)
-{
-#ifdef _WIN32
-	BassPlayer *player = new BassPlayer();
-	player->LoadMusic(file.c_str());
-	
-	return player;
-#else
-	return NULL;
-#endif
-}

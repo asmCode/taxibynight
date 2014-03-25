@@ -4,10 +4,16 @@
 #include "IAudioPlayer.h"
 #include <string>
 
+namespace FMOD { class System; }
+namespace FMOD { class Sound; }
+namespace FMOD { class Channel; }
+
 class FModAudioPlayer : public IAudioPlayer
 {
 public:
-	FModAudioPlayer(const std::string& file, bool stereo, bool loadIntoMemory);
+	FModAudioPlayer();
+
+	bool LoadFromFile(const std::string& file, bool stereo, bool loadIntoMemory);
 
 	void Play();
 	void Stop();
@@ -17,7 +23,20 @@ public:
 	void SetVolume(float vol);
 	float GetVolume() const;
 	void SetPitch(float pitch);
+
+private:
+	static bool m_isInitialized;
+	static FMOD::System *m_system;
+
+	FMOD::Sound *m_sound;
+	FMOD::Channel *m_channel;
+
+	float m_volume;
+	float m_pitch;
+
+	static bool Initialize();
 };
 
 
 #endif // FMOD_AUDIO_PLAYER
+

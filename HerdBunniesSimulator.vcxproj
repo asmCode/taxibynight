@@ -59,7 +59,8 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;glu32.lib;"d:\stuff\Infected Bunnies\code\ssg02\HerdBunniesSimulator\Ext\libpng\libpng15.lib";"d:\stuff\Infected Bunnies\code\ssg02\HerdBunniesSimulator\Ext\zlib\zlib.lib";"d:\stuff\Infected Bunnies\code\ssg02\HerdBunniesSimulator\Ext\glew-1.9.0\lib\glew32.lib";"d:\stuff\Taxi\Code\Ext\bass\bass.lib";%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glu32.lib;"d:\stuff\Infected Bunnies\code\ssg02\HerdBunniesSimulator\Ext\libpng\libpng15.lib";"d:\stuff\Infected Bunnies\code\ssg02\HerdBunniesSimulator\Ext\zlib\zlib.lib";"d:\stuff\Infected Bunnies\code\ssg02\HerdBunniesSimulator\Ext\glew-1.9.0\lib\glew32.lib";"d:\stuff\Taxi\Code\Ext\bass\bass.lib";fmod\fmod64_vc.lib;fmod\fmod_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>d:\stuff\Taxi\Code\Ext\</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -133,7 +134,6 @@
     <ClInclude Include="Bunnies\Ticker.h" />
     <ClInclude Include="Framework\Audio\AlAudioPlayer.h" />
     <ClInclude Include="Framework\Audio\AudioPlayerFactory.h" />
-    <ClInclude Include="Framework\Audio\BassPlayer.h" />
     <ClInclude Include="Framework\Audio\DummyAudioPlayer.h" />
     <ClInclude Include="Framework\Audio\FModAudioPlayer.h" />
     <ClInclude Include="Framework\Audio\IAudioPlayer.h" />
@@ -261,7 +261,6 @@
     <ClCompile Include="Ext\tinyxml\tinyxml2.cpp" />
     <ClCompile Include="Framework\Audio\AlAudioPlayer.cpp" />
     <ClCompile Include="Framework\Audio\AudioPlayerFactory.cpp" />
-    <ClCompile Include="Framework\Audio\BassPlayer.cpp" />
     <ClCompile Include="Framework\Audio\DummyAudioPlayer.cpp" />
     <ClCompile Include="Framework\Audio\FModAudioPlayer.cpp" />
     <ClCompile Include="Framework\Audio\SoundManager.cpp" />
