@@ -11,7 +11,6 @@
 		AE64F6F918DBBE17005F6D56 /* DiffLightEffect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AE64F6F518DBBCE6005F6D56 /* DiffLightEffect.cpp */; };
 		AE8E712418D008B400ECF0E7 /* AlAudioPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AE8E709718D008B300ECF0E7 /* AlAudioPlayer.cpp */; };
 		AE8E712518D008B400ECF0E7 /* AudioPlayerFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AE8E709918D008B300ECF0E7 /* AudioPlayerFactory.cpp */; };
-		AE8E712618D008B400ECF0E7 /* BassPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AE8E709B18D008B300ECF0E7 /* BassPlayer.cpp */; };
 		AE8E712718D008B400ECF0E7 /* SoundManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AE8E709E18D008B300ECF0E7 /* SoundManager.cpp */; };
 		AE8E712918D008B400ECF0E7 /* Animation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AE8E70A718D008B300ECF0E7 /* Animation.cpp */; };
 		AE8E712A18D008B400ECF0E7 /* AnimationLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AE8E70A918D008B300ECF0E7 /* AnimationLoader.cpp */; };
@@ -113,6 +112,10 @@
 		AEC281A918D9264A003D9E6E /* ThrowTrajectory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AEC2814C18D9264A003D9E6E /* ThrowTrajectory.cpp */; };
 		AEC281AA18D9264A003D9E6E /* Ticker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AEC2814D18D9264A003D9E6E /* Ticker.cpp */; };
 		AEC282F718D93A52003D9E6E /* data in Resources */ = {isa = PBXBuildFile; fileRef = AEC282F618D93A52003D9E6E /* data */; };
+		AEF87CBE18E1182A00BF84B8 /* FModAudioPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AEF87CBC18E1182A00BF84B8 /* FModAudioPlayer.cpp */; };
+		AEF87CC418E11E0500BF84B8 /* libfmod_iphonesimulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AEF87CC318E11E0500BF84B8 /* libfmod_iphonesimulator.a */; };
+		AEF87CC718E11F2200BF84B8 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEF87CC518E11F2200BF84B8 /* AudioToolbox.framework */; };
+		AEF87CC818E11F2200BF84B8 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEF87CC618E11F2200BF84B8 /* CoreAudio.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -132,8 +135,6 @@
 		AE8E709818D008B300ECF0E7 /* AlAudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlAudioPlayer.h; sourceTree = "<group>"; };
 		AE8E709918D008B300ECF0E7 /* AudioPlayerFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioPlayerFactory.cpp; sourceTree = "<group>"; };
 		AE8E709A18D008B300ECF0E7 /* AudioPlayerFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioPlayerFactory.h; sourceTree = "<group>"; };
-		AE8E709B18D008B300ECF0E7 /* BassPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BassPlayer.cpp; sourceTree = "<group>"; };
-		AE8E709C18D008B300ECF0E7 /* BassPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BassPlayer.h; sourceTree = "<group>"; };
 		AE8E709D18D008B300ECF0E7 /* IAudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAudioPlayer.h; sourceTree = "<group>"; };
 		AE8E709E18D008B300ECF0E7 /* SoundManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoundManager.cpp; sourceTree = "<group>"; };
 		AE8E709F18D008B300ECF0E7 /* SoundManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundManager.h; sourceTree = "<group>"; };
@@ -371,6 +372,11 @@
 		AEC2817F18D9264A003D9E6E /* ThrowTrajectory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ThrowTrajectory.h; path = ../../../Bunnies/ThrowTrajectory.h; sourceTree = "<group>"; };
 		AEC2818018D9264A003D9E6E /* Ticker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Ticker.h; path = ../../../Bunnies/Ticker.h; sourceTree = "<group>"; };
 		AEC282F618D93A52003D9E6E /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; name = data; path = ../../../data; sourceTree = "<group>"; };
+		AEF87CBC18E1182A00BF84B8 /* FModAudioPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FModAudioPlayer.cpp; sourceTree = "<group>"; };
+		AEF87CBD18E1182A00BF84B8 /* FModAudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FModAudioPlayer.h; sourceTree = "<group>"; };
+		AEF87CC318E11E0500BF84B8 /* libfmod_iphonesimulator.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfmod_iphonesimulator.a; path = ../../Ext/fmod/libfmod_iphonesimulator.a; sourceTree = "<group>"; };
+		AEF87CC518E11F2200BF84B8 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		AEF87CC618E11F2200BF84B8 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -378,9 +384,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEF87CC718E11F2200BF84B8 /* AudioToolbox.framework in Frameworks */,
+				AEF87CC818E11F2200BF84B8 /* CoreAudio.framework in Frameworks */,
 				AE9E9CB618D0049100E1744F /* OpenGLES.framework in Frameworks */,
 				AE9E9CB018D0049100E1744F /* CoreGraphics.framework in Frameworks */,
 				AE9E9CB218D0049100E1744F /* UIKit.framework in Frameworks */,
+				AEF87CC418E11E0500BF84B8 /* libfmod_iphonesimulator.a in Frameworks */,
 				AE9E9CB418D0049100E1744F /* GLKit.framework in Frameworks */,
 				AE9E9CAE18D0049100E1744F /* Foundation.framework in Frameworks */,
 			);
@@ -426,12 +435,12 @@
 		AE8E709618D008B300ECF0E7 /* Audio */ = {
 			isa = PBXGroup;
 			children = (
+				AEF87CBC18E1182A00BF84B8 /* FModAudioPlayer.cpp */,
+				AEF87CBD18E1182A00BF84B8 /* FModAudioPlayer.h */,
 				AE8E709718D008B300ECF0E7 /* AlAudioPlayer.cpp */,
 				AE8E709818D008B300ECF0E7 /* AlAudioPlayer.h */,
 				AE8E709918D008B300ECF0E7 /* AudioPlayerFactory.cpp */,
 				AE8E709A18D008B300ECF0E7 /* AudioPlayerFactory.h */,
-				AE8E709B18D008B300ECF0E7 /* BassPlayer.cpp */,
-				AE8E709C18D008B300ECF0E7 /* BassPlayer.h */,
 				AE8E709D18D008B300ECF0E7 /* IAudioPlayer.h */,
 				AE8E709E18D008B300ECF0E7 /* SoundManager.cpp */,
 				AE8E709F18D008B300ECF0E7 /* SoundManager.h */,
@@ -652,6 +661,9 @@
 		AE9E9CAC18D0049100E1744F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AEF87CC518E11F2200BF84B8 /* AudioToolbox.framework */,
+				AEF87CC618E11F2200BF84B8 /* CoreAudio.framework */,
+				AEF87CC318E11E0500BF84B8 /* libfmod_iphonesimulator.a */,
 				AE9E9CAD18D0049100E1744F /* Foundation.framework */,
 				AE9E9CAF18D0049100E1744F /* CoreGraphics.framework */,
 				AE9E9CB118D0049100E1744F /* UIKit.framework */,
@@ -964,7 +976,6 @@
 				AE8E714318D008B400ECF0E7 /* Texture.cpp in Sources */,
 				AEC2819418D9264A003D9E6E /* LeaderboardScreen.cpp in Sources */,
 				AEC281A618D9264A003D9E6E /* SummaryPanel.cpp in Sources */,
-				AE8E712618D008B400ECF0E7 /* BassPlayer.cpp in Sources */,
 				AEC281A418D9264A003D9E6E /* StreetPiece.cpp in Sources */,
 				AE8E714818D008B400ECF0E7 /* BinaryWriter.cpp in Sources */,
 				AEC281A118D9264A003D9E6E /* Street.cpp in Sources */,
@@ -982,6 +993,7 @@
 				AE8E713818D008B400ECF0E7 /* MaterialLoader.cpp in Sources */,
 				AEC281A018D9264A003D9E6E /* SpritesMap.cpp in Sources */,
 				AE8E714B18D008B400ECF0E7 /* Matrix.cpp in Sources */,
+				AEF87CBE18E1182A00BF84B8 /* FModAudioPlayer.cpp in Sources */,
 				AE8E713F18D008B400ECF0E7 /* SpriteAnim.cpp in Sources */,
 				AEC27FAD18D90CA6003D9E6E /* tinyxml2.cpp in Sources */,
 				AEC2818718D9264A003D9E6E /* Control.cpp in Sources */,
@@ -1137,13 +1149,17 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					/Users/szymonm/Projects/TaxiByNight/Code/Framework/,
+					/Users/szymonm/Projects/TaxiByNight/Code/Ext/,
 				);
 				INFOPLIST_FILE = "Taxi by Night/Taxi by Night-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/szymonm/Projects/TaxiByNight/Code/Ext/bass,
+					/Users/szymonm/Projects/TaxiByNight/Code/Ext/fmod/,
+					/Users/szymonm/Projects/TaxiByNight/Code/Ext/fmod,
 				);
+				"OTHER_LDFLAGS[sdk=iphoneos*]" = /Users/szymonm/Projects/TaxiByNight/Code/Ext/fmod/libfmod_iphoneos.a;
+				"OTHER_LDFLAGS[sdk=iphonesimulator*]" = /Users/szymonm/Projects/TaxiByNight/Code/Ext/fmod/libfmod_iphonesimulator.a;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1161,13 +1177,16 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					/Users/szymonm/Projects/TaxiByNight/Code/Framework/,
+					/Users/szymonm/Projects/TaxiByNight/Code/Ext/,
 				);
 				INFOPLIST_FILE = "Taxi by Night/Taxi by Night-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/szymonm/Projects/TaxiByNight/Code/Ext/bass,
+					/Users/szymonm/Projects/TaxiByNight/Code/Ext/fmod/,
+					/Users/szymonm/Projects/TaxiByNight/Code/Ext/fmod,
 				);
+				"OTHER_LDFLAGS[arch=*]" = /Users/szymonm/Projects/TaxiByNight/Code/Ext/fmod/libfmod_iphoneos.a;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
