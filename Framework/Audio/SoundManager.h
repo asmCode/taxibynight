@@ -43,6 +43,8 @@ public:
 	static SoundManager *GetInstance();
 
 	bool Initialize(const std::string &audioPath);
+
+	void Update();
 	
 	void SetSoundVolume(float value);
 	void SetMusicVolume(float value);

@@ -167,6 +167,8 @@ void GameController::Update(float time, float seconds)
 	assert(m_activeScreen != NULL);
 
 	m_activeScreen->Update(time, seconds);
+
+	SoundManager::GetInstance()->Update();
 }
 
 void GameController::HandlePress(int pointId, const sm::Vec2 &point)

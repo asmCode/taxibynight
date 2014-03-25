@@ -62,6 +62,11 @@ bool SoundManager::Initialize(const std::string &audioPath)
 	return true;
 }
 
+void SoundManager::Update()
+{
+	m_engine->Update();
+}
+
 void SoundManager::SetSoundVolume(float value)
 {
 	this->soundVolume = value;

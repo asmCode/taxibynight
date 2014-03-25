@@ -27,6 +27,7 @@ bool FModAudioPlayer::Initialize()
 FModAudioPlayer::FModAudioPlayer() :
 	m_sound(NULL),
 	m_channel(NULL),
+	m_isLooping(false),
 	m_volume(1.0f),
 	m_pitch(1.0f)
 {
@@ -39,51 +40,67 @@ bool FModAudioPlayer::LoadFromFile(const std::string& file, bool stereo, bool lo
 
 	FMOD_RESULT result;
 
-	result = m_system->createSound(file.c_str(), FMOD_2D | FMOD_HARDWARE | FMOD_LOOP_NORMAL, NULL, &m_sound);
+	FMOD_MODE useStream = loadIntoMemory ? 0 : FMOD_CREATESTREAM;
+
+	result = m_system->createSound(
+		file.c_str(),
+		FMOD_2D | FMOD_HARDWARE | FMOD_LOOP_NORMAL | useStream,
+		NULL,
+		&m_sound);
+
 	if (result != FMOD_OK)
 		return false;
-
-	SetLoop(false);
 
 	return true;
 }
 
-void FModAudioPlayer::Play()
+void FModAudioPlayer::Update()
 {
-	m_system->playSound(m_sound, NULL, false, &m_channel);
+	if (m_system == NULL)
+		return;
 
 	m_system->update();
-	
+}
+
+void FModAudioPlayer::Play()
+{
+	if (m_sound == NULL)
+		return;
+
+	m_system->playSound(m_sound, NULL, true, &m_channel);
+
+	SetLoop(m_isLooping);
 	SetVolume(m_volume);
 	SetPitch(m_pitch);
+
+	m_channel->setPaused(false);
 }
 
 void FModAudioPlayer::Stop()
 {
-	if (m_channel != NULL)
-	{
-		m_channel->stop();
-		m_channel = NULL;
+	if (m_channel == NULL)
+		return;
 
-		m_system->update();
-	}
+	m_channel->setPaused(true);
 }
 
 void FModAudioPlayer::SetLoop(bool loop)
 {
-	m_sound->setLoopCount(loop ? -1 : 0);
-	m_system->update();
+	m_isLooping = loop;
+
+	if (m_channel == NULL)
+		return;
+
+	m_channel->setLoopCount(m_isLooping ? -1 : 0);
 }
 
 void FModAudioPlayer::SetVolume(float vol)
 {
-	m_volume = vol;
+	if (m_channel == NULL)
+		return;
 
-	if (m_channel != NULL)
-	{
-		m_channel->setVolume(m_volume);
-		m_system->update();
-	}
+	m_volume = vol;
+	m_channel->setVolume(m_volume);
 }
 
 float FModAudioPlayer::GetVolume() const
@@ -93,11 +110,10 @@ float FModAudioPlayer::GetVolume() const
 
 void FModAudioPlayer::SetPitch(float pitch)
 {
-	m_pitch = pitch;
+	if (m_channel == NULL)
+		return;
 
-	if (m_channel != NULL)
-	{
-		m_channel->setPitch(m_pitch);
-		m_system->update();
-	}
+	m_pitch = pitch;
+	m_channel->setPitch(m_pitch);
 }
+

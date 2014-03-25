@@ -8,6 +8,8 @@ public:
 	virtual ~IAudioPlayer() {}
 
 	virtual bool LoadFromFile(const std::string& file, bool stereo, bool loadIntoMemory) = 0;
+
+	virtual void Update() {}
 	
 	virtual void Play() = 0;
 	virtual void Stop() = 0;

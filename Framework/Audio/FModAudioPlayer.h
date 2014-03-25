@@ -15,6 +15,8 @@ public:
 
 	bool LoadFromFile(const std::string& file, bool stereo, bool loadIntoMemory);
 
+	void Update();
+
 	void Play();
 	void Stop();
 	
@@ -31,6 +33,7 @@ private:
 	FMOD::Sound *m_sound;
 	FMOD::Channel *m_channel;
 
+	bool m_isLooping;
 	float m_volume;
 	float m_pitch;
 
