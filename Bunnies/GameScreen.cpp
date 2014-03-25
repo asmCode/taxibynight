@@ -34,6 +34,10 @@
 
 #include <Graphics/OpenglPort.h>
 
+#if _WIN32
+#include <Windows.h>
+#endif
+
 GameScreen *GameScreen::m_instance;
 
 GameScreen::GameScreen(GameController *gameController) :
@@ -389,7 +393,7 @@ void GameScreen::BreakButtonPressed(bool isPressed)
 
 void GameScreen::SimulatePress()
 {
-#if 0
+#if 1 && _WIN32
 	if (GetAsyncKeyState(VK_UP) & 0x8000)
 		AccelerationButtonPressed(true);
 	else
