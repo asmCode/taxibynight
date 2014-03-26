@@ -116,6 +116,13 @@
 		AEF87CC418E11E0500BF84B8 /* libfmod_iphonesimulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AEF87CC318E11E0500BF84B8 /* libfmod_iphonesimulator.a */; };
 		AEF87CC718E11F2200BF84B8 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEF87CC518E11F2200BF84B8 /* AudioToolbox.framework */; };
 		AEF87CC818E11F2200BF84B8 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEF87CC618E11F2200BF84B8 /* CoreAudio.framework */; };
+		AEF87CD318E23F7400BF84B8 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AEF87CD218E23F7400BF84B8 /* libGoogleAdMobAds.a */; };
+		AEF87CD618E23FFF00BF84B8 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEF87CD518E23FFF00BF84B8 /* AdSupport.framework */; };
+		AEF87CD818E2400600BF84B8 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEF87CD718E2400600BF84B8 /* AVFoundation.framework */; };
+		AEF87CDA18E2402000BF84B8 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEF87CD918E2402000BF84B8 /* CoreTelephony.framework */; };
+		AEF87CDC18E2402800BF84B8 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEF87CDB18E2402800BF84B8 /* MessageUI.framework */; };
+		AEF87CDE18E2404900BF84B8 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEF87CDD18E2404900BF84B8 /* StoreKit.framework */; };
+		AEF87CE018E2405300BF84B8 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEF87CDF18E2405300BF84B8 /* SystemConfiguration.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -377,6 +384,22 @@
 		AEF87CC318E11E0500BF84B8 /* libfmod_iphonesimulator.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfmod_iphonesimulator.a; path = ../../Ext/fmod/libfmod_iphonesimulator.a; sourceTree = "<group>"; };
 		AEF87CC518E11F2200BF84B8 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		AEF87CC618E11F2200BF84B8 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		AEF87CC918E23F7400BF84B8 /* GADAdMobExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADAdMobExtras.h; path = admob/GADAdMobExtras.h; sourceTree = "<group>"; };
+		AEF87CCA18E23F7400BF84B8 /* GADAdNetworkExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADAdNetworkExtras.h; path = admob/GADAdNetworkExtras.h; sourceTree = "<group>"; };
+		AEF87CCB18E23F7400BF84B8 /* GADAdSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADAdSize.h; path = admob/GADAdSize.h; sourceTree = "<group>"; };
+		AEF87CCC18E23F7400BF84B8 /* GADBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADBannerView.h; path = admob/GADBannerView.h; sourceTree = "<group>"; };
+		AEF87CCD18E23F7400BF84B8 /* GADBannerViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADBannerViewDelegate.h; path = admob/GADBannerViewDelegate.h; sourceTree = "<group>"; };
+		AEF87CCE18E23F7400BF84B8 /* GADInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADInterstitial.h; path = admob/GADInterstitial.h; sourceTree = "<group>"; };
+		AEF87CCF18E23F7400BF84B8 /* GADInterstitialDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADInterstitialDelegate.h; path = admob/GADInterstitialDelegate.h; sourceTree = "<group>"; };
+		AEF87CD018E23F7400BF84B8 /* GADRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADRequest.h; path = admob/GADRequest.h; sourceTree = "<group>"; };
+		AEF87CD118E23F7400BF84B8 /* GADRequestError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADRequestError.h; path = admob/GADRequestError.h; sourceTree = "<group>"; };
+		AEF87CD218E23F7400BF84B8 /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGoogleAdMobAds.a; path = ../../Ext/admob/libGoogleAdMobAds.a; sourceTree = "<group>"; };
+		AEF87CD518E23FFF00BF84B8 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		AEF87CD718E2400600BF84B8 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		AEF87CD918E2402000BF84B8 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		AEF87CDB18E2402800BF84B8 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		AEF87CDD18E2404900BF84B8 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		AEF87CDF18E2405300BF84B8 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -384,10 +407,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEF87CE018E2405300BF84B8 /* SystemConfiguration.framework in Frameworks */,
+				AEF87CDE18E2404900BF84B8 /* StoreKit.framework in Frameworks */,
+				AEF87CDC18E2402800BF84B8 /* MessageUI.framework in Frameworks */,
+				AEF87CDA18E2402000BF84B8 /* CoreTelephony.framework in Frameworks */,
+				AE9E9CB018D0049100E1744F /* CoreGraphics.framework in Frameworks */,
+				AEF87CD818E2400600BF84B8 /* AVFoundation.framework in Frameworks */,
+				AEF87CD618E23FFF00BF84B8 /* AdSupport.framework in Frameworks */,
 				AEF87CC718E11F2200BF84B8 /* AudioToolbox.framework in Frameworks */,
 				AEF87CC818E11F2200BF84B8 /* CoreAudio.framework in Frameworks */,
+				AEF87CD318E23F7400BF84B8 /* libGoogleAdMobAds.a in Frameworks */,
 				AE9E9CB618D0049100E1744F /* OpenGLES.framework in Frameworks */,
-				AE9E9CB018D0049100E1744F /* CoreGraphics.framework in Frameworks */,
 				AE9E9CB218D0049100E1744F /* UIKit.framework in Frameworks */,
 				AEF87CC418E11E0500BF84B8 /* libfmod_iphonesimulator.a in Frameworks */,
 				AE9E9CB418D0049100E1744F /* GLKit.framework in Frameworks */,
@@ -661,9 +691,16 @@
 		AE9E9CAC18D0049100E1744F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AEF87CDF18E2405300BF84B8 /* SystemConfiguration.framework */,
+				AEF87CDD18E2404900BF84B8 /* StoreKit.framework */,
+				AEF87CDB18E2402800BF84B8 /* MessageUI.framework */,
+				AEF87CD918E2402000BF84B8 /* CoreTelephony.framework */,
+				AEF87CD718E2400600BF84B8 /* AVFoundation.framework */,
+				AEF87CD518E23FFF00BF84B8 /* AdSupport.framework */,
+				AEF87CD218E23F7400BF84B8 /* libGoogleAdMobAds.a */,
+				AEF87CC318E11E0500BF84B8 /* libfmod_iphonesimulator.a */,
 				AEF87CC518E11F2200BF84B8 /* AudioToolbox.framework */,
 				AEF87CC618E11F2200BF84B8 /* CoreAudio.framework */,
-				AEF87CC318E11E0500BF84B8 /* libfmod_iphonesimulator.a */,
 				AE9E9CAD18D0049100E1744F /* Foundation.framework */,
 				AE9E9CAF18D0049100E1744F /* CoreGraphics.framework */,
 				AE9E9CB118D0049100E1744F /* UIKit.framework */,
@@ -709,6 +746,7 @@
 		AEC27F9818D90CA5003D9E6E /* Ext */ = {
 			isa = PBXGroup;
 			children = (
+				AEF87CD418E23FA300BF84B8 /* admob */,
 				AEC27FA918D90CA5003D9E6E /* tinyxml */,
 			);
 			name = Ext;
@@ -821,6 +859,22 @@
 				AEC2818018D9264A003D9E6E /* Ticker.h */,
 			);
 			name = Game;
+			sourceTree = "<group>";
+		};
+		AEF87CD418E23FA300BF84B8 /* admob */ = {
+			isa = PBXGroup;
+			children = (
+				AEF87CC918E23F7400BF84B8 /* GADAdMobExtras.h */,
+				AEF87CCA18E23F7400BF84B8 /* GADAdNetworkExtras.h */,
+				AEF87CCB18E23F7400BF84B8 /* GADAdSize.h */,
+				AEF87CCC18E23F7400BF84B8 /* GADBannerView.h */,
+				AEF87CCD18E23F7400BF84B8 /* GADBannerViewDelegate.h */,
+				AEF87CCE18E23F7400BF84B8 /* GADInterstitial.h */,
+				AEF87CCF18E23F7400BF84B8 /* GADInterstitialDelegate.h */,
+				AEF87CD018E23F7400BF84B8 /* GADRequest.h */,
+				AEF87CD118E23F7400BF84B8 /* GADRequestError.h */,
+			);
+			name = admob;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1157,9 +1211,16 @@
 					"$(inherited)",
 					/Users/szymonm/Projects/TaxiByNight/Code/Ext/fmod/,
 					/Users/szymonm/Projects/TaxiByNight/Code/Ext/fmod,
+					/Users/szymonm/Projects/TaxiByNight/Code/Ext/admob,
 				);
-				"OTHER_LDFLAGS[sdk=iphoneos*]" = /Users/szymonm/Projects/TaxiByNight/Code/Ext/fmod/libfmod_iphoneos.a;
-				"OTHER_LDFLAGS[sdk=iphonesimulator*]" = /Users/szymonm/Projects/TaxiByNight/Code/Ext/fmod/libfmod_iphonesimulator.a;
+				"OTHER_LDFLAGS[sdk=iphoneos*]" = (
+					/Users/szymonm/Projects/TaxiByNight/Code/Ext/fmod/libfmod_iphoneos.a,
+					"-ObjC",
+				);
+				"OTHER_LDFLAGS[sdk=iphonesimulator*]" = (
+					/Users/szymonm/Projects/TaxiByNight/Code/Ext/fmod/libfmod_iphonesimulator.a,
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1185,8 +1246,12 @@
 					"$(inherited)",
 					/Users/szymonm/Projects/TaxiByNight/Code/Ext/fmod/,
 					/Users/szymonm/Projects/TaxiByNight/Code/Ext/fmod,
+					/Users/szymonm/Projects/TaxiByNight/Code/Ext/admob,
 				);
-				"OTHER_LDFLAGS[arch=*]" = /Users/szymonm/Projects/TaxiByNight/Code/Ext/fmod/libfmod_iphoneos.a;
+				"OTHER_LDFLAGS[arch=*]" = (
+					"-ObjC",
+					/Users/szymonm/Projects/TaxiByNight/Code/Ext/fmod/libfmod_iphoneos.a,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
