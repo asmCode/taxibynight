@@ -15,6 +15,7 @@ class ComicsScreen;
 class SummaryScreen;
 class LeaderboardScreen;
 class Content;
+class IServiceProvider;
 
 class GameController : public IGameController
 {
@@ -22,7 +23,7 @@ public:
 	GameController(IGraphicsEngine *graphicsEngine);
 	virtual ~GameController(void);
 
-	bool Initialize(ISystemUtils *systemUtils);
+	bool Initialize(ISystemUtils *systemUtils, IServiceProvider* serviceProvider);
 
 	void Draw(float time, float seconds);
 	void Update(float time, float seconds);

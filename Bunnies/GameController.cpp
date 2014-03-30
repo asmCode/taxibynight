@@ -21,6 +21,7 @@
 #include <Graphics/SpriteBatch.h>
 #include <Graphics/FontRenderer.h>
 #include <Audio/SoundManager.h>
+#include "AdsMnager.h"
 #include <Utils/Log.h>
 #include <time.h>
 #include <stddef.h>
@@ -98,13 +99,15 @@ bool GameController::InitializeGraphics(const std::string &basePath)
 	return true;
 }
 
-bool GameController::Initialize(ISystemUtils *systemUtils)
+bool GameController::Initialize(ISystemUtils *systemUtils, IServiceProvider* serviceProvider)
 {
 	Log::StartLog(true);
 
 	m_systemUtils = systemUtils;
 
 	srand(time(NULL));
+	
+	AdsManager::GetInstance()->Initialize(serviceProvider);
 
 	Player *player = new Player(TaxiGame::Environment::GetInstance()->GetWritePath() + "player.xml");
 	player->Load();

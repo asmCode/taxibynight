@@ -7,17 +7,15 @@
 //
 
 #import "ViewController.h"
+#include "iOSServicesProvider.h"
 #include "../../../Bunnies/InfectedBunniesFactory.h"
 #include "../../../Bunnies/Environment.h"
+#include "../../../Bunnies/SystemSpecificData/SystemSpecificData.h"
 #include <Graphics/GraphicsEngineFactory.h>
 #include <string>
 
-#import <UIKit/UIDevice.h>
-#import "GADBannerView.h"
-
 @interface ViewController ()
 {
-	GADBannerView *m_bannerView;
 }
 
 @property (strong, nonatomic) EAGLContext *context;
@@ -33,23 +31,7 @@
     [super viewDidLoad];
     [self view].multipleTouchEnabled = YES;
 	self.preferredFramesPerSecond = 300;
-	
-	m_bannerView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeSmartBannerLandscape];
-	m_bannerView.adUnitID = @"ca-app-pub-7651431092078292/6036357967";
-	
-	GADRequest *request = [GADRequest request];
-	
-	// Make the request for a test ad. Put in an identifier for
-	// the simulator as well as any devices you want to receive test ads.
-	request.testDevices = [NSArray arrayWithObjects:
-						   GAD_SIMULATOR_ID,
-                           nil];
-	
-	m_bannerView.rootViewController = self;
-	[self.view addSubview:m_bannerView];
-	
-	[m_bannerView loadRequest:request];
-	
+		
     self.context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
 
     if (!self.context) {
@@ -88,10 +70,12 @@ IGameController *m_game;
 														self.view.bounds.size.width * self.view.contentScaleFactor);
 	NSLog(@"screen size = %.4f x %.4f", self.view.bounds.size.width, self.view.bounds.size.height);
 	NSLog(@"scale factor = %.4f", self.view.contentScaleFactor);
+
+	iOSServicesProvider* iOSS = new iOSServicesProvider(self);
 	
 	IGraphicsEngine *graphicsEngine = GraphicsEngineFactory::Create();
 	m_game = InfectedBunniesFactory::Create(graphicsEngine);
-	m_game->Initialize(NULL);
+	m_game->Initialize(NULL, iOSS);
 }
 
 - (void)dealloc

@@ -7,13 +7,15 @@
 
 class Player;
 class ISystemUtils;
+class IServiceProvider;
 
 class IGameController : public IGestureHandler
 {
 public:
 	virtual ~IGameController() {}
 
-	virtual bool Initialize(ISystemUtils *systemUtils) = 0;
+	virtual bool Initialize(ISystemUtils *systemUtils,
+							IServiceProvider* serviceProvider) = 0;
 
 	virtual void Draw(float time, float seconds) = 0;
 	virtual void Update(float time, float seconds) = 0;
