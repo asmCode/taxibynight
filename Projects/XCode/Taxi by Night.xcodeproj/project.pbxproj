@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		AE5ADC0518E8C7BD00471E8B /* iOSServicesProvider.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE5ADC0418E8C7BD00471E8B /* iOSServicesProvider.mm */; };
+		AE5ADC0718EA5B8800471E8B /* libFlurry_4.4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE5ADC0618EA5B8800471E8B /* libFlurry_4.4.0.a */; };
+		AE5ADC0D18EA5DEE00471E8B /* AnalyticsEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AE5ADC0B18EA5DEE00471E8B /* AnalyticsEvent.cpp */; };
+		AE5ADC1018EA652400471E8B /* FlurryAnalytics.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE5ADC0F18EA652400471E8B /* FlurryAnalytics.mm */; };
 		AE64F6F718DBBCE6005F6D56 /* DiffLightEffect.h in Sources */ = {isa = PBXBuildFile; fileRef = AE64F6F618DBBCE6005F6D56 /* DiffLightEffect.h */; };
 		AE64F6F918DBBE17005F6D56 /* DiffLightEffect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AE64F6F518DBBCE6005F6D56 /* DiffLightEffect.cpp */; };
 		AE8E712418D008B400ECF0E7 /* AlAudioPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AE8E709718D008B300ECF0E7 /* AlAudioPlayer.cpp */; };
@@ -143,6 +146,13 @@
 		AE5ADC0218E8C3FC00471E8B /* IServiceProvider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IServiceProvider.h; path = ../../../Framework/System/IServiceProvider.h; sourceTree = "<group>"; };
 		AE5ADC0318E8C7BD00471E8B /* iOSServicesProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSServicesProvider.h; sourceTree = "<group>"; };
 		AE5ADC0418E8C7BD00471E8B /* iOSServicesProvider.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = iOSServicesProvider.mm; sourceTree = "<group>"; };
+		AE5ADC0618EA5B8800471E8B /* libFlurry_4.4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFlurry_4.4.0.a; path = ../../Ext/flurry/libFlurry_4.4.0.a; sourceTree = "<group>"; };
+		AE5ADC0918EA5D2100471E8B /* AnalyticsProvider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AnalyticsProvider.h; path = ../../../Framework/Analytics/AnalyticsProvider.h; sourceTree = "<group>"; };
+		AE5ADC0A18EA5D2100471E8B /* IAnalytics.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IAnalytics.h; path = ../../../Framework/Analytics/IAnalytics.h; sourceTree = "<group>"; };
+		AE5ADC0B18EA5DEE00471E8B /* AnalyticsEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AnalyticsEvent.cpp; path = ../../../Framework/Analytics/AnalyticsEvent.cpp; sourceTree = "<group>"; };
+		AE5ADC0C18EA5DEE00471E8B /* AnalyticsEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnalyticsEvent.h; path = ../../../Framework/Analytics/AnalyticsEvent.h; sourceTree = "<group>"; };
+		AE5ADC0E18EA651E00471E8B /* FlurryAnalytics.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FlurryAnalytics.h; path = ../../../Framework/Analytics/FlurryAnalytics.h; sourceTree = "<group>"; };
+		AE5ADC0F18EA652400471E8B /* FlurryAnalytics.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = FlurryAnalytics.mm; path = ../../../Framework/Analytics/iOS/FlurryAnalytics.mm; sourceTree = "<group>"; };
 		AE64F6F518DBBCE6005F6D56 /* DiffLightEffect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DiffLightEffect.cpp; path = ../../../Bunnies/Effects/DiffLightEffect.cpp; sourceTree = "<group>"; };
 		AE64F6F618DBBCE6005F6D56 /* DiffLightEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DiffLightEffect.h; path = ../../../Bunnies/Effects/DiffLightEffect.h; sourceTree = "<group>"; };
 		AE8E709718D008B300ECF0E7 /* AlAudioPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AlAudioPlayer.cpp; sourceTree = "<group>"; };
@@ -438,6 +448,7 @@
 				AE9E9CB218D0049100E1744F /* UIKit.framework in Frameworks */,
 				AEF87CC418E11E0500BF84B8 /* libfmod_iphonesimulator.a in Frameworks */,
 				AE9E9CB418D0049100E1744F /* GLKit.framework in Frameworks */,
+				AE5ADC0718EA5B8800471E8B /* libFlurry_4.4.0.a in Frameworks */,
 				AE9E9CAE18D0049100E1744F /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -463,6 +474,19 @@
 			name = System;
 			sourceTree = "<group>";
 		};
+		AE5ADC0818EA5D1300471E8B /* Analytics */ = {
+			isa = PBXGroup;
+			children = (
+				AE5ADC0F18EA652400471E8B /* FlurryAnalytics.mm */,
+				AE5ADC0E18EA651E00471E8B /* FlurryAnalytics.h */,
+				AE5ADC0B18EA5DEE00471E8B /* AnalyticsEvent.cpp */,
+				AE5ADC0C18EA5DEE00471E8B /* AnalyticsEvent.h */,
+				AE5ADC0918EA5D2100471E8B /* AnalyticsProvider.h */,
+				AE5ADC0A18EA5D2100471E8B /* IAnalytics.h */,
+			);
+			name = Analytics;
+			sourceTree = "<group>";
+		};
 		AE64F6F818DBBCF2005F6D56 /* Effects */ = {
 			isa = PBXGroup;
 			children = (
@@ -475,6 +499,7 @@
 		AE8E709518D0083A00ECF0E7 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				AE5ADC0818EA5D1300471E8B /* Analytics */,
 				AE5ADC0118E8C3EF00471E8B /* System */,
 				AEF87CE118E265AF00BF84B8 /* Ads */,
 				AE8E709618D008B300ECF0E7 /* Audio */,
@@ -718,6 +743,7 @@
 		AE9E9CAC18D0049100E1744F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AE5ADC0618EA5B8800471E8B /* libFlurry_4.4.0.a */,
 				AEF87CDF18E2405300BF84B8 /* SystemConfiguration.framework */,
 				AEF87CDD18E2404900BF84B8 /* StoreKit.framework */,
 				AEF87CDB18E2402800BF84B8 /* MessageUI.framework */,
@@ -1111,6 +1137,7 @@
 				AEC2818718D9264A003D9E6E /* Control.cpp in Sources */,
 				AE8E714E18D008B400ECF0E7 /* StringUtils.cpp in Sources */,
 				AE8E713B18D008B400ECF0E7 /* Model.cpp in Sources */,
+				AE5ADC0D18EA5DEE00471E8B /* AnalyticsEvent.cpp in Sources */,
 				AEC2819018D9264A003D9E6E /* Inflater.cpp in Sources */,
 				AEC2819B18D9264A003D9E6E /* PlaceIndicator.cpp in Sources */,
 				AEC27F9718D90864003D9E6E /* DummyAudioPlayer.cpp in Sources */,
@@ -1129,6 +1156,7 @@
 				AE8E713918D008B400ECF0E7 /* Mesh.cpp in Sources */,
 				AEC2819F18D9264A003D9E6E /* SpringCamera.cpp in Sources */,
 				AE8E713A18D008B400ECF0E7 /* MeshPart.cpp in Sources */,
+				AE5ADC1018EA652400471E8B /* FlurryAnalytics.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1270,6 +1298,7 @@
 					/Users/szymonm/Projects/TaxiByNight/Code/Ext/fmod/,
 					/Users/szymonm/Projects/TaxiByNight/Code/Ext/fmod,
 					/Users/szymonm/Projects/TaxiByNight/Code/Ext/admob,
+					/Users/szymonm/Projects/TaxiByNight/Code/Ext/flurry,
 				);
 				"OTHER_LDFLAGS[sdk=iphoneos*]" = (
 					/Users/szymonm/Projects/TaxiByNight/Code/Ext/fmod/libfmod_iphoneos.a,
@@ -1305,6 +1334,7 @@
 					/Users/szymonm/Projects/TaxiByNight/Code/Ext/fmod/,
 					/Users/szymonm/Projects/TaxiByNight/Code/Ext/fmod,
 					/Users/szymonm/Projects/TaxiByNight/Code/Ext/admob,
+					/Users/szymonm/Projects/TaxiByNight/Code/Ext/flurry,
 				);
 				"OTHER_LDFLAGS[arch=*]" = (
 					"-ObjC",
