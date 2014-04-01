@@ -32,6 +32,12 @@
 		m_observer->FullScreenAdLoaded();
 }
 
+- (void)interstitialDidDismissScreen:(GADInterstitial *)interstitial
+{
+	if (m_observer != NULL)
+		m_observer->FullScreenAdClosed();
+}
+
 @end
 
 class GADBannerViewImpl
@@ -54,7 +60,8 @@ public:
 
 AdMobAds::AdMobAds() :
 	m_observer(NULL),
-	m_bannerView(NULL)
+	m_bannerView(NULL),
+	m_fullScreenAd(NULL)
 {
 }
 
@@ -87,18 +94,22 @@ bool AdMobAds::Initialize(const std::string& bannerAdId,
 	m_bannerView->impl.rootViewController = viewController;
 	[[viewController view] addSubview:m_bannerView->impl];
 	
-	[m_bannerView->impl loadRequest:request];
-	
 	return true;
 }
 
 void AdMobAds::LoadBannerAd()
 {
-	
+	[m_bannerView->impl loadRequest:[GADRequest request]];
 }
 
 void AdMobAds::LoadInterstitialAd()
 {
+	if (m_fullScreenAd != NULL)
+	{
+		m_fullScreenAd->m_impl.delegate = nil;
+		delete m_fullScreenAd;
+	}
+	
 	m_fullScreenAd = new GADFullScreenAdImpl();
 	m_fullScreenAd->m_impl = [[GADInterstitial alloc] init];
 	m_fullScreenAd->m_impl.adUnitID = [NSString stringWithUTF8String:m_fullScreenAdId.c_str()];
@@ -109,11 +120,25 @@ void AdMobAds::LoadInterstitialAd()
 
 void AdMobAds::ShowBannerAd(bool show)
 {
+	assert(m_bannerView != NULL);
+	assert(m_bannerView->impl != nil);
+	
+	if (m_bannerView == NULL &&
+		m_bannerView->impl == nil)
+		return;
+	
 	[m_bannerView->impl setHidden:!show];
 }
 
 void AdMobAds::ShowInterstitialAd(bool show)
 {
+	assert(m_fullScreenAd != NULL);
+	assert(m_fullScreenAd->m_impl != nil);
+	
+	if (m_fullScreenAd == NULL &&
+		m_fullScreenAd->m_impl == nil)
+		return;
+	
 	UIViewController* viewController = (__bridge_transfer UIViewController*)m_serviceProvider->GetService("ViewController");
 	assert(viewController != NULL);
 	
