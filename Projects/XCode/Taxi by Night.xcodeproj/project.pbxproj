@@ -11,6 +11,8 @@
 		AE5ADC0718EA5B8800471E8B /* libFlurry_4.4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE5ADC0618EA5B8800471E8B /* libFlurry_4.4.0.a */; };
 		AE5ADC0D18EA5DEE00471E8B /* AnalyticsEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AE5ADC0B18EA5DEE00471E8B /* AnalyticsEvent.cpp */; };
 		AE5ADC1018EA652400471E8B /* FlurryAnalytics.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE5ADC0F18EA652400471E8B /* FlurryAnalytics.mm */; };
+		AE5ADC1518EA6E6400471E8B /* AnalyticsProvider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AE5ADC1318EA6E6400471E8B /* AnalyticsProvider.cpp */; };
+		AE5ADC1918EA709800471E8B /* StartGameEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AE5ADC1718EA709800471E8B /* StartGameEvent.cpp */; };
 		AE64F6F718DBBCE6005F6D56 /* DiffLightEffect.h in Sources */ = {isa = PBXBuildFile; fileRef = AE64F6F618DBBCE6005F6D56 /* DiffLightEffect.h */; };
 		AE64F6F918DBBE17005F6D56 /* DiffLightEffect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AE64F6F518DBBCE6005F6D56 /* DiffLightEffect.cpp */; };
 		AE8E712418D008B400ECF0E7 /* AlAudioPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AE8E709718D008B300ECF0E7 /* AlAudioPlayer.cpp */; };
@@ -147,12 +149,16 @@
 		AE5ADC0318E8C7BD00471E8B /* iOSServicesProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSServicesProvider.h; sourceTree = "<group>"; };
 		AE5ADC0418E8C7BD00471E8B /* iOSServicesProvider.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = iOSServicesProvider.mm; sourceTree = "<group>"; };
 		AE5ADC0618EA5B8800471E8B /* libFlurry_4.4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFlurry_4.4.0.a; path = ../../Ext/flurry/libFlurry_4.4.0.a; sourceTree = "<group>"; };
-		AE5ADC0918EA5D2100471E8B /* AnalyticsProvider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AnalyticsProvider.h; path = ../../../Framework/Analytics/AnalyticsProvider.h; sourceTree = "<group>"; };
 		AE5ADC0A18EA5D2100471E8B /* IAnalytics.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IAnalytics.h; path = ../../../Framework/Analytics/IAnalytics.h; sourceTree = "<group>"; };
 		AE5ADC0B18EA5DEE00471E8B /* AnalyticsEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AnalyticsEvent.cpp; path = ../../../Framework/Analytics/AnalyticsEvent.cpp; sourceTree = "<group>"; };
 		AE5ADC0C18EA5DEE00471E8B /* AnalyticsEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnalyticsEvent.h; path = ../../../Framework/Analytics/AnalyticsEvent.h; sourceTree = "<group>"; };
 		AE5ADC0E18EA651E00471E8B /* FlurryAnalytics.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FlurryAnalytics.h; path = ../../../Framework/Analytics/FlurryAnalytics.h; sourceTree = "<group>"; };
 		AE5ADC0F18EA652400471E8B /* FlurryAnalytics.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = FlurryAnalytics.mm; path = ../../../Framework/Analytics/iOS/FlurryAnalytics.mm; sourceTree = "<group>"; };
+		AE5ADC1218EA68ED00471E8B /* Flurry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Flurry.h; path = flurry/Flurry.h; sourceTree = "<group>"; };
+		AE5ADC1318EA6E6400471E8B /* AnalyticsProvider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AnalyticsProvider.cpp; path = ../../../Bunnies/AnalyticsProvider.cpp; sourceTree = "<group>"; };
+		AE5ADC1418EA6E6400471E8B /* AnalyticsProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnalyticsProvider.h; path = ../../../Bunnies/AnalyticsProvider.h; sourceTree = "<group>"; };
+		AE5ADC1718EA709800471E8B /* StartGameEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = StartGameEvent.cpp; path = ../../../Bunnies/AnalyticsEvents/StartGameEvent.cpp; sourceTree = "<group>"; };
+		AE5ADC1818EA709800471E8B /* StartGameEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StartGameEvent.h; path = ../../../Bunnies/AnalyticsEvents/StartGameEvent.h; sourceTree = "<group>"; };
 		AE64F6F518DBBCE6005F6D56 /* DiffLightEffect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DiffLightEffect.cpp; path = ../../../Bunnies/Effects/DiffLightEffect.cpp; sourceTree = "<group>"; };
 		AE64F6F618DBBCE6005F6D56 /* DiffLightEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DiffLightEffect.h; path = ../../../Bunnies/Effects/DiffLightEffect.h; sourceTree = "<group>"; };
 		AE8E709718D008B300ECF0E7 /* AlAudioPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AlAudioPlayer.cpp; sourceTree = "<group>"; };
@@ -481,10 +487,26 @@
 				AE5ADC0E18EA651E00471E8B /* FlurryAnalytics.h */,
 				AE5ADC0B18EA5DEE00471E8B /* AnalyticsEvent.cpp */,
 				AE5ADC0C18EA5DEE00471E8B /* AnalyticsEvent.h */,
-				AE5ADC0918EA5D2100471E8B /* AnalyticsProvider.h */,
 				AE5ADC0A18EA5D2100471E8B /* IAnalytics.h */,
 			);
 			name = Analytics;
+			sourceTree = "<group>";
+		};
+		AE5ADC1118EA68D800471E8B /* flurry */ = {
+			isa = PBXGroup;
+			children = (
+				AE5ADC1218EA68ED00471E8B /* Flurry.h */,
+			);
+			name = flurry;
+			sourceTree = "<group>";
+		};
+		AE5ADC1618EA704A00471E8B /* AnalyticsEvents */ = {
+			isa = PBXGroup;
+			children = (
+				AE5ADC1718EA709800471E8B /* StartGameEvent.cpp */,
+				AE5ADC1818EA709800471E8B /* StartGameEvent.h */,
+			);
+			name = AnalyticsEvents;
 			sourceTree = "<group>";
 		};
 		AE64F6F818DBBCF2005F6D56 /* Effects */ = {
@@ -801,6 +823,7 @@
 		AEC27F9818D90CA5003D9E6E /* Ext */ = {
 			isa = PBXGroup;
 			children = (
+				AE5ADC1118EA68D800471E8B /* flurry */,
 				AEF87CD418E23FA300BF84B8 /* admob */,
 				AEC27FA918D90CA5003D9E6E /* tinyxml */,
 			);
@@ -820,8 +843,11 @@
 		AEC2804518D91565003D9E6E /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				AE5ADC1618EA704A00471E8B /* AnalyticsEvents */,
 				AEF87CF318E3ADAC00BF84B8 /* SystemSpecificData */,
 				AE64F6F818DBBCF2005F6D56 /* Effects */,
+				AE5ADC1318EA6E6400471E8B /* AnalyticsProvider.cpp */,
+				AE5ADC1418EA6E6400471E8B /* AnalyticsProvider.h */,
 				AEC2812418D9264A003D9E6E /* AnimButton.cpp */,
 				AEC2812518D9264A003D9E6E /* Arrow.cpp */,
 				AEC2812618D9264A003D9E6E /* Billboard.cpp */,
@@ -1113,12 +1139,14 @@
 				AE8E714318D008B400ECF0E7 /* Texture.cpp in Sources */,
 				AEC2819418D9264A003D9E6E /* LeaderboardScreen.cpp in Sources */,
 				AEC281A618D9264A003D9E6E /* SummaryPanel.cpp in Sources */,
+				AE5ADC1518EA6E6400471E8B /* AnalyticsProvider.cpp in Sources */,
 				AEC281A418D9264A003D9E6E /* StreetPiece.cpp in Sources */,
 				AEF87CEC18E396EC00BF84B8 /* AdMobAds.mm in Sources */,
 				AE8E714818D008B400ECF0E7 /* BinaryWriter.cpp in Sources */,
 				AEC281A118D9264A003D9E6E /* Street.cpp in Sources */,
 				AE8E712B18D008B400ECF0E7 /* BoundingBox.cpp in Sources */,
 				AE8E712A18D008B400ECF0E7 /* AnimationLoader.cpp in Sources */,
+				AE5ADC1918EA709800471E8B /* StartGameEvent.cpp in Sources */,
 				AEC2818518D9264A003D9E6E /* Camera.cpp in Sources */,
 				AEC281A318D9264A003D9E6E /* StreetPassenger.cpp in Sources */,
 				AEC281AA18D9264A003D9E6E /* Ticker.cpp in Sources */,

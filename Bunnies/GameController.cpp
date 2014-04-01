@@ -14,6 +14,8 @@
 #include "DrawingRoutines.h"
 #include "InterfaceProvider.h"
 #include "Leaderboard.h"
+#include "AnalyticsProvider.h"
+#include "AnalyticsEvents/StartGameEvent.h"
 #include <Graphics/IGraphicsEngine.h>
 #include <Graphics/Content/Content.h>
 #include <Graphics/Model.h>
@@ -209,6 +211,8 @@ void GameController::proto_SetLookTarget(const sm::Vec3 &lookTarget)
 
 void GameController::ShowGameScreen()
 {
+	AnalyticsProvider::GetAnalytics()->TrackEvent(StartGameEvent());
+	
 	IScreen* screen = NULL;
 
 	if (Player::Instance->m_firstRun)
