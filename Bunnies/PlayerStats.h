@@ -7,7 +7,7 @@ class PlayerStats
 {
 public:
 	PlayerStats() :
-		m_id(0),
+		m_id(""),
 		m_place(0),
 		m_reward(0),
 		m_courses(0)
@@ -15,7 +15,7 @@ public:
 
 	}
 
-	int m_id;
+	std::string m_id;
 	int m_place;
 	std::string m_name;
 	float m_reward;

@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AE1008D718ECDB24004F0A7A /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE1008D618ECDB24004F0A7A /* Parse.framework */; };
+		AE1008DA18ECDF82004F0A7A /* FBMissingSymbols.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1008D818ECDF82004F0A7A /* FBMissingSymbols.m */; };
+		AE1008E618F4B738004F0A7A /* IRemoteGameDataAccessObserver.h in Sources */ = {isa = PBXBuildFile; fileRef = AE1008E318F4B738004F0A7A /* IRemoteGameDataAccessObserver.h */; };
+		AE1008ED18F4BCAB004F0A7A /* Dictionary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AE1008EC18F4BCAB004F0A7A /* Dictionary.cpp */; };
+		AE1008EF18F4BCD8004F0A7A /* ParseGameDataAccess.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE1008EE18F4BCD8004F0A7A /* ParseGameDataAccess.mm */; };
+		AE1008F618F4C465004F0A7A /* RemoteDataAccessFactory.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE1008F418F4C465004F0A7A /* RemoteDataAccessFactory.mm */; };
 		AE5ADC0518E8C7BD00471E8B /* iOSServicesProvider.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE5ADC0418E8C7BD00471E8B /* iOSServicesProvider.mm */; };
 		AE5ADC0718EA5B8800471E8B /* libFlurry_4.4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE5ADC0618EA5B8800471E8B /* libFlurry_4.4.0.a */; };
 		AE5ADC0D18EA5DEE00471E8B /* AnalyticsEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AE5ADC0B18EA5DEE00471E8B /* AnalyticsEvent.cpp */; };
@@ -118,6 +124,12 @@
 		AEC281A918D9264A003D9E6E /* ThrowTrajectory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AEC2814C18D9264A003D9E6E /* ThrowTrajectory.cpp */; };
 		AEC281AA18D9264A003D9E6E /* Ticker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AEC2814D18D9264A003D9E6E /* Ticker.cpp */; };
 		AEC282F718D93A52003D9E6E /* data in Resources */ = {isa = PBXBuildFile; fileRef = AEC282F618D93A52003D9E6E /* data */; };
+		AEEDBD3118ECD05C008C957B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEEDBD3018ECD05C008C957B /* CFNetwork.framework */; };
+		AEEDBD3318ECD069008C957B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEEDBD3218ECD069008C957B /* CoreLocation.framework */; };
+		AEEDBD3518ECD078008C957B /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AEEDBD3418ECD078008C957B /* libz.dylib */; };
+		AEEDBD3718ECD084008C957B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEEDBD3618ECD084008C957B /* MobileCoreServices.framework */; };
+		AEEDBD3918ECD08D008C957B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEEDBD3818ECD08D008C957B /* QuartzCore.framework */; };
+		AEEDBD3B18ECD095008C957B /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEEDBD3A18ECD095008C957B /* Security.framework */; };
 		AEF87CBE18E1182A00BF84B8 /* FModAudioPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AEF87CBC18E1182A00BF84B8 /* FModAudioPlayer.cpp */; };
 		AEF87CC418E11E0500BF84B8 /* libfmod_iphonesimulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AEF87CC318E11E0500BF84B8 /* libfmod_iphonesimulator.a */; };
 		AEF87CC718E11F2200BF84B8 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEF87CC518E11F2200BF84B8 /* AudioToolbox.framework */; };
@@ -145,6 +157,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AE1008D618ECDB24004F0A7A /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		AE1008D818ECDF82004F0A7A /* FBMissingSymbols.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBMissingSymbols.m; sourceTree = "<group>"; };
+		AE1008E118F4B738004F0A7A /* ParseGameDataAccess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ParseGameDataAccess.h; path = ../../../Bunnies/RemoteGameDataAccess/ParseGameDataAccess.h; sourceTree = "<group>"; };
+		AE1008E318F4B738004F0A7A /* IRemoteGameDataAccessObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IRemoteGameDataAccessObserver.h; path = ../../../Bunnies/RemoteGameDataAccess/IRemoteGameDataAccessObserver.h; sourceTree = "<group>"; };
+		AE1008E418F4B738004F0A7A /* IRemoteGameDataAccess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IRemoteGameDataAccess.h; path = ../../../Bunnies/RemoteGameDataAccess/IRemoteGameDataAccess.h; sourceTree = "<group>"; };
+		AE1008E718F4BAAB004F0A7A /* Dictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Dictionary.h; path = ../../../Framework/Collections/Dictionary.h; sourceTree = "<group>"; };
+		AE1008EC18F4BCAB004F0A7A /* Dictionary.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Dictionary.cpp; path = ../../../Framework/Collections/Dictionary.cpp; sourceTree = "<group>"; };
+		AE1008EE18F4BCD8004F0A7A /* ParseGameDataAccess.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ParseGameDataAccess.mm; path = ../../../Bunnies/RemoteGameDataAccess/iOS/ParseGameDataAccess.mm; sourceTree = "<group>"; };
+		AE1008F018F4C0EC004F0A7A /* LeaderboardType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LeaderboardType.h; path = ../../../Bunnies/RemoteGameDataAccess/LeaderboardType.h; sourceTree = "<group>"; };
+		AE1008F418F4C465004F0A7A /* RemoteDataAccessFactory.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = RemoteDataAccessFactory.mm; path = ../../../Bunnies/RemoteGameDataAccess/RemoteDataAccessFactory.mm; sourceTree = "<group>"; };
+		AE1008F518F4C465004F0A7A /* RemoteDataAccessFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RemoteDataAccessFactory.h; path = ../../../Bunnies/RemoteGameDataAccess/RemoteDataAccessFactory.h; sourceTree = "<group>"; };
 		AE5ADC0218E8C3FC00471E8B /* IServiceProvider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IServiceProvider.h; path = ../../../Framework/System/IServiceProvider.h; sourceTree = "<group>"; };
 		AE5ADC0318E8C7BD00471E8B /* iOSServicesProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSServicesProvider.h; sourceTree = "<group>"; };
 		AE5ADC0418E8C7BD00471E8B /* iOSServicesProvider.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = iOSServicesProvider.mm; sourceTree = "<group>"; };
@@ -402,6 +425,12 @@
 		AEC2817F18D9264A003D9E6E /* ThrowTrajectory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ThrowTrajectory.h; path = ../../../Bunnies/ThrowTrajectory.h; sourceTree = "<group>"; };
 		AEC2818018D9264A003D9E6E /* Ticker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Ticker.h; path = ../../../Bunnies/Ticker.h; sourceTree = "<group>"; };
 		AEC282F618D93A52003D9E6E /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; name = data; path = ../../../data; sourceTree = "<group>"; };
+		AEEDBD3018ECD05C008C957B /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		AEEDBD3218ECD069008C957B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		AEEDBD3418ECD078008C957B /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		AEEDBD3618ECD084008C957B /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		AEEDBD3818ECD08D008C957B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		AEEDBD3A18ECD095008C957B /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		AEF87CBC18E1182A00BF84B8 /* FModAudioPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FModAudioPlayer.cpp; sourceTree = "<group>"; };
 		AEF87CBD18E1182A00BF84B8 /* FModAudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FModAudioPlayer.h; sourceTree = "<group>"; };
 		AEF87CC318E11E0500BF84B8 /* libfmod_iphonesimulator.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfmod_iphonesimulator.a; path = ../../Ext/fmod/libfmod_iphonesimulator.a; sourceTree = "<group>"; };
@@ -440,8 +469,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AEF87CE018E2405300BF84B8 /* SystemConfiguration.framework in Frameworks */,
 				AEF87CDE18E2404900BF84B8 /* StoreKit.framework in Frameworks */,
+				AEEDBD3B18ECD095008C957B /* Security.framework in Frameworks */,
+				AEEDBD3918ECD08D008C957B /* QuartzCore.framework in Frameworks */,
+				AEEDBD3718ECD084008C957B /* MobileCoreServices.framework in Frameworks */,
+				AEEDBD3518ECD078008C957B /* libz.dylib in Frameworks */,
+				AEEDBD3318ECD069008C957B /* CoreLocation.framework in Frameworks */,
+				AEEDBD3118ECD05C008C957B /* CFNetwork.framework in Frameworks */,
+				AEF87CE018E2405300BF84B8 /* SystemConfiguration.framework in Frameworks */,
 				AEF87CDC18E2402800BF84B8 /* MessageUI.framework in Frameworks */,
 				AEF87CDA18E2402000BF84B8 /* CoreTelephony.framework in Frameworks */,
 				AE9E9CB018D0049100E1744F /* CoreGraphics.framework in Frameworks */,
@@ -450,6 +485,7 @@
 				AEF87CC718E11F2200BF84B8 /* AudioToolbox.framework in Frameworks */,
 				AEF87CC818E11F2200BF84B8 /* CoreAudio.framework in Frameworks */,
 				AEF87CD318E23F7400BF84B8 /* libGoogleAdMobAds.a in Frameworks */,
+				AE1008D718ECDB24004F0A7A /* Parse.framework in Frameworks */,
 				AE9E9CB618D0049100E1744F /* OpenGLES.framework in Frameworks */,
 				AE9E9CB218D0049100E1744F /* UIKit.framework in Frameworks */,
 				AEF87CC418E11E0500BF84B8 /* libfmod_iphonesimulator.a in Frameworks */,
@@ -472,6 +508,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AE1008DC18F4B314004F0A7A /* Collections */ = {
+			isa = PBXGroup;
+			children = (
+				AE1008EC18F4BCAB004F0A7A /* Dictionary.cpp */,
+				AE1008E718F4BAAB004F0A7A /* Dictionary.h */,
+			);
+			name = Collections;
+			sourceTree = "<group>";
+		};
+		AE1008E018F4B700004F0A7A /* RemoteGameDataAccess */ = {
+			isa = PBXGroup;
+			children = (
+				AE1008F418F4C465004F0A7A /* RemoteDataAccessFactory.mm */,
+				AE1008F518F4C465004F0A7A /* RemoteDataAccessFactory.h */,
+				AE1008F018F4C0EC004F0A7A /* LeaderboardType.h */,
+				AE1008EE18F4BCD8004F0A7A /* ParseGameDataAccess.mm */,
+				AE1008E118F4B738004F0A7A /* ParseGameDataAccess.h */,
+				AE1008E318F4B738004F0A7A /* IRemoteGameDataAccessObserver.h */,
+				AE1008E418F4B738004F0A7A /* IRemoteGameDataAccess.h */,
+			);
+			name = RemoteGameDataAccess;
+			sourceTree = "<group>";
+		};
 		AE5ADC0118E8C3EF00471E8B /* System */ = {
 			isa = PBXGroup;
 			children = (
@@ -521,6 +580,7 @@
 		AE8E709518D0083A00ECF0E7 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				AE1008DC18F4B314004F0A7A /* Collections */,
 				AE5ADC0818EA5D1300471E8B /* Analytics */,
 				AE5ADC0118E8C3EF00471E8B /* System */,
 				AEF87CE118E265AF00BF84B8 /* Ads */,
@@ -765,6 +825,13 @@
 		AE9E9CAC18D0049100E1744F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AE1008D618ECDB24004F0A7A /* Parse.framework */,
+				AEEDBD3A18ECD095008C957B /* Security.framework */,
+				AEEDBD3818ECD08D008C957B /* QuartzCore.framework */,
+				AEEDBD3618ECD084008C957B /* MobileCoreServices.framework */,
+				AEEDBD3418ECD078008C957B /* libz.dylib */,
+				AEEDBD3218ECD069008C957B /* CoreLocation.framework */,
+				AEEDBD3018ECD05C008C957B /* CFNetwork.framework */,
 				AE5ADC0618EA5B8800471E8B /* libFlurry_4.4.0.a */,
 				AEF87CDF18E2405300BF84B8 /* SystemConfiguration.framework */,
 				AEF87CDD18E2404900BF84B8 /* StoreKit.framework */,
@@ -805,6 +872,7 @@
 				AE5ADC0418E8C7BD00471E8B /* iOSServicesProvider.mm */,
 				AE9E9CD018D0049100E1744F /* Images.xcassets */,
 				AE9E9CB818D0049100E1744F /* Supporting Files */,
+				AE1008D818ECDF82004F0A7A /* FBMissingSymbols.m */,
 			);
 			path = "Taxi by Night";
 			sourceTree = "<group>";
@@ -843,6 +911,7 @@
 		AEC2804518D91565003D9E6E /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				AE1008E018F4B700004F0A7A /* RemoteGameDataAccess */,
 				AE5ADC1618EA704A00471E8B /* AnalyticsEvents */,
 				AEF87CF318E3ADAC00BF84B8 /* SystemSpecificData */,
 				AE64F6F818DBBCF2005F6D56 /* Effects */,
@@ -1118,6 +1187,7 @@
 				AEC2819818D9264A003D9E6E /* PausePanel.cpp in Sources */,
 				AEF87CF018E3A83400BF84B8 /* AdsMnager.cpp in Sources */,
 				AE8E713718D008B400ECF0E7 /* Material.cpp in Sources */,
+				AE1008ED18F4BCAB004F0A7A /* Dictionary.cpp in Sources */,
 				AEC2818918D9264A003D9E6E /* Environment.cpp in Sources */,
 				AEC27F9218D8F5AF003D9E6E /* Path.mm in Sources */,
 				AE8E714418D008B400ECF0E7 /* TextureLoader.cpp in Sources */,
@@ -1138,6 +1208,7 @@
 				AEC2818818D9264A003D9E6E /* DrawingRoutines.cpp in Sources */,
 				AE8E714318D008B400ECF0E7 /* Texture.cpp in Sources */,
 				AEC2819418D9264A003D9E6E /* LeaderboardScreen.cpp in Sources */,
+				AE1008EF18F4BCD8004F0A7A /* ParseGameDataAccess.mm in Sources */,
 				AEC281A618D9264A003D9E6E /* SummaryPanel.cpp in Sources */,
 				AE5ADC1518EA6E6400471E8B /* AnalyticsProvider.cpp in Sources */,
 				AEC281A418D9264A003D9E6E /* StreetPiece.cpp in Sources */,
@@ -1150,6 +1221,7 @@
 				AEC2818518D9264A003D9E6E /* Camera.cpp in Sources */,
 				AEC281A318D9264A003D9E6E /* StreetPassenger.cpp in Sources */,
 				AEC281AA18D9264A003D9E6E /* Ticker.cpp in Sources */,
+				AE1008DA18ECDF82004F0A7A /* FBMissingSymbols.m in Sources */,
 				AE8E714718D008B400ECF0E7 /* BinaryReader.cpp in Sources */,
 				AE8E714218D008B400ECF0E7 /* TexPart.cpp in Sources */,
 				AE8E712E18D008B400ECF0E7 /* Content.cpp in Sources */,
@@ -1158,6 +1230,8 @@
 				AE9E9CBE18D0049100E1744F /* main.m in Sources */,
 				AE8E713818D008B400ECF0E7 /* MaterialLoader.cpp in Sources */,
 				AEC281A018D9264A003D9E6E /* SpritesMap.cpp in Sources */,
+				AE1008E618F4B738004F0A7A /* IRemoteGameDataAccessObserver.h in Sources */,
+				AE1008F618F4C465004F0A7A /* RemoteDataAccessFactory.mm in Sources */,
 				AE8E714B18D008B400ECF0E7 /* Matrix.cpp in Sources */,
 				AEF87CBE18E1182A00BF84B8 /* FModAudioPlayer.cpp in Sources */,
 				AE8E713F18D008B400ECF0E7 /* SpriteAnim.cpp in Sources */,
@@ -1311,6 +1385,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Taxi by Night/Taxi by Night-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -1347,6 +1425,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Taxi by Night/Taxi by Night-Prefix.pch";
 				HEADER_SEARCH_PATHS = (

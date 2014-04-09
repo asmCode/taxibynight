@@ -115,15 +115,15 @@ void LeaderboardScreen::LeaderOffline()
 
 void LeaderboardScreen::LeaderTopLoaded()
 {
-	SetPlayerStats(Leaderboard::GetInstance()->GetTopLadder());
+	SetPlayerStats(Leaderboard::GetInstance()->GetTopLadder(LeaderboardType_HighestIncome));
 }
 
 void LeaderboardScreen::LeaderPlayerLoaded()
 {
-	SetPlayerStats(Leaderboard::GetInstance()->GetPlayerLadder());
+	SetPlayerStats(Leaderboard::GetInstance()->GetPlayerLadder(LeaderboardType_HighestIncome));
 }
 
-void LeaderboardScreen::PointsUpdated(int playerId)
+void LeaderboardScreen::PointsUpdated(const std::string& playerId)
 {
 //	m_youTab->SetVisible(true);
 //	m_topTab->SetVisible(true);
@@ -131,7 +131,7 @@ void LeaderboardScreen::PointsUpdated(int playerId)
 
 	Player* p = Player::Instance;
 
-	if (p->m_id != playerId && playerId != 0)
+	if (p->m_id != playerId && playerId != "")
 	{
 		p->m_id = playerId;
 		p->Save();
@@ -146,9 +146,9 @@ void LeaderboardScreen::SetTab(LeaderboardScreen::Tab tab)
 void LeaderboardScreen::RefreshCurrentView()
 {
 	if (m_currentTab == Tab_Top)
-		Leaderboard::GetInstance()->RefreshTopLadder();
+		Leaderboard::GetInstance()->RefreshTopLadder(LeaderboardType_HighestIncome);
 	else if (m_currentTab == Tab_You)
-		Leaderboard::GetInstance()->RefreshSurrLadder(Player::Instance->m_totalMoney);
+		Leaderboard::GetInstance()->RefreshSurrLadder(LeaderboardType_HighestIncome, "");
 }
 
 void LeaderboardScreen::ClearTable()
@@ -174,7 +174,7 @@ void LeaderboardScreen::SetPlayerStats(const std::vector<PlayerStats>& playerSta
 	{
 		Color color = Color::White;
 
-		if (playerStats[i].m_id != 0 &&
+		if (playerStats[i].m_id.size() != 0 &&
 			playerStats[i].m_id == Player::Instance->m_id)
 			color = Color(234, 60, 7);
 
@@ -215,11 +215,16 @@ void LeaderboardScreen::Clicked(Control *control, uint32_t x, uint32_t y)
 	else if (control == m_refreshButton)
 	{
 		SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Button);
+		/*
 		Leaderboard::GetInstance()->SendPlayerPoints(
 			Player::Instance->m_id,
 			Player::Instance->m_name,
 			Player::Instance->m_totalMoney,
 			Player::Instance->m_totalCourses);
+		 */
+		
+		Leaderboard::GetInstance()->SendPlayerPoints(PlayerStats());
+
 
 		RefreshCurrentView();
 	}
@@ -261,16 +266,21 @@ void LeaderboardScreen::ScreenKeyboardDone(const std::string& text)
 		Player::Instance->m_name = text2;
 		Player::Instance->Save();
 
-		int playerId = Player::Instance->m_id;
+		std::string playerId = Player::Instance->m_id;
 		std::string playerName = Player::Instance->m_name;
 		float reward = Player::Instance->m_totalMoney;
 		int courses = Player::Instance->m_totalCourses;
 
+		/*
 		Leaderboard::GetInstance()->SendPlayerPoints(
 			playerId,
 			playerName,
 			reward,
 			courses);
+		 */
+		
+		Leaderboard::GetInstance()->SendPlayerPoints(PlayerStats());
+
 
 		m_playerNameLabel->SetText(playerName);
 	}

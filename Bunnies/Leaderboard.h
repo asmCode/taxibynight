@@ -1,16 +1,16 @@
 #ifndef LEADERBOARD_H_
 #define LEADERBOARD_H_
 
-#include "IHttpCommunicationObserver.h"
 #include "PlayerStats.h"
+#include "RemoteGameDataAccess/IRemoteGameDataAccessObserver.h"
+#include "RemoteGameDataAccess/LeaderboardType.h"
 #include <string>
 #include <vector>
 
-class HttpCommunication;
+class IRemoteGameDataAccess;
 class ILeaderboardObserver;
-class XMLNode;
 
-class Leaderboard : public IHttpCommunicationObserver
+class Leaderboard : public IRemoteGameDataAccessObserver
 {
 public:
 	static Leaderboard* m_instance;
@@ -21,42 +21,29 @@ public:
 
 	void AddObserver(ILeaderboardObserver* observer);
 
-	void RefreshTopLadder();
-	void RefreshSurrLadder(float playerReward);
-	void SendPlayerPoints(int id, const std::string& playerName, float reward, int courses);
+	void RefreshTopLadder(LeaderboardType type);
+	void RefreshSurrLadder(LeaderboardType type, const std::string& playerId);
+	void SendPlayerPoints(const PlayerStats& playerStats);
 
-	const std::vector<PlayerStats>& GetTopLadder() const;
-	const std::vector<PlayerStats>& GetPlayerLadder() const;
+	const std::vector<PlayerStats>& GetTopLadder(LeaderboardType type) const;
+	const std::vector<PlayerStats>& GetPlayerLadder(LeaderboardType type) const;
 
 private:
-	static const std::string HostAddress;
-	static const std::string AddUserAddress;
-	static const std::string TopAddress;
-	static const std::string UserSurroundingAddress;
-
 	static const int TopCount = 10;
 	static const int SurrCount = 5;
 
 	std::vector<ILeaderboardObserver*> m_observers;
-
-	HttpCommunication* m_httpUser;
-	HttpCommunication* m_httpTop;
-	HttpCommunication* m_httpSurr;
-
-	std::vector<PlayerStats> m_topStats;
-	std::vector<PlayerStats> m_surrStats;
-
+	
+	IRemoteGameDataAccess* m_remoteDataAccess;
+	
 	Leaderboard();
 	void Initialize();
 
-	void FetchArrayFromRasult(std::vector<PlayerStats>& array, XMLNode* node, int rank);
-
 	void Timeount();
-	void Response(HttpCommunication* http, int httpCode, const std::string& data);
-
-	void ProcessTopResponse(XMLNode* node);
-	void ProcessSurrResponse(XMLNode* node);
-	void ProcessUserResponse(XMLNode* node);
+	
+	void TopPlayersRefreshed();
+	void SurroundPlayersRefreshed();
+	void PlayerDataSaved(const std::string& playerId);
 };
 
 #endif /* LEADERBOARD_H_ */

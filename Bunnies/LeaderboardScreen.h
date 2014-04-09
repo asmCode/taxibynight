@@ -74,7 +74,7 @@ private:
 	void LeaderOffline();
 	void LeaderTopLoaded();
 	void LeaderPlayerLoaded();
-	void PointsUpdated(int playerId);
+	void PointsUpdated(const std::string& playerId);
 	void SetPlayerStats(const std::vector<PlayerStats>& playerStats);
 };
 

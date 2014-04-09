@@ -441,11 +441,15 @@ void GameScreen::EndRound()
 	Player::Instance->m_tutorialFinished = true;
 	Player::Instance->Save();
 
+	/*
 	Leaderboard::GetInstance()->SendPlayerPoints(
 		Player::Instance->m_id,
 		Player::Instance->m_name,
 		Player::Instance->m_totalMoney,
 		Player::Instance->m_totalCourses);
+	 */
+	 
+	 Leaderboard::GetInstance()->SendPlayerPoints(PlayerStats());
 
 	m_gameController->ShowSummaryScreen(
 		m_pedsManager->m_totalMoney,

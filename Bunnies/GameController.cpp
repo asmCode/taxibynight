@@ -148,12 +148,19 @@ bool GameController::Initialize(ISystemUtils *systemUtils, IServiceProvider* ser
 	m_leaderboardScreen = new LeaderboardScreen(this);
 	if (!m_leaderboardScreen->InitResources())
 		return false;
+	
+	PlayerStats playerStats;
 
+	/*
 	Leaderboard::GetInstance()->SendPlayerPoints(
 		player->m_id,
 		player->m_name,
 		player->m_totalMoney,
 		player->m_totalCourses);
+	 */
+	
+	Leaderboard::GetInstance()->SendPlayerPoints(playerStats);
+
 
 	m_activeScreen = m_splashScreen;
 
