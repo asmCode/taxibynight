@@ -92,6 +92,7 @@
     <ClInclude Include="Bunnies\AnimButton.h" />
     <ClInclude Include="Bunnies\Arrow.h" />
     <ClInclude Include="Bunnies\Billboard.h" />
+    <ClInclude Include="Bunnies\Bonuses\BonusStreetSymbol.h" />
     <ClInclude Include="Bunnies\Camera.h" />
     <ClInclude Include="Bunnies\ComicsScreen.h" />
     <ClInclude Include="Bunnies\DummyAnalytics.h" />
@@ -233,6 +234,7 @@
     <ClCompile Include="Bunnies\AnimButton.cpp" />
     <ClCompile Include="Bunnies\Arrow.cpp" />
     <ClCompile Include="Bunnies\Billboard.cpp" />
+    <ClCompile Include="Bunnies\Bonuses\BonusStreetSymbol.cpp" />
     <ClCompile Include="Bunnies\Camera.cpp" />
     <ClCompile Include="Bunnies\ComicsScreen.cpp" />
     <ClCompile Include="Bunnies\DummyAnalytics.cpp" />
@@ -325,22 +327,12 @@
     <ClCompile Include="Framework\XML\XMLNode.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="data\shaders\CelShading.fpr" />
-    <None Include="data\shaders\CelShading.vpr" />
-    <None Include="data\shaders\CelShadingMutating.fpr" />
-    <None Include="data\shaders\CelShadingMutating.vpr" />
     <None Include="data\shaders\Diff.fpr" />
     <None Include="data\shaders\Diff.vpr" />
     <None Include="data\shaders\DiffLight.fpr" />
     <None Include="data\shaders\DiffLight.vpr" />
     <None Include="data\shaders\DiffTex.fpr" />
     <None Include="data\shaders\DiffTex.vpr" />
-    <None Include="data\shaders\Grass.fpr" />
-    <None Include="data\shaders\Grass.vpr" />
-    <None Include="data\shaders\Outline.fpr" />
-    <None Include="data\shaders\Outline.vpr" />
-    <None Include="data\shaders\OutlineMutating.fpr" />
-    <None Include="data\shaders\OutlineMutating.vpr" />
     <None Include="data\shaders\Ped.fpr" />
     <None Include="data\shaders\Ped.vpr" />
     <None Include="data\shaders\sprite.fpr" />

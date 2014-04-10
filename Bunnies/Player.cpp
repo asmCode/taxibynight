@@ -43,7 +43,7 @@ void Player::Load()
 		else if (child->GetName() == "FirstRun")
 			m_firstRun = child->GetValueAsBool();
 		else if (child->GetName() == "Id")
-			m_id = child->GetValueAsInt32();
+			m_id = child->GetValueAsString();
 		else if (child->GetName() == "Name")
 			m_name = StringUtils::FromBase64(child->GetValueAsString());
 	}

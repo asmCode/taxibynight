@@ -16,6 +16,7 @@
 #include "Leaderboard.h"
 #include "AnalyticsProvider.h"
 #include "AnalyticsEvents/StartGameEvent.h"
+#include "Bonuses/BonusStreetSymbol.h"
 #include <Graphics/IGraphicsEngine.h>
 #include <Graphics/Content/Content.h>
 #include <Graphics/Model.h>
@@ -124,6 +125,8 @@ bool GameController::Initialize(ISystemUtils *systemUtils, IServiceProvider* ser
 		assert(false);
 		return false;
 	}
+
+	BonusStreetSymbol::Initialize();
 
 	m_gameScreen = new GameScreen(this);
 	if (!m_gameScreen->Initialize())
