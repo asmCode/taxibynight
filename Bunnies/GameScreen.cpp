@@ -19,6 +19,7 @@
 #include "Label.h"
 #include <Audio/SoundManager.h>
 #include "HUD.h"
+#include "Bonuses/BonusStreetSymbol.h"
 
 #include <Math/MathUtils.h>
 #include <Graphics/Shader.h>
@@ -119,6 +120,8 @@ bool GameScreen::ReleaseResources()
 	return false;
 }
 
+BonusStreetSymbol d;
+
 void GameScreen::Draw(float time, float seconds)
 {
 #if __APPLE__
@@ -127,6 +130,13 @@ void GameScreen::Draw(float time, float seconds)
 	
 	glEnable(GL_DEPTH_TEST);
 	glDisable(GL_BLEND);
+
+	static sm::Vec3 tp = m_taxi->GetPosition();
+
+	
+	d.SetPosition(tp);
+	d.Update(time, seconds);
+	d.Draw(time, seconds);
 
 	m_street->Draw(time, seconds);
 	m_taxi->Draw(time, seconds);

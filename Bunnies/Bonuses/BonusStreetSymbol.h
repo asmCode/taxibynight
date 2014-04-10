@@ -25,7 +25,11 @@ public:
 
 private:
 	sm::Vec3 m_position;
+	sm::Matrix m_transform;
 
 	static Model* m_model;
+
+	float m_angle;
+	float m_height;
 };
 
