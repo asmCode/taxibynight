@@ -58,9 +58,11 @@ bool AdsManager::Initialize(IServiceProvider* serviceProvider)
 {
 	m_ads = AdManagerFactory::Create();
 	
+#if __APPLE__
 	bool result = ((AdMobAds*)m_ads)->Initialize(AdMobBannerToken, AdMobFullScreenToken, serviceProvider);
 	if (!result)
 		return false;
+#endif
 	
 	m_ads->AddObserver(this);
 		

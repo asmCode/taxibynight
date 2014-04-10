@@ -42,7 +42,7 @@ void Renderer::Initialize()
 	TaxiGame::Environment::GetInstance()->SetScreenSize(ScreenWidth, ScreenHeight);
 	TaxiGame::Environment::GetInstance()->SetBasePath(std::string(currentDir) + "/");
 
-	bool success = gctrl->Initialize(NULL);
+	bool success = gctrl->Initialize(NULL, NULL);
 	assert(success != NULL);
 }
 
