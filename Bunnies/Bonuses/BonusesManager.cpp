@@ -74,6 +74,8 @@ void BonusesManager::Draw(float time, float seconds)
 			m_bonusesSymbols[i]->Draw(time, seconds);
 	}
 
+	m_bonusBlowEffect->Draw(time, seconds);
+
 	/*
 	DrawingRoutines::DrawUnlitBegin(m_peds[0]->m_shadow->m_meshParts[0]);
 	for (uint32_t i = 0; i < MaxPeds; i++)
@@ -103,7 +105,12 @@ void BonusesManager::NotifyStreetSegmentVisibilityChanged(StreetSegment *streetS
 		if (bonus == NULL)
 			return;
 
-		bonus->SetActive(streetSegment->GetPivotPosition(), streetSegment);
+		sm::Vec3 bonusPosition = streetSegment->GetPivotPosition();
+		static Randomizer random;
+
+		bonusPosition += sm::Vec3(random.GetFloat(-5.0f, 5.0f), 0.0f, random.GetFloat(-5.0f, 5.0f));
+
+		bonus->SetActive(bonusPosition, streetSegment);
 	}
 }
 
