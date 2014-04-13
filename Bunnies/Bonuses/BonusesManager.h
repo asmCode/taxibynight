@@ -3,6 +3,8 @@
 
 #include <Math/Matrix.h>
 #include <Core/stdint.h>
+#include "BonusType.h"
+#include <vector>
 
 class Model;
 class Mesh;
@@ -11,12 +13,14 @@ class StreetSegment;
 class Ped;
 class BonusStreetSymbol;
 class BonusBlowEffect;
+class IBonusesManagerObserver;
 
 class BonusesManager
 {
 public:
 	static BonusesManager *Instance;
 
+	void AddObserver(IBonusesManagerObserver* observer);
 	void Reset(const sm::Vec3 &taxiPosition);
 
 	BonusesManager();
@@ -29,9 +33,14 @@ public:
 
 	void NotifyStreetSegmentVisibilityChanged(StreetSegment *streetSegment);
 
+	void ActivateBonus(BonusType type);
+	float GetBonusTimeLeft(BonusType type);
+
 private:
 	static const uint32_t MaxBonuses = 10;
 	static const float TaxiViewRange;
+
+	std::vector<IBonusesManagerObserver*> m_observers;
 
 	BonusStreetSymbol *m_bonusesSymbols[MaxBonuses];
 

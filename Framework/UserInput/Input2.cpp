@@ -23,6 +23,17 @@ bool Input2::Constructor()
 	Input2::m_keyMap[KeyCode_Q] = 'Q';
 	Input2::m_keyMap[KeyCode_P] = 'P';
 
+	Input2::m_keyMap[KeyCode_Num0] = '0';
+	Input2::m_keyMap[KeyCode_Num1] = '1';
+	Input2::m_keyMap[KeyCode_Num2] = '2';
+	Input2::m_keyMap[KeyCode_Num3] = '3';
+	Input2::m_keyMap[KeyCode_Num4] = '4';
+	Input2::m_keyMap[KeyCode_Num5] = '5';
+	Input2::m_keyMap[KeyCode_Num6] = '6';
+	Input2::m_keyMap[KeyCode_Num7] = '7';
+	Input2::m_keyMap[KeyCode_Num8] = '8';
+	Input2::m_keyMap[KeyCode_Num9] = '9';
+
 	return true;
 }
 

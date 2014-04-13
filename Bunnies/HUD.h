@@ -2,13 +2,16 @@
 
 #include "Control.h"
 #include "IControlEventsObserver.h"
+#include "Bonuses/IBonusesManagerObserver.h"
 
 class GameScreen;
 class Label;
+class GridPanel;
 
 class HUD :
 	public Control,
-	public IControlEventsObserver
+	public IControlEventsObserver,
+	public IBonusesManagerObserver
 {
 public:
 	GameScreen *m_gameScreen;
@@ -21,6 +24,8 @@ private:
 	Label *m_rewardLabel;
 	Label *m_timeLeftLabel;
 
+	GridPanel* m_bonusesGrid;
+
 	HUD();
 	
 	// Control interface
@@ -31,5 +36,8 @@ private:
 	void Clicked(Control *control, uint32_t x, uint32_t y);
 	void Pressed(Control *control, uint32_t x, uint32_t y);
 	void Released(Control *control, uint32_t x, uint32_t y);
+
+	void BonusActivated(BonusType bonusType);
+	void BonusDeactivated(BonusType bonusType);
 };
 

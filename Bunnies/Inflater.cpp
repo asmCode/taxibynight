@@ -2,6 +2,7 @@
 #include "Control.h"
 #include "Label.h"
 #include "AnimButton.h"
+#include "Gui/GridPanel.h"
 #include "InterfaceProvider.h"
 #include "SpritesMap.h"
 #include "Environment.h"
@@ -37,6 +38,8 @@ Control* Inflater::LoadNode(XMLNode *node)
 		control = LoadImageControl(node, name);
 	else if (type == "AnimButton")
 		control = LoadAnimButtonControl(node, name);
+	else if (type == "Grid")
+		control = LoadGridControl(node, name);
 	else if (type == "Label")
 		control = LoadLabelControl(node, name);
 
@@ -145,5 +148,10 @@ Control* Inflater::LoadAnimButtonControl(XMLNode *node, const std::string &name)
 	assert(imagePushed != NULL);
 
 	return new AnimButton(name, 0, 0, *image, *imagePushed);
+}
+
+Control* Inflater::LoadGridControl(XMLNode *node, const std::string &name)
+{
+	return new GridPanel(name);
 }
 

@@ -24,4 +24,6 @@
 	<sprite name="you_down" file="gui02" bounds="70,698,70,170" />
 	<sprite name="top" file="gui02" bounds="140,698,70,170" />
 	<sprite name="top_down" file="gui02" bounds="210,698,70,170" />
+	
+	<sprite name="bonus_icon" file="gui02" bounds="1920,896,128,128" />
 </map>

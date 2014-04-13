@@ -78,8 +78,10 @@ public:
 	virtual ~Control();
 	
 	Control *GetParent();
-	void AddChild(Control *control);
-	void RemoveChild(Control *control);
+	virtual void AddChild(Control *control);
+	virtual void RemoveChild(Control *control);
+	int GetChildrenCount() const;
+	Control* GetChild(int index);
 	
 	void SetX(int x);
 	void SetY(int y);

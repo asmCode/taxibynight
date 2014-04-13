@@ -130,6 +130,21 @@ void Control::RemoveChild(Control *control)
 	children.remove(control);
 }
 
+int Control::GetChildrenCount() const
+{
+	return children.size();
+}
+
+Control* Control::GetChild(int index)
+{
+	assert(children.size() > index);
+
+	std::list<Control*>::iterator it = children.begin();
+	std::advance(it, index);
+
+	return *it;
+}
+
 void Control::SetX(int x)
 {
 	this->x = x;

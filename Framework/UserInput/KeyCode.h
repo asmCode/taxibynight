@@ -13,5 +13,16 @@ enum KeyCode
 	KeyCode_Q,
 	KeyCode_P,
 
+	KeyCode_Num0,
+	KeyCode_Num1,
+	KeyCode_Num2,
+	KeyCode_Num3,
+	KeyCode_Num4,
+	KeyCode_Num5,
+	KeyCode_Num6,
+	KeyCode_Num7,
+	KeyCode_Num8,
+	KeyCode_Num9,
+
 	Count
 };

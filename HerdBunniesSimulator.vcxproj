@@ -95,11 +95,15 @@
     <ClInclude Include="Bunnies\Bonuses\Bonus.h" />
     <ClInclude Include="Bunnies\Bonuses\BonusBlowEffect.h" />
     <ClInclude Include="Bunnies\Bonuses\BonusesManager.h" />
+    <ClInclude Include="Bunnies\Bonuses\IBonusesManagerObserver.h" />
     <ClInclude Include="Bunnies\Bonuses\BonusStreetSymbol.h" />
+    <ClInclude Include="Bunnies\Bonuses\BonusType.h" />
     <ClInclude Include="Bunnies\Camera.h" />
     <ClInclude Include="Bunnies\ComicsScreen.h" />
     <ClInclude Include="Bunnies\DummyAnalytics.h" />
     <ClInclude Include="Bunnies\Effects\DiffLightEffect.h" />
+    <ClInclude Include="Bunnies\Gui\BonusControl.h" />
+    <ClInclude Include="Bunnies\Gui\GridPanel.h" />
     <ClInclude Include="Bunnies\HttpCommunication.h" />
     <ClInclude Include="Bunnies\Leaderboard.h" />
     <ClInclude Include="Bunnies\LeaderboardScreen.h" />
@@ -247,6 +251,8 @@
     <ClCompile Include="Bunnies\ComicsScreen.cpp" />
     <ClCompile Include="Bunnies\DummyAnalytics.cpp" />
     <ClCompile Include="Bunnies\Effects\DiffLightEffect.cpp" />
+    <ClCompile Include="Bunnies\Gui\BonusControl.cpp" />
+    <ClCompile Include="Bunnies\Gui\GridPanel.cpp" />
     <ClCompile Include="Bunnies\HttpCommunication.cpp" />
     <ClCompile Include="Bunnies\Leaderboard.cpp" />
     <ClCompile Include="Bunnies\LeaderboardScreen.cpp" />

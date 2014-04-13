@@ -1,6 +1,7 @@
 #include "BonusesManager.h"
 #include "BonusStreetSymbol.h"
 #include "BonusBlowEffect.h"
+#include "IBonusesManagerObserver.h"
 #include "../Environment.h"
 #include "../StreetMap.h"
 #include "../StreetSegment.h"
@@ -16,6 +17,8 @@
 #include <Audio/SoundManager.h>
 #include <assert.h>
 
+#include <UserInput/Input2.h>
+
 #include <Graphics/OpenglPort.h>
 
 const float BonusesManager::TaxiViewRange = 30.0f;
@@ -29,6 +32,11 @@ BonusesManager::BonusesManager()
 		m_bonusesSymbols[i] = new BonusStreetSymbol();
 
 	m_bonusBlowEffect = new BonusBlowEffect();
+}
+
+void BonusesManager::AddObserver(IBonusesManagerObserver* observer)
+{
+	m_observers.push_back(observer);
 }
 
 void BonusesManager::Reset(const sm::Vec3 &taxiPosition)
@@ -64,6 +72,9 @@ void BonusesManager::Update(float time, float seconds)
 
 		m_bonusesSymbols[i]->Update(time, seconds);
 	}
+
+	if (Input2::GetKeyDown(KeyCode_Num1))
+		ActivateBonus(BonusType_Carmageddon);
 }
 
 void BonusesManager::Draw(float time, float seconds)
@@ -108,7 +119,7 @@ void BonusesManager::NotifyStreetSegmentVisibilityChanged(StreetSegment *streetS
 		sm::Vec3 bonusPosition = streetSegment->GetPivotPosition();
 		static Randomizer random;
 
-		bonusPosition += sm::Vec3(random.GetFloat(-5.0f, 5.0f), 0.0f, random.GetFloat(-5.0f, 5.0f));
+		bonusPosition += sm::Vec3(random.GetFloat(-4.5f, 4.5f), 0.0f, random.GetFloat(-4.5f, 4.5f));
 
 		bonus->SetActive(bonusPosition, streetSegment);
 	}
@@ -134,4 +145,15 @@ BonusStreetSymbol* BonusesManager::GetInactiveBonusSymbol()
 void BonusesManager::SetViewProjMatrix(const sm::Matrix& viewProjMatrix)
 {
 	m_viewProjMatrix = viewProjMatrix;
+}
+
+void BonusesManager::ActivateBonus(BonusType type)
+{
+	for (uint32_t i = 0; i < m_observers.size(); i++)
+		m_observers[i]->BonusActivated(type);
+}
+
+float BonusesManager::GetBonusTimeLeft(BonusType type)
+{
+	return 12.47f;
 }

@@ -2,12 +2,15 @@
 #include "Environment.h"
 #include "InterfaceProvider.h"
 #include "AnimButton.h"
+#include "Gui/GridPanel.h"
 #include "Label.h"
 #include "GameScreen.h"
 #include "Taxi.h"
 #include "GameController.h"
 #include "PedsManager.h"
 #include "Inflater.h"
+#include "Gui/BonusControl.h"
+#include "Bonuses/BonusesManager.h"
 #include <Audio/SoundManager.h>
 #include <Graphics/TexPart.h>
 #include <Graphics/Content/Content.h>
@@ -30,6 +33,18 @@ HUD *HUD::Create(GameScreen *gameScreen)
 	Control *content = Inflater::Inflate(basePath + "data/gui/HUD.xml");
 
 	ret->AddChild(content);
+
+
+	//ret->AddChild(new BonusControl("ssss", TexPart()));
+
+	//ret->m_gridPanel = new GridPanel("");
+	//ret->m_gridPanel->AddChild(new BonusControl("ssss", TexPart()));
+	//ret->m_gridPanel->AddChild(new BonusControl("ssss", TexPart()));
+	//ret->m_gridPanel->AddChild(new BonusControl("ssss", TexPart()));
+	//ret->AddChild(ret->m_gridPanel);
+
+	ret->m_bonusesGrid = dynamic_cast<GridPanel*>(ret->FindChild("bonuses_grid"));
+	assert(ret->m_bonusesGrid != NULL);
 	
 	Control *left = dynamic_cast<AnimButton*>(ret->FindChild("turn_left"));
 	assert(left != NULL);
@@ -57,6 +72,8 @@ HUD *HUD::Create(GameScreen *gameScreen)
 	ret->m_timeLeftLabel = dynamic_cast<Label*>(ret->FindChild("time_left_value"));
 	assert(ret->m_timeLeftLabel != NULL);
 	
+	BonusesManager::Instance->AddObserver(ret);
+
 	return ret;
 }
 
@@ -128,5 +145,17 @@ void HUD::OnUpdate(float time, float seconds)
 		m_rewardLabel->SetVisible(false);
 		m_timeLeftLabel->SetVisible(false);
 	}
+}
+
+void HUD::BonusActivated(BonusType bonusType)
+{
+	BonusControl *bonus = new BonusControl("", TexPart());
+	bonus->SetAlign("top-left");
+
+	m_bonusesGrid->AddChild(bonus);
+}
+
+void HUD::BonusDeactivated(BonusType bonusType)
+{
 }
 
