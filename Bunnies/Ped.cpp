@@ -6,6 +6,7 @@
 #include "StreetSegment.h"
 #include "Street.h"
 #include "Taxi.h"
+#include "PedsManager.h"
 
 #include <Graphics/Model.h>
 #include <Utils/Randomizer.h>
@@ -139,6 +140,10 @@ void Ped::Draw(float time, float seconds)
 
 	if (IsPassenger() && !Taxi::GetInstance()->IsOccupied())
 		color = sm::Vec3(2, 0, 0);
+	else if (IsZombieMode())
+	{
+		color = sm::Vec3(0, 0.5, 0);
+	}
 
 	DrawingRoutines::DrawPed(m_model->m_meshParts[0], m_transform, sm::Vec4(color, 1.0f));
 }
@@ -236,3 +241,7 @@ void Ped::Die()
 	m_dieProgress = m_dieTime;
 }
 
+bool Ped::IsZombieMode()
+{
+	return PedsManager::Instance->IsZombieMode();
+}

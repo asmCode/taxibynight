@@ -21,11 +21,11 @@ std::string Bonus::GetName() const
 	switch (m_bonusType)
 	{
 	case BonusType_Money:
-		return "Money For Nothing";
+		return "MONEY FOR NOTHING";
 	case BonusType_Carmageddon:
-		return "Carmageddon";
+		return "CARMAGEDDON";
 	case BonusType_PedsAntiMagnet:
-		return "Peds Anti-Magnet";
+		return "PEDS ANTI-MAGNET";
 	case BonusType_GenerousClients:
 		return "Generous Clients";
 	case BonusType_FeelThePower:

@@ -88,8 +88,8 @@ bool GameScreen::Initialize()
 	//m_manCam = new ManCam();
 
 	m_taxi = new Taxi();
-	m_pedsManager = new PedsManager(m_taxi->GetPosition());
 	m_bonusesManager = new BonusesManager();
+	m_pedsManager = new PedsManager(m_taxi->GetPosition());
 	m_street = new Street(m_pedsManager);
 	m_street->SetInitialVisibility(m_taxi->GetPosition());
 

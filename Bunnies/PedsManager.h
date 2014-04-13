@@ -1,6 +1,7 @@
 #ifndef PEDS_MANAGER
 #define PEDS_MANAGER
 
+#include "Bonuses/IBonusesManagerObserver.h"
 #include <Math/Matrix.h>
 #include <Core/stdint.h>
 
@@ -10,7 +11,7 @@ class Texture;
 class StreetSegment;
 class Ped;
 
-class PedsManager
+class PedsManager : public IBonusesManagerObserver
 {
 public:
 	static PedsManager *Instance;
@@ -39,6 +40,8 @@ public:
 	float m_dollarsMultiplier;
 	float m_secondsMultiplier;
 
+	bool IsZombieMode();
+
 private:
 	static const uint32_t MaxPeds = 50;
 	static const float TaxiViewRange;
@@ -57,6 +60,11 @@ private:
 	void MovePedNearCar(Ped *ped);
 	bool IsOnVisibleSegment(Ped *ped);
 	void ResetPosition(Ped *ped, const sm::Vec3 &position, const sm::Vec3 &direction);
+
+	bool m_isZombieMode;
+
+	void BonusActivated(BonusType bonusType);
+	void BonusDeactivated(BonusType bonusType);
 };
 
 #endif // PEDS_MANAGER

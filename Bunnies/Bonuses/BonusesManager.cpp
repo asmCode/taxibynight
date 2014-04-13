@@ -82,6 +82,8 @@ void BonusesManager::Update(float time, float seconds)
 		ActivateBonus(BonusType_Blind);
 	if (Input2::GetKeyDown(KeyCode_Num3))
 		ActivateBonus(BonusType_PedsAntiMagnet);
+	if (Input2::GetKeyDown(KeyCode_Num4))
+		ActivateBonus(BonusType_ZombiePeds);
 }
 
 void BonusesManager::Draw(float time, float seconds)

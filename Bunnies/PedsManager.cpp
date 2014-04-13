@@ -9,6 +9,7 @@
 #include "Taxi.h"
 #include "GameScreen.h"
 #include "BoxCollider.h"
+#include "Bonuses/BonusesManager.h"
 
 #include <Graphics/Model.h>
 #include <Graphics/Mesh.h>
@@ -32,7 +33,8 @@ PedsManager::PedsManager(const sm::Vec3 taxiPosition) :
 	for (uint32_t i = 0; i < MaxPeds; i++)
 		m_peds[i] = new Ped();
 
-
+	BonusesManager::Instance->AddObserver(this);
+	
 	Reset(taxiPosition);
 }
 
@@ -41,6 +43,7 @@ void PedsManager::Reset(const sm::Vec3 &taxiPosition)
 	for (uint32_t i = 0; i < MaxPeds; i++)
 		m_peds[i]->ResetPosition(sm::Vec3(0, 0, 0));
 
+	m_isZombieMode = false;
 	m_pedApproaching = NULL;
 
 	m_pedResets = 0;
@@ -324,4 +327,66 @@ void PedsManager::NotifyApproachingToCar(Ped *ped)
 {
 	m_pedApproaching = ped;
 }
+
+bool PedsManager::IsZombieMode()
+{
+	return m_isZombieMode;
+}
+
+void PedsManager::BonusActivated(BonusType bonusType)
+{
+	switch (bonusType)
+	{
+	case BonusType_Money:
+		break;
+	case BonusType_Carmageddon:
+		break;
+	case BonusType_PedsAntiMagnet:
+		break;
+	case BonusType_GenerousClients:
+		break;
+	case BonusType_FeelThePower:
+		break;
+	case BonusType_TakeYourTime:
+		break;
+	case BonusType_VitaminOverdose:
+		break;
+	case BonusType_Blind:
+		break;
+	case BonusType_ZombiePeds:
+		m_isZombieMode = true;
+		break;
+	default:
+		break;
+	}
+}
+
+void PedsManager::BonusDeactivated(BonusType bonusType)
+{
+	switch (bonusType)
+	{
+	case BonusType_Money:
+		break;
+	case BonusType_Carmageddon:
+		break;
+	case BonusType_PedsAntiMagnet:
+		break;
+	case BonusType_GenerousClients:
+		break;
+	case BonusType_FeelThePower:
+		break;
+	case BonusType_TakeYourTime:
+		break;
+	case BonusType_VitaminOverdose:
+		break;
+	case BonusType_Blind:
+		break;
+	case BonusType_ZombiePeds:
+		m_isZombieMode = false;
+		break;
+	default:
+		break;
+	}
+}
+
 

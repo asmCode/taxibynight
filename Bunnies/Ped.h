@@ -74,6 +74,8 @@ public:
 	sm::Vec3 m_tripDestination;
 	float m_cash;
 	float m_timeLimit;
+
+	bool IsZombieMode();
 };
 
 #endif // PED
