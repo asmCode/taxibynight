@@ -5,6 +5,8 @@
 #include "Gui/GridPanel.h"
 #include "Label.h"
 #include "GameScreen.h"
+#include "Bonuses/BonusType.h"
+#include "Bonuses/Bonus.h"
 #include "Taxi.h"
 #include "GameController.h"
 #include "PedsManager.h"
@@ -152,13 +154,37 @@ void HUD::BonusActivated(BonusType bonusType)
 	Bonus* bonus = BonusesManager::Instance->GetActiveBonus(bonusType);
 	assert(bonus != NULL);
 
-	BonusControl *bonusConrtol = new BonusControl(bonus);
-	bonusConrtol->SetAlign("top-left");
-
-	m_bonusesGrid->AddChild(bonusConrtol);
+	BonusControl *bonusConrtol = GetBonusControlOfType(bonusType);
+	if (bonusConrtol == NULL)
+	{
+		bonusConrtol = new BonusControl(bonus);
+		bonusConrtol->SetAlign("top-left");
+		m_bonusesGrid->AddChild(bonusConrtol);
+	}
+	else
+		bonusConrtol->SetBonus(bonus);
 }
 
 void HUD::BonusDeactivated(BonusType bonusType)
 {
+	BonusControl* bonusControl = GetBonusControlOfType(bonusType);
+	assert(bonusControl != NULL);
+
+	m_bonusesGrid->RemoveChild(bonusControl);
+	delete bonusControl;
 }
 
+BonusControl* HUD::GetBonusControlOfType(BonusType type)
+{
+	std::list<Control*>::iterator it;
+	for (it = m_bonusesGrid->children.begin(); it != m_bonusesGrid->children.end(); it++)
+	{
+		BonusControl* bonusControl = dynamic_cast<BonusControl*>(*it);
+		assert(bonusControl != NULL);
+
+		if (bonusControl->GetBonus()->GetBonusType() == type)
+			return bonusControl;
+	}
+
+	return NULL;
+}

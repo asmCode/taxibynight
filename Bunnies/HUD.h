@@ -7,6 +7,7 @@
 class GameScreen;
 class Label;
 class GridPanel;
+class BonusControl;
 
 class HUD :
 	public Control,
@@ -39,5 +40,7 @@ private:
 
 	void BonusActivated(BonusType bonusType);
 	void BonusDeactivated(BonusType bonusType);
+
+	BonusControl* GetBonusControlOfType(BonusType type);
 };
 

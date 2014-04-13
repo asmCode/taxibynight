@@ -103,3 +103,10 @@ bool Bonus::IsRunDown() const
 	return GetTimeLeft() == 0.0f;
 }
 
+void Bonus::DecreaseTimeLeft(float seconds)
+{
+	m_timeLeft -= seconds;
+
+	if (m_timeLeft < 0.0f)
+		m_timeLeft = 0.0f;
+}

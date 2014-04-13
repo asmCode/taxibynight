@@ -10,6 +10,9 @@ class BonusControl : public Control
 public:
 	BonusControl(Bonus* bonus);
 
+	void SetBonus(Bonus* bonus);
+	Bonus* GetBonus();
+
 protected:
 	//virtual void OnDraw(float time, float ms);
 

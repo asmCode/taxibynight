@@ -60,6 +60,8 @@ private:
 
 	void OnBonusCollected(BonusStreetSymbol* bonusStreetSymbol);
 
+	void UpdateBonuses(float seconds);
+
 	BonusStreetSymbol* GetInactiveBonusSymbol();
 };
 

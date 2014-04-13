@@ -20,7 +20,8 @@ class Control :
 	public virtual IGestureHandler,
 	public ObserversContainer<IControlEventsObserver*>
 {
-protected:
+// TODO bylo protexted
+public:
 	enum PressState
 	{
 		PressState_Unpressed,

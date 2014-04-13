@@ -20,6 +20,8 @@ public:
 	bool IsInstantBonus() const;
 	bool IsRunDown() const;
 
+	void DecreaseTimeLeft(float seconds);
+
 private:
 	BonusType m_bonusType;
 	float m_timeLeft;

@@ -74,6 +74,8 @@ void BonusesManager::Update(float time, float seconds)
 		m_bonusesSymbols[i]->Update(time, seconds);
 	}
 
+	UpdateBonuses(seconds);
+
 	if (Input2::GetKeyDown(KeyCode_Num1))
 		ActivateBonus(BonusType_Carmageddon);
 	if (Input2::GetKeyDown(KeyCode_Num2))
@@ -156,7 +158,7 @@ void BonusesManager::ActivateBonus(BonusType type)
 {
 	Bonus* bonus = GetActiveBonus(type);
 	if (bonus == NULL)
-		bonus = new Bonus(type, 30.0f);
+		bonus = new Bonus(type, 3.0f);
 
 	m_bonuses[type] = bonus;
 
@@ -177,3 +179,27 @@ Bonus* BonusesManager::GetActiveBonus(BonusType type)
 
 	return it->second;
 }
+
+void BonusesManager::UpdateBonuses(float seconds)
+{
+	std::map<BonusType, Bonus*>::iterator it;
+	std::vector<Bonus*> bonusesToDelete;
+
+	for (it = m_bonuses.begin(); it != m_bonuses.end(); it++)
+	{
+		it->second->DecreaseTimeLeft(seconds);
+
+		if (it->second->IsRunDown())
+			bonusesToDelete.push_back(it->second);
+	}
+
+	for (uint32_t i = 0; i < bonusesToDelete.size(); i++)
+	{
+		for (uint32_t j = 0; j < m_observers.size(); j++)
+			m_observers[j]->BonusDeactivated(bonusesToDelete[i]->GetBonusType());
+
+		m_bonuses.erase(bonusesToDelete[i]->GetBonusType());
+		delete bonusesToDelete[i];
+	}
+}
+

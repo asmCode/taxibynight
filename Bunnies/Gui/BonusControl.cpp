@@ -33,6 +33,16 @@ BonusControl::BonusControl(Bonus* bonus) :
 	m_icon->SetBackground(*icon);
 }
 
+void BonusControl::SetBonus(Bonus* bonus)
+{
+	m_bonus = bonus;
+}
+
+Bonus* BonusControl::GetBonus()
+{
+	return m_bonus;
+}
+
 void BonusControl::OnUpdate(float time, float ms)
 {
 	this->Control::OnUpdate(time, ms);
