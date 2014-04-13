@@ -10,6 +10,7 @@ class ManCam;
 class Taxi;
 class FontRenderer;
 class PedsManager;
+class BonusesManager;
 class Arrow;
 class PlaceIndicator;
 class HUD;
@@ -84,6 +85,7 @@ private:
 	Street *m_street;
 	Taxi *m_taxi;
 	PedsManager *m_pedsManager;
+	BonusesManager *m_bonusesManager;
 	Arrow *m_arrow;
 	PlaceIndicator *m_placeIndicator;
 	HUD *m_hud;

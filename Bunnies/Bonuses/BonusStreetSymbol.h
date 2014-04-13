@@ -8,6 +8,7 @@ class Model;
 class Mesh;
 class Texture;
 class Material;
+class StreetSegment;
 
 class BonusStreetSymbol
 {
@@ -17,13 +18,20 @@ public:
 	BonusStreetSymbol();
 	~BonusStreetSymbol();
 
-	void SetPosition(const sm::Vec3& position);
+	void SetActive(const sm::Vec3& position, StreetSegment* streetSegment);
+	void SetInactive();
 
 	void Update(float time, float seconds);
 	void Draw(float time, float seconds);
 	void DrawShadow(float time, float seconds);
 
+	const sm::Vec3& GetPosition() const;
+	const bool IsActive() const;
+
+	const StreetSegment* GetStreetSegment() const;
+
 private:
+	bool m_isActive;
 	sm::Vec3 m_position;
 	sm::Matrix m_transform;
 
@@ -31,5 +39,7 @@ private:
 
 	float m_angle;
 	float m_height;
+
+	StreetSegment* m_streetSegment;
 };
 

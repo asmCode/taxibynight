@@ -52,6 +52,22 @@ bool StreetPiece::HasPavement() const
 		m_pieceType == StreetPiece::PieceType_TurnUpRight_1;
 }
 
+bool StreetPiece::IsStreet() const
+{
+	return
+		m_pieceType == StreetPiece::PieceType_StraightHori_1 ||
+		m_pieceType == StreetPiece::PieceType_StraightVert_1 ||
+		m_pieceType == StreetPiece::PieceType_TDown_1 ||
+		m_pieceType == StreetPiece::PieceType_TLeft_1 ||
+		m_pieceType == StreetPiece::PieceType_TRight_1 ||
+		m_pieceType == StreetPiece::PieceType_TUp_1 ||
+		m_pieceType == StreetPiece::PieceType_TurnDownLeft_1 ||
+		m_pieceType == StreetPiece::PieceType_TurnDownRight_1 ||
+		m_pieceType == StreetPiece::PieceType_TurnUpLeft_1 ||
+		m_pieceType == StreetPiece::PieceType_TurnUpRight_1 ||
+		m_pieceType == StreetPiece::PieceType_Cross_1;
+}
+
 bool StreetPiece::IsCollider() const
 {
 	return

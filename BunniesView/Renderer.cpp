@@ -11,6 +11,7 @@
 #include <assert.h>
 #include <Graphics/IGraphicsEngine.h>
 #include <Graphics/GraphicsEngineFactory.h>
+#include <UserInput/Input2.h>
 
 IGameController *gctrl;
 IGraphicsEngine *graphics;
@@ -156,6 +157,7 @@ void Renderer::Update(float time, float seconds)
 {
 	//input->UpdateMouse();
 	input->Update();
+	Input2::UpdateState();
 
 	if (gctrl->proto_IsInGame())
 	{

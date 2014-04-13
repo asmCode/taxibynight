@@ -94,7 +94,7 @@ float SoundManager::GetMusicVolume() const
 
 void SoundManager::PlayMusic()
 {
-	//return;
+	return;
 	
 	assert(music != NULL);
 	music->Play();
@@ -110,11 +110,14 @@ void SoundManager::StopMusic()
 
 void SoundManager::PlaySound(SoundManager::Sound sound)
 {
+	return;
 	sounds[sound]->Play();
 }
 
 void SoundManager::StartEngine()
 {
+	return;
+
 	m_engine->Play();
 }
 

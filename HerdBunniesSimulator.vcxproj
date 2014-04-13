@@ -92,6 +92,9 @@
     <ClInclude Include="Bunnies\AnimButton.h" />
     <ClInclude Include="Bunnies\Arrow.h" />
     <ClInclude Include="Bunnies\Billboard.h" />
+    <ClInclude Include="Bunnies\Bonuses\Bonus.h" />
+    <ClInclude Include="Bunnies\Bonuses\BonusBlowEffect.h" />
+    <ClInclude Include="Bunnies\Bonuses\BonusesManager.h" />
     <ClInclude Include="Bunnies\Bonuses\BonusStreetSymbol.h" />
     <ClInclude Include="Bunnies\Camera.h" />
     <ClInclude Include="Bunnies\ComicsScreen.h" />
@@ -217,6 +220,8 @@
     <ClInclude Include="Framework\Math\Vec2.h" />
     <ClInclude Include="Framework\Math\Vec3.h" />
     <ClInclude Include="Framework\UI\IGestureHandler.h" />
+    <ClInclude Include="Framework\UserInput\Input2.h" />
+    <ClInclude Include="Framework\UserInput\KeyCode.h" />
     <ClInclude Include="Framework\Utils\Log.h" />
     <ClInclude Include="Framework\Utils\Randomizer.h" />
     <ClInclude Include="Framework\Utils\StringUtils.h" />
@@ -234,6 +239,9 @@
     <ClCompile Include="Bunnies\AnimButton.cpp" />
     <ClCompile Include="Bunnies\Arrow.cpp" />
     <ClCompile Include="Bunnies\Billboard.cpp" />
+    <ClCompile Include="Bunnies\Bonuses\Bonus.cpp" />
+    <ClCompile Include="Bunnies\Bonuses\BonusBlowEffect.cpp" />
+    <ClCompile Include="Bunnies\Bonuses\BonusesManager.cpp" />
     <ClCompile Include="Bunnies\Bonuses\BonusStreetSymbol.cpp" />
     <ClCompile Include="Bunnies\Camera.cpp" />
     <ClCompile Include="Bunnies\ComicsScreen.cpp" />
@@ -320,6 +328,7 @@
     <ClCompile Include="Framework\IO\Win32\Path.cpp" />
     <ClCompile Include="Framework\Math\MathUtils.cpp" />
     <ClCompile Include="Framework\Math\Matrix.cpp" />
+    <ClCompile Include="Framework\UserInput\Input2.cpp" />
     <ClCompile Include="Framework\Utils\Log.cpp" />
     <ClCompile Include="Framework\Utils\Randomizer.cpp" />
     <ClCompile Include="Framework\Utils\StringUtils.cpp" />

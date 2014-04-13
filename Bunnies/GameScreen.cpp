@@ -1,6 +1,7 @@
 #include "GameScreen.h"
 
 #include "PedsManager.h"
+#include "Bonuses/BonusesManager.h"
 #include "InterfaceProvider.h"
 #include "Environment.h"
 #include "GameProps.h"
@@ -20,6 +21,7 @@
 #include <Audio/SoundManager.h>
 #include "HUD.h"
 #include "Bonuses/BonusStreetSymbol.h"
+#include "Bonuses/BonusBlowEffect.h"
 
 #include <Math/MathUtils.h>
 #include <Graphics/Shader.h>
@@ -32,6 +34,8 @@
 #include <Graphics/Content/Content.h>
 #include <Utils/Log.h>
 #include <Utils/StringUtils.h>
+
+#include <UserInput/Input2.h>
 
 #include <Graphics/OpenglPort.h>
 
@@ -46,6 +50,7 @@ GameScreen::GameScreen(GameController *gameController) :
 	m_street(NULL),
 	m_taxi(NULL),
 	m_pedsManager(NULL),
+	m_bonusesManager(NULL),
 	m_isPaused(false)
 {
 	m_penaltyProgress = 0.0f;
@@ -84,6 +89,7 @@ bool GameScreen::Initialize()
 
 	m_taxi = new Taxi();
 	m_pedsManager = new PedsManager(m_taxi->GetPosition());
+	m_bonusesManager = new BonusesManager();
 	m_street = new Street(m_pedsManager);
 	m_street->SetInitialVisibility(m_taxi->GetPosition());
 
@@ -120,7 +126,7 @@ bool GameScreen::ReleaseResources()
 	return false;
 }
 
-BonusStreetSymbol d;
+BonusBlowEffect* bonusBlowEffect;
 
 void GameScreen::Draw(float time, float seconds)
 {
@@ -133,17 +139,16 @@ void GameScreen::Draw(float time, float seconds)
 
 	static sm::Vec3 tp = m_taxi->GetPosition();
 
-	
-	d.SetPosition(tp);
-	d.Update(time, seconds);
-	d.Draw(time, seconds);
-
 	m_street->Draw(time, seconds);
 	m_taxi->Draw(time, seconds);
 	m_pedsManager->Draw(time, seconds);
+	m_bonusesManager->Draw(time, seconds);
 	if (!m_isPaused)
 		m_arrow->Draw(time, seconds);
 	m_placeIndicator->Draw(time, seconds);
+	if (bonusBlowEffect == NULL)
+		bonusBlowEffect = new BonusBlowEffect();
+	bonusBlowEffect->Draw(time, seconds);
 
 	char fpsText[16];
 	sprintf(fpsText, "fps: %d", m_currentFps);
@@ -207,6 +212,10 @@ void GameScreen::Update(float time, float seconds)
 
 	m_pedsManager->SetTaxiPosition(m_taxi->GetPosition());
 	m_pedsManager->Update(time, seconds);
+
+	m_bonusesManager->SetTaxiPosition(m_taxi->GetPosition());
+	m_bonusesManager->SetViewProjMatrix(m_projMatrix * m_viewMatrix);
+	m_bonusesManager->Update(time, seconds);
 
 	if (m_taxi->IsOccupied())
 	{
@@ -274,6 +283,13 @@ void GameScreen::Update(float time, float seconds)
 		m_messageLabel->SetVisible(false);
 
 	m_placeIndicator->Update(time, seconds, m_projMatrix * m_viewMatrix);
+	static sm::Vec3 tp = m_taxi->GetPosition();
+	if (bonusBlowEffect == NULL)
+		bonusBlowEffect = new BonusBlowEffect();
+	bonusBlowEffect->SetPosition(tp);
+	if (Input2::GetKeyDown(KeyCode::KeyCode_S))
+		bonusBlowEffect->Blow();
+	bonusBlowEffect->Update(time, seconds, m_projMatrix * m_viewMatrix);
 	m_hud->Update(time, seconds);
 
 	m_fps++;

@@ -40,6 +40,7 @@ public:
 	void Draw(const sm::Matrix &transform);
 
 	bool HasPavement() const;
+	bool IsStreet() const;
 	bool IsCollider() const;
 
 	const sm::Matrix& GetTransform() const;

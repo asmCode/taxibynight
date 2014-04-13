@@ -6,6 +6,7 @@
 #include "InterfaceProvider.h"
 #include "StreetMap.h"
 #include "Environment.h"
+#include "Bonuses/BonusesManager.h"
 
 #include <Utils/Randomizer.h>
 #include <Graphics/Model.h>
@@ -228,7 +229,10 @@ void Street::Update(float time, float seconds)
 	}
 
 	for (uint32_t i = 0; i < segmentsChanged.size(); i++)
+	{
 		m_pedsManager->NotifyStreetSegmentVisibilityChanged(segmentsChanged[i]);
+		BonusesManager::Instance->NotifyStreetSegmentVisibilityChanged(segmentsChanged[i]);
+	}
 
 	/*if (ix > m_lastTaxiSegment->CoordX() && ix < m_streetMap->GetWidth() - Range)
 	{
@@ -344,6 +348,7 @@ void Street::SetInitialVisibility(const sm::Vec3 &taxiPosition)
 		{
 			//m_streetSegments[y * m_streetMap->GetWidth() + x]->SetVisibility(true);
 			m_pedsManager->NotifyStreetSegmentVisibilityChanged(m_streetSegments[y * m_streetMap->GetWidth() + x]);
+			BonusesManager::Instance->NotifyStreetSegmentVisibilityChanged(m_streetSegments[y * m_streetMap->GetWidth() + x]);
 		}
 	}
 }
