@@ -149,10 +149,13 @@ void HUD::OnUpdate(float time, float seconds)
 
 void HUD::BonusActivated(BonusType bonusType)
 {
-	BonusControl *bonus = new BonusControl("", TexPart());
-	bonus->SetAlign("top-left");
+	Bonus* bonus = BonusesManager::Instance->GetActiveBonus(bonusType);
+	assert(bonus != NULL);
 
-	m_bonusesGrid->AddChild(bonus);
+	BonusControl *bonusConrtol = new BonusControl(bonus);
+	bonusConrtol->SetAlign("top-left");
+
+	m_bonusesGrid->AddChild(bonusConrtol);
 }
 
 void HUD::BonusDeactivated(BonusType bonusType)

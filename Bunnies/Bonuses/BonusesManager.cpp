@@ -2,6 +2,7 @@
 #include "BonusStreetSymbol.h"
 #include "BonusBlowEffect.h"
 #include "IBonusesManagerObserver.h"
+#include "Bonus.h"
 #include "../Environment.h"
 #include "../StreetMap.h"
 #include "../StreetSegment.h"
@@ -75,6 +76,10 @@ void BonusesManager::Update(float time, float seconds)
 
 	if (Input2::GetKeyDown(KeyCode_Num1))
 		ActivateBonus(BonusType_Carmageddon);
+	if (Input2::GetKeyDown(KeyCode_Num2))
+		ActivateBonus(BonusType_Blind);
+	if (Input2::GetKeyDown(KeyCode_Num3))
+		ActivateBonus(BonusType_PedsAntiMagnet);
 }
 
 void BonusesManager::Draw(float time, float seconds)
@@ -149,6 +154,12 @@ void BonusesManager::SetViewProjMatrix(const sm::Matrix& viewProjMatrix)
 
 void BonusesManager::ActivateBonus(BonusType type)
 {
+	Bonus* bonus = GetActiveBonus(type);
+	if (bonus == NULL)
+		bonus = new Bonus(type, 30.0f);
+
+	m_bonuses[type] = bonus;
+
 	for (uint32_t i = 0; i < m_observers.size(); i++)
 		m_observers[i]->BonusActivated(type);
 }
@@ -156,4 +167,13 @@ void BonusesManager::ActivateBonus(BonusType type)
 float BonusesManager::GetBonusTimeLeft(BonusType type)
 {
 	return 12.47f;
+}
+
+Bonus* BonusesManager::GetActiveBonus(BonusType type)
+{
+	std::map<BonusType, Bonus*>::iterator it = m_bonuses.find(type);
+	if (it == m_bonuses.end())
+		return NULL;
+
+	return it->second;
 }

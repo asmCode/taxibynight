@@ -1,5 +1,5 @@
 <Panel name="bonus_control" width="200" height="64">
-	<Image image="bonus_icon" align="left" width="64" height="64"/>
-	<Label name="name_label" font="fenix_18" text="Bonus Name" size="1.0" align="top-left" margin_left="74" margin_top="4" />
-	<Label name="time_left_label" font="fenix_18" text="00:00" size="1.0" align="bottom-left" margin_left="74" margin_bottom="-4" />
+	<Image name="icon" image="bonus_icon" align="left" width="64" height="64"/>
+	<Label name="name" font="fenix_18" text="Bonus Name" size="1.0" align="top-left" margin_left="74" margin_top="4" />
+	<Label name="time_left" font="fenix_18" text="00:00" size="1.0" align="bottom-left" margin_left="74" margin_bottom="-4" />
 </Panel>

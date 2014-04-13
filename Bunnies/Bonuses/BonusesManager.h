@@ -5,6 +5,7 @@
 #include <Core/stdint.h>
 #include "BonusType.h"
 #include <vector>
+#include <map>
 
 class Model;
 class Mesh;
@@ -14,6 +15,7 @@ class Ped;
 class BonusStreetSymbol;
 class BonusBlowEffect;
 class IBonusesManagerObserver;
+class Bonus;
 
 class BonusesManager
 {
@@ -36,11 +38,14 @@ public:
 	void ActivateBonus(BonusType type);
 	float GetBonusTimeLeft(BonusType type);
 
+	Bonus* GetActiveBonus(BonusType type);
+
 private:
 	static const uint32_t MaxBonuses = 10;
 	static const float TaxiViewRange;
 
 	std::vector<IBonusesManagerObserver*> m_observers;
+	std::map<BonusType, Bonus*> m_bonuses;
 
 	BonusStreetSymbol *m_bonusesSymbols[MaxBonuses];
 

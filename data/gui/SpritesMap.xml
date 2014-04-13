@@ -26,4 +26,14 @@
 	<sprite name="top_down" file="gui02" bounds="210,698,70,170" />
 	
 	<sprite name="bonus_icon" file="gui02" bounds="1920,896,128,128" />
+	
+	<sprite name="money" file="gui02" bounds="896,896,128,128" />
+	<sprite name="carmageddon" file="gui02" bounds="1024,896,128,128" />
+	<sprite name="peds_antimagnet" file="gui02" bounds="1152,896,128,128" />
+	<sprite name="generous_clients" file="gui02" bounds="1280,896,128,128" />
+	<sprite name="feel_the_power" file="gui02" bounds="1408,896,128,128" />
+	<sprite name="take_your_time" file="gui02" bounds="1536,896,128,128" />
+	<sprite name="vitamin_overdose" file="gui02" bounds="1664,896,128,128" />
+	<sprite name="blind" file="gui02" bounds="1792,896,128,128" />
+	<sprite name="zombie_peds" file="gui02" bounds="1920,896,128,128" />
 </map>

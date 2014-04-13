@@ -114,6 +114,8 @@ public:
 
 	std::string GetName() const;
 	
+	void SetBackground(TexPart texPart);
+
 	float GetOpacity() const;
 	void SetOpacity(float opacity);
 	

@@ -2,18 +2,25 @@
 
 #include "../Control.h"
 
+class Bonus;
+class Label;
+
 class BonusControl : public Control
 {
 public:
-	BonusControl(
-		const std::string &name,
-		TexPart icon);
+	BonusControl(Bonus* bonus);
 
 protected:
 	//virtual void OnDraw(float time, float ms);
 
 private:
-	TexPart m_icon;
+	Bonus* m_bonus;
 
 	Control *m_view;
+
+	Control* m_icon;
+	Label* m_bonusName;
+	Label* m_timeLeft;
+
+	void OnUpdate(float time, float ms);
 };

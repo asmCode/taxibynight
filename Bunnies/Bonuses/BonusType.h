@@ -10,7 +10,7 @@ enum BonusType
 	BonusType_FeelThePower,
 	BonusType_TakeYourTime,
 	BonusType_VitaminOverdose,
-	BonusType_Blnd,
+	BonusType_Blind,
 	BonusType_ZombiePeds
 };
 

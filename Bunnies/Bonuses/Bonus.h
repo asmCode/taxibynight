@@ -1,21 +1,28 @@
 #ifndef BONUS
 #define BONUS
 
+#include "BonusType.h"
 #include <Math/Matrix.h>
 #include <Core/stdint.h>
-
-class BonusStreetSymbol;
+#include <string>
 
 class Bonus
 {
 public:
-	Bonus();
+	Bonus(BonusType bonusType, float time);
 	~Bonus();
 
-	bool IsActive() const;
+	BonusType GetBonusType() const;
+	std::string GetName() const;
+	std::string GetIconName() const;
+	float GetTimeLeft() const;
+
+	bool IsInstantBonus() const;
+	bool IsRunDown() const;
 
 private:
-	bool m_isActive;
+	BonusType m_bonusType;
+	float m_timeLeft;
 };
 
 #endif // BONUS

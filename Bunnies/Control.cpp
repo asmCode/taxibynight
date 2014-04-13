@@ -570,3 +570,7 @@ Control* Control::FindChild(const std::string &name)
 	return NULL;
 }
 
+void Control::SetBackground(TexPart texPart)
+{
+	bg = texPart;
+}
