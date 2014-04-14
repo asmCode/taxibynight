@@ -10,6 +10,7 @@
 #include <Graphics/Mesh.h>
 #include <Graphics/BoundingBox.h>
 #include <Graphics/Texture.h>
+#include <Graphics/Material.h>
 #include <Audio/SoundManager.h>
 #include <Math/MathUtils.h>
 #include <Utils/Randomizer.h>
@@ -34,6 +35,18 @@ Taxi::Taxi() :
 
 	m_taxiModel = content->Get<Model>("taxi");
 	assert(m_taxiModel != NULL);
+
+	m_bladeModel = content->Get<Model>("blade");
+	assert(m_bladeModel != NULL);
+
+	m_normalTex = content->Get<Texture>("cabby_diff");
+	assert(m_normalTex != NULL);
+
+	m_carmaTex = content->Get<Texture>("cabby_carma_diff");
+	assert(m_carmaTex != NULL);
+
+	m_taxiMat = content->Get<Material>("taxi");
+	assert(m_taxiMat != NULL);
 
 	m_shadow = content->Get<Model>("taxi_shadow");
 	assert(m_shadow != NULL);
@@ -340,6 +353,16 @@ void Taxi::Update(float time, float seconds)
 void Taxi::Draw(float time, float seconds)
 {
 	DrawingRoutines::DrawWithMaterial(m_taxiModel->m_meshParts, m_worldMatrix);
+
+	if (PedsManager::Instance->IsCarmageddonMode())
+	{
+		DrawingRoutines::DrawWithMaterial(m_bladeModel->m_meshParts, m_worldMatrix);
+		m_taxiMat->diffuseTex = m_carmaTex;
+	}
+	else
+	{
+		m_taxiMat->diffuseTex = m_normalTex;
+	}
 
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

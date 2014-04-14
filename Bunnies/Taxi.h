@@ -6,6 +6,7 @@
 class Model;
 class Mesh;
 class Texture;
+class Material;
 class BoxCollider;
 
 class Taxi
@@ -54,7 +55,11 @@ public:
 	float m_acc;
 
 	Model *m_taxiModel;
+	Model *m_bladeModel;
 	Model *m_shadow;
+	Texture* m_normalTex;
+	Texture* m_carmaTex;
+	Material* m_taxiMat;
 
 	sm::Vec3 m_boundsTopLeft;
 	sm::Vec3 m_boundsTopRight;
