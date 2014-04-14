@@ -75,6 +75,8 @@ public:
 	float m_cash;
 	float m_timeLimit;
 
+	bool m_prevZombieMode;
+
 	bool IsZombieMode();
 };
 

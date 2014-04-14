@@ -21,6 +21,7 @@
 Ped::Ped()
 {
 	m_dieTime = 1.5f;
+	m_prevZombieMode = false;
 
 	m_fadingToGray = 0.0f;
 	m_speed = 1.0f;
@@ -59,6 +60,20 @@ void Ped::Update(float time, float seconds)
 		return;
 	}
 
+	if (!IsPassenger())
+	{
+		if (PedsManager::Instance->IsZombieMode())
+		{
+			m_target = Taxi::GetInstance()->GetPosition();
+			m_prevZombieMode = true;
+		}
+		else if (m_prevZombieMode == true)
+		{
+			m_prevZombieMode = false;
+			m_target = m_position;
+		}
+	}
+
 	jumpVal = 0.0f;
 	sm::Matrix waveMatrix = sm::Matrix::IdentityMatrix();
 
@@ -90,10 +105,11 @@ void Ped::Update(float time, float seconds)
 		if (seg != NULL)
 		{
 			sm::Vec3 pos, norm;
-			StreetMap::Instance->GetRandomPavementArea(seg->CoordX(), seg->CoordY(), pos, norm);
-
-			m_target = pos;
-			m_speed = random.GetFloat(0.3f, 0.8f);
+			if (StreetMap::Instance->GetRandomPavementArea(seg->CoordX(), seg->CoordY(), pos, norm))
+			{
+				m_target = pos;
+				m_speed = random.GetFloat(0.3f, 0.8f);
+			}
 		}
 	}
 
