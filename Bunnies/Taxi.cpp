@@ -2,6 +2,7 @@
 #include "DrawingRoutines.h"
 #include "InterfaceProvider.h"
 #include "Environment.h"
+#include "PedsManager.h"
 #include "Street.h"
 #include "BoxCollider.h"
 
@@ -109,7 +110,7 @@ void Taxi::Update(float time, float seconds)
 
 	if (IsOccupied())
 	{
-		m_timeLeft -= seconds;
+		PedsManager::Instance->IsTakeYourTimeMode() ? m_timeLeft -= seconds * 0.5f : m_timeLeft -= seconds;
 		if (m_timeLeft < 0.0f)
 			m_timeLeft = 0.0f;
 	}
@@ -130,7 +131,11 @@ void Taxi::Update(float time, float seconds)
 		m_speed -= MathUtils::Min(MathUtils::Abs(m_speed), 12.0f * seconds) * MathUtils::Sign(m_speed);
 	}
 
-	m_speed = MathUtils::Clamp(m_speed, -MaxSpeed / 4, MaxSpeed);
+	float maxSpeed = MaxSpeed;
+	if (PedsManager::Instance->IsFeelThePowerMode())
+		maxSpeed *= 1.4f;
+
+	m_speed = MathUtils::Clamp(m_speed, -MaxSpeed / 4, maxSpeed);
 
 	SoundManager::GetInstance()->SetEnginePitch((MathUtils::Abs(m_speed) / MaxSpeed) * 1.0f + 1.0f);
 
@@ -349,6 +354,9 @@ void Taxi::SetTurn(float turnValue)
 
 void Taxi::SetAcceleration(float acc)
 {
+	if (PedsManager::Instance->IsFeelThePowerMode() && acc > 0.0f)
+		acc *= 3.0f;
+
 	m_acc = acc;
 }
 

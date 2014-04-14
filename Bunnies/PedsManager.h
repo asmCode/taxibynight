@@ -41,6 +41,10 @@ public:
 	float m_secondsMultiplier;
 
 	bool IsZombieMode();
+	bool IsAntiMagnetMode();
+	bool IsTakeYourTimeMode();
+	bool IsCarmageddonMode();
+	bool IsFeelThePowerMode();
 
 private:
 	static const uint32_t MaxPeds = 50;
@@ -62,9 +66,15 @@ private:
 	void ResetPosition(Ped *ped, const sm::Vec3 &position, const sm::Vec3 &direction);
 
 	bool m_isZombieMode;
+	bool m_isAntiMagentMode;
+	bool m_isGenerousPedsMode;
+	bool m_isTakeYourTimeMode;
+	bool m_isCarmageddonMode;
+	bool m_isFeelThePowerMode;
 
 	void BonusActivated(BonusType bonusType);
 	void BonusDeactivated(BonusType bonusType);
+	void UpdateGenerousPedsBonus();
 };
 
 #endif // PEDS_MANAGER

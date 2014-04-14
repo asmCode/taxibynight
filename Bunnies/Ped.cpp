@@ -113,6 +113,17 @@ void Ped::Update(float time, float seconds)
 		}
 	}
 
+	if (!IsPassenger() && PedsManager::Instance->IsAntiMagnetMode())
+	{
+		sm::Vec3 directionToTaxi = Taxi::GetInstance()->GetPosition() - m_position;
+		float distance = directionToTaxi.GetLength();
+
+		if (distance < 7.0f)
+		{
+			m_position -= directionToTaxi.GetNormalized() * 8.0f * seconds;
+		}
+	}
+
 	m_fadingToGray -= seconds;
 	if (m_fadingToGray < 0.0f)
 		m_fadingToGray = 0.0f;

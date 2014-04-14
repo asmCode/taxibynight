@@ -84,6 +84,12 @@ void BonusesManager::Update(float time, float seconds)
 		ActivateBonus(BonusType_PedsAntiMagnet);
 	if (Input2::GetKeyDown(KeyCode_Num4))
 		ActivateBonus(BonusType_ZombiePeds);
+	if (Input2::GetKeyDown(KeyCode_Num5))
+		ActivateBonus(BonusType_GenerousClients);
+	if (Input2::GetKeyDown(KeyCode_Num6))
+		ActivateBonus(BonusType_TakeYourTime);
+	if (Input2::GetKeyDown(KeyCode_Num7))
+		ActivateBonus(BonusType_FeelThePower);
 }
 
 void BonusesManager::Draw(float time, float seconds)
@@ -160,7 +166,9 @@ void BonusesManager::ActivateBonus(BonusType type)
 {
 	Bonus* bonus = GetActiveBonus(type);
 	if (bonus == NULL)
-		bonus = new Bonus(type, 3.0f);
+		bonus = new Bonus(type, 10.0f);
+
+	bonus->SetTimeLeft(10.0f);
 
 	m_bonuses[type] = bonus;
 

@@ -71,6 +71,11 @@ std::string Bonus::GetIconName() const
 	}
 }
 
+void Bonus::SetTimeLeft(float time)
+{
+	m_timeLeft = time;
+}
+
 float Bonus::GetTimeLeft() const
 {
 	return m_timeLeft;

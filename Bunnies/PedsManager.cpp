@@ -44,6 +44,11 @@ void PedsManager::Reset(const sm::Vec3 &taxiPosition)
 		m_peds[i]->ResetPosition(sm::Vec3(0, 0, 0));
 
 	m_isZombieMode = false;
+	m_isAntiMagentMode = false;
+	m_isGenerousPedsMode = false;
+	m_isTakeYourTimeMode = false;
+	m_isCarmageddonMode = false;
+	m_isFeelThePowerMode = false;
 	m_pedApproaching = NULL;
 
 	m_pedResets = 0;
@@ -116,9 +121,13 @@ void PedsManager::Update(float time, float seconds)
 		{
 			SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Doors);
 
+			float reward = m_pedApproaching->GetCash();
+			if (m_isGenerousPedsMode)
+				reward *= 2.0f;
+
 			Taxi::GetInstance()->SetOccupied(
 				m_pedApproaching->GetTripDestination(),
-				m_pedApproaching->GetCash(),
+				reward,
 				m_pedApproaching->GetTimeLimit() * 1.0f);
 
 			GameScreen::GetInstance()->SetOccupiedMode();
@@ -153,11 +162,20 @@ void PedsManager::Update(float time, float seconds)
 				m_peds[i]->Die();
 				SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Die);
 
-				float penalty = MathUtils::Min(m_totalMoney, m_dollarsPerKm * m_dollarsMultiplier * 0.2f);
-				m_totalMoney -= penalty;
+				float penalty;
+				if (m_isCarmageddonMode)
+				{
+					penalty = m_dollarsPerKm * m_dollarsMultiplier * 0.2f;
+					m_totalMoney += penalty;
+				}
+				else
+				{
+					penalty = -MathUtils::Min(m_totalMoney, m_dollarsPerKm * m_dollarsMultiplier * 0.2f);
+					m_totalMoney += penalty;
+				}
 
-				if (penalty > 0)
-					GameScreen::GetInstance()->SetPenalty(-penalty);
+				if (penalty != 0)
+					GameScreen::GetInstance()->SetPenalty(penalty);
 			}
 		}
 	}
@@ -333,6 +351,26 @@ bool PedsManager::IsZombieMode()
 	return m_isZombieMode;
 }
 
+bool PedsManager::IsAntiMagnetMode()
+{
+	return m_isAntiMagentMode;
+}
+
+bool PedsManager::IsTakeYourTimeMode()
+{
+	return m_isTakeYourTimeMode;
+}
+
+bool PedsManager::IsCarmageddonMode()
+{
+	return m_isCarmageddonMode;
+}
+
+bool PedsManager::IsFeelThePowerMode()
+{
+	return m_isFeelThePowerMode;
+}
+
 void PedsManager::BonusActivated(BonusType bonusType)
 {
 	switch (bonusType)
@@ -340,14 +378,20 @@ void PedsManager::BonusActivated(BonusType bonusType)
 	case BonusType_Money:
 		break;
 	case BonusType_Carmageddon:
+		m_isCarmageddonMode = true;
 		break;
 	case BonusType_PedsAntiMagnet:
+		m_isAntiMagentMode = true;
 		break;
 	case BonusType_GenerousClients:
+		m_isGenerousPedsMode = true;
+		UpdateGenerousPedsBonus();
 		break;
 	case BonusType_FeelThePower:
+		m_isFeelThePowerMode = true;
 		break;
 	case BonusType_TakeYourTime:
+		m_isTakeYourTimeMode = true;
 		break;
 	case BonusType_VitaminOverdose:
 		break;
@@ -358,7 +402,7 @@ void PedsManager::BonusActivated(BonusType bonusType)
 		break;
 	default:
 		break;
-	}
+	}	
 }
 
 void PedsManager::BonusDeactivated(BonusType bonusType)
@@ -368,14 +412,20 @@ void PedsManager::BonusDeactivated(BonusType bonusType)
 	case BonusType_Money:
 		break;
 	case BonusType_Carmageddon:
+		m_isCarmageddonMode = false;
 		break;
 	case BonusType_PedsAntiMagnet:
+		m_isAntiMagentMode = false;
 		break;
 	case BonusType_GenerousClients:
+		m_isGenerousPedsMode = false;
+		UpdateGenerousPedsBonus();
 		break;
 	case BonusType_FeelThePower:
+		m_isFeelThePowerMode = false;
 		break;
 	case BonusType_TakeYourTime:
+		m_isTakeYourTimeMode = false;
 		break;
 	case BonusType_VitaminOverdose:
 		break;
@@ -389,4 +439,13 @@ void PedsManager::BonusDeactivated(BonusType bonusType)
 	}
 }
 
+void PedsManager::UpdateGenerousPedsBonus()
+{
+	if (!Taxi::GetInstance()->IsOccupied())
+		return;
 
+	float reward = Taxi::GetInstance()->m_revard;
+
+	m_isGenerousPedsMode ? reward *= 2.0f : reward /= 2.0f;
+	Taxi::GetInstance()->m_revard = reward;
+}

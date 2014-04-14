@@ -165,7 +165,10 @@ void GameScreen::Draw(float time, float seconds)
 		m_penaltyLabel->SetVisible(true);
 
 		m_penaltyLabel->SetMarginTop((int)(50.0f + (m_penaltyProgress / m_penaltyTime) * 50.0f));
-		m_penaltyLabel->SetColor(Color(255, 0, 0, (uint8_t)((1.0f - m_penaltyProgress / m_penaltyTime) * 255.0f)));
+		if (m_penaltyValue < 0.0f)
+			m_penaltyLabel->SetColor(Color(255, 0, 0, (uint8_t)((1.0f - m_penaltyProgress / m_penaltyTime) * 255.0f)));
+		else
+			m_penaltyLabel->SetColor(Color(0, 255, 0, (uint8_t)((1.0f - m_penaltyProgress / m_penaltyTime) * 255.0f)));
 	}
 	else
 	{

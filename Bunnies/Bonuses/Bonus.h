@@ -16,6 +16,7 @@ public:
 	std::string GetName() const;
 	std::string GetIconName() const;
 	float GetTimeLeft() const;
+	void SetTimeLeft(float time);
 
 	bool IsInstantBonus() const;
 	bool IsRunDown() const;
