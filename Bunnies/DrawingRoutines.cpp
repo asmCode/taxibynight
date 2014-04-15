@@ -321,8 +321,6 @@ bool DrawingRoutines::SetupShader(Material *material, MeshPart *meshPart, const 
 		glDisableVertexAttribArray(2);
 		glEnableVertexAttribArray(3);
 		glDisableVertexAttribArray(4);
-
-		glDepthMask(true);
 		
 		return true;
 	}
@@ -457,5 +455,18 @@ void DrawingRoutines::DrawWithMaterial(std::vector<MeshPart*> &meshParts, const 
 
 		if (SetupShader(meshParts[i]->GetMaterial(), meshParts[i], worldMatrix * meshParts[i]->mesh->Transform()))
 			meshParts[i]->Draw();
+	}
+}
+
+void DrawingRoutines::DrawAntimagnet(MeshPart* meshPart, const sm::Matrix &worldMatrix, Texture* tex, const sm::Vec3& lightPosition)
+{
+	if (SetupShader(meshPart->GetMaterial(), meshPart, worldMatrix))
+	{
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+
+		m_diffShader->SetParameter("u_lightPosition", lightPosition);
+		meshPart->Draw();
+
+		glDepthMask(true);
 	}
 }

@@ -1,0 +1,11 @@
+<Material Name="Material #1">
+	<Param Type="Diffuse" Value="0.288;0.288;0.888" />
+	<Param Type="Specular" Value="0;0.215686;1.701961" />
+	<Param Type="Opacity" Value="0.4" />
+	<Param Type="Glossiness" Value="0.1" />
+	<Param Type="SpecularLevel" Value="0.38" />
+	<Textures>
+		<Texture Type="Diffuse" File="antimagnet.png">
+		</Texture>
+	</Textures>
+</Material>

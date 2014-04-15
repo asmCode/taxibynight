@@ -22,6 +22,8 @@ public:
 	static void DrawStreetBegin();
 	static void DrawStreet(Model *model, Texture *diffuseTexture, const sm::Matrix &worldMatrix);
 	static void DrawStreetEnd();
+
+	static void DrawAntimagnet(MeshPart* meshPart, const sm::Matrix &worldMatrix, Texture* tex, const sm::Vec3& lightPosition);
 	
 	static void DrawWithMaterial(std::vector<MeshPart*> &meshParts, const sm::Matrix &worldMatrix);
 	static void DrawUnlit(MeshPart* meshPart, const sm::Matrix &worldMatrix);

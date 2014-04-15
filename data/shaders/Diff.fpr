@@ -20,7 +20,7 @@ void main()
 	
 	vec3 halfVector = normalize(lightDirection + eyeDirection);
 	
-	float diffValue = max(dot(lightDirection, normal), 0.0);
+	float diffValue = max(dot(lightDirection, normal), 0.2);
 	float specValue = pow(max(dot(halfVector, normal), 0.0), u_glossiness) * u_specularLevel;
 	
 	vec4 diffColor = texture2D(u_diffTex, o_coordsDiff);

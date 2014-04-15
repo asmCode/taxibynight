@@ -51,6 +51,9 @@ Taxi::Taxi() :
 	m_shadow = content->Get<Model>("taxi_shadow");
 	assert(m_shadow != NULL);
 
+	m_antiMagnet = content->Get<Model>("antimagnet");
+	assert(m_antiMagnet != NULL);
+
 	m_position.Set(100, 0, 100);
 	m_velocity.Set(0, 0, 0);
 	m_turnDirection.Set(0, 0, -1);
@@ -88,6 +91,8 @@ Taxi::Taxi() :
 
 void Taxi::Reset()
 {
+	m_antiMagnetRor1.Set(0, 0, 0, 0);
+	m_antiMagnetRor2.Set(0, 0, 0, 0);
 	m_speed = 0.0f;
 
 	m_position.Set(100, 0, 100);
@@ -116,6 +121,19 @@ Taxi::~Taxi()
 
 void Taxi::Update(float time, float seconds)
 {
+	if (PedsManager::Instance->IsAntiMagnetMode())
+	{
+		m_antiMagnetRor1.x += seconds * 0.7f;
+		m_antiMagnetRor1.y += seconds * 1.5f;
+		m_antiMagnetRor1.z += seconds * 2.3f;
+		m_antiMagnetRor1.w += seconds * 0.4f;
+
+		m_antiMagnetRor2.x += seconds * 2.25f;
+		m_antiMagnetRor2.y += seconds * 0.83f;
+		m_antiMagnetRor2.z += seconds * 1.1f;
+		m_antiMagnetRor2.w += seconds * 0.8f;
+	}
+
 	//m_position.y = sinf(time * (((m_speed + 1) / 13.0f) * 1.0f)) * 0.5f + 0.5f;
 	//m_position.y *= 0.5f;
 
@@ -416,4 +434,32 @@ void Taxi::SetFree()
 sm::Vec3 Taxi::GetPassengerTarget() const
 {
 	return m_passengerTarget;
+}
+
+void Taxi::DrawTransparencies()
+{
+	if (PedsManager::Instance->IsAntiMagnetMode())
+	{
+		sm::Matrix rot1 =
+			sm::Matrix::RotateAxisMatrix(
+			m_antiMagnetRor1.w,
+			sm::Vec3(sinf(m_antiMagnetRor1.x), sinf(m_antiMagnetRor1.y), sinf(m_antiMagnetRor1.z)).GetNormalized());
+
+		sm::Matrix rot2 =
+			sm::Matrix::RotateAxisMatrix(
+			m_antiMagnetRor2.w,
+			sm::Vec3(sinf(m_antiMagnetRor2.x), sinf(m_antiMagnetRor2.y), sinf(m_antiMagnetRor2.z)).GetNormalized());
+		
+		DrawingRoutines::DrawAntimagnet(
+			m_antiMagnet->m_meshParts[0],
+			m_worldMatrix * sm::Matrix::ScaleMatrix(7.0f, 3.5f, 7.0f) * rot1,
+			NULL,
+			m_position + sm::Vec3(-70.0f, 15.0f, -70.0f));
+
+		DrawingRoutines::DrawAntimagnet(
+			m_antiMagnet->m_meshParts[0],
+			m_worldMatrix * sm::Matrix::ScaleMatrix(7.0f, 3.5f, 7.0f) * rot2,
+			NULL,
+			m_position + sm::Vec3(-70.0f, 15.0f, -70.0f));
+	}
 }

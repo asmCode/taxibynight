@@ -120,7 +120,7 @@ void Ped::Update(float time, float seconds)
 
 		if (distance < 7.0f)
 		{
-			m_position -= directionToTaxi.GetNormalized() * 8.0f * seconds;
+			m_position -= directionToTaxi.GetNormalized() * 10.0f * seconds;
 		}
 	}
 

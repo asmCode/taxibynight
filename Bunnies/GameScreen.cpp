@@ -149,6 +149,8 @@ void GameScreen::Draw(float time, float seconds)
 	if (bonusBlowEffect == NULL)
 		bonusBlowEffect = new BonusBlowEffect();
 	bonusBlowEffect->Draw(time, seconds);
+	
+	m_taxi->DrawTransparencies();
 
 	char fpsText[16];
 	sprintf(fpsText, "fps: %d", m_currentFps);

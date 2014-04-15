@@ -45,6 +45,8 @@ public:
 
 	sm::Matrix m_worldMatrix;
 
+	void DrawTransparencies();
+
 public:
 	static Taxi *m_instance;
 	static float MaxSpeed;
@@ -56,6 +58,7 @@ public:
 
 	Model *m_taxiModel;
 	Model *m_bladeModel;
+	Model *m_antiMagnet;
 	Model *m_shadow;
 	Texture* m_normalTex;
 	Texture* m_carmaTex;
@@ -84,6 +87,9 @@ public:
 
 	Mesh *m_frontRightWheel;
 	Mesh *m_frontLeftWheel;
+
+	sm::Vec4 m_antiMagnetRor1;
+	sm::Vec4 m_antiMagnetRor2;
 };
 
 #endif // TAXI
