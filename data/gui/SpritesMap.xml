@@ -36,4 +36,7 @@
 	<sprite name="vitamin_overdose" file="gui02" bounds="1664,896,128,128" />
 	<sprite name="blind" file="gui02" bounds="1792,896,128,128" />
 	<sprite name="zombie_peds" file="gui02" bounds="1920,896,128,128" />
+	
+	<sprite name="ib_logo" file="gui02" bounds="286,698,256,256" />
+	<sprite name="taxiline" file="gui02" bounds="1048,468,568,43" />
 </map>

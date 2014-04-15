@@ -424,6 +424,11 @@ void Control::Update(float time, float ms)
 		x = m_marginLeft;
 		y = m_marginTop;
 	}
+	else if (!m_fill && m_align == "top-center")
+	{
+		x = (parentSize.x - width) / 2;
+		y = m_marginTop;
+	}
 	else if (!m_fill && m_align =="top-right")
 	{
 		x = parentSize.x - width - m_marginRight;

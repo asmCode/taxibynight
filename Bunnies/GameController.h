@@ -12,6 +12,7 @@ class GameScreen;
 class SplashScreen;
 class MainMenuScreen;
 class ComicsScreen;
+class IntroScreen;
 class SummaryScreen;
 class LeaderboardScreen;
 class Content;
@@ -45,6 +46,7 @@ public:
 	void ShowGameScreen();
 	void ShowLeaderboard();
 	void ShowMainMenuScreen();
+	void ShowIntroScreen();
 	void ShowSummaryScreen(
 		float earn,
 		int courses,
@@ -59,6 +61,7 @@ private:
 	SummaryScreen *m_summaryScreen;
 	ComicsScreen *m_comicsScreen;
 	LeaderboardScreen *m_leaderboardScreen;
+	IntroScreen *m_introScreen;
 
 	IGraphicsEngine *m_graphicsEngine;
 	Content *m_content;

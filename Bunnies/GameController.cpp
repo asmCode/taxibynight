@@ -6,6 +6,7 @@
 #include "MainMenuScreen.h"
 #include "SummaryScreen.h"
 #include "ComicsScreen.h"
+#include "IntroScreen.h"
 #include "LeaderboardScreen.h"
 #include "SpritesMap.h"
 #include "Player.h"
@@ -153,6 +154,10 @@ bool GameController::Initialize(ISystemUtils *systemUtils, IServiceProvider* ser
 	m_leaderboardScreen = new LeaderboardScreen(this);
 	if (!m_leaderboardScreen->InitResources())
 		return false;
+
+	m_introScreen = new IntroScreen(this);
+	if (!m_introScreen->InitResources())
+		return false;
 	
 	PlayerStats playerStats;
 
@@ -252,6 +257,13 @@ void GameController::ShowMainMenuScreen()
 
 	m_activeScreen->Leave();
 	m_activeScreen = m_mainMenuScreen;
+	m_activeScreen->Enter();
+}
+
+void GameController::ShowIntroScreen()
+{
+	m_activeScreen->Leave();
+	m_activeScreen = m_introScreen;
 	m_activeScreen->Enter();
 }
 
