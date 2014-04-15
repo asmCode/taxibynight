@@ -194,5 +194,5 @@ void Renderer::Render(float time, float seconds)
 
 void Renderer::QuitApplication()
 {
-
+	PostQuitMessage(0);
 }

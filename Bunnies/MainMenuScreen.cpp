@@ -8,6 +8,8 @@
 #include <Utils/StringUtils.h>
 #include <Graphics/Content/Content.h>
 #include <Graphics/SpriteBatch.h>
+#include <UserInput/Input2.h>
+#include <Windows.h>
 
 MainMenuScreen::MainMenuScreen(GameController *gameController) :
 	m_gameController(gameController),
@@ -46,8 +48,16 @@ void MainMenuScreen::Draw(float time, float seconds)
 	InterfaceProvider::GetSpriteBatch()->End();
 }
 
+extern bool GlobalDone;
+
 void MainMenuScreen::Update(float time, float seconds)
 {
+	if (Input2::GetKeyDown(KeyCode_Escape))
+	{
+		GlobalDone = true;
+		PostQuitMessage(0);
+	}
+
 	m_mainMenuPanel->Update(time, seconds);
 }
 

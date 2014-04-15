@@ -21,7 +21,7 @@ public:
 
 private:
 	static const int PagesCount = 3;
-	static const int PageTimeout = 8;
+	static const int PageTimeout = 4;
 	static const std::string PageFileNameTemplate;
 
 	int m_pageIndex;

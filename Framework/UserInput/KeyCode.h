@@ -24,5 +24,7 @@ enum KeyCode
 	KeyCode_Num8,
 	KeyCode_Num9,
 
+	KeyCode_Escape,
+
 	Count
 };

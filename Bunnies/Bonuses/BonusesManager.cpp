@@ -76,6 +76,7 @@ void BonusesManager::Update(float time, float seconds)
 
 	UpdateBonuses(seconds);
 
+	/*
 	if (Input2::GetKeyDown(KeyCode_Num1))
 		ActivateBonus(BonusType_Carmageddon);
 	if (Input2::GetKeyDown(KeyCode_Num2))
@@ -90,6 +91,7 @@ void BonusesManager::Update(float time, float seconds)
 		ActivateBonus(BonusType_TakeYourTime);
 	if (Input2::GetKeyDown(KeyCode_Num7))
 		ActivateBonus(BonusType_FeelThePower);
+	*/
 }
 
 void BonusesManager::Draw(float time, float seconds)
@@ -127,17 +129,53 @@ void BonusesManager::NotifyStreetSegmentVisibilityChanged(StreetSegment *streetS
 
 	if (streetSegment->IsVisible())
 	{
-		BonusStreetSymbol *bonus = GetInactiveBonusSymbol();
-		if (bonus == NULL)
-			return;
+		static Randomizer rand;
+		if (rand.GetInt(0, 10) == 0)
+		{
+			BonusStreetSymbol *bonus = GetInactiveBonusSymbol();
+			if (bonus == NULL)
+				return;
 
-		sm::Vec3 bonusPosition = streetSegment->GetPivotPosition();
-		static Randomizer random;
+			sm::Vec3 bonusPosition = streetSegment->GetPivotPosition();
+			static Randomizer random;
 
-		bonusPosition += sm::Vec3(random.GetFloat(-4.5f, 4.5f), 0.0f, random.GetFloat(-4.5f, 4.5f));
+			bonusPosition += sm::Vec3(random.GetFloat(-4.5f, 4.5f), 0.0f, random.GetFloat(-4.5f, 4.5f));
 
-		bonus->SetActive(bonusPosition, streetSegment);
+			bonus->SetActive(bonusPosition, streetSegment);
+		}
 	}
+}
+
+int GetRandomIndex(float *probabilityDistribution, int count)
+{
+	if (count == 0)
+	{
+		assert(false);
+	}
+
+	// get sum of all values
+	float range = 0.0f;
+	for (int i = 0; i < count; i++)
+		range += probabilityDistribution[i];
+
+	// get random value in the range of sum of all values
+	static Randomizer random;
+	float value = random.GetFloat(0.0f, range);
+
+	float min = 0.0f;
+	float max = 0.0f;
+
+	for (int i = 0; i < count; i++)
+	{
+		min = max;
+		max += probabilityDistribution[i];
+
+		if (value >= min && value <= max)
+			return i;
+	}
+
+	assert(false);
+	return -1;
 }
 
 void BonusesManager::OnBonusCollected(BonusStreetSymbol* bonusStreetSymbol)
@@ -146,6 +184,32 @@ void BonusesManager::OnBonusCollected(BonusStreetSymbol* bonusStreetSymbol)
 
 	m_bonusBlowEffect->SetPosition(bonusStreetSymbol->GetPosition());
 	m_bonusBlowEffect->Blow();
+
+	float prob[] = 
+	{
+		1,
+		2,
+		2,
+		1,
+		1,
+		1,
+		2
+	};
+
+	BonusType type[] = 
+	{
+		BonusType_Money,
+		BonusType_Carmageddon,
+		BonusType_PedsAntiMagnet,
+		BonusType_GenerousClients,
+		BonusType_FeelThePower,
+		BonusType_TakeYourTime,
+		BonusType_ZombiePeds
+	};
+
+	int index = GetRandomIndex(prob, 7);
+
+	ActivateBonus(type[index]);
 
 	bonusStreetSymbol->SetInactive();
 }
@@ -168,9 +232,9 @@ void BonusesManager::ActivateBonus(BonusType type)
 {
 	Bonus* bonus = GetActiveBonus(type);
 	if (bonus == NULL)
-		bonus = new Bonus(type, 10.0f);
+		bonus = new Bonus(type, 15.0f);
 
-	bonus->SetTimeLeft(10.0f);
+	bonus->SetTimeLeft(15.0f);
 
 	m_bonuses[type] = bonus;
 

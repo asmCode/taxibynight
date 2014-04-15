@@ -39,12 +39,14 @@ void BonusBlowEffect::Initialize()
 	m_transparencyCurve->AddKeyframe(0.0f, 1.0f, false);
 	m_transparencyCurve->AddKeyframe(0.25f, 0.8f, false);
 	m_transparencyCurve->AddKeyframe(0.5f, 0.0f, false);
+
 }
 
 BonusBlowEffect::BonusBlowEffect()
 {
 	m_isActive = false;
 
+	m_viewProjMatrix = sm::Matrix::Identity;
 	m_baseTransform = sm::Matrix::RotateAxisMatrix(-MathUtils::PI2, 1, 0, 0);
 	m_transform = sm::Matrix::IdentityMatrix();
 

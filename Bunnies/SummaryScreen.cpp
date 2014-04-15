@@ -7,6 +7,7 @@
 #include <Graphics/Content/Content.h>
 #include <Graphics/SpriteBatch.h>
 #include <Audio/SoundManager.h>
+#include <UserInput/Input2.h>
 
 SummaryScreen::SummaryScreen(GameController *gameController) :
 	m_gameController(gameController),
@@ -44,6 +45,9 @@ void SummaryScreen::Draw(float time, float seconds)
 
 void SummaryScreen::Update(float time, float seconds)
 {
+	if (Input2::GetKeyDown(KeyCode_Escape))
+		m_gameController->ShowMainMenuScreen();
+
 	m_summaryPanel->Update(time, seconds);
 }
 

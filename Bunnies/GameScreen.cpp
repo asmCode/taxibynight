@@ -126,8 +126,6 @@ bool GameScreen::ReleaseResources()
 	return false;
 }
 
-BonusBlowEffect* bonusBlowEffect;
-
 void GameScreen::Draw(float time, float seconds)
 {
 #if __APPLE__
@@ -145,11 +143,7 @@ void GameScreen::Draw(float time, float seconds)
 	m_bonusesManager->Draw(time, seconds);
 	if (!m_isPaused)
 		m_arrow->Draw(time, seconds);
-	m_placeIndicator->Draw(time, seconds);
-	if (bonusBlowEffect == NULL)
-		bonusBlowEffect = new BonusBlowEffect();
-	bonusBlowEffect->Draw(time, seconds);
-	
+	m_placeIndicator->Draw(time, seconds);	
 	m_taxi->DrawTransparencies();
 
 	char fpsText[16];
@@ -190,8 +184,18 @@ void GameScreen::SetPenalty(float value)
 	m_penaltyLabel->SetMarginTop(50);
 }
 
+bool justResumed;
+
 void GameScreen::Update(float time, float seconds)
 {
+	if (!justResumed && !m_isPaused && Input2::GetKeyUp(KeyCode_Escape))
+	{
+		ShowPause();
+		return;
+	}
+
+	justResumed = false;
+
 	if (m_penaltyValue != 0.0f)
 	{
 		m_penaltyProgress += seconds;
@@ -206,8 +210,16 @@ void GameScreen::Update(float time, float seconds)
 
 	if (m_isPaused)
 	{
-		m_pausePanel->Update(time, seconds);
-		return;
+		if (Input2::GetKeyUp(KeyCode_Escape))
+		{
+			justResumed = true;
+			Resume();
+		}
+		else
+		{
+			m_pausePanel->Update(time, seconds);
+			return;
+		}
 	}
 
 	m_taxi->Update(time, seconds);
@@ -271,7 +283,7 @@ void GameScreen::Update(float time, float seconds)
 
 	m_messageLabel->SetVisible(true);
 	if (!Player::Instance->m_tutorialFinished && !Taxi::GetInstance()->IsOccupied())
-		m_messageLabel->SetText("Stop next to red guy");
+		m_messageLabel->SetText("Use arrows to drive. Stop next to red guy");
 	else if (
 		!Player::Instance->m_tutorialFinished && Taxi::GetInstance()->IsOccupied() &&
 		(Taxi::GetInstance()->GetPassengerTarget() - Taxi::GetInstance()->GetPosition()).GetLength() > 15.0f)
@@ -288,13 +300,6 @@ void GameScreen::Update(float time, float seconds)
 		m_messageLabel->SetVisible(false);
 
 	m_placeIndicator->Update(time, seconds, m_projMatrix * m_viewMatrix);
-	static sm::Vec3 tp = m_taxi->GetPosition();
-	if (bonusBlowEffect == NULL)
-		bonusBlowEffect = new BonusBlowEffect();
-	bonusBlowEffect->SetPosition(tp);
-	if (Input2::GetKeyDown(KeyCode::KeyCode_S))
-		bonusBlowEffect->Blow();
-	bonusBlowEffect->Update(time, seconds, m_projMatrix * m_viewMatrix);
 	m_hud->Update(time, seconds);
 
 	m_fps++;

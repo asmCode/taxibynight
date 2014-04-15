@@ -34,6 +34,8 @@ bool Input2::Constructor()
 	Input2::m_keyMap[KeyCode_Num8] = '8';
 	Input2::m_keyMap[KeyCode_Num9] = '9';
 
+	Input2::m_keyMap[KeyCode_Escape] = VK_ESCAPE;
+
 	return true;
 }
 

@@ -155,6 +155,9 @@ void HUD::OnUpdate(float time, float seconds)
 
 void HUD::BonusActivated(BonusType bonusType)
 {
+	if (bonusType == BonusType_Money)
+		return;
+
 	Bonus* bonus = BonusesManager::Instance->GetActiveBonus(bonusType);
 	assert(bonus != NULL);
 
@@ -171,6 +174,9 @@ void HUD::BonusActivated(BonusType bonusType)
 
 void HUD::BonusDeactivated(BonusType bonusType)
 {
+	if (bonusType == BonusType_Money)
+		return;
+
 	BonusControl* bonusControl = GetBonusControlOfType(bonusType);
 	assert(bonusControl != NULL);
 

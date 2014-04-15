@@ -7,6 +7,8 @@
 #include <stdio.h>
 #include <assert.h>
 
+bool GlobalDone;
+
 #if 0
 // iPod Touch 4
 int ScreenWidth = 960;
@@ -97,7 +99,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR, int)
 	renderer = new Renderer(glwnd);
 	renderer ->Initialize();
 
-	while (!done)
+	while (!GlobalDone)
 	{
 		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
 		{
@@ -113,18 +115,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR, int)
 		}
 		else
 		{
-			if (GetAsyncKeyState(VK_ESCAPE) & 0x8000)
-			{
-				done = true;
-			}
-			else
-			{
-				float seconds = tc ->CheckFrameMS() / 1000.0f;
-				time += seconds;
+			float seconds = tc ->CheckFrameMS() / 1000.0f;
+			time += seconds;
 
-				renderer->Update(time, seconds);
-				renderer ->Render(time, seconds);
-			}
+			renderer->Update(time, seconds);
+			renderer ->Render(time, seconds);
 		}
 	}
 

@@ -232,6 +232,7 @@
     <ClInclude Include="Framework\Utils\StringUtils.h" />
     <ClInclude Include="Framework\XML\XMLLoader.h" />
     <ClInclude Include="Framework\XML\XMLNode.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BunniesView\OpenglWindow.cpp" />
@@ -358,6 +359,12 @@
     <None Include="data\shaders\Sprite2.vpr" />
     <None Include="data\shaders\Unlit.fpr" />
     <None Include="data\shaders\Unlit.vpr" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="BunniesHerdSimulator.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="ikona.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

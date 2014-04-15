@@ -17,6 +17,7 @@
 #include <Audio/SoundManager.h>
 #include <stdio.h>
 #include <assert.h>
+#include <UserInput/Input2.h>
 
 LeaderboardScreen::LeaderboardScreen(GameController *gameController) :
 	m_gameController(gameController),
@@ -85,6 +86,9 @@ void LeaderboardScreen::Draw(float time, float seconds)
 
 void LeaderboardScreen::Update(float time, float seconds)
 {
+	if (Input2::GetKeyDown(KeyCode_Escape))
+		m_gameController->ShowMainMenuScreen();
+
 	m_leaderboardPanel->Update(time, seconds);
 }
 
