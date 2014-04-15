@@ -178,6 +178,7 @@ void DrawingRoutines::DrawUnlitEnd()
 
 void DrawingRoutines::DrawPedBegin(MeshPart *meshPart)
 {
+	glDepthMask(true);
 	glEnable(GL_DEPTH_TEST);
 
 	glEnableVertexAttribArray(0); 
@@ -278,7 +279,7 @@ const sm::Vec3& DrawingRoutines::GetLightPosition()
 	return m_lightPosition;
 }
 
-bool DrawingRoutines::SetupShader(Material *material, MeshPart *meshPart, const sm::Matrix &worldatrix)
+bool DrawingRoutines::SetupShader(Material *material, MeshPart *meshPart, const sm::Matrix &worldatrix, bool additiveBlend)
 {
 	if (!material->IsOpacity())
 	{
@@ -295,7 +296,11 @@ bool DrawingRoutines::SetupShader(Material *material, MeshPart *meshPart, const 
 		glEnable(GL_DEPTH_TEST);
 		glDepthMask(false);
 		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+		if (additiveBlend)
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+		else
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	}
 
 	assert(material != NULL);
@@ -440,7 +445,7 @@ bool DrawingRoutines::SetupShader(Material *material, MeshPart *meshPart, const 
 	return false;
 }
 
-void DrawingRoutines::DrawWithMaterial(std::vector<MeshPart*> &meshParts, const sm::Matrix &worldMatrix)
+void DrawingRoutines::DrawWithMaterial(std::vector<MeshPart*> &meshParts, const sm::Matrix &worldMatrix, bool additiveBlend)
 {
 	for (uint32_t i = 0; i < meshParts.size(); i++)
 	{
@@ -453,17 +458,15 @@ void DrawingRoutines::DrawWithMaterial(std::vector<MeshPart*> &meshParts, const 
 			meshParts[i]->material = new Material();
 		}
 
-		if (SetupShader(meshParts[i]->GetMaterial(), meshParts[i], worldMatrix * meshParts[i]->mesh->Transform()))
+		if (SetupShader(meshParts[i]->GetMaterial(), meshParts[i], worldMatrix * meshParts[i]->mesh->Transform(), additiveBlend))
 			meshParts[i]->Draw();
 	}
 }
 
 void DrawingRoutines::DrawAntimagnet(MeshPart* meshPart, const sm::Matrix &worldMatrix, Texture* tex, const sm::Vec3& lightPosition)
 {
-	if (SetupShader(meshPart->GetMaterial(), meshPart, worldMatrix))
+	if (SetupShader(meshPart->GetMaterial(), meshPart, worldMatrix, true))
 	{
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-
 		m_diffShader->SetParameter("u_lightPosition", lightPosition);
 		meshPart->Draw();
 

@@ -48,8 +48,7 @@ BonusBlowEffect::BonusBlowEffect()
 	m_baseTransform = sm::Matrix::RotateAxisMatrix(-MathUtils::PI2, 1, 0, 0);
 	m_transform = sm::Matrix::IdentityMatrix();
 
-	//m_color.Set(1, 0.7f, 0, 0.8f);
-	m_color.Set(0.5f, 0.5f, 0.5f, 0.8f);
+	m_color.Set(181.0f / 256.0f, 230.0f / 256.0f, 29.0f / 256.0f, 0.6f);
 	m_effectTime = 0.0f;
 	m_maxScale = 8.0f;
 }

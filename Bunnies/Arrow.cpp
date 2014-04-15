@@ -53,8 +53,9 @@ void Arrow::Draw(float time, float seconds)
 
 	float arrowWidth = width * 0.1f;
 
-	glClear(GL_DEPTH_BUFFER_BIT);
 	glViewport((width - arrowWidth) / 2, height - arrowWidth, arrowWidth, arrowWidth);
+	glDepthMask(true);
+	glClear(GL_DEPTH_BUFFER_BIT);
 
 	sm::Vec3 camPosition(0, 12, -5);
 	sm::Vec3 camLook = (camPosition - (sm::Vec3(0, 0, 0))).GetNormalized();

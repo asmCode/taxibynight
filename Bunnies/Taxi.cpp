@@ -36,6 +36,9 @@ Taxi::Taxi() :
 	m_taxiModel = content->Get<Model>("taxi");
 	assert(m_taxiModel != NULL);
 
+	m_lights = content->Get<Model>("lights");
+	assert(m_lights != NULL);
+
 	m_bladeModel = content->Get<Model>("blade");
 	assert(m_bladeModel != NULL);
 
@@ -438,6 +441,8 @@ sm::Vec3 Taxi::GetPassengerTarget() const
 
 void Taxi::DrawTransparencies()
 {
+	//DrawingRoutines::DrawWithMaterial(m_lights->m_meshParts, m_worldMatrix, true);
+
 	if (PedsManager::Instance->IsAntiMagnetMode())
 	{
 		sm::Matrix rot1 =

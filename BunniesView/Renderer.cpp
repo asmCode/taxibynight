@@ -183,6 +183,7 @@ void Renderer::Update(float time, float seconds)
 
 void Renderer::Render(float time, float seconds)
 {
+	glDepthMask(true);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
 

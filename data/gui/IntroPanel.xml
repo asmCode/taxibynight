@@ -7,9 +7,9 @@
 	
 	<Panel align="top-left" margin_left="20" margin_top="220">
 		<Panel align="top-left">
-			<Label font="fenix_18" align="top-left" margin_top="0" text="We are very glad, that we can present you a prototype of our iOS game, which" />
+			<Label font="fenix_18" align="top-left" margin_top="0" text="We are very glad to present you a prototype of our iOS game, which" />
 			<Label font="fenix_18" align="top-left" margin_top="30" text="we are currently working on. Some of the features still need some work, but we" />
-			<Label font="fenix_18" align="top-left" margin_top="60" text="hope, that this game will bring you a little bit fun!" />
+			<Label font="fenix_18" align="top-left" margin_top="60" text="hope, that this game will bring you a little bit of fun!" />
 		</Panel>
 		
 		<Panel align="top-left" margin_top="130">

@@ -17,7 +17,8 @@ const std::string SoundManager::SoundFiles[] =
 	std::string("money.mp3"),
 	std::string("summary.mp3"),
 	std::string("doors.mp3"),
-	std::string("die.mp3")
+	std::string("die.mp3"),
+	std::string("bonus.mp3")
 };
 
 SoundManager *SoundManager::GetInstance()
@@ -94,8 +95,6 @@ float SoundManager::GetMusicVolume() const
 
 void SoundManager::PlayMusic()
 {
-	return;
-	
 	assert(music != NULL);
 	music->Play();
 }
@@ -110,14 +109,11 @@ void SoundManager::StopMusic()
 
 void SoundManager::PlaySound(SoundManager::Sound sound)
 {
-	return;
 	sounds[sound]->Play();
 }
 
 void SoundManager::StartEngine()
 {
-	return;
-
 	m_engine->Play();
 }
 

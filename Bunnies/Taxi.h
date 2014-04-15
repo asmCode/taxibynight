@@ -57,6 +57,7 @@ public:
 	float m_acc;
 
 	Model *m_taxiModel;
+	Model *m_lights;
 	Model *m_bladeModel;
 	Model *m_antiMagnet;
 	Model *m_shadow;

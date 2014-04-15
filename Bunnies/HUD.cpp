@@ -48,6 +48,7 @@ HUD *HUD::Create(GameScreen *gameScreen)
 	ret->m_bonusesGrid = dynamic_cast<GridPanel*>(ret->FindChild("bonuses_grid"));
 	assert(ret->m_bonusesGrid != NULL);
 	
+	/*
 	Control *left = dynamic_cast<AnimButton*>(ret->FindChild("turn_left"));
 	assert(left != NULL);
 	Control *right = dynamic_cast<AnimButton*>(ret->FindChild("turn_right"));
@@ -56,13 +57,16 @@ HUD *HUD::Create(GameScreen *gameScreen)
 	assert(acc != NULL);
 	Control *brake = dynamic_cast<AnimButton*>(ret->FindChild("brake_pedal"));
 	assert(brake != NULL);
+	*/
 	Control *pause = dynamic_cast<AnimButton*>(ret->FindChild("pause"));
 	assert(pause != NULL);
 
+	/*
 	ObsCast(IControlEventsObserver, left)->AddObserver(ret);
 	ObsCast(IControlEventsObserver, right)->AddObserver(ret);
 	ObsCast(IControlEventsObserver, acc)->AddObserver(ret);
 	ObsCast(IControlEventsObserver, brake)->AddObserver(ret);
+	*/
 	ObsCast(IControlEventsObserver, pause)->AddObserver(ret);
 
 	ret->m_totalMoneyLabel = dynamic_cast<Label*>(ret->FindChild("total_money_value"));

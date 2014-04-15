@@ -142,6 +142,8 @@ void BonusesManager::NotifyStreetSegmentVisibilityChanged(StreetSegment *streetS
 
 void BonusesManager::OnBonusCollected(BonusStreetSymbol* bonusStreetSymbol)
 {
+	SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Bonus);
+
 	m_bonusBlowEffect->SetPosition(bonusStreetSymbol->GetPosition());
 	m_bonusBlowEffect->Blow();
 

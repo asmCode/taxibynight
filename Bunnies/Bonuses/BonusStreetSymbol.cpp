@@ -64,7 +64,7 @@ void BonusStreetSymbol::Update(float time, float seconds)
 void BonusStreetSymbol::Draw(float time, float seconds)
 {
 //	if (Input2::GetKey(KeyCode::KeyCode_A))
-		DrawingRoutines::DrawWithMaterial(m_model->m_meshParts, m_transform);
+		DrawingRoutines::DrawWithMaterial(m_model->m_meshParts, m_transform, true);
 }
 
 void BonusStreetSymbol::DrawShadow(float time, float seconds)

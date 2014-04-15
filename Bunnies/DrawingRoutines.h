@@ -25,7 +25,7 @@ public:
 
 	static void DrawAntimagnet(MeshPart* meshPart, const sm::Matrix &worldMatrix, Texture* tex, const sm::Vec3& lightPosition);
 	
-	static void DrawWithMaterial(std::vector<MeshPart*> &meshParts, const sm::Matrix &worldMatrix);
+	static void DrawWithMaterial(std::vector<MeshPart*> &meshParts, const sm::Matrix &worldMatrix, bool additiveBlend = false);
 	static void DrawUnlit(MeshPart* meshPart, const sm::Matrix &worldMatrix);
 	static void DrawSprite(Model *model, const sm::Matrix &viewMatrix, const sm::Matrix &worldMatrix);
 
@@ -64,7 +64,7 @@ private:
 	static sm::Matrix m_viewMatrix;
 	static sm::Matrix m_viewProjMatrix;
 
-	static bool SetupShader(Material *material, MeshPart *meshPart, const sm::Matrix &worldatrix);
+	static bool SetupShader(Material *material, MeshPart *meshPart, const sm::Matrix &worldatrix, bool additiveBlend);
 };
 
 #endif // DRAWING_ROUTINES
