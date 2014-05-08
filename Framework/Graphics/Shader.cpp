@@ -153,6 +153,7 @@ GLuint Shader::CompileShader(GLenum shaderType, const char* file)
 	std::ifstream fileStream(file, std::ios::binary);
 	if (!fileStream.is_open() || fileStream.fail())
 	{
+		Log::LogT("Couldn't open shader file: %s", file);
 		assert(false);
 		return NULL;
 	}
@@ -177,7 +178,8 @@ GLuint Shader::CompileShader(GLenum shaderType, const char* file)
     
     GLint logLength;
     glGetShaderiv(shaderId, GL_INFO_LOG_LENGTH, &logLength);
-    if (logLength > 0) {
+    if (logLength > 0)
+	{
         GLchar *log = new GLchar[logLength];
         glGetShaderInfoLog(shaderId, logLength, &logLength, log);
 		Log::LogT("shader log: %s", log);

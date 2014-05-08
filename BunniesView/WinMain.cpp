@@ -1,4 +1,4 @@
-#include <windows.h>
+﻿#include <windows.h>
 
 #include <GL/glew.h>
 #include "OpenglWindow.h"
@@ -42,15 +42,28 @@ void APIENTRY OpenglDebugCallback(
 	 int houston = 0;
  }
 
-void InitGl()
+bool InitGl()
 {
 	if (glewInit() != GLEW_OK)
 	{
 		assert(false);
 	}
 
+	int versionMajor;
+	int versionMinor;
+	glGetIntegerv(GL_MAJOR_VERSION, &versionMajor);
+	glGetIntegerv(GL_MINOR_VERSION, &versionMinor);
+
+	if (versionMajor < 2)
+	{
+		MessageBoxA(NULL, "You need Opengl 2.0 or higher", "Wrong opengl version", MB_ICONWARNING);
+		return false;
+	}
+
+#if 0
 	glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
 	glDebugMessageCallback(OpenglDebugCallback, NULL);
+#endif
 
 	glViewport(0, 0, ScreenWidth, ScreenHeight);
 
@@ -76,6 +89,8 @@ void InitGl()
 	glHint(GL_POLYGON_SMOOTH_HINT, GL_NICEST);
 
 	glDisable(GL_LIGHTING);
+
+	return true;
 }
 
 HWND hwnd;
@@ -92,9 +107,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR, int)
 
 	glwnd = new OpenglWindow();
 	glwnd ->SetCurrentContext();
-	glwnd ->Initialize(NULL, "dupa", ScreenWidth, ScreenHeight, 32, 0, false, true, NULL);
+	glwnd ->Initialize(NULL, "Taxi by Night", ScreenWidth, ScreenHeight, 32, 0, false, true, NULL);
 
-	InitGl();
+	if (!InitGl())
+		return 0;
 
 	renderer = new Renderer(glwnd);
 	renderer ->Initialize();

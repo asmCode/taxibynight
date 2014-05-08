@@ -8,6 +8,7 @@
 bool Log::logThreadName;
 
 std::stringstream Log::logSStream;
+std::ofstream Log::m_fileStream;
 char Log::dstBuf[1024];
 char Log::timeBuff[80];
 
@@ -37,6 +38,8 @@ void Log::UpdateLog()
 
 void Log::StartLog(bool logThreadName)
 {
+	m_fileStream.open("log.txt");
+
 	Log::logThreadName = logThreadName;
 }
 
@@ -51,5 +54,7 @@ void Log::LogT(const char *formatString, ...)
 	UpdateLog();
 	
 	OutputDebugStringA(logSStream.str().c_str());
+	m_fileStream.write(logSStream.str().c_str(), logSStream.str().length());
+	m_fileStream.flush();
 }
 

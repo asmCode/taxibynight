@@ -76,7 +76,7 @@ void BonusesManager::Update(float time, float seconds)
 
 	UpdateBonuses(seconds);
 
-	/*
+#if 0
 	if (Input2::GetKeyDown(KeyCode_Num1))
 		ActivateBonus(BonusType_Carmageddon);
 	if (Input2::GetKeyDown(KeyCode_Num2))
@@ -91,7 +91,7 @@ void BonusesManager::Update(float time, float seconds)
 		ActivateBonus(BonusType_TakeYourTime);
 	if (Input2::GetKeyDown(KeyCode_Num7))
 		ActivateBonus(BonusType_FeelThePower);
-	*/
+#endif
 }
 
 void BonusesManager::Draw(float time, float seconds)

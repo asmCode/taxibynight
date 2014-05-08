@@ -1,11 +1,13 @@
 #pragma once
 
 #include <string>
+#include <fstream>
 
 class Log
 {
 private:
 	static std::stringstream logSStream;
+	static std::ofstream m_fileStream;
 	static char dstBuf[1024];
 	static char timeBuff[80];
 	
