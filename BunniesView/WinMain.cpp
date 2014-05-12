@@ -60,7 +60,7 @@ bool InitGl()
 		return false;
 	}
 
-#if 0
+#if 1
 	glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
 	glDebugMessageCallback(OpenglDebugCallback, NULL);
 #endif
