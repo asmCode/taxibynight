@@ -39,4 +39,8 @@
 	
 	<sprite name="ib_logo" file="gui02" bounds="286,698,256,256" />
 	<sprite name="taxiline" file="gui02" bounds="1048,468,568,43" />
+	
+	<sprite name="car_dealer_button" file="gui02" bounds="1460,700,196,196" />
+	<sprite name="car_parts_button" file="gui02" bounds="1656,700,196,196" />
+	<sprite name="car_paint_button" file="gui02" bounds="1852,700,196,196" />
 </map>

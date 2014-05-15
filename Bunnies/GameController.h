@@ -15,6 +15,7 @@ class ComicsScreen;
 class IntroScreen;
 class SummaryScreen;
 class LeaderboardScreen;
+class GarageScreen;
 class Content;
 class IServiceProvider;
 
@@ -61,6 +62,7 @@ private:
 	SummaryScreen *m_summaryScreen;
 	ComicsScreen *m_comicsScreen;
 	LeaderboardScreen *m_leaderboardScreen;
+	GarageScreen *m_garageScreen;
 	IntroScreen *m_introScreen;
 
 	IGraphicsEngine *m_graphicsEngine;

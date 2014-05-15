@@ -8,6 +8,7 @@
 #include "ComicsScreen.h"
 #include "IntroScreen.h"
 #include "LeaderboardScreen.h"
+#include "GarageScreen.h"
 #include "SpritesMap.h"
 #include "Player.h"
 #include "Environment.h"
@@ -158,6 +159,10 @@ bool GameController::Initialize(ISystemUtils *systemUtils, IServiceProvider* ser
 	m_introScreen = new IntroScreen(this);
 	if (!m_introScreen->InitResources())
 		return false;
+
+	m_garageScreen = new GarageScreen(this);
+	if (!m_garageScreen->InitResources())
+		return false;
 	
 	PlayerStats playerStats;
 
@@ -270,7 +275,8 @@ void GameController::ShowIntroScreen()
 void GameController::ShowLeaderboard()
 {
 	m_activeScreen->Leave();
-	m_activeScreen = m_leaderboardScreen;
+	//m_activeScreen = m_leaderboardScreen;
+	m_activeScreen = m_garageScreen;
 	m_activeScreen->Enter();
 }
 
