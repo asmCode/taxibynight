@@ -99,6 +99,7 @@
     <ClInclude Include="Bunnies\Bonuses\BonusStreetSymbol.h" />
     <ClInclude Include="Bunnies\Bonuses\BonusType.h" />
     <ClInclude Include="Bunnies\Camera.h" />
+    <ClInclude Include="Bunnies\CarDealerScreen.h" />
     <ClInclude Include="Bunnies\ComicsScreen.h" />
     <ClInclude Include="Bunnies\DummyAnalytics.h" />
     <ClInclude Include="Bunnies\Effects\DiffLightEffect.h" />
@@ -251,6 +252,7 @@
     <ClCompile Include="Bunnies\Bonuses\BonusesManager.cpp" />
     <ClCompile Include="Bunnies\Bonuses\BonusStreetSymbol.cpp" />
     <ClCompile Include="Bunnies\Camera.cpp" />
+    <ClCompile Include="Bunnies\CarDealerScreen.cpp" />
     <ClCompile Include="Bunnies\ComicsScreen.cpp" />
     <ClCompile Include="Bunnies\DummyAnalytics.cpp" />
     <ClCompile Include="Bunnies\Effects\DiffLightEffect.cpp" />

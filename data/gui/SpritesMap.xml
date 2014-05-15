@@ -43,4 +43,11 @@
 	<sprite name="car_dealer_button" file="gui02" bounds="1460,700,196,196" />
 	<sprite name="car_parts_button" file="gui02" bounds="1656,700,196,196" />
 	<sprite name="car_paint_button" file="gui02" bounds="1852,700,196,196" />
+	
+	<sprite name="car_1_button" file="gui02" bounds="1460,1024,196,196" />
+	<sprite name="car_2_button" file="gui02" bounds="1656,1024,196,196" />
+	<sprite name="car_3_button" file="gui02" bounds="1852,1024,196,196" />
+	
+	<sprite name="stats_cell_off" file="gui02" bounds="0,868,32,96" />
+	<sprite name="stats_cell_on" file="gui02" bounds="32,868,32,96" />
 </map>

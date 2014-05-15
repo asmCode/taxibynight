@@ -155,3 +155,5 @@ $RECYCLE.BIN/
 .sign
 crash-info
 /HerdBunniesSimulator.vcxproj.filters
+/log.txt
+/player.xml

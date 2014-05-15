@@ -9,6 +9,7 @@
 #include "IntroScreen.h"
 #include "LeaderboardScreen.h"
 #include "GarageScreen.h"
+#include "CarDealerScreen.h"
 #include "SpritesMap.h"
 #include "Player.h"
 #include "Environment.h"
@@ -40,6 +41,8 @@ GameController::GameController(IGraphicsEngine *graphicsEngine) :
 	m_mainMenuScreen(NULL),
 	m_summaryScreen(NULL),
 	m_gameScreen(NULL),
+	m_garageScreen(NULL),
+	m_carDealerScreen(NULL),
 	m_comicsScreen(NULL),
 	m_activeScreen(NULL)
 {
@@ -163,6 +166,10 @@ bool GameController::Initialize(ISystemUtils *systemUtils, IServiceProvider* ser
 	m_garageScreen = new GarageScreen(this);
 	if (!m_garageScreen->InitResources())
 		return false;
+
+	m_carDealerScreen = new CarDealerScreen(this);
+	if (!m_carDealerScreen->InitResources())
+		return false;
 	
 	PlayerStats playerStats;
 
@@ -253,6 +260,13 @@ void GameController::ShowGameScreen()
 
 	m_activeScreen->Leave();
 	m_activeScreen = screen;
+	m_activeScreen->Enter();
+}
+
+void GameController::ShowCarDealerScreen()
+{
+	m_activeScreen->Leave();
+	m_activeScreen = m_carDealerScreen;
 	m_activeScreen->Enter();
 }
 

@@ -86,6 +86,6 @@ void GarageScreen::Clicked(Control *control, uint32_t x, uint32_t y)
 	if (control == m_carDealerButton)
 	{
 		SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Button);
-		m_gameController->ShowMainMenuScreen();
+		m_gameController->ShowCarDealerScreen();
 	}
 }

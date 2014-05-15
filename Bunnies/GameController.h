@@ -16,6 +16,7 @@ class IntroScreen;
 class SummaryScreen;
 class LeaderboardScreen;
 class GarageScreen;
+class CarDealerScreen;
 class Content;
 class IServiceProvider;
 
@@ -45,6 +46,7 @@ public:
 	void proto_SetLookTarget(const sm::Vec3 &lookTarget);
 
 	void ShowGameScreen();
+	void ShowCarDealerScreen();
 	void ShowLeaderboard();
 	void ShowMainMenuScreen();
 	void ShowIntroScreen();
@@ -63,6 +65,7 @@ private:
 	ComicsScreen *m_comicsScreen;
 	LeaderboardScreen *m_leaderboardScreen;
 	GarageScreen *m_garageScreen;
+	CarDealerScreen *m_carDealerScreen;
 	IntroScreen *m_introScreen;
 
 	IGraphicsEngine *m_graphicsEngine;
