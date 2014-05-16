@@ -50,7 +50,8 @@ void SplashScreen::Update(float time, float seconds)
 	m_timeout.Progress(seconds);
 	if (m_timeout.IsTimeout())
 		//m_gameController->ShowMainMenuScreen();
-		m_gameController->ShowIntroScreen();
+		//m_gameController->ShowIntroScreen();
+		m_gameController->ShowLeaderboard();
 }
 
 void SplashScreen::Leave()

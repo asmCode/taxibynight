@@ -3,6 +3,7 @@
 #include "Label.h"
 #include "AnimButton.h"
 #include "Gui/GridPanel.h"
+#include "../Bunnies/Gui/ProgressControl.h"
 #include "InterfaceProvider.h"
 #include "SpritesMap.h"
 #include "Environment.h"
@@ -40,6 +41,8 @@ Control* Inflater::LoadNode(XMLNode *node)
 		control = LoadAnimButtonControl(node, name);
 	else if (type == "Grid")
 		control = LoadGridControl(node, name);
+	else if (type == "ProgressControl")
+		control = LoadProgressControl(node, name);
 	else if (type == "Label")
 		control = LoadLabelControl(node, name);
 
@@ -152,6 +155,34 @@ Control* Inflater::LoadAnimButtonControl(XMLNode *node, const std::string &name)
 
 Control* Inflater::LoadGridControl(XMLNode *node, const std::string &name)
 {
-	return new GridPanel(name);
+	GridPanel::Orientation orientation = GridPanel::Orientation_Horizontal;
+	int gapSize = 8;
+
+	if (node->HasAttrib("orientation"))
+	{
+		std::string orientationText = node->GetAttribAsString("orientation");
+
+		if (orientationText == "horizontal")
+			orientation = GridPanel::Orientation_Horizontal;
+		else if (orientationText == "vertical")
+			orientation = GridPanel::Orientation_Vertical;
+	}
+	if (node->HasAttrib("gap_size"))
+		gapSize = node->GetAttribAsInt32("gap_size");
+
+	return new GridPanel(name, orientation, gapSize);
+}
+
+Control* Inflater::LoadProgressControl(XMLNode *node, const std::string &name)
+{
+	std::string title;
+	int maxValues = 0;
+
+	if (node->HasAttrib("title"))
+		title = node->GetAttribAsString("title");
+	if (node->HasAttrib("max_values"))
+		maxValues = node->GetAttribAsInt32("max_values");
+
+	return new ProgressControl(title, maxValues);
 }
 

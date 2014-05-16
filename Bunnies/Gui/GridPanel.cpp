@@ -1,8 +1,9 @@
 #include "GridPanel.h"
 
-GridPanel::GridPanel(const std::string &name) :
+GridPanel::GridPanel(const std::string &name, Orientation orientation, int gapSize) :
 	Control(name),
-	m_childrenDistance(8)
+	m_orientation(orientation),
+	m_childrenDistance(gapSize)
 {
 }
 
@@ -22,13 +23,20 @@ void GridPanel::RemoveChild(Control *control)
 
 void GridPanel::Reposition()
 {
-	int baseY = 0;
+	int base = 0;
 
 	for (int i = 0; i < GetChildrenCount(); i++)
 	{
 		Control* child = GetChild(i);
-		child->SetMarginTop(baseY);
 
-		baseY += child->GetHeight() + m_childrenDistance;
+		m_orientation == Orientation_Horizontal ?
+			child->SetMarginLeft(base) :
+			child->SetMarginTop(base);
+
+		base += m_childrenDistance;
+
+		m_orientation == Orientation_Horizontal ?
+			base += child->GetWidth() :
+			base += child->GetHeight();
 	}
 }

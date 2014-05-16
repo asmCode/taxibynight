@@ -1,4 +1,6 @@
 <Panel name="" fill="true">
+	<ProgressControl title="dupa" max_values="6" align="top-left" margin_top="10" />
+	
 	<Image image="town" tmp_fill="wypelnij" align="top" width="650" height="495"/>
 	
 	<Label font="fenix_26" text="Player Name:" size="1.0" align="top-left" margin_left="20" margin_top="20" />
