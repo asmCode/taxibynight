@@ -112,6 +112,7 @@
     <ClInclude Include="Bunnies\Leaderboard.h" />
     <ClInclude Include="Bunnies\LeaderboardScreen.h" />
     <ClInclude Include="Bunnies\PausePanel.h" />
+    <ClInclude Include="Bunnies\PlayerObserver.h" />
     <ClInclude Include="Bunnies\Player.h" />
     <ClInclude Include="Bunnies\BoxCollider.h" />
     <ClInclude Include="Bunnies\RemoteGameDataAccess\DummyGameDataAccess.h" />

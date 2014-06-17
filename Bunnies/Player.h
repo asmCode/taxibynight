@@ -1,6 +1,9 @@
 #pragma once
 
 #include <string>
+#include <vector>
+
+class PlayerObserver;
 
 class Player
 {
@@ -20,6 +23,7 @@ public:
 	bool m_firstRun;
 
 	float GetExperience() const;
+	float GetLevel() const;
 	float GetSoftMoney() const;
 	float GetHardMoney() const;
 
@@ -27,11 +31,20 @@ public:
 	void SetSoftMoney(float softMoney);
 	void SetHardMoney(float hardMoney);
 
+	void AddObserver(PlayerObserver *observer);
+
 private:
 	std::string m_path;
 
 	float m_experience;
 	float m_softMoney;
 	float m_hardMoney;
+
+	std::vector<PlayerObserver*> m_observers;
+
+	void NotifyExperienceChanged();
+	void NotifyLevelChanged();
+	void NotifySoftMoneyChanged();
+	void NotifyHardMoneyChanged();
 };
 

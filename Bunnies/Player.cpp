@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "PlayerObserver.h"
 #include <Utils/StringUtils.h>
 #include <IO/Path.h>
 #include <XML/XMLLoader.h>
@@ -71,6 +72,11 @@ float Player::GetExperience() const
 	return m_experience;
 }
 
+float Player::GetLevel() const
+{
+	return fmodf(m_experience, 100.0f);
+}
+
 float Player::GetSoftMoney() const
 {
 	return m_softMoney;
@@ -83,15 +89,67 @@ float Player::GetHardMoney() const
 
 void Player::SetExperience(float experience)
 {
-	m_experience = experience;
+	assert(experience >= 0);
+
+	if (m_experience != experience)
+	{
+		int prevLevel = GetLevel();
+
+		m_experience = experience;
+		NotifyExperienceChanged();
+
+		if (GetLevel() != prevLevel)
+			NotifyLevelChanged();
+	}
 }
 
 void Player::SetSoftMoney(float softMoney)
 {
-	m_softMoney = softMoney;
+	assert(softMoney >= 0);
+
+	if (m_softMoney != softMoney)
+	{
+		m_softMoney = softMoney;
+		NotifySoftMoneyChanged();
+	}
 }
 
 void Player::SetHardMoney(float hardMoney)
 {
-	m_hardMoney = hardMoney;
+	assert(hardMoney >= 0);
+
+	if (m_hardMoney != hardMoney)
+	{
+		m_hardMoney = hardMoney;
+		NotifyHardMoneyChanged();
+	}
+}
+
+void Player::AddObserver(PlayerObserver *observer)
+{
+	m_observers.push_back(observer);
+}
+
+void Player::NotifyExperienceChanged()
+{
+	for (uint32_t i = 0; i < m_observers.size(); i++)
+		m_observers[i]->ExperienceChanged();
+}
+
+void Player::NotifyLevelChanged()
+{
+	for (uint32_t i = 0; i < m_observers.size(); i++)
+		m_observers[i]->LevelChanged();
+}
+
+void Player::NotifySoftMoneyChanged()
+{
+	for (uint32_t i = 0; i < m_observers.size(); i++)
+		m_observers[i]->SoftMoneyChanged();
+}
+
+void Player::NotifyHardMoneyChanged()
+{
+	for (uint32_t i = 0; i < m_observers.size(); i++)
+		m_observers[i]->HardMoneyChanged();
 }
