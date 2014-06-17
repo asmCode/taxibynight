@@ -80,7 +80,7 @@ void MainMenuScreen::UpdateStats()
 {
 	static std::string S = "$";
 
-	m_totalIncome->SetText(S + StringUtils::ToString(Player::Instance->m_totalMoney));
+	m_totalIncome->SetText(S + StringUtils::ToString(Player::Instance->GetSoftMoney()));
 	m_totalCourses->SetText(StringUtils::ToString(Player::Instance->m_totalCourses));
 	m_bestReward->SetText(S + StringUtils::ToString(Player::Instance->m_bestRoundIncome));
 }

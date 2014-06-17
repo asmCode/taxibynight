@@ -467,7 +467,7 @@ void GameScreen::Resume()
 void GameScreen::EndRound()
 {
 	bool record = false;
-	Player::Instance->m_totalMoney += m_pedsManager->m_totalMoney;
+	Player::Instance->SetSoftMoney(Player::Instance->GetSoftMoney() + m_pedsManager->m_totalMoney);
 	Player::Instance->m_totalCourses += m_pedsManager->m_totalCourses;
 	if (Player::Instance->m_bestRoundIncome < m_pedsManager->m_totalMoney)
 	{
@@ -490,7 +490,7 @@ void GameScreen::EndRound()
 	m_gameController->ShowSummaryScreen(
 		m_pedsManager->m_totalMoney,
 		m_pedsManager->m_totalCourses,
-		Player::Instance->m_totalMoney,
+		Player::Instance->GetSoftMoney(),
 		Player::Instance->m_totalCourses,
 		record);
 }

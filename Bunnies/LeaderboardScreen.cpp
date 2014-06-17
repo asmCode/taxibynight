@@ -272,7 +272,7 @@ void LeaderboardScreen::ScreenKeyboardDone(const std::string& text)
 
 		std::string playerId = Player::Instance->m_id;
 		std::string playerName = Player::Instance->m_name;
-		float reward = Player::Instance->m_totalMoney;
+		float reward = Player::Instance->GetSoftMoney();
 		int courses = Player::Instance->m_totalCourses;
 
 		/*
