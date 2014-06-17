@@ -30,15 +30,19 @@ void Player::Load()
 	if (node == NULL)
 		return;
 
-	for (int i = 0; i < node->GetChildrenCount(); i++)
+	for (uint32_t i = 0; i < node->GetChildrenCount(); i++)
 	{
 		XMLNode *child = node->GetChild(i);
-		if (child->GetName() == "SoftMonet")
+		if (child->GetName() == "Experience")
+			m_experience = child->GetValueAsFloat();
+		else if (child->GetName() == "SoftMoney")
 			m_softMoney = child->GetValueAsFloat();
+		else if (child->GetName() == "HardMoney")
+			m_hardMoney = child->GetValueAsFloat();
 		else if (child->GetName() == "TotalCourses")
 			m_totalCourses = child->GetValueAsInt32();
 		else if (child->GetName() == "BestRoundIncome")
-			m_bestRoundIncome = child->GetValueAsInt32();
+			m_bestRoundIncome = child->GetValueAsFloat();
 		else if (child->GetName() == "TutorialFinished")
 			m_tutorialFinished = child->GetValueAsBool();
 		else if (child->GetName() == "FirstRun")
@@ -57,7 +61,9 @@ void Player::Save()
 	xml += "<Player>\n";
 	xml += "\t<Id>"; xml += m_id; xml += "</Id>\n";
 	xml += "\t<Name>"; xml += StringUtils::ToBase64(m_name); xml += "</Name>\n";
+	xml += "\t<Experience>"; xml += StringUtils::ToString(m_softMoney); xml += "</Experience>\n";
 	xml += "\t<SoftMoney>"; xml += StringUtils::ToString(m_softMoney); xml += "</SoftMoney>\n";
+	xml += "\t<HardMoney>"; xml += StringUtils::ToString(m_hardMoney); xml += "</HardMoney>\n";
 	xml += "\t<TotalCourses>"; xml += StringUtils::ToString(m_totalCourses); xml += "</TotalCourses>\n";
 	xml += "\t<BestRoundIncome>"; xml += StringUtils::ToString(m_bestRoundIncome); xml += "</BestRoundIncome>\n";
 	xml += "\t<TutorialFinished>"; xml += m_tutorialFinished ? "true" : "false"; xml += "</TutorialFinished>\n";
@@ -72,9 +78,9 @@ float Player::GetExperience() const
 	return m_experience;
 }
 
-float Player::GetLevel() const
+int Player::GetLevel() const
 {
-	return fmodf(m_experience, 100.0f);
+	return static_cast<int>(m_experience / 100.0f);
 }
 
 float Player::GetSoftMoney() const

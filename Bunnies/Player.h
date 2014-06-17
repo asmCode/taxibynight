@@ -23,7 +23,7 @@ public:
 	bool m_firstRun;
 
 	float GetExperience() const;
-	float GetLevel() const;
+	int GetLevel() const;
 	float GetSoftMoney() const;
 	float GetHardMoney() const;
 
