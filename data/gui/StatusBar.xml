@@ -1,0 +1,11 @@
+<Panel name="StatusBar" fill="true">
+	<Panel align="top-right" width="256" height="128">
+		<Image image="money_bg" align="right" width="256" height="128" />
+		<Image image="money_soft_icon" align="top-right" width="45" height="55" margin_top="10" />
+		<Image image="money_hard_icon" align="top-right" width="45" height="55" margin_top="65" />
+		<Label font="fenix_18" name="soft" align="top-right" text="soft" margin_right="64" margin_top="10" />
+		<Label font="fenix_18" name="hard" align="top-right" text="soft" margin_right="64" margin_top="65" />
+		
+		<AnimButton name="add" align="left" margin_left="3" width="64" height="64" image="add_money_button" image_pushed="add_money_button" />
+	</Panel>
+</Panel>

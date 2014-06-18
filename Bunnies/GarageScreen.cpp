@@ -7,6 +7,8 @@
 #include "Environment.h"
 #include <Audio/SoundManager.h>
 
+#include "Gui/StatusBar.h"
+
 GarageScreen::GarageScreen(GameController *gameController) :
 	m_gameController(gameController),
 	m_carDealerButton(NULL),
@@ -25,6 +27,9 @@ bool GarageScreen::InitResources()
 
 	m_garageView = Inflater::Inflate(basePath + "data/gui/GaragePanel.xml");
 	assert(m_garageView != NULL);
+
+	StatusBar* statusBar = new StatusBar();
+	m_garageView->AddChild(statusBar);
 
 	m_carDealerButton = dynamic_cast<Control*>(m_garageView->FindChild("car_dealer"));
 	assert(m_carDealerButton != NULL);

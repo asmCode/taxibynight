@@ -107,6 +107,7 @@
     <ClInclude Include="Bunnies\Gui\BonusControl.h" />
     <ClInclude Include="Bunnies\Gui\GridPanel.h" />
     <ClInclude Include="Bunnies\Gui\ProgressControl.h" />
+    <ClInclude Include="Bunnies\Gui\StatusBar.h" />
     <ClInclude Include="Bunnies\HttpCommunication.h" />
     <ClInclude Include="Bunnies\IntroScreen.h" />
     <ClInclude Include="Bunnies\Leaderboard.h" />
@@ -262,6 +263,7 @@
     <ClCompile Include="Bunnies\Gui\BonusControl.cpp" />
     <ClCompile Include="Bunnies\Gui\GridPanel.cpp" />
     <ClCompile Include="Bunnies\Gui\ProgressControl.cpp" />
+    <ClCompile Include="Bunnies\Gui\StatusBar.cpp" />
     <ClCompile Include="Bunnies\HttpCommunication.cpp" />
     <ClCompile Include="Bunnies\IntroScreen.cpp" />
     <ClCompile Include="Bunnies\Leaderboard.cpp" />
