@@ -50,4 +50,9 @@
 	
 	<sprite name="stats_cell_off" file="gui02" bounds="0,868,32,96" />
 	<sprite name="stats_cell_on" file="gui02" bounds="32,868,32,96" />
+	
+	<sprite name="money_bg" file="gui02" bounds="1792,1220,256,128" />
+	<sprite name="money_soft_icon" file="gui02" bounds="1747,1220,45,55" />
+	<sprite name="money_hard_icon" file="gui02" bounds="1747,1275,45,55" />
+	<sprite name="add_money_button" file="gui02" bounds="1683,1220,64,64" />
 </map>
