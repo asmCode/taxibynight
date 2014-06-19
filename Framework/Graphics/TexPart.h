@@ -13,4 +13,6 @@ public:
 	TexPart();
 	TexPart(Texture *tex);
 	TexPart(Texture *tex, const sm::Rect<int> &texRect);
+
+	void SetImageRect(const sm::Rect<int> &texRect);
 };

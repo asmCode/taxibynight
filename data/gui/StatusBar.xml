@@ -8,4 +8,6 @@
 		
 		<AnimButton name="add" align="left" margin_left="3" width="64" height="64" image="add_money_button" image_pushed="add_money_button" />
 	</Panel>
+	
+	<ProgressBar align="top" margin_top="20" bg="exp_bg" fg="exp_fg" />
 </Panel>

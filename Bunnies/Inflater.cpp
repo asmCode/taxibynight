@@ -2,6 +2,7 @@
 #include "Control.h"
 #include "Label.h"
 #include "AnimButton.h"
+#include "ProgressBar.h"
 #include "Gui/GridPanel.h"
 #include "../Bunnies/Gui/ProgressControl.h"
 #include "InterfaceProvider.h"
@@ -45,6 +46,8 @@ Control* Inflater::LoadNode(XMLNode *node)
 		control = LoadProgressControl(node, name);
 	else if (type == "Label")
 		control = LoadLabelControl(node, name);
+	else if (type == "ProgressBar")
+		control = LoadProgressBar(node, name);
 
 	if (control == NULL)
 		return NULL;
@@ -132,6 +135,24 @@ Control* Inflater::LoadLabelControl(XMLNode *node, const std::string &name)
 Control* Inflater::LoadPanelControl(XMLNode *node, const std::string &name)
 {
 	return new Control(name);
+}
+
+Control* Inflater::LoadProgressBar(XMLNode *node, const std::string &name)
+{
+	std::string bgName;
+	std::string fgName;
+
+	if (node->HasAttrib("bg"))
+		bgName = node->GetAttribAsString("bg");
+	if (node->HasAttrib("fg"))
+		fgName = node->GetAttribAsString("fg");
+
+	TexPart *bg = InterfaceProvider::GetSpritesMap()->GetTexPart(bgName);
+	assert(bg != NULL);
+	TexPart *fg = InterfaceProvider::GetSpritesMap()->GetTexPart(fgName);
+	assert(fg != NULL);
+
+	return new ProgressBar(name, *bg, *fg);
 }
 
 Control* Inflater::LoadAnimButtonControl(XMLNode *node, const std::string &name)

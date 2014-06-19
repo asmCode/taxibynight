@@ -27,21 +27,28 @@ TexPart::TexPart(Texture *tex) : ImageRect(0, 0, tex ->GetWidth(), tex ->GetHeig
 TexPart::TexPart(Texture *tex, const sm::Rect<int> &texRect) : ImageRect(texRect)
 {
 	this ->Tex = tex;
-	
-	float x1 = (float)texRect.X / (float)tex ->GetWidth();
-	float y1 = ((float)texRect.Y / (float)tex ->GetHeight());
-	float x2 = (float)(texRect.X  + texRect.Width) / (float)tex ->GetWidth();
-	float y2 = ((float)(texRect.Y  + texRect.Height) / (float)tex ->GetHeight());
-	
+
+	SetImageRect(ImageRect);
+}
+
+void TexPart::SetImageRect(const sm::Rect<int> &texRect)
+{
+	ImageRect = texRect;
+
+	float x1 = (float)texRect.X / (float)Tex->GetWidth();
+	float y1 = ((float)texRect.Y / (float)Tex->GetHeight());
+	float x2 = (float)(texRect.X + texRect.Width) / (float)Tex->GetWidth();
+	float y2 = ((float)(texRect.Y + texRect.Height) / (float)Tex->GetHeight());
+
 	TexCoords[0] = x1;
 	TexCoords[1] = y1;
-	
+
 	TexCoords[2] = x2;
 	TexCoords[3] = y1;
-	
+
 	TexCoords[4] = x1;
 	TexCoords[5] = y2;
-	
+
 	TexCoords[6] = x2;
 	TexCoords[7] = y2;
 }
