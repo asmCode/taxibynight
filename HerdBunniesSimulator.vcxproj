@@ -105,6 +105,11 @@
     <ClInclude Include="Bunnies\Effects\DiffLightEffect.h" />
     <ClInclude Include="Bunnies\Experience.h" />
     <ClInclude Include="Bunnies\GarageScreen.h" />
+    <ClInclude Include="Bunnies\GlobalSettings\CarData.h" />
+    <ClInclude Include="Bunnies\GlobalSettings\DecalData.h" />
+    <ClInclude Include="Bunnies\GlobalSettings\GlobalSettings.h" />
+    <ClInclude Include="Bunnies\GlobalSettings\UpgradeData.h" />
+    <ClInclude Include="Bunnies\GlobalSettings\UpgradeLevelData.h" />
     <ClInclude Include="Bunnies\Gui\BonusControl.h" />
     <ClInclude Include="Bunnies\Gui\GridPanel.h" />
     <ClInclude Include="Bunnies\Gui\ProgressControl.h" />
@@ -263,6 +268,7 @@
     <ClCompile Include="Bunnies\Effects\DiffLightEffect.cpp" />
     <ClCompile Include="Bunnies\Experience.cpp" />
     <ClCompile Include="Bunnies\GarageScreen.cpp" />
+    <ClCompile Include="Bunnies\GlobalSettings\GlobalSettings.cpp" />
     <ClCompile Include="Bunnies\Gui\BonusControl.cpp" />
     <ClCompile Include="Bunnies\Gui\GridPanel.cpp" />
     <ClCompile Include="Bunnies\Gui\ProgressControl.cpp" />

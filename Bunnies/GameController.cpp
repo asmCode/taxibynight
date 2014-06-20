@@ -15,6 +15,7 @@
 #include "Environment.h"
 #include "Control.h"
 #include "DrawingRoutines.h"
+#include "GlobalSettings/GlobalSettings.h"
 #include "InterfaceProvider.h"
 #include "Leaderboard.h"
 #include "AnalyticsProvider.h"
@@ -115,6 +116,8 @@ bool GameController::Initialize(ISystemUtils *systemUtils, IServiceProvider* ser
 	m_systemUtils = systemUtils;
 
 	srand(time(NULL));
+
+	GlobalSettings::LoadFromFile(TaxiGame::Environment::GetInstance()->GetWritePath() + "GlobalSettings.xml");
 	
 	AdsManager::GetInstance()->Initialize(serviceProvider);
 

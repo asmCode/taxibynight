@@ -1,7 +1,14 @@
 <GlobalSettings version="1">
 	<Cars>
-		<Car id="car1" name="Piece of Junk" soft_price="700" speed_slots="5" acc_slots="4" tires_slots="3">
-			<Specs speed="8" acc="2" tires="1" />
+		<Car id="car1"
+			 name="Piece of Junk"
+			 soft_price="700"
+			 speed="8"
+			 acc="2"
+			 tires="1"
+			 speed_slots="5"
+			 acc_slots="4"
+			 tires_slots="3">
 			<Upgrades>
 				<Upgrade id="speed">
 					<UpgradeLevel value="8.1" soft_price="110" />
@@ -26,8 +33,16 @@
 				<Decal id="3" hard_price="50" bonus="2.0" />
 			</Decals>
 		</Car>
-		<Car id="car2" name="Bus" soft_price="8900" hard_price="100" speed_slots="7" acc_slots="6" tires_slots="5">
-			<Specs speed="9" acc="3" tires="2" />
+		<Car id="car2"
+			 name="Bus"
+			 soft_price="8900"
+			 hard_price="100"
+			 speed="9"
+			 acc="3"
+			 tires="2"
+			 speed_slots="7"
+			 acc_slots="6"
+			 tires_slots="5">
 			<Upgrades>
 				<Upgrade id="speed">
 					<UpgradeLevel value="9.1" soft_price="110" />
@@ -52,8 +67,15 @@
 				<Decal id="3" hard_price="50" bonus="2.0" />
 			</Decals>
 		</Car>
-		<Car id="car3" name="Predator" hard_price="500" speed_slots="9" acc_slots="8" tires_slots="7">
-			<Specs speed="10" acc="4" tires="3" />
+		<Car id="car3"
+			 name="Predator"
+			 hard_price="500"
+			 speed="10"
+			 acc="4"
+			 tires="3"
+			 speed_slots="9"
+			 acc_slots="8"
+			 tires_slots="7">
 			<Upgrades>
 				<Upgrade id="speed">
 					<UpgradeLevel value="10.1" soft_price="110" />
