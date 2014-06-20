@@ -1,5 +1,7 @@
 #include "StatusBar.h"
 #include "../Label.h"
+#include "../ProgressBar.h"
+#include "../Experience.h"
 #include "../AnimButton.h"
 #include "../Inflater.h"
 #include "../Environment.h"
@@ -22,11 +24,15 @@ StatusBar::StatusBar() :
 
 	m_softMoneyLabel = dynamic_cast<Label*>(m_view->FindChild("soft"));
 	m_hardMoneyLabel = dynamic_cast<Label*>(m_view->FindChild("hard"));
+	m_levelLabel = dynamic_cast<Label*>(m_view->FindChild("level"));
+	m_experienceBar = dynamic_cast<ProgressBar*>(m_view->FindChild("exp"));
 	m_addMoneyButton = dynamic_cast<AnimButton*>(m_view->FindChild("add"));
 
 	assert(m_softMoneyLabel != NULL);
 	assert(m_hardMoneyLabel != NULL);
 	assert(m_addMoneyButton != NULL);
+	assert(m_levelLabel != NULL);
+	assert(m_experienceBar != NULL);
 
 	ObsCast(IControlEventsObserver, m_addMoneyButton)->AddObserver(this);
 
@@ -39,6 +45,20 @@ void StatusBar::Refresh()
 {
 	m_softMoneyLabel->SetText(StringUtils::ToString(Player::Instance->GetSoftMoney()));
 	m_hardMoneyLabel->SetText(StringUtils::ToString(Player::Instance->GetHardMoney()));
+	m_levelLabel ->SetText(StringUtils::ToString(Player::Instance->GetLevel()));
+
+	RefreshExp();
+}
+
+void StatusBar::RefreshExp()
+{
+	float bExp = Experience::GetExperienceValueForLevel(Player::Instance->GetLevel());
+	float eExp = Experience::GetExperienceValueForLevel(Player::Instance->GetLevel() + 1);
+	float cExp = Player::Instance->GetExperience();
+
+	float normExp = (cExp - bExp) / (eExp - bExp);
+
+	m_experienceBar->SetValue(normExp);
 }
 
 void StatusBar::SoftMoneyChanged()

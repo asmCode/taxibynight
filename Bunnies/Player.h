@@ -4,6 +4,7 @@
 #include <vector>
 
 class PlayerObserver;
+class Experience;
 
 class Player
 {
@@ -36,7 +37,7 @@ public:
 private:
 	std::string m_path;
 
-	float m_experience;
+	Experience* m_experience;
 	float m_softMoney;
 	float m_hardMoney;
 

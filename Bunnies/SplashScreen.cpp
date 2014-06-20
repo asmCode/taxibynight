@@ -13,7 +13,6 @@ SplashScreen::SplashScreen(GameController *gameController) :
 {
 }
 
-
 SplashScreen::~SplashScreen(void)
 {
 }

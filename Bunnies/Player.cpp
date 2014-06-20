@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "PlayerObserver.h"
+#include "Experience.h"
 #include <Utils/StringUtils.h>
 #include <IO/Path.h>
 #include <XML/XMLLoader.h>
@@ -11,6 +12,7 @@ Player *Player::Instance;
 Player::Player(const std::string &path) :
 	m_id(""),
 	m_name("unnamed"),
+	m_softMoney(0.0f),
 	m_hardMoney(0.0f),
 	m_totalCourses(0),
 	m_bestRoundIncome(0.0f),
@@ -18,6 +20,8 @@ Player::Player(const std::string &path) :
 	m_firstRun(true),
 	m_path(path)
 {
+	m_experience = new Experience(0);
+
 	Instance = this;
 }
 
@@ -34,7 +38,7 @@ void Player::Load()
 	{
 		XMLNode *child = node->GetChild(i);
 		if (child->GetName() == "Experience")
-			m_experience = child->GetValueAsFloat();
+			m_experience->SetExperienceValue(child->GetValueAsFloat());
 		else if (child->GetName() == "SoftMoney")
 			m_softMoney = child->GetValueAsFloat();
 		else if (child->GetName() == "HardMoney")
@@ -75,12 +79,12 @@ void Player::Save()
 
 float Player::GetExperience() const
 {
-	return m_experience;
+	return m_experience->GetExperienceValue();
 }
 
 int Player::GetLevel() const
 {
-	return static_cast<int>(m_experience / 100.0f);
+	return m_experience->GetLevel();
 }
 
 float Player::GetSoftMoney() const
@@ -97,11 +101,11 @@ void Player::SetExperience(float experience)
 {
 	assert(experience >= 0);
 
-	if (m_experience != experience)
+	if (m_experience->GetExperienceValue() != experience)
 	{
 		int prevLevel = GetLevel();
 
-		m_experience = experience;
+		m_experience->SetExperienceValue(experience);
 		NotifyExperienceChanged();
 
 		if (GetLevel() != prevLevel)

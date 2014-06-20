@@ -7,6 +7,7 @@
 
 class Label;
 class AnimButton;
+class ProgressBar;
 
 class StatusBar : public Control,
 				  public PlayerObserver,
@@ -20,9 +21,12 @@ private:
 
 	Label* m_softMoneyLabel;
 	Label* m_hardMoneyLabel;
+	Label* m_levelLabel;
+	ProgressBar* m_experienceBar;
 	AnimButton* m_addMoneyButton;
 
 	void Refresh();
+	void RefreshExp();
 
 	// PlayerObserver Impl
 	void SoftMoneyChanged();

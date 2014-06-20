@@ -103,6 +103,7 @@
     <ClInclude Include="Bunnies\ComicsScreen.h" />
     <ClInclude Include="Bunnies\DummyAnalytics.h" />
     <ClInclude Include="Bunnies\Effects\DiffLightEffect.h" />
+    <ClInclude Include="Bunnies\Experience.h" />
     <ClInclude Include="Bunnies\GarageScreen.h" />
     <ClInclude Include="Bunnies\Gui\BonusControl.h" />
     <ClInclude Include="Bunnies\Gui\GridPanel.h" />
@@ -260,6 +261,7 @@
     <ClCompile Include="Bunnies\ComicsScreen.cpp" />
     <ClCompile Include="Bunnies\DummyAnalytics.cpp" />
     <ClCompile Include="Bunnies\Effects\DiffLightEffect.cpp" />
+    <ClCompile Include="Bunnies\Experience.cpp" />
     <ClCompile Include="Bunnies\GarageScreen.cpp" />
     <ClCompile Include="Bunnies\Gui\BonusControl.cpp" />
     <ClCompile Include="Bunnies\Gui\GridPanel.cpp" />

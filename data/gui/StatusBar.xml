@@ -9,5 +9,11 @@
 		<AnimButton name="add" align="left" margin_left="3" width="64" height="64" image="add_money_button" image_pushed="add_money_button" />
 	</Panel>
 	
-	<ProgressBar align="top" margin_top="20" bg="exp_bg" fg="exp_fg" />
+	<Panel align="top" height="60">
+		<ProgressBar name="exp" align="top" margin_top="10" bg="exp_bg" fg="exp_fg" />
+		<Panel align="bottom" height="18" width="100">
+			<Label font="fenix_18" align="bottom-left" text="Level" />
+			<Label font="fenix_18" name="level" align="bottom-right" text="1" />
+		</Panel>
+	</Panel>
 </Panel>
