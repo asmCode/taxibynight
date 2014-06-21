@@ -28,9 +28,9 @@
 				</Upgrade>
 			</Upgrades>
 			<Decals>
-				<Decal id="1" soft_price="1000" bonus="1.1" />
-				<Decal id="2" soft_price="5000" hard_price="10" bonus="1.2" />
-				<Decal id="3" hard_price="50" bonus="2.0" />
+				<Decal id="car1dec1" soft_price="1000" bonus="1.1" />
+				<Decal id="car1dec2" soft_price="5000" hard_price="10" bonus="1.2" />
+				<Decal id="car1dec3" hard_price="50" bonus="2.0" />
 			</Decals>
 		</Car>
 		<Car id="car2"
@@ -62,9 +62,9 @@
 				</Upgrade>
 			</Upgrades>
 			<Decals>
-				<Decal id="1" soft_price="1000" bonus="1.1" />
-				<Decal id="2" soft_price="5000" hard_price="10" bonus="1.2" />
-				<Decal id="3" hard_price="50" bonus="2.0" />
+				<Decal id="car2dec1" soft_price="1000" bonus="1.1" />
+				<Decal id="car2dec2" soft_price="5000" hard_price="10" bonus="1.2" />
+				<Decal id="car2dec3" hard_price="50" bonus="2.0" />
 			</Decals>
 		</Car>
 		<Car id="car3"
@@ -95,9 +95,9 @@
 				</Upgrade>
 			</Upgrades>
 			<Decals>
-				<Decal id="1" soft_price="1000" bonus="1.1" />
-				<Decal id="2" soft_price="5000" hard_price="10" bonus="1.2" />
-				<Decal id="3" hard_price="50" bonus="2.0" />
+				<Decal id="car3dec1" soft_price="1000" bonus="1.1" />
+				<Decal id="car3dec2" soft_price="5000" hard_price="10" bonus="1.2" />
+				<Decal id="car3dec3" hard_price="50" bonus="2.0" />
 			</Decals>
 		</Car>
 	</Cars>

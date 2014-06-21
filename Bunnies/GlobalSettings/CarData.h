@@ -18,4 +18,6 @@ public:
 	int AccSlots;
 	int TiresSlots;
 	std::vector<UpgradeData> Upgrades;
+
+	UpgradeData GetUpgradeData(const std::string& id) const;
 };

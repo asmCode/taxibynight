@@ -99,8 +99,11 @@
     <ClInclude Include="Bunnies\Bonuses\BonusStreetSymbol.h" />
     <ClInclude Include="Bunnies\Bonuses\BonusType.h" />
     <ClInclude Include="Bunnies\Camera.h" />
+    <ClInclude Include="Bunnies\Car.h" />
     <ClInclude Include="Bunnies\CarDealerScreen.h" />
+    <ClInclude Include="Bunnies\CardId.h" />
     <ClInclude Include="Bunnies\ComicsScreen.h" />
+    <ClInclude Include="Bunnies\DecalId.h" />
     <ClInclude Include="Bunnies\DummyAnalytics.h" />
     <ClInclude Include="Bunnies\Effects\DiffLightEffect.h" />
     <ClInclude Include="Bunnies\Experience.h" />
@@ -161,6 +164,7 @@
     <ClInclude Include="Bunnies\Taxi.h" />
     <ClInclude Include="Bunnies\ThrowTrajectory.h" />
     <ClInclude Include="Bunnies\Ticker.h" />
+    <ClInclude Include="Bunnies\UpgradeId.h" />
     <ClInclude Include="Framework\Ads\AdManagerFactory.h" />
     <ClInclude Include="Framework\Ads\DummyAds.h" />
     <ClInclude Include="Framework\Analytics\AnalyticsEvent.h" />
@@ -262,12 +266,16 @@
     <ClCompile Include="Bunnies\Bonuses\BonusesManager.cpp" />
     <ClCompile Include="Bunnies\Bonuses\BonusStreetSymbol.cpp" />
     <ClCompile Include="Bunnies\Camera.cpp" />
+    <ClCompile Include="Bunnies\Car.cpp" />
     <ClCompile Include="Bunnies\CarDealerScreen.cpp" />
+    <ClCompile Include="Bunnies\CardId.cpp" />
     <ClCompile Include="Bunnies\ComicsScreen.cpp" />
+    <ClCompile Include="Bunnies\DecalId.cpp" />
     <ClCompile Include="Bunnies\DummyAnalytics.cpp" />
     <ClCompile Include="Bunnies\Effects\DiffLightEffect.cpp" />
     <ClCompile Include="Bunnies\Experience.cpp" />
     <ClCompile Include="Bunnies\GarageScreen.cpp" />
+    <ClCompile Include="Bunnies\GlobalSettings\CarData.cpp" />
     <ClCompile Include="Bunnies\GlobalSettings\GlobalSettings.cpp" />
     <ClCompile Include="Bunnies\Gui\BonusControl.cpp" />
     <ClCompile Include="Bunnies\Gui\GridPanel.cpp" />
@@ -314,6 +322,7 @@
     <ClCompile Include="Bunnies\Taxi.cpp" />
     <ClCompile Include="Bunnies\ThrowTrajectory.cpp" />
     <ClCompile Include="Bunnies\Ticker.cpp" />
+    <ClCompile Include="Bunnies\UpgradeId.cpp" />
     <ClCompile Include="Ext\tinyxml\tinyxml2.cpp" />
     <ClCompile Include="Framework\Ads\AdManagerFactory.cpp" />
     <ClCompile Include="Framework\Ads\DummyAds.cpp" />
