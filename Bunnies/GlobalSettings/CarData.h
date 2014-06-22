@@ -1,6 +1,8 @@
 #pragma once
 
 #include "UpgradeData.h"
+#include "DecalData.h"
+#include "../UpgradeId.h"
 #include <string>
 #include <vector>
 
@@ -18,6 +20,10 @@ public:
 	int AccSlots;
 	int TiresSlots;
 	std::vector<UpgradeData> Upgrades;
+	std::vector<DecalData> Decals;
 
 	UpgradeData GetUpgradeData(const std::string& id) const;
+	DecalData GetDecalData(const std::string& id) const;
+
+	int GetUpgradeSlotsCount(const std::string& id) const;
 };

@@ -148,3 +148,12 @@ XMLNode* XMLNode::GetChild(uint32_t index) const
 
 	return m_children[index];
 }
+
+XMLNode* XMLNode::GetChild(const std::string &name) const
+{
+	for (uint32_t i = 0; i < m_children.size(); i++)
+	if (m_children[i]->m_name == name)
+		return m_children[i];
+
+	return NULL;
+}

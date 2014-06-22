@@ -14,7 +14,7 @@ class GlobalSettings
 public:
 	static bool LoadFromFile(const std::string& filename);
 
-	CarData GetCarById(const std::string& id);
+	static CarData GetCarById(const std::string& id);
 	
 private:
 	static std::vector<CarData> m_cars;

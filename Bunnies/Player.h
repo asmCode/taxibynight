@@ -1,10 +1,13 @@
 #pragma once
 
+#include "CardId.h"
 #include <string>
 #include <vector>
 
 class PlayerObserver;
 class Experience;
+class Car;
+class XMLNode;
 
 class Player
 {
@@ -34,8 +37,15 @@ public:
 
 	void AddObserver(PlayerObserver *observer);
 
+	Car* GetActiveCar();
+	bool HasCar(const std::string& carId);
+
 private:
 	std::string m_path;
+
+	std::string m_activeCarId;
+	Car* m_activeCar;
+	std::vector<Car*> m_cars;
 
 	Experience* m_experience;
 	float m_softMoney;
@@ -47,5 +57,9 @@ private:
 	void NotifyLevelChanged();
 	void NotifySoftMoneyChanged();
 	void NotifyHardMoneyChanged();
+
+	void LoadCars(XMLNode* node);
+
+	Car* GetCarById(const std::string& id);
 };
 

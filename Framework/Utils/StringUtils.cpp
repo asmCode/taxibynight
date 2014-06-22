@@ -50,6 +50,26 @@ std::string StringUtils::ToString(int val)
 	return txt;
 }
 
+void StringUtils::Split(const std::string src, const std::string &separator, std::vector<std::string> &result)
+{
+	result.clear();
+
+	std::string _src = src;
+	int offset = 0;
+
+	while (offset != -1)
+	{
+		offset = _src.find_first_of(separator);
+		if (offset != -1)
+		{
+			result.push_back(_src.substr(0, offset));
+			_src = _src.substr(offset + separator.length());
+		}
+	}
+
+	result.push_back(_src);
+}
+
 std::string StringUtils::ToBase64(const std::string& str)
 {
 	return str;

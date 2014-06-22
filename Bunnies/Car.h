@@ -2,13 +2,18 @@
 
 #include "UpgradeId.h"
 #include "GlobalSettings/CarData.h"
+#include "GlobalSettings/DecalData.h"
 #include <string>
 #include <vector>
 
 class Car
 {
 public:
-	Car();
+	Car(CarData carData,
+		int speedUpgradeLevel,
+		int accUpgradeLevel,
+		int tiresUpgradeLevel,
+		const std::vector<DecalData>& decals);
 
 	std::string GetId() const;
 	std::string GetName() const;
@@ -31,6 +36,8 @@ private:
 	int m_speedUpgradeLevel;
 	int m_accUpgradeLevel;
 	int m_tiresUpgradeLevel;
+
+	std::vector<DecalData> m_decals;
 
 	int GetUpgradeLevel(const std::string& id);
 };

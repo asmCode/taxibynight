@@ -1,6 +1,8 @@
 #include "Player.h"
 #include "PlayerObserver.h"
+#include "Car.h"
 #include "Experience.h"
+#include "GlobalSettings/GlobalSettings.h"
 #include <Utils/StringUtils.h>
 #include <IO/Path.h>
 #include <XML/XMLLoader.h>
@@ -18,6 +20,8 @@ Player::Player(const std::string &path) :
 	m_bestRoundIncome(0.0f),
 	m_tutorialFinished(false),
 	m_firstRun(true),
+	m_activeCar(NULL),
+	m_activeCarId(""),
 	m_path(path)
 {
 	m_experience = new Experience(0);
@@ -39,6 +43,8 @@ void Player::Load()
 		XMLNode *child = node->GetChild(i);
 		if (child->GetName() == "Experience")
 			m_experience->SetExperienceValue(child->GetValueAsFloat());
+		else if (child->GetName() == "ActiveCar")
+			m_activeCarId = child->GetValueAsString();
 		else if (child->GetName() == "SoftMoney")
 			m_softMoney = child->GetValueAsFloat();
 		else if (child->GetName() == "HardMoney")
@@ -56,6 +62,10 @@ void Player::Load()
 		else if (child->GetName() == "Name")
 			m_name = StringUtils::FromBase64(child->GetValueAsString());
 	}
+
+	LoadCars(node);
+
+	m_activeCar = GetCarById(m_activeCarId);
 }
 
 void Player::Save()
@@ -162,4 +172,57 @@ void Player::NotifyHardMoneyChanged()
 {
 	for (uint32_t i = 0; i < m_observers.size(); i++)
 		m_observers[i]->HardMoneyChanged();
+}
+
+void Player::LoadCars(XMLNode* node)
+{
+	XMLNode* carsNode = node->GetChild("Cars");
+	if (carsNode == NULL)
+		return;
+
+	for (uint32_t i = 0; i < carsNode->GetChildrenCount(); i++)
+	{
+		XMLNode* carNode = carsNode->GetChild(i);
+
+		std::string id = carNode->GetAttribAsString("id");
+		int speedLevel = carNode->GetAttribAsInt32("speed_level");
+		int accLevel = carNode->GetAttribAsInt32("acc_level");
+		int tiresLevel = carNode->GetAttribAsInt32("tires_level");
+
+		CarData carData = GlobalSettings::GetCarById(id);
+
+		assert(speedLevel <= carData.GetUpgradeSlotsCount(UpgradeId::Speed));
+		assert(accLevel <= carData.GetUpgradeSlotsCount(UpgradeId::Acc));
+		assert(tiresLevel <= carData.GetUpgradeSlotsCount(UpgradeId::Tires));
+
+		std::string decalsString = carNode->GetAttribAsString("decals");
+		std::vector<DecalData> decals;
+
+		if (decalsString.size() > 0)
+		{
+			std::vector<std::string> decalsIds;
+			StringUtils::Split(decalsString, ",", decalsIds);
+
+			for (uint32_t decalIndex = 0; decalIndex < decalsIds.size(); decalIndex++)
+				decals.push_back(carData.GetDecalData(decalsIds[decalIndex]));
+		}
+
+		Car* car = new Car(
+			carData,
+			speedLevel,
+			accLevel,
+			tiresLevel,
+			decals);
+
+		m_cars.push_back(car);
+	}
+}
+
+Car* Player::GetCarById(const std::string& id)
+{
+	for (uint32_t i = 0; i < m_cars.size(); i++)
+		if (m_cars[i]->GetId() == id)
+			return m_cars[i];
+
+	return NULL;
 }

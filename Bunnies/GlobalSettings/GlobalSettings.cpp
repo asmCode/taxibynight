@@ -46,9 +46,12 @@ CarData GlobalSettings::LoadCarData(XMLNode* node)
 	data.TiresSlots = node->GetAttribAsUInt32("tires_slots");
 
 	XMLNode& upgradesNode = (*node)["Upgrades"];
-
 	for (uint32_t i = 0; i < upgradesNode.GetChildrenCount(); i++)
 		data.Upgrades.push_back(LoadUpgradeData(upgradesNode.GetChild(i)));
+
+	XMLNode& decalsNode = (*node)["Decals"];
+	for (uint32_t i = 0; i < decalsNode.GetChildrenCount(); i++)
+		data.Decals.push_back(LoadDecalData(decalsNode.GetChild(i)));
 
 	assert(data.Id.size() > 0);
 

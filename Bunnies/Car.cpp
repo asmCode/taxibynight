@@ -1,11 +1,17 @@
 #include "Car.h"
 
-Car::Car() :
-	m_speedUpgradeLevel(0),
-	m_accUpgradeLevel(0),
-	m_tiresUpgradeLevel(0)
+Car::Car(
+	CarData carData,
+	int speedUpgradeLevel,
+	int accUpgradeLevel,
+	int tiresUpgradeLevel,
+	const std::vector<DecalData>& decals) :
+	m_carData(carData),
+	m_speedUpgradeLevel(speedUpgradeLevel),
+	m_accUpgradeLevel(accUpgradeLevel),
+	m_tiresUpgradeLevel(tiresUpgradeLevel),
+	m_decals(decals)
 {
-
 }
 
 std::string Car::GetId() const
