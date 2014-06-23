@@ -3,10 +3,28 @@
 	
 	<StatusBar name="status_bar" />
 	
-	<Panel align="bottom-right" width="500" height="160">
+	<Panel align="bottom-right" width="700" height="160">
 		<Image image="money_bg" fill="true" />
-		<ProgressControl name="speed" title="Speed" max_values="6" align="top-left" margin_top="0" />
-		<ProgressControl name="acc" title="Acceleration" max_values="6" align="top-left" margin_top="50" />
-		<ProgressControl name="tires" title="Tires" max_values="6" align="top-left" margin_top="100" />
+		
+		<Panel align="top-left" width="500" height="160">
+			<ProgressControl name="speed" title="Speed" max_values="6" align="top-left" margin_top="0" />
+			<ProgressControl name="acc" title="Acceleration" max_values="6" align="top-left" margin_top="50" />
+			<ProgressControl name="tires" title="Tires" max_values="6" align="top-left" margin_top="100" />
+		</Panel>
+		
+		<Panel align="top-right" width="200"  height="160">
+			<AnimButton name="buy_speed_btn" align="top-right" margin_left="0" margin_top="0" width="160" height="40" image="uni_button" image_pushed="uni_button_down">
+				<Label name="speed_price" font="fenix_18" color="0;0;0" text="100" align="center-left" />
+				<Image image="money_soft_icon" align="center-right" width="45" height="55" />
+			</AnimButton>
+			<AnimButton name="buy_acc_btn" align="top-right" margin_left="0" margin_top="50" width="160" height="40" image="uni_button" image_pushed="uni_button_down">
+				<Label name="acc_price" font="fenix_18" color="0;0;0" text="100" align="center-left" />
+				<Image image="money_soft_icon" align="center-right" width="45" height="55" />
+			</AnimButton>
+			<AnimButton name="buy_tires_btn" align="top-right" margin_left="0" margin_top="100" width="160" height="40" image="uni_button" image_pushed="uni_button_down">
+				<Label name="tires_price" font="fenix_18" color="0;0;0" text="100" align="center-left" />
+				<Image image="money_soft_icon" align="center-right" width="45" height="55" />
+			</AnimButton>
+		</Panel>
 	</Panel>
 </Panel>

@@ -7,6 +7,7 @@ class GameController;
 class ProgressControl;
 class StatusBar;
 class Control;
+class Label;
 
 class CarPartsScreen :
 	public IScreen,
@@ -26,6 +27,14 @@ private:
 	GameController *m_gameController;
 
 	Control *m_view;
+
+	Control* m_buySpeedButton;
+	Control* m_buyAccButton;
+	Control* m_buyTiresButton;
+
+	Label* m_speedPrice;
+	Label* m_accPrice;
+	Label* m_tiresPrice;
 
 	ProgressControl* m_speedProgress;
 	ProgressControl* m_accProgress;
