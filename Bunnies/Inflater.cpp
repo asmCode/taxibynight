@@ -204,6 +204,6 @@ Control* Inflater::LoadProgressControl(XMLNode *node, const std::string &name)
 	if (node->HasAttrib("max_values"))
 		maxValues = node->GetAttribAsInt32("max_values");
 
-	return new ProgressControl(title, maxValues);
+	return new ProgressControl(name, title, maxValues);
 }
 

@@ -8,9 +8,9 @@
 #include <Graphics/SpriteBatch.h>
 #include <Utils/StringUtils.h>
 
-ProgressControl::ProgressControl(const std::string& name, int maxValues) :
-	Control(""),
-	m_name(name),
+ProgressControl::ProgressControl(const std::string& name, const std::string& title, int maxValues) :
+	Control(name),
+	m_title(title),
 	m_maxValues(maxValues),
 	m_fillCells(NULL)
 {
@@ -29,21 +29,28 @@ ProgressControl::ProgressControl(const std::string& name, int maxValues) :
 	assert(m_cellsGridOn != NULL);
 	assert(m_cellsGridOff != NULL);
 
-	m_nameLabel->SetText(m_name);
+	m_nameLabel->SetText(m_title);
 
 	CreateCells();
 }
 
-void ProgressControl::SetName(const std::string& name)
+void ProgressControl::SetTitle(const std::string& title)
 {
-	m_name = name;
+	m_title = title;
 
-	m_nameLabel->SetText(name);
+	m_nameLabel->SetText(m_title);
 }
 
-std::string ProgressControl::GetName() const
+std::string ProgressControl::GetTitle() const
 {
 	return m_name;
+}
+
+void ProgressControl::SetLimit(int limit)
+{
+	m_maxValues = limit;
+
+	CreateCells();
 }
 
 void ProgressControl::SetValue(int value)
@@ -61,6 +68,17 @@ int ProgressControl::GetValue() const
 
 void ProgressControl::CreateCells()
 {
+	if (m_fillCells != NULL)
+	{
+		delete[] m_fillCells;
+
+		while (m_cellsGridOff->GetChildrenCount() > 0)
+			m_cellsGridOff->RemoveChild(m_cellsGridOff->GetChild(0));
+
+		while (m_cellsGridOn->GetChildrenCount() > 0)
+			m_cellsGridOn->RemoveChild(m_cellsGridOn->GetChild(0));
+	}
+
 	m_fillCells = new Control*[m_maxValues];
 
 	TexPart *cellOnTexPart = InterfaceProvider::GetSpritesMap()->GetTexPart("stats_cell_on");

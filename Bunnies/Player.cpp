@@ -150,6 +150,11 @@ void Player::AddObserver(PlayerObserver *observer)
 	m_observers.push_back(observer);
 }
 
+Car* Player::GetActiveCar()
+{
+	return m_activeCar;
+}
+
 void Player::NotifyExperienceChanged()
 {
 	for (uint32_t i = 0; i < m_observers.size(); i++)

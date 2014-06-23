@@ -102,6 +102,7 @@
     <ClInclude Include="Bunnies\Car.h" />
     <ClInclude Include="Bunnies\CarDealerScreen.h" />
     <ClInclude Include="Bunnies\CardId.h" />
+    <ClInclude Include="Bunnies\CarPartsScreen.h" />
     <ClInclude Include="Bunnies\ComicsScreen.h" />
     <ClInclude Include="Bunnies\DecalId.h" />
     <ClInclude Include="Bunnies\DummyAnalytics.h" />
@@ -269,6 +270,7 @@
     <ClCompile Include="Bunnies\Car.cpp" />
     <ClCompile Include="Bunnies\CarDealerScreen.cpp" />
     <ClCompile Include="Bunnies\CardId.cpp" />
+    <ClCompile Include="Bunnies\CarPartsScreen.cpp" />
     <ClCompile Include="Bunnies\ComicsScreen.cpp" />
     <ClCompile Include="Bunnies\DecalId.cpp" />
     <ClCompile Include="Bunnies\DummyAnalytics.cpp" />

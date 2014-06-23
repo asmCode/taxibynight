@@ -93,4 +93,9 @@ void GarageScreen::Clicked(Control *control, uint32_t x, uint32_t y)
 		SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Button);
 		m_gameController->ShowCarDealerScreen();
 	}
+	else if (control == m_carPartsButton)
+	{
+		SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Button);
+		m_gameController->ShowCarPartsScreen();
+	}
 }

@@ -1,10 +1,11 @@
 <Panel name="" >
-	<Panel align="top-left" width="100" height="48">
+	<Panel align="top-left" width="240" height="48">
 		<Label name="name" font="fenix_26" text="Name" size="1.0" align="right" />
 	</Panel>
 	
-	<Panel align="top-left" margin_left="100" height="48">
-		<Grid name="cells_grid_off" align="top-left" margin_left="40" orientation="horizontal" gap_size="8" />
-		<Grid name="cells_grid_on" align="top-left" margin_left="40" orientation="horizontal" gap_size="8" />
+	<Panel align="top-left" margin_left="260" width="200" height="48">
+		<Image image="ib_logo" fill="true" />
+		<Grid name="cells_grid_off" align="top-left" orientation="horizontal" gap_size="8" />
+		<Grid name="cells_grid_on" align="top-left" orientation="horizontal" gap_size="8" />
 	</Panel>
 </Panel>

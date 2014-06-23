@@ -1,0 +1,10 @@
+<Panel name="" fill="true">
+	<Image image="town" tmp_fill="wypelnij" align="top" width="650" height="495"/>
+	
+	<Panel align="bottom-right" width="500" height="160">
+		<Image image="money_bg" fill="true" />
+		<ProgressControl name="speed" title="Speed" max_values="6" align="top-left" margin_top="0" />
+		<ProgressControl name="acc" title="Acceleration" max_values="6" align="top-left" margin_top="50" />
+		<ProgressControl name="tires" title="Tires" max_values="6" align="top-left" margin_top="100" />
+	</Panel>
+</Panel>
