@@ -1,5 +1,7 @@
 <Panel name="" fill="true">
 	<Image image="town" tmp_fill="wypelnij" align="top" width="650" height="495"/>
+	
+	<StatusBar name="status_bar" />
 
 	<Panel align="center">
 		<ProgressControl title="Acceleration" max_values="6" align="top-left" margin_top="0" />

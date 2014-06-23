@@ -4,6 +4,7 @@
 #include "IControlEventsObserver.h"
 
 class GameController;
+class StatusBar;
 class Control;
 
 class GarageScreen :
@@ -28,6 +29,8 @@ private:
 	Control* m_carDealerButton;
 	Control* m_carPartsButton;
 	Control* m_carPaintButton;
+
+	StatusBar* m_statusBar;
 
 	void HandlePress(int pointId, const sm::Vec2 &point);
 	void HandleRelease(int pointId, const sm::Vec2 &point);

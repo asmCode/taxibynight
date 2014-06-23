@@ -4,6 +4,7 @@
 #include "AnimButton.h"
 #include "ProgressBar.h"
 #include "Gui/GridPanel.h"
+#include "Gui/StatusBar.h"
 #include "../Bunnies/Gui/ProgressControl.h"
 #include "InterfaceProvider.h"
 #include "SpritesMap.h"
@@ -38,6 +39,8 @@ Control* Inflater::LoadNode(XMLNode *node)
 		control = LoadPanelControl(node, name);
 	else if (type == "Image")
 		control = LoadImageControl(node, name);
+	else if (type == "StatusBar")
+		control = LoadStatusBar(node, name);
 	else if (type == "AnimButton")
 		control = LoadAnimButtonControl(node, name);
 	else if (type == "Grid")
@@ -135,6 +138,11 @@ Control* Inflater::LoadLabelControl(XMLNode *node, const std::string &name)
 Control* Inflater::LoadPanelControl(XMLNode *node, const std::string &name)
 {
 	return new Control(name);
+}
+
+Control* Inflater::LoadStatusBar(XMLNode *node, const std::string &name)
+{
+	return new StatusBar(name);
 }
 
 Control* Inflater::LoadProgressBar(XMLNode *node, const std::string &name)

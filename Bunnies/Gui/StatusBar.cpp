@@ -11,8 +11,8 @@
 #include <Graphics/SpriteBatch.h>
 #include <Utils/StringUtils.h>
 
-StatusBar::StatusBar() :
-	Control("")
+StatusBar::StatusBar(const std::string& name) :
+	Control(name)
 {
 	m_view = Inflater::Inflate(TaxiGame::Environment::GetInstance()->GetBasePath() + "data/gui/StatusBar.xml");
 

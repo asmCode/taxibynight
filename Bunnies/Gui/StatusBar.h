@@ -14,7 +14,7 @@ class StatusBar : public Control,
 				  public IControlEventsObserver
 {
 public:
-	StatusBar();
+	StatusBar(const std::string& name);
 
 private:	
 	Control *m_view;

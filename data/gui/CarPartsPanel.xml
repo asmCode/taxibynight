@@ -1,6 +1,8 @@
 <Panel name="" fill="true">
 	<Image image="town" tmp_fill="wypelnij" align="top" width="650" height="495"/>
 	
+	<StatusBar name="status_bar" />
+	
 	<Panel align="bottom-right" width="500" height="160">
 		<Image image="money_bg" fill="true" />
 		<ProgressControl name="speed" title="Speed" max_values="6" align="top-left" margin_top="0" />
