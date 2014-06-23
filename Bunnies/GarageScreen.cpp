@@ -13,7 +13,8 @@ GarageScreen::GarageScreen(GameController *gameController) :
 	m_gameController(gameController),
 	m_carDealerButton(NULL),
 	m_carPartsButton(NULL),
-	m_carPaintButton(NULL)
+	m_carPaintButton(NULL),
+	m_statusBar(NULL)
 {
 }
 

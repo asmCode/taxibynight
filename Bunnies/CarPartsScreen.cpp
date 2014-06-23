@@ -3,18 +3,20 @@
 #include "InterfaceProvider.h"
 #include "Car.h"
 #include "Player.h"
-#include <Graphics/SpriteBatch.h>
 #include "Control.h"
-#include "Gui/ProgressControl.h"
 #include "GameController.h"
 #include "Environment.h"
+#include "Gui/ProgressControl.h"
+#include "Gui/StatusBar.h"
 #include <Audio/SoundManager.h>
+#include <Graphics/SpriteBatch.h>
 
 CarPartsScreen::CarPartsScreen(GameController *gameController) :
 	m_gameController(gameController),
 	m_speedProgress(NULL),
 	m_accProgress(NULL),
-	m_tiresProgress(NULL)
+	m_tiresProgress(NULL),
+	m_statusBar(NULL)
 {
 }
 
@@ -37,6 +39,9 @@ bool CarPartsScreen::InitResources()
 
 	m_tiresProgress = dynamic_cast<ProgressControl*>(m_view->FindChild("tires"));
 	assert(m_tiresProgress != NULL);
+
+	m_statusBar = dynamic_cast<StatusBar*>(m_view->FindChild("status_bar"));
+	assert(m_statusBar != NULL);
 
 	/*
 

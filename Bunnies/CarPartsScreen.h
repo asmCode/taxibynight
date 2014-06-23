@@ -5,6 +5,7 @@
 
 class GameController;
 class ProgressControl;
+class StatusBar;
 class Control;
 
 class CarPartsScreen :
@@ -29,6 +30,8 @@ private:
 	ProgressControl* m_speedProgress;
 	ProgressControl* m_accProgress;
 	ProgressControl* m_tiresProgress;
+
+	StatusBar* m_statusBar;
 
 	void RefreshView();
 
