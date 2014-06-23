@@ -2,6 +2,7 @@
 
 #include "IScreen.h"
 #include "IControlEventsObserver.h"
+#include "CarObserver.h"
 
 class GameController;
 class ProgressControl;
@@ -11,7 +12,8 @@ class Label;
 
 class CarPartsScreen :
 	public IScreen,
-	public IControlEventsObserver
+	public IControlEventsObserver,
+	public CarObserver
 {
 public:
 	CarPartsScreen(GameController *gameController);
@@ -43,6 +45,11 @@ private:
 	StatusBar* m_statusBar;
 
 	void RefreshView();
+	void RefreshUpgradeProgress(
+		Car* car,
+		const std::string& upgradeId,
+		ProgressControl* progressControl,
+		Label* upgradePrice);
 
 	void HandlePress(int pointId, const sm::Vec2 &point);
 	void HandleRelease(int pointId, const sm::Vec2 &point);
@@ -51,5 +58,7 @@ private:
 	void Clicked(Control *control, uint32_t x, uint32_t y);
 
 	void Enter();
+
+	void Upgraded(Car* car, const std::string& upgradeId);
 };
 

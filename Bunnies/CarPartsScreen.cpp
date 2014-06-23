@@ -12,6 +12,7 @@
 #include <Audio/SoundManager.h>
 #include <Graphics/SpriteBatch.h>
 #include <Utils/Log.h>
+#include <Utils/StringUtils.h>
 
 CarPartsScreen::CarPartsScreen(GameController *gameController) :
 	m_gameController(gameController),
@@ -109,6 +110,11 @@ void CarPartsScreen::HandleMove(int pointId, const sm::Vec2 &point)
 
 void CarPartsScreen::Enter()
 {
+	Car* car = Player::Instance->GetActiveCar();
+	if (car == NULL)
+		return;
+
+	car->AddObserver(this);
 }
 
 void CarPartsScreen::Clicked(Control *control, uint32_t x, uint32_t y)
@@ -136,19 +142,30 @@ void CarPartsScreen::RefreshView()
 	if (car == NULL)
 		return;
 	
+	RefreshUpgradeProgress(car, UpgradeId::Speed, m_speedProgress, m_speedPrice);
+	RefreshUpgradeProgress(car, UpgradeId::Acc, m_accProgress, m_accPrice);
+	RefreshUpgradeProgress(car, UpgradeId::Tires, m_tiresProgress, m_tiresPrice);
+}
+
+void CarPartsScreen::RefreshUpgradeProgress(
+	Car* car,
+	const std::string& upgradeId,
+	ProgressControl* progressControl,
+	Label* upgradePrice)
+{
 	int totalSlots;
 	int activeSlots;
-	car->GetUpgradeSlots(UpgradeId::Speed, totalSlots, activeSlots);
-	m_speedProgress->SetLimit(totalSlots);
-	m_speedProgress->SetValue(activeSlots);
+	car->GetUpgradeSlots(upgradeId, totalSlots, activeSlots);
+	progressControl->SetLimit(totalSlots);
+	progressControl->SetValue(activeSlots);
 
-	car->GetUpgradeSlots(UpgradeId::Acc, totalSlots, activeSlots);
-	m_accProgress->SetLimit(totalSlots);
-	m_accProgress->SetValue(activeSlots);
+	float softPrice;
+	float hardPrice;
+	car->GetNextUpgradePrice(upgradeId, softPrice, hardPrice);
+	upgradePrice->SetText(StringUtils::ToString(softPrice));
+}
 
-	car->GetUpgradeSlots(UpgradeId::Tires, totalSlots, activeSlots);
-	m_tiresProgress->SetLimit(totalSlots);
-	m_tiresProgress->SetValue(activeSlots);
-
+void CarPartsScreen::Upgraded(Car* car, const std::string& upgradeId)
+{
 
 }

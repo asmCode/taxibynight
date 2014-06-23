@@ -1,4 +1,6 @@
 #include "Car.h"
+#include "CarObserver.h"
+#include <algorithm>
 
 Car::Car(
 	CarData carData,
@@ -80,6 +82,14 @@ void Car::GetNextUpgradePrice(const std::string& id, float& softPrice, float& ha
 
 	softPrice = upgradeData.UpgradeLevels[upgradeLevel].SoftPrice;
 	hardPrice = upgradeData.UpgradeLevels[upgradeLevel].HardPrice;
+}
+
+void Car::AddObserver(CarObserver* carObserver)
+{
+	if (std::find(m_observers.begin(), m_observers.end(), carObserver) != m_observers.end())
+		return;
+
+	m_observers.push_back(carObserver);
 }
 
 int Car::GetUpgradeLevel(const std::string& id)

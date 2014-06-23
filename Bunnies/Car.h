@@ -6,6 +6,8 @@
 #include <string>
 #include <vector>
 
+class CarObserver;
+
 class Car
 {
 public:
@@ -30,6 +32,8 @@ public:
 	void GetUpgradeSlots(const std::string& id, int& totalSlots, int& activeSlots) const;
 	void GetNextUpgradePrice(const std::string& id, float& softPrice, float& hardPrice);
 
+	void AddObserver(CarObserver* carObserver);
+
 private:
 	CarData m_carData;
 
@@ -38,6 +42,8 @@ private:
 	int m_tiresUpgradeLevel;
 
 	std::vector<DecalData> m_decals;
+
+	std::vector<CarObserver*> m_observers;
 
 	int GetUpgradeLevel(const std::string& id);
 };
