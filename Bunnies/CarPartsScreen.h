@@ -9,6 +9,7 @@ class ProgressControl;
 class StatusBar;
 class Control;
 class Label;
+class Car;
 
 class CarPartsScreen :
 	public IScreen,
@@ -44,12 +45,15 @@ private:
 
 	StatusBar* m_statusBar;
 
+	Car* m_activeCar;
+
 	void RefreshView();
 	void RefreshUpgradeProgress(
-		Car* car,
 		const std::string& upgradeId,
 		ProgressControl* progressControl,
 		Label* upgradePrice);
+
+	void Upgrade(const std::string& upgradeId);
 
 	void HandlePress(int pointId, const sm::Vec2 &point);
 	void HandleRelease(int pointId, const sm::Vec2 &point);

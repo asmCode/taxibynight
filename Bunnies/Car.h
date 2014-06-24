@@ -32,6 +32,9 @@ public:
 	void GetUpgradeSlots(const std::string& id, int& totalSlots, int& activeSlots) const;
 	void GetNextUpgradePrice(const std::string& id, float& softPrice, float& hardPrice);
 
+	void Upgrade(const std::string& upgradeId);
+	bool IsFullyUpgraded(const std::string& upgradeId);
+
 	void AddObserver(CarObserver* carObserver);
 
 private:
@@ -46,5 +49,6 @@ private:
 	std::vector<CarObserver*> m_observers;
 
 	int GetUpgradeLevel(const std::string& id);
+	void NotifyUpgraded(const std::string& upgradeId);
 };
 

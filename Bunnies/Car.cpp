@@ -1,5 +1,6 @@
 #include "Car.h"
 #include "CarObserver.h"
+#include <Core/stdint.h>
 #include <algorithm>
 
 Car::Car(
@@ -75,13 +76,33 @@ void Car::GetNextUpgradePrice(const std::string& id, float& softPrice, float& ha
 {
 	UpgradeData upgradeData = m_carData.GetUpgradeData(id);
 
-	if (upgradeData.UpgradeLevels.size() == m_speedUpgradeLevel)
-		return;
-
 	int upgradeLevel = GetUpgradeLevel(id);
+
+	if (upgradeData.UpgradeLevels.size() == upgradeLevel)
+		return;
 
 	softPrice = upgradeData.UpgradeLevels[upgradeLevel].SoftPrice;
 	hardPrice = upgradeData.UpgradeLevels[upgradeLevel].HardPrice;
+}
+
+void Car::Upgrade(const std::string& upgradeId)
+{
+	if (IsFullyUpgraded(upgradeId))
+		return;
+
+	if (upgradeId == UpgradeId::Speed)
+		m_speedUpgradeLevel++;
+	if (upgradeId == UpgradeId::Acc)
+		m_accUpgradeLevel++;
+	if (upgradeId == UpgradeId::Tires)
+		m_tiresUpgradeLevel++;
+
+	NotifyUpgraded(upgradeId);
+}
+
+bool Car::IsFullyUpgraded(const std::string& upgradeId)
+{
+	return m_carData.GetUpgradeSlotsCount(upgradeId) == GetUpgradeLevel(upgradeId);
 }
 
 void Car::AddObserver(CarObserver* carObserver)
@@ -102,4 +123,10 @@ int Car::GetUpgradeLevel(const std::string& id)
 		return m_tiresUpgradeLevel;
 
 	return 0;
+}
+
+void Car::NotifyUpgraded(const std::string& upgradeId)
+{
+	for (uint32_t i = 0; i < m_observers.size(); i++)
+		m_observers[i]->Upgraded(this, upgradeId);
 }

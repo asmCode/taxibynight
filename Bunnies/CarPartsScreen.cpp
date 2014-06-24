@@ -68,8 +68,6 @@ bool CarPartsScreen::InitResources()
 	ObsCast(IControlEventsObserver, m_buyAccButton)->AddObserver(this);
 	ObsCast(IControlEventsObserver, m_buyTiresButton)->AddObserver(this);
 
-	RefreshView();
-
 	return true;
 }
 
@@ -110,11 +108,13 @@ void CarPartsScreen::HandleMove(int pointId, const sm::Vec2 &point)
 
 void CarPartsScreen::Enter()
 {
-	Car* car = Player::Instance->GetActiveCar();
-	if (car == NULL)
+	m_activeCar = Player::Instance->GetActiveCar();
+	if (m_activeCar == NULL)
 		return;
 
-	car->AddObserver(this);
+	m_activeCar->AddObserver(this);
+
+	RefreshView();
 }
 
 void CarPartsScreen::Clicked(Control *control, uint32_t x, uint32_t y)
@@ -122,50 +122,80 @@ void CarPartsScreen::Clicked(Control *control, uint32_t x, uint32_t y)
 	if (control == m_buySpeedButton)
 	{
 		SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Button);
-		Log::LogT("Speed");
+		Upgrade(UpgradeId::Speed);
 	}
 	else if (control == m_buyAccButton)
 	{
 		SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Button);
-		Log::LogT("Acc");
+		Upgrade(UpgradeId::Acc);
 	}
 	else if (control == m_buyTiresButton)
 	{
 		SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Button);
-		Log::LogT("Tires");
+		Upgrade(UpgradeId::Tires);
 	}
 }
 
 void CarPartsScreen::RefreshView()
 {
-	Car* car = Player::Instance->GetActiveCar();
-	if (car == NULL)
-		return;
-	
-	RefreshUpgradeProgress(car, UpgradeId::Speed, m_speedProgress, m_speedPrice);
-	RefreshUpgradeProgress(car, UpgradeId::Acc, m_accProgress, m_accPrice);
-	RefreshUpgradeProgress(car, UpgradeId::Tires, m_tiresProgress, m_tiresPrice);
+	RefreshUpgradeProgress(UpgradeId::Speed, m_speedProgress, m_speedPrice);
+	RefreshUpgradeProgress(UpgradeId::Acc, m_accProgress, m_accPrice);
+	RefreshUpgradeProgress(UpgradeId::Tires, m_tiresProgress, m_tiresPrice);
 }
 
 void CarPartsScreen::RefreshUpgradeProgress(
-	Car* car,
 	const std::string& upgradeId,
 	ProgressControl* progressControl,
 	Label* upgradePrice)
 {
+	if (m_activeCar == NULL)
+	{
+		assert(false);
+		return;
+	}
+
 	int totalSlots;
 	int activeSlots;
-	car->GetUpgradeSlots(upgradeId, totalSlots, activeSlots);
+	m_activeCar->GetUpgradeSlots(upgradeId, totalSlots, activeSlots);
 	progressControl->SetLimit(totalSlots);
 	progressControl->SetValue(activeSlots);
 
+	if (m_activeCar->IsFullyUpgraded(upgradeId))
+	{
+		//upgradePrice->SetVisible(false);
+	}
+	else
+	{
+		//upgradePrice->SetVisible(true);
+
+		float softPrice;
+		float hardPrice;
+		m_activeCar->GetNextUpgradePrice(upgradeId, softPrice, hardPrice);
+		upgradePrice->SetText(StringUtils::ToString(softPrice));
+	}
+}
+
+void CarPartsScreen::Upgrade(const std::string& upgradeId)
+{
+	if (m_activeCar == NULL)
+	{
+		assert(false);
+		return;
+	}
+
+	if (m_activeCar->IsFullyUpgraded(upgradeId))
+		return;
+
 	float softPrice;
 	float hardPrice;
-	car->GetNextUpgradePrice(upgradeId, softPrice, hardPrice);
-	upgradePrice->SetText(StringUtils::ToString(softPrice));
+	m_activeCar->GetNextUpgradePrice(upgradeId, softPrice, hardPrice);
+
+	m_activeCar->Upgrade(upgradeId);
+
+	Player::Instance->SetSoftMoney(Player::Instance->GetSoftMoney() - softPrice);
 }
 
 void CarPartsScreen::Upgraded(Car* car, const std::string& upgradeId)
 {
-
+	RefreshView();
 }
