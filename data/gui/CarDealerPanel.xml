@@ -1,10 +1,48 @@
 <Panel name="" fill="true">
 	<Image image="town" tmp_fill="wypelnij" align="top" width="650" height="495"/>
 	
-	<Label font="fenix_26" text="Player Name:" size="1.0" align="top-left" margin_left="20" margin_top="20" />
-	<Label name="player_name" font="fenix_26" text="MajakTheCoder" size="1.0" align="top-left" margin_left="300" margin_top="20" />
+	<StatusBar name="status_bar" />
 	
-	<Grid align="top-left" margin_left="40" margin_top="150" >
+	<Panel align="bottom-right" width="700" height="160">
+		<Image image="money_bg" fill="true" />
+		
+		<Panel align="top-left" width="500" height="160">
+			<ProgressControl name="speed" title="Speed" max_values="6" align="top-left" margin_top="0" />
+			<ProgressControl name="acc" title="Acceleration" max_values="6" align="top-left" margin_top="50" />
+			<ProgressControl name="tires" title="Tires" max_values="6" align="top-left" margin_top="100" />
+		</Panel>
+	</Panel>
+
+	<Panel name="buy_panel" align="top" width="300" height="100" margin_top="150" visible="false">
+		<Image image="money_bg" fill="true" />
+		
+		<AnimButton name="buy_btn" align="bottom" margin_left="0" margin_top="0" width="160" height="80" image="uni_button" image_pushed="uni_button_down">
+			<Panel align="bottom" width="158" height="55">
+				<Label name="price" font="fenix_18" color="0;0;0" text="100" align="left" />
+				<Image image="money_soft_icon" align="right" width="45" height="55" />
+			</Panel>
+			
+			<Label font="fenix_18" color="255;255;255" text="buy" align="top" />
+		</AnimButton>
+	</Panel>
+
+	<Panel name="activate_panel" align="top" width="300" height="140" margin_top="150" visible="false">
+		<Image image="money_bg" fill="true" />
+		
+		<Label font="fenix_18" color="255;255;255" text="Already have this car" align="top" />
+		
+		<AnimButton name="activate_btn" align="bottom" margin_left="0" margin_top="0" width="160" height="80" image="uni_button" image_pushed="uni_button_down">
+			<Label font="fenix_18" color="255;255;255" text="Activate" align="center" />
+		</AnimButton>
+	</Panel>
+
+	<Panel name="already_have_panel" align="top" width="300" height="140" margin_top="150" visible="false">
+		<Image image="money_bg" fill="true" />
+		
+		<Label font="fenix_18" color="255;255;255" text="This is your current car" align="top" />
+	</Panel>
+	
+	<Grid align="top-left" margin_left="40" margin_top="150" orientation="vertical" >
 		<AnimButton name="car_1_button" align="top-left" margin_top="0" width="128" height="128" image="car_1_button" image_pushed="car_1_button" />
 		<AnimButton name="car_2_button" align="top-left" margin_top="0" width="128" height="128" image="car_2_button" image_pushed="car_2_button" />
 		<AnimButton name="car_3_button" align="top-left" margin_top="0" width="128" height="128" image="car_3_button" image_pushed="car_3_button" />
