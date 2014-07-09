@@ -29,9 +29,8 @@ Control* Inflater::Inflate(const std::string &xml)
 Control* Inflater::LoadNode(XMLNode *node)
 {
 	std::string type = node->GetName();
-	std::string name;
-	if (node->HasAttrib("name"))
-		name = node->GetAttribAsString("name");
+	std::string name = node->GetAttribAsString("name");
+	bool visible = node->GetAttribAsBool("visible", true);
 
 	Control *control = NULL;
 
@@ -54,6 +53,8 @@ Control* Inflater::LoadNode(XMLNode *node)
 
 	if (control == NULL)
 		return NULL;
+
+	control->SetVisible(visible);
 
 	LoadLayout(node, control);
 
