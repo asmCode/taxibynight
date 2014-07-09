@@ -38,6 +38,8 @@ public:
 	void AddObserver(PlayerObserver *observer);
 
 	Car* GetActiveCar();
+	void AddCar(const std::string& carId);
+	void ActicateCar(const std::string& carId);
 	bool HasCar(const std::string& carId);
 
 private:

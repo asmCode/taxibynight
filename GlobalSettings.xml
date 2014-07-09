@@ -34,7 +34,7 @@
 		</Car>
 		<Car id="car2"
 			 name="Bus"
-			 soft_price="8900"
+			 soft_price="89.00"
 			 hard_price="100"
 			 speed="9"
 			 acc="3"

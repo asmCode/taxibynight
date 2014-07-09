@@ -2,6 +2,7 @@
 #include "Inflater.h"
 #include "Car.h"
 #include "Player.h"
+#include "GlobalSettings/GlobalSettings.h"
 #include "InterfaceProvider.h"
 #include <Graphics/SpriteBatch.h>
 #include "Control.h"
@@ -17,6 +18,9 @@ CarDealerScreen::CarDealerScreen(GameController *gameController) :
 	m_buyPanel(NULL),
 	m_activatePanel(NULL),
 	m_alreadyHavePanel(NULL),
+	m_buySoftButton(NULL),
+	m_buyHardButton(NULL),
+	m_activateButton(NULL),
 	m_activeCar(NULL)
 {
 }
@@ -48,9 +52,19 @@ bool CarDealerScreen::InitResources()
 	m_alreadyHavePanel = m_view->FindChild("already_have_panel");
 	assert(m_alreadyHavePanel != NULL);
 
+	m_buySoftButton = m_view->FindChild("buy_soft_btn");
+	assert(m_buySoftButton != NULL);
+	m_buyHardButton = m_view->FindChild("buy_hard_btn");
+	assert(m_buyHardButton != NULL);
+	m_activateButton = m_view->FindChild("activate_btn");
+	assert(m_activateButton != NULL);
+
 	ObsCast(IControlEventsObserver, m_car1Button)->AddObserver(this);
 	ObsCast(IControlEventsObserver, m_car2Button)->AddObserver(this);
 	ObsCast(IControlEventsObserver, m_car3Button)->AddObserver(this);
+	ObsCast(IControlEventsObserver, m_buySoftButton)->AddObserver(this);
+	ObsCast(IControlEventsObserver, m_buyHardButton)->AddObserver(this);
+	ObsCast(IControlEventsObserver, m_activateButton)->AddObserver(this);
 
 	return true;
 }
@@ -81,6 +95,44 @@ void CarDealerScreen::SelectCar(const std::string& carId)
 		return;
 
 	m_selectedCarId = carId;
+
+	RefreshView();
+}
+
+void CarDealerScreen::BuyCar(const std::string& carId, bool buyForHard)
+{
+	assert(Player::Instance->HasCar(carId) == false);
+	if (Player::Instance->HasCar(carId))
+		return;
+
+	CarData carData = GlobalSettings::GetCarById(carId);
+
+	if (!buyForHard)
+	{
+		assert(carData.SoftPrice > 0);
+
+		if (Player::Instance->GetSoftMoney() < carData.SoftPrice)
+		{
+			// not enouch money - message
+			assert("not enouch money - message" && false);
+		}
+
+		Player::Instance->SetSoftMoney(Player::Instance->GetSoftMoney() - carData.SoftPrice);
+		Player::Instance->AddCar(carId);
+	}
+
+	ActivateCar(carId);
+}
+
+void CarDealerScreen::ActivateCar(const std::string& carId)
+{
+	assert(Player::Instance->HasCar(carId));
+	if (!Player::Instance->HasCar(carId))
+		return;
+
+	Player::Instance->ActicateCar(carId);
+
+	m_activeCar = Player::Instance->GetActiveCar();
 
 	RefreshView();
 }
@@ -144,5 +196,20 @@ void CarDealerScreen::Clicked(Control *control, uint32_t x, uint32_t y)
 	{
 		SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Button);
 		SelectCar(CarId::Car3);
+	}
+	else if (control == m_buySoftButton)
+	{
+		SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Button);
+		BuyCar(m_selectedCarId, false);
+	}
+	else if (control == m_buyHardButton)
+	{
+		SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Button);
+		BuyCar(m_selectedCarId, true);
+	}
+	else if (control == m_activateButton)
+	{
+		SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Button);
+		ActivateCar(m_selectedCarId);
 	}
 }

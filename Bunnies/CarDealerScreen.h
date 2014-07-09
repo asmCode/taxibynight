@@ -37,11 +37,17 @@ private:
 	Control* m_activatePanel;
 	Control* m_alreadyHavePanel;
 
+	Control* m_buySoftButton;
+	Control* m_buyHardButton;
+	Control* m_activateButton;
+
 	Car* m_activeCar;
 
 	std::string m_selectedCarId;
 
 	void SelectCar(const std::string& carId);
+	void BuyCar(const std::string& carId, bool buyForHard);
+	void ActivateCar(const std::string& carId);
 	void HideAllActionPanels();
 
 	void HandlePress(int pointId, const sm::Vec2 &point);

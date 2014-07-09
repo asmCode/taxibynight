@@ -65,7 +65,7 @@ void Player::Load()
 
 	LoadCars(node);
 
-	m_activeCar = GetCarById(m_activeCarId);
+	ActicateCar(m_activeCarId);
 }
 
 void Player::Save()
@@ -153,6 +153,28 @@ void Player::AddObserver(PlayerObserver *observer)
 Car* Player::GetActiveCar()
 {
 	return m_activeCar;
+}
+
+void Player::AddCar(const std::string& carId)
+{
+	assert(HasCar(carId) == false);
+	if (HasCar(carId))
+		return;
+
+	CarData carData = GlobalSettings::GetCarById(carId);
+
+	Car* car = new Car(carData, 0, 0, 0, std::vector<DecalData>());
+	m_cars.push_back(car);
+}
+
+void Player::ActicateCar(const std::string& carId)
+{
+	assert(HasCar(carId));
+	if (!HasCar(carId))
+		return;
+
+	m_activeCarId = carId;
+	m_activeCar = GetCarById(m_activeCarId);
 }
 
 bool Player::HasCar(const std::string& carId)

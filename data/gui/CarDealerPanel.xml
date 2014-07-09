@@ -16,10 +16,19 @@
 	<Panel name="buy_panel" align="top" width="300" height="100" margin_top="150" visible="false">
 		<Image image="money_bg" fill="true" />
 		
-		<AnimButton name="buy_btn" align="bottom" margin_left="0" margin_top="0" width="160" height="80" image="uni_button" image_pushed="uni_button_down">
+		<AnimButton name="buy_soft_btn" align="bottom" margin_left="0" margin_bottom="80" width="160" height="80" image="uni_button" image_pushed="uni_button_down">
 			<Panel align="bottom" width="158" height="55">
-				<Label name="price" font="fenix_18" color="0;0;0" text="100" align="left" />
+				<Label name="soft_price" font="fenix_18" color="0;0;0" text="100" align="left" />
 				<Image image="money_soft_icon" align="right" width="45" height="55" />
+			</Panel>
+			
+			<Label font="fenix_18" color="255;255;255" text="buy" align="top" />
+		</AnimButton>
+		
+		<AnimButton name="buy_hard_btn" align="bottom" margin_left="0" margin_bottom="0" width="160" height="80" image="uni_button" image_pushed="uni_button_down">
+			<Panel align="bottom" width="158" height="55">
+				<Label name="hard_price" font="fenix_18" color="0;0;0" text="100" align="left" />
+				<Image image="money_hard_icon" align="right" width="45" height="55" />
 			</Panel>
 			
 			<Label font="fenix_18" color="255;255;255" text="buy" align="top" />
