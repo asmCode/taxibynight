@@ -155,6 +155,15 @@ Car* Player::GetActiveCar()
 	return m_activeCar;
 }
 
+bool Player::HasCar(const std::string& carId)
+{
+	for (uint32_t i = 0; i < m_cars.size(); i++)
+		if (m_cars[i]->GetId() == carId)
+			return true;
+
+	return false;
+}
+
 void Player::NotifyExperienceChanged()
 {
 	for (uint32_t i = 0; i < m_observers.size(); i++)
