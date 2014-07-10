@@ -6,6 +6,7 @@
 
 class GameController;
 class Control;
+class Label;
 class Car;
 
 class CarDealerScreen :
@@ -40,6 +41,9 @@ private:
 	Control* m_buySoftButton;
 	Control* m_buyHardButton;
 	Control* m_activateButton;
+
+	Label* m_softPriceLabel;
+	Label* m_hardPriceLabel;
 
 	Car* m_activeCar;
 

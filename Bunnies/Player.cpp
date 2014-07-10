@@ -65,7 +65,8 @@ void Player::Load()
 
 	LoadCars(node);
 
-	ActicateCar(m_activeCarId);
+	if (m_activeCarId.length() > 0)
+		ActicateCar(m_activeCarId);
 }
 
 void Player::Save()

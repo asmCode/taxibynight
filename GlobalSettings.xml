@@ -2,7 +2,7 @@
 	<Cars>
 		<Car id="car1"
 			 name="Piece of Junk"
-			 soft_price="700"
+			 soft_price="70.0"
 			 speed="8"
 			 acc="2"
 			 tires="1"
@@ -35,7 +35,7 @@
 		<Car id="car2"
 			 name="Bus"
 			 soft_price="89.00"
-			 hard_price="100"
+			 hard_price="10.0"
 			 speed="9"
 			 acc="3"
 			 tires="2"
@@ -68,7 +68,7 @@
 		</Car>
 		<Car id="car3"
 			 name="Predator"
-			 hard_price="500"
+			 hard_price="50.0"
 			 speed="10"
 			 acc="4"
 			 tires="3"

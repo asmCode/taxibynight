@@ -2,12 +2,14 @@
 #include "Inflater.h"
 #include "Car.h"
 #include "Player.h"
-#include "GlobalSettings/GlobalSettings.h"
 #include "InterfaceProvider.h"
-#include <Graphics/SpriteBatch.h>
 #include "Control.h"
+#include "Label.h"
 #include "GameController.h"
 #include "Environment.h"
+#include "GlobalSettings/GlobalSettings.h"
+#include <Graphics/SpriteBatch.h>
+#include <Utils/StringUtils.h>
 #include <Audio/SoundManager.h>
 
 CarDealerScreen::CarDealerScreen(GameController *gameController) :
@@ -21,6 +23,8 @@ CarDealerScreen::CarDealerScreen(GameController *gameController) :
 	m_buySoftButton(NULL),
 	m_buyHardButton(NULL),
 	m_activateButton(NULL),
+	m_softPriceLabel(NULL),
+	m_hardPriceLabel(NULL),
 	m_activeCar(NULL)
 {
 }
@@ -58,6 +62,11 @@ bool CarDealerScreen::InitResources()
 	assert(m_buyHardButton != NULL);
 	m_activateButton = m_view->FindChild("activate_btn");
 	assert(m_activateButton != NULL);
+
+	m_softPriceLabel = dynamic_cast<Label*>(m_view->FindChild("soft_price"));
+	assert(m_softPriceLabel != NULL);
+	m_hardPriceLabel = dynamic_cast<Label*>(m_view->FindChild("hard_price"));
+	assert(m_hardPriceLabel != NULL);
 
 	ObsCast(IControlEventsObserver, m_car1Button)->AddObserver(this);
 	ObsCast(IControlEventsObserver, m_car2Button)->AddObserver(this);
@@ -113,13 +122,26 @@ void CarDealerScreen::BuyCar(const std::string& carId, bool buyForHard)
 
 		if (Player::Instance->GetSoftMoney() < carData.SoftPrice)
 		{
-			// not enouch money - message
-			assert("not enouch money - message" && false);
+			// not enouch soft money - message
+			assert("not enouch soft money - message" && false);
 		}
 
 		Player::Instance->SetSoftMoney(Player::Instance->GetSoftMoney() - carData.SoftPrice);
-		Player::Instance->AddCar(carId);
 	}
+	else
+	{
+		assert(carData.HardPrice > 0);
+
+		if (Player::Instance->GetHardMoney() < carData.HardPrice)
+		{
+			// not enouch hard money - message
+			assert("not enouch hard money - message" && false);
+		}
+
+		Player::Instance->SetHardMoney(Player::Instance->GetHardMoney() - carData.HardPrice);
+	}
+
+	Player::Instance->AddCar(carId);
 
 	ActivateCar(carId);
 }
@@ -148,12 +170,39 @@ void CarDealerScreen::RefreshView()
 {
 	HideAllActionPanels();
 
-	if (m_activeCar->GetId() == m_selectedCarId)
+	if (m_activeCar == NULL || !Player::Instance->HasCar(m_selectedCarId))
+	{
+		m_buyPanel->SetVisible(true);
+
+		CarData carData = GlobalSettings::GetCarById(m_selectedCarId);
+
+		m_softPriceLabel->SetText(StringUtils::ToString(carData.SoftPrice));
+		m_hardPriceLabel->SetText(StringUtils::ToString(carData.HardPrice));
+
+		if (carData.SoftPrice > 0 && carData.HardPrice > 0)
+		{
+			m_buySoftButton->SetAlign("bottom-left");
+			m_buySoftButton->SetVisible(true);
+			m_buyHardButton->SetAlign("bottom-right");
+			m_buyHardButton->SetVisible(true);
+		}
+		else if (carData.SoftPrice > 0)
+		{
+			m_buySoftButton->SetAlign("bottom");
+			m_buySoftButton->SetVisible(true);
+			m_buyHardButton->SetVisible(false);
+		}
+		else if (carData.HardPrice > 0)
+		{
+			m_buyHardButton->SetAlign("bottom");
+			m_buyHardButton->SetVisible(true);
+			m_buySoftButton->SetVisible(false);
+		}
+	}
+	else if (m_activeCar->GetId() == m_selectedCarId)
 		m_alreadyHavePanel->SetVisible(true);
 	else if (Player::Instance->HasCar(m_selectedCarId))
 		m_activatePanel->SetVisible(true);
-	else
-		m_buyPanel->SetVisible(true);
 }
 
 void CarDealerScreen::HandlePress(int pointId, const sm::Vec2 &point)
@@ -174,9 +223,7 @@ void CarDealerScreen::HandleMove(int pointId, const sm::Vec2 &point)
 void CarDealerScreen::Enter()
 {
 	m_activeCar = Player::Instance->GetActiveCar();
-	if (m_activeCar == NULL)
-		return;
-
+	
 	SelectCar(CarId::Car1);
 }
 
