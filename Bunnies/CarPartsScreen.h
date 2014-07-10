@@ -31,6 +31,8 @@ private:
 
 	Control *m_view;
 
+	Control* m_backButton;
+
 	Control* m_buySpeedButton;
 	Control* m_buyAccButton;
 	Control* m_buyTiresButton;

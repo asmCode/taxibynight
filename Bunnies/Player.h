@@ -38,6 +38,7 @@ public:
 	void AddObserver(PlayerObserver *observer);
 
 	Car* GetActiveCar();
+	Car* GetCar(const std::string& carId);
 	void AddCar(const std::string& carId);
 	void ActicateCar(const std::string& carId);
 	bool HasCar(const std::string& carId);
@@ -61,7 +62,5 @@ private:
 	void NotifyHardMoneyChanged();
 
 	void LoadCars(XMLNode* node);
-
-	Car* GetCarById(const std::string& id);
 };
 

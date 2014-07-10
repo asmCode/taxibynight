@@ -271,6 +271,13 @@ void GameController::ShowGameScreen()
 	m_activeScreen->Enter();
 }
 
+void GameController::ShowGarageScreen()
+{
+	m_activeScreen->Leave();
+	m_activeScreen = m_garageScreen;
+	m_activeScreen->Enter();
+}
+
 void GameController::ShowCarDealerScreen()
 {
 	m_activeScreen->Leave();

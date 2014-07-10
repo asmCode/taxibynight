@@ -5,6 +5,7 @@
 #include "InterfaceProvider.h"
 #include "Control.h"
 #include "Label.h"
+#include "Gui/ProgressControl.h"
 #include "GameController.h"
 #include "Environment.h"
 #include "GlobalSettings/GlobalSettings.h"
@@ -14,6 +15,7 @@
 
 CarDealerScreen::CarDealerScreen(GameController *gameController) :
 	m_gameController(gameController),
+	m_backButton(NULL),
 	m_car1Button(NULL),
 	m_car2Button(NULL),
 	m_car3Button(NULL),
@@ -25,6 +27,9 @@ CarDealerScreen::CarDealerScreen(GameController *gameController) :
 	m_activateButton(NULL),
 	m_softPriceLabel(NULL),
 	m_hardPriceLabel(NULL),
+	m_speedProgress(NULL),
+	m_accProgress(NULL),
+	m_tiresProgress(NULL),
 	m_activeCar(NULL)
 {
 }
@@ -39,6 +44,9 @@ bool CarDealerScreen::InitResources()
 
 	m_view = Inflater::Inflate(basePath + "data/gui/CarDealerPanel.xml");
 	assert(m_view != NULL);
+
+	m_backButton = dynamic_cast<Control*>(m_view->FindChild("back_btn"));
+	assert(m_backButton != NULL);
 
 	m_car1Button = dynamic_cast<Control*>(m_view->FindChild("car_1_button"));
 	assert(m_car1Button != NULL);
@@ -68,6 +76,14 @@ bool CarDealerScreen::InitResources()
 	m_hardPriceLabel = dynamic_cast<Label*>(m_view->FindChild("hard_price"));
 	assert(m_hardPriceLabel != NULL);
 
+	m_speedProgress = dynamic_cast<ProgressControl*>(m_view->FindChild("speed"));
+	assert(m_speedProgress != NULL);
+	m_accProgress = dynamic_cast<ProgressControl*>(m_view->FindChild("acc"));
+	assert(m_accProgress != NULL);
+	m_tiresProgress = dynamic_cast<ProgressControl*>(m_view->FindChild("tires"));
+	assert(m_tiresProgress != NULL);
+
+	ObsCast(IControlEventsObserver, m_backButton)->AddObserver(this);
 	ObsCast(IControlEventsObserver, m_car1Button)->AddObserver(this);
 	ObsCast(IControlEventsObserver, m_car2Button)->AddObserver(this);
 	ObsCast(IControlEventsObserver, m_car3Button)->AddObserver(this);
@@ -104,8 +120,6 @@ void CarDealerScreen::SelectCar(const std::string& carId)
 		return;
 
 	m_selectedCarId = carId;
-
-	RefreshView();
 }
 
 void CarDealerScreen::BuyCar(const std::string& carId, bool buyForHard)
@@ -166,6 +180,39 @@ void CarDealerScreen::HideAllActionPanels()
 	m_alreadyHavePanel->SetVisible(false);
 }
 
+void CarDealerScreen::RefreshCarStatistics()
+{
+	if (Player::Instance->HasCar(m_selectedCarId))
+	{
+		Car* car = Player::Instance->GetCar(m_selectedCarId);
+		assert(car != NULL);
+
+		int totalSlots;
+		int activeSlots;
+
+		car->GetUpgradeSlots(UpgradeId::Speed, totalSlots, activeSlots);
+		m_speedProgress->SetLimit(totalSlots);
+		m_speedProgress->SetValue(activeSlots);
+		car->GetUpgradeSlots(UpgradeId::Acc, totalSlots, activeSlots);
+		m_accProgress->SetLimit(totalSlots);
+		m_accProgress->SetValue(activeSlots);
+		car->GetUpgradeSlots(UpgradeId::Tires, totalSlots, activeSlots);
+		m_tiresProgress->SetLimit(totalSlots);
+		m_tiresProgress->SetValue(activeSlots);
+	}
+	else
+	{
+		CarData carData = GlobalSettings::GetCarById(m_selectedCarId);
+
+		m_speedProgress->SetLimit(carData.SpeedSlots);
+		m_speedProgress->SetValue(carData.SpeedSlots - carData.GetUpgradeSlotsCount(UpgradeId::Speed));
+		m_accProgress->SetLimit(carData.AccSlots);
+		m_accProgress->SetValue(carData.AccSlots - carData.GetUpgradeSlotsCount(UpgradeId::Acc));
+		m_tiresProgress->SetLimit(carData.TiresSlots);
+		m_tiresProgress->SetValue(carData.TiresSlots - carData.GetUpgradeSlotsCount(UpgradeId::Tires));
+	}
+}
+
 void CarDealerScreen::RefreshView()
 {
 	HideAllActionPanels();
@@ -203,6 +250,8 @@ void CarDealerScreen::RefreshView()
 		m_alreadyHavePanel->SetVisible(true);
 	else if (Player::Instance->HasCar(m_selectedCarId))
 		m_activatePanel->SetVisible(true);
+
+	RefreshCarStatistics();
 }
 
 void CarDealerScreen::HandlePress(int pointId, const sm::Vec2 &point)
@@ -225,24 +274,33 @@ void CarDealerScreen::Enter()
 	m_activeCar = Player::Instance->GetActiveCar();
 	
 	SelectCar(CarId::Car1);
+	RefreshView();
 }
 
 void CarDealerScreen::Clicked(Control *control, uint32_t x, uint32_t y)
 {
-	if (control == m_car1Button)
+	if (control == m_backButton)
+	{
+		SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Button);
+		m_gameController->ShowGarageScreen();
+	}
+	else if (control == m_car1Button)
 	{
 		SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Button);
 		SelectCar(CarId::Car1);
+		RefreshView();
 	}
 	else if (control == m_car2Button)
 	{
 		SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Button);
 		SelectCar(CarId::Car2);
+		RefreshView();
 	}
 	else if (control == m_car3Button)
 	{
 		SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Button);
 		SelectCar(CarId::Car3);
+		RefreshView();
 	}
 	else if (control == m_buySoftButton)
 	{

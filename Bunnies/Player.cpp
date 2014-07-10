@@ -156,6 +156,15 @@ Car* Player::GetActiveCar()
 	return m_activeCar;
 }
 
+Car* Player::GetCar(const std::string& id)
+{
+	for (uint32_t i = 0; i < m_cars.size(); i++)
+	if (m_cars[i]->GetId() == id)
+		return m_cars[i];
+
+	return NULL;
+}
+
 void Player::AddCar(const std::string& carId)
 {
 	assert(HasCar(carId) == false);
@@ -175,16 +184,12 @@ void Player::ActicateCar(const std::string& carId)
 		return;
 
 	m_activeCarId = carId;
-	m_activeCar = GetCarById(m_activeCarId);
+	m_activeCar = GetCar(m_activeCarId);
 }
 
 bool Player::HasCar(const std::string& carId)
 {
-	for (uint32_t i = 0; i < m_cars.size(); i++)
-		if (m_cars[i]->GetId() == carId)
-			return true;
-
-	return false;
+	return GetCar(carId) != NULL;
 }
 
 void Player::NotifyExperienceChanged()
@@ -253,13 +258,4 @@ void Player::LoadCars(XMLNode* node)
 
 		m_cars.push_back(car);
 	}
-}
-
-Car* Player::GetCarById(const std::string& id)
-{
-	for (uint32_t i = 0; i < m_cars.size(); i++)
-		if (m_cars[i]->GetId() == id)
-			return m_cars[i];
-
-	return NULL;
 }

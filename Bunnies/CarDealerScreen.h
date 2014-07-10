@@ -5,6 +5,7 @@
 #include <string>
 
 class GameController;
+class ProgressControl;
 class Control;
 class Label;
 class Car;
@@ -30,6 +31,8 @@ private:
 
 	Control *m_view;
 
+	Control* m_backButton;
+
 	Control* m_car1Button;
 	Control* m_car2Button;
 	Control* m_car3Button;
@@ -45,6 +48,10 @@ private:
 	Label* m_softPriceLabel;
 	Label* m_hardPriceLabel;
 
+	ProgressControl* m_speedProgress;
+	ProgressControl* m_accProgress;
+	ProgressControl* m_tiresProgress;
+
 	Car* m_activeCar;
 
 	std::string m_selectedCarId;
@@ -53,6 +60,7 @@ private:
 	void BuyCar(const std::string& carId, bool buyForHard);
 	void ActivateCar(const std::string& carId);
 	void HideAllActionPanels();
+	void RefreshCarStatistics();
 
 	void HandlePress(int pointId, const sm::Vec2 &point);
 	void HandleRelease(int pointId, const sm::Vec2 &point);

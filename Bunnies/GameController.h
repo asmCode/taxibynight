@@ -47,6 +47,7 @@ public:
 	void proto_SetLookTarget(const sm::Vec3 &lookTarget);
 
 	void ShowGameScreen();
+	void ShowGarageScreen();
 	void ShowCarDealerScreen();
 	void ShowCarPartsScreen();
 	void ShowLeaderboard();

@@ -16,6 +16,7 @@
 
 CarPartsScreen::CarPartsScreen(GameController *gameController) :
 	m_gameController(gameController),
+	m_backButton(NULL),
 	m_speedProgress(NULL),
 	m_accProgress(NULL),
 	m_tiresProgress(NULL),
@@ -39,6 +40,9 @@ bool CarPartsScreen::InitResources()
 
 	m_view = Inflater::Inflate(basePath + "data/gui/CarPartsPanel.xml");
 	assert(m_view != NULL);
+
+	m_backButton = dynamic_cast<Control*>(m_view->FindChild("back_btn"));
+	assert(m_backButton != NULL);
 
 	m_speedProgress = dynamic_cast<ProgressControl*>(m_view->FindChild("speed"));
 	assert(m_speedProgress != NULL);
@@ -64,6 +68,7 @@ bool CarPartsScreen::InitResources()
 	m_statusBar = dynamic_cast<StatusBar*>(m_view->FindChild("status_bar"));
 	assert(m_statusBar != NULL);
 
+	ObsCast(IControlEventsObserver, m_backButton)->AddObserver(this);
 	ObsCast(IControlEventsObserver, m_buySpeedButton)->AddObserver(this);
 	ObsCast(IControlEventsObserver, m_buyAccButton)->AddObserver(this);
 	ObsCast(IControlEventsObserver, m_buyTiresButton)->AddObserver(this);
@@ -119,7 +124,12 @@ void CarPartsScreen::Enter()
 
 void CarPartsScreen::Clicked(Control *control, uint32_t x, uint32_t y)
 {
-	if (control == m_buySpeedButton)
+	if (control == m_backButton)
+	{
+		SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Button);
+		m_gameController->ShowGarageScreen();
+	}
+	else if (control == m_buySpeedButton)
 	{
 		SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Button);
 		Upgrade(UpgradeId::Speed);
