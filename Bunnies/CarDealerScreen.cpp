@@ -27,6 +27,7 @@ CarDealerScreen::CarDealerScreen(GameController *gameController) :
 	m_activateButton(NULL),
 	m_softPriceLabel(NULL),
 	m_hardPriceLabel(NULL),
+	m_carNameLabel(NULL),
 	m_speedProgress(NULL),
 	m_accProgress(NULL),
 	m_tiresProgress(NULL),
@@ -75,6 +76,8 @@ bool CarDealerScreen::InitResources()
 	assert(m_softPriceLabel != NULL);
 	m_hardPriceLabel = dynamic_cast<Label*>(m_view->FindChild("hard_price"));
 	assert(m_hardPriceLabel != NULL);
+	m_carNameLabel = dynamic_cast<Label*>(m_view->FindChild("car_name"));
+	assert(m_carNameLabel != NULL);
 
 	m_speedProgress = dynamic_cast<ProgressControl*>(m_view->FindChild("speed"));
 	assert(m_speedProgress != NULL);
@@ -215,13 +218,15 @@ void CarDealerScreen::RefreshCarStatistics()
 
 void CarDealerScreen::RefreshView()
 {
+	CarData carData = GlobalSettings::GetCarById(m_selectedCarId);
+
+	m_carNameLabel->SetText(carData.Name);
+
 	HideAllActionPanels();
 
 	if (m_activeCar == NULL || !Player::Instance->HasCar(m_selectedCarId))
 	{
 		m_buyPanel->SetVisible(true);
-
-		CarData carData = GlobalSettings::GetCarById(m_selectedCarId);
 
 		m_softPriceLabel->SetText(StringUtils::ToString(carData.SoftPrice));
 		m_hardPriceLabel->SetText(StringUtils::ToString(carData.HardPrice));

@@ -47,6 +47,7 @@ private:
 
 	Label* m_softPriceLabel;
 	Label* m_hardPriceLabel;
+	Label* m_carNameLabel;
 
 	ProgressControl* m_speedProgress;
 	ProgressControl* m_accProgress;

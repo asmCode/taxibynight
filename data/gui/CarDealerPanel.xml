@@ -60,4 +60,6 @@
 		<AnimButton name="car_2_button" align="top-left" margin_top="0" width="128" height="128" image="car_2_button" image_pushed="car_2_button" />
 		<AnimButton name="car_3_button" align="top-left" margin_top="0" width="128" height="128" image="car_3_button" image_pushed="car_3_button" />
 	</Grid>
+	
+	<Label name="car_name" font="fenix_18" color="255;0;255" text="car_name" align="bottom-left" />
 </Panel>
