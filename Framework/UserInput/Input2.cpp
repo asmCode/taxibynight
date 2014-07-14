@@ -16,12 +16,31 @@ bool Input2::Constructor()
 	Input2::m_keyMap[KeyCode_Down] = VK_DOWN;
 
 	Input2::m_keyMap[KeyCode_A] = 'A';
-	Input2::m_keyMap[KeyCode_E] = 'E';
+	Input2::m_keyMap[KeyCode_B] = 'B';
+	Input2::m_keyMap[KeyCode_C] = 'C';
 	Input2::m_keyMap[KeyCode_D] = 'D';
-	Input2::m_keyMap[KeyCode_S] = 'S';
-	Input2::m_keyMap[KeyCode_W] = 'W';
-	Input2::m_keyMap[KeyCode_Q] = 'Q';
+	Input2::m_keyMap[KeyCode_E] = 'E';
+	Input2::m_keyMap[KeyCode_F] = 'F';
+	Input2::m_keyMap[KeyCode_G] = 'G';
+	Input2::m_keyMap[KeyCode_H] = 'H';
+	Input2::m_keyMap[KeyCode_I] = 'I';
+	Input2::m_keyMap[KeyCode_J] = 'J';
+	Input2::m_keyMap[KeyCode_K] = 'K';
+	Input2::m_keyMap[KeyCode_L] = 'L';
+	Input2::m_keyMap[KeyCode_M] = 'M';
+	Input2::m_keyMap[KeyCode_N] = 'N';
+	Input2::m_keyMap[KeyCode_O] = 'O';
 	Input2::m_keyMap[KeyCode_P] = 'P';
+	Input2::m_keyMap[KeyCode_Q] = 'Q';
+	Input2::m_keyMap[KeyCode_R] = 'R';
+	Input2::m_keyMap[KeyCode_S] = 'S';
+	Input2::m_keyMap[KeyCode_T] = 'T';
+	Input2::m_keyMap[KeyCode_U] = 'U';
+	Input2::m_keyMap[KeyCode_V] = 'V';
+	Input2::m_keyMap[KeyCode_W] = 'W';
+	Input2::m_keyMap[KeyCode_X] = 'X';
+	Input2::m_keyMap[KeyCode_Y] = 'Y';
+	Input2::m_keyMap[KeyCode_Z] = 'Z';
 
 	Input2::m_keyMap[KeyCode_Num0] = '0';
 	Input2::m_keyMap[KeyCode_Num1] = '1';

@@ -18,6 +18,7 @@ public:
 
 	void Load();
 	void Save();
+	void Reset();
 
 	std::string m_id;
 	std::string m_name;
@@ -55,6 +56,10 @@ private:
 	float m_hardMoney;
 
 	std::vector<PlayerObserver*> m_observers;
+
+	std::string SaveCars(const std::string& tab);
+	std::string SaveCar(Car* car, const std::string& tab);
+	std::string SaveDecals(Car* car);
 
 	void NotifyExperienceChanged();
 	void NotifyLevelChanged();

@@ -29,11 +29,21 @@ public:
 	// Tires with upgrades
 	float GetTires() const;
 
+	int GetUpgradeLevel(const std::string& id) const;
 	void GetUpgradeSlots(const std::string& id, int& totalSlots, int& activeSlots) const;
-	void GetNextUpgradePrice(const std::string& id, float& softPrice, float& hardPrice);
+	void GetNextUpgradePrice(const std::string& id, float& softPrice, float& hardPrice) const;
+
+	const std::vector<DecalData>& GetDecals() const;
 
 	void Upgrade(const std::string& upgradeId);
 	bool IsFullyUpgraded(const std::string& upgradeId);
+
+	void AddDecal(DecalData decalData);
+	void SetDecal(const std::string& decalId);
+	DecalData GetDecal(const std::string& decalId) const;
+	std::string GetActiveDecalId() const;
+	float GetActiveDecalBonus() const;
+	bool HasDecal(const std::string& decalId) const;
 
 	void AddObserver(CarObserver* carObserver);
 
@@ -44,11 +54,13 @@ private:
 	int m_accUpgradeLevel;
 	int m_tiresUpgradeLevel;
 
+	std::string m_activeDecalId;
+
 	std::vector<DecalData> m_decals;
 
 	std::vector<CarObserver*> m_observers;
 
-	int GetUpgradeLevel(const std::string& id);
 	void NotifyUpgraded(const std::string& upgradeId);
+	void NotifyChangedDecal(const std::string& decalId);
 };
 

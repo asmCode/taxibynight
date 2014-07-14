@@ -2,6 +2,7 @@
 #include "CarObserver.h"
 #include <Core/stdint.h>
 #include <algorithm>
+#include <assert.h>
 
 Car::Car(
 	CarData carData,
@@ -51,6 +52,19 @@ float Car::GetTires() const
 		return m_carData.Tires;
 }
 
+int Car::GetUpgradeLevel(const std::string& id) const
+{
+	if (id == UpgradeId::Speed)
+		return m_speedUpgradeLevel;
+	if (id == UpgradeId::Acc)
+		return m_accUpgradeLevel;
+	if (id == UpgradeId::Tires)
+		return m_tiresUpgradeLevel;
+
+	assert(false);
+	return 0;
+}
+
 void Car::GetUpgradeSlots(const std::string& id, int& totalSlots, int& activeSlots) const
 {
 	UpgradeData upgradeData = m_carData.GetUpgradeData(id);
@@ -70,9 +84,13 @@ void Car::GetUpgradeSlots(const std::string& id, int& totalSlots, int& activeSlo
 		totalSlots = m_carData.TiresSlots;
 		activeSlots = totalSlots - upgradeData.UpgradeLevels.size() + m_tiresUpgradeLevel;
 	}
+	else
+	{
+		assert(false);
+	}
 }
 
-void Car::GetNextUpgradePrice(const std::string& id, float& softPrice, float& hardPrice)
+void Car::GetNextUpgradePrice(const std::string& id, float& softPrice, float& hardPrice) const
 {
 	UpgradeData upgradeData = m_carData.GetUpgradeData(id);
 
@@ -83,6 +101,11 @@ void Car::GetNextUpgradePrice(const std::string& id, float& softPrice, float& ha
 
 	softPrice = upgradeData.UpgradeLevels[upgradeLevel].SoftPrice;
 	hardPrice = upgradeData.UpgradeLevels[upgradeLevel].HardPrice;
+}
+
+const std::vector<DecalData>& Car::GetDecals() const
+{
+	return m_decals;
 }
 
 void Car::Upgrade(const std::string& upgradeId)
@@ -105,6 +128,61 @@ bool Car::IsFullyUpgraded(const std::string& upgradeId)
 	return m_carData.GetUpgradeSlotsCount(upgradeId) == GetUpgradeLevel(upgradeId);
 }
 
+void Car::AddDecal(DecalData decalData)
+{
+	assert(!HasDecal(decalData.Id));
+	if (HasDecal(decalData.Id))
+		return;
+
+	m_decals.push_back(decalData);
+}
+
+void Car::SetDecal(const std::string& decalId)
+{
+	if (decalId != "")
+	{
+		assert(HasDecal(decalId));
+		if (!HasDecal(decalId))
+			return;
+	}
+
+	m_activeDecalId = decalId;
+
+	NotifyChangedDecal(decalId);
+}
+
+DecalData Car::GetDecal(const std::string& decalId) const
+{
+	for (uint32_t i = 0; i < m_decals.size(); i++)
+	if (m_decals[i].Id == decalId)
+		return m_decals[i];
+
+	return DecalData();
+}
+
+std::string Car::GetActiveDecalId() const
+{
+	return m_activeDecalId;
+}
+
+float Car::GetActiveDecalBonus() const
+{
+	if (m_activeDecalId == "")
+		return 0.0f;
+
+	DecalData decalData = GetDecal(m_activeDecalId);
+	return decalData.Bonus;
+}
+
+bool Car::HasDecal(const std::string& decalId) const
+{
+	for (uint32_t i = 0; i < m_decals.size(); i++)
+		if (m_decals[i].Id == decalId)
+			return true;
+
+	return false;
+}
+
 void Car::AddObserver(CarObserver* carObserver)
 {
 	if (std::find(m_observers.begin(), m_observers.end(), carObserver) != m_observers.end())
@@ -113,20 +191,14 @@ void Car::AddObserver(CarObserver* carObserver)
 	m_observers.push_back(carObserver);
 }
 
-int Car::GetUpgradeLevel(const std::string& id)
-{
-	if (id == UpgradeId::Speed)
-		return m_speedUpgradeLevel;
-	if (id == UpgradeId::Acc)
-		return m_accUpgradeLevel;
-	if (id == UpgradeId::Tires)
-		return m_tiresUpgradeLevel;
-
-	return 0;
-}
-
 void Car::NotifyUpgraded(const std::string& upgradeId)
 {
 	for (uint32_t i = 0; i < m_observers.size(); i++)
 		m_observers[i]->Upgraded(this, upgradeId);
+}
+
+void Car::NotifyChangedDecal(const std::string& decalId)
+{
+	for (uint32_t i = 0; i < m_observers.size(); i++)
+		m_observers[i]->ChangedDecal(this, decalId);
 }

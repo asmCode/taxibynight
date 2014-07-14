@@ -23,6 +23,7 @@
 #include "AnalyticsEvents/StartGameEvent.h"
 #include "Bonuses/BonusStreetSymbol.h"
 #include "Bonuses/BonusBlowEffect.h"
+#include <UserInput/Input2.h>
 #include <Graphics/IGraphicsEngine.h>
 #include <Graphics/Content/Content.h>
 #include <Graphics/Model.h>
@@ -207,6 +208,13 @@ void GameController::Draw(float time, float seconds)
 void GameController::Update(float time, float seconds)
 {
 	assert(m_activeScreen != NULL);
+
+	//debug
+	if (Input2::GetKeyDown(KeyCode::KeyCode_R))
+	{
+		Player::Instance->Reset();
+		Player::Instance->Save();
+	}
 
 	m_activeScreen->Update(time, seconds);
 

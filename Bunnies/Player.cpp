@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "PlayerObserver.h"
 #include "Car.h"
+#include "DecalId.h"
 #include "Experience.h"
 #include "GlobalSettings/GlobalSettings.h"
 #include <Utils/StringUtils.h>
@@ -76,16 +77,33 @@ void Player::Save()
 	xml += "<Player>\n";
 	xml += "\t<Id>"; xml += m_id; xml += "</Id>\n";
 	xml += "\t<Name>"; xml += StringUtils::ToBase64(m_name); xml += "</Name>\n";
-	xml += "\t<Experience>"; xml += StringUtils::ToString(m_softMoney); xml += "</Experience>\n";
+	xml += "\t<Experience>"; xml += StringUtils::ToString(m_experience->GetExperienceValue()); xml += "</Experience>\n";
 	xml += "\t<SoftMoney>"; xml += StringUtils::ToString(m_softMoney); xml += "</SoftMoney>\n";
 	xml += "\t<HardMoney>"; xml += StringUtils::ToString(m_hardMoney); xml += "</HardMoney>\n";
 	xml += "\t<TotalCourses>"; xml += StringUtils::ToString(m_totalCourses); xml += "</TotalCourses>\n";
 	xml += "\t<BestRoundIncome>"; xml += StringUtils::ToString(m_bestRoundIncome); xml += "</BestRoundIncome>\n";
 	xml += "\t<TutorialFinished>"; xml += m_tutorialFinished ? "true" : "false"; xml += "</TutorialFinished>\n";
 	xml += "\t<FirstRun>"; xml += m_firstRun ? "true" : "false"; xml += "</FirstRun>\n";
+	xml += "\t<ActiveCar>"; xml += m_activeCarId + "</ActiveCar>\n";
+	xml += SaveCars("\t");
 	xml += "</Player>\n";
 
 	Path::WriteTextFile(m_path.c_str(), xml);
+}
+
+void Player::Reset()
+{
+	SetSoftMoney(0.0f);
+	SetHardMoney(0.0f);
+	SetExperience(0.0f);
+	m_totalCourses = 0;
+	m_bestRoundIncome = 0;
+	m_tutorialFinished = false;
+	m_firstRun = true;
+	m_activeCar = NULL;
+	m_activeCarId = "";
+
+	m_cars.clear();
 }
 
 float Player::GetExperience() const
@@ -117,6 +135,9 @@ void Player::SetExperience(float experience)
 		int prevLevel = GetLevel();
 
 		m_experience->SetExperienceValue(experience);
+
+		Save();
+
 		NotifyExperienceChanged();
 
 		if (GetLevel() != prevLevel)
@@ -131,6 +152,9 @@ void Player::SetSoftMoney(float softMoney)
 	if (m_softMoney != softMoney)
 	{
 		m_softMoney = softMoney;
+
+		Save();
+
 		NotifySoftMoneyChanged();
 	}
 }
@@ -142,6 +166,9 @@ void Player::SetHardMoney(float hardMoney)
 	if (m_hardMoney != hardMoney)
 	{
 		m_hardMoney = hardMoney;
+
+		Save();
+
 		NotifyHardMoneyChanged();
 	}
 }
@@ -175,6 +202,8 @@ void Player::AddCar(const std::string& carId)
 
 	Car* car = new Car(carData, 0, 0, 0, std::vector<DecalData>());
 	m_cars.push_back(car);
+
+	Save();
 }
 
 void Player::ActicateCar(const std::string& carId)
@@ -185,11 +214,63 @@ void Player::ActicateCar(const std::string& carId)
 
 	m_activeCarId = carId;
 	m_activeCar = GetCar(m_activeCarId);
+
+	Save();
 }
 
 bool Player::HasCar(const std::string& carId)
 {
 	return GetCar(carId) != NULL;
+}
+
+std::string Player::SaveCars(const std::string& tab)
+{
+	std::string xml;
+	
+	xml += tab + "<Cars>\n";
+
+	for (uint32_t i = 0; i < m_cars.size(); i++)
+		xml += SaveCar(m_cars[i], tab + "\t");
+
+	xml += tab + "</Cars>\n";
+
+	return xml;
+}
+
+std::string Player::SaveCar(Car* car, const std::string& tab)
+{
+	std::string xml;
+
+	xml += tab + "<Car ";
+	xml += "id=\"" + car->GetId() + "\" ";
+	xml += "speed_level=\"" + StringUtils::ToString(car->GetUpgradeLevel(UpgradeId::Speed)) + "\" ";
+	xml += "acc_level=\"" + StringUtils::ToString(car->GetUpgradeLevel(UpgradeId::Acc)) + "\" ";
+	xml += "tires_level=\"" + StringUtils::ToString(car->GetUpgradeLevel(UpgradeId::Tires)) + "\" ";
+	xml += SaveDecals(car);
+	xml += "/>\n";
+
+	return xml;
+}
+
+std::string Player::SaveDecals(Car* car)
+{
+	const std::vector<DecalData>& decals = car->GetDecals();
+	if (decals.size() == 0)
+		return "";
+
+	std::string xml = "decals=\"";
+	
+	for (uint32_t i = 0; i < decals.size(); i++)
+	{
+		xml += decals[i].Id;
+		if (i < decals.size() - 1)
+			xml += ",";
+	}
+
+	xml += "\" ";
+	xml += "active_decal=\"" + car->GetActiveDecalId() + "\" ";
+
+	return xml;
 }
 
 void Player::NotifyExperienceChanged()
@@ -230,6 +311,7 @@ void Player::LoadCars(XMLNode* node)
 		int speedLevel = carNode->GetAttribAsInt32("speed_level");
 		int accLevel = carNode->GetAttribAsInt32("acc_level");
 		int tiresLevel = carNode->GetAttribAsInt32("tires_level");
+		std::string activeDecal = carNode->GetAttribAsString("active_decal");
 
 		CarData carData = GlobalSettings::GetCarById(id);
 
@@ -255,6 +337,8 @@ void Player::LoadCars(XMLNode* node)
 			accLevel,
 			tiresLevel,
 			decals);
+
+		car->SetDecal(activeDecal);
 
 		m_cars.push_back(car);
 	}
