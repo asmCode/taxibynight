@@ -340,9 +340,23 @@ void Control::HandleMove(int pointId, const sm::Vec2 &point)
 
 bool Control::HitTest(int x, int y) const
 {
-	return
-		(x >= this ->x && x < this ->x + width) &&
-		(y >= this ->y && y < this ->y + height);
+	float rotate = GetGlobalRotation();
+
+	if (rotate == 0.0f)
+	{
+		return
+			(x >= this->x && x < this->x + width) &&
+			(y >= this->y && y < this->y + height);
+	}
+	else
+	{
+		sm::Vec3 center = (sm::Vec3(this->x, this->y, 0.0f) + sm::Vec3(this->x + this->width, this->y + this->height, 0.0f)) * 0.5f;
+		sm::Vec3 mousePos = sm::Vec3::RotateZ(sm::Vec3(x, y, 0.0f) - center, -rotate) + center;
+
+		return
+			(mousePos.x >= this->x && mousePos.x < this->x + width) &&
+			(mousePos.y >= this->y && mousePos.y < this->y + height);
+	}
 }
 
 void Control::Update(float time, float ms)
