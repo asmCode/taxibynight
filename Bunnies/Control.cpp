@@ -96,6 +96,8 @@ Control::~Control()
 
 void Control::SetDefaults()
 {
+	//m_transform = sm::Matrix::Identity;
+
 	x = 0;
 	y = 0;
 	width = 0;
@@ -106,6 +108,9 @@ void Control::SetDefaults()
 	m_marginTop = 0;
 	m_marginBottom = 0;
 	m_rollAngle = 0.0f;
+	m_align = "top-left";
+
+	m_rotatePivot.Set(0.0f, 0.0f, 0.0f);
 
 	m_tmpFill = "";
 
@@ -142,7 +147,7 @@ int Control::GetChildrenCount() const
 
 Control* Control::GetChild(int index)
 {
-	assert(children.size() > index);
+	assert(children.size() > static_cast<uint32_t>(index));
 
 	std::list<Control*>::iterator it = children.begin();
 	std::advance(it, index);
@@ -225,12 +230,12 @@ void Control::SetAlign(const std::string &align)
 
 sm::Vec2 Control::GetLocalPos()
 {
-	return sm::Vec2(x, y);
+	return sm::Vec2(static_cast<float>(x), static_cast<float>(y));
 }
 
 sm::Vec2 Control::GetGlobalPos()
 {
-	sm::Vec2 pos(x, y);
+	sm::Vec2 pos(static_cast<float>(x), static_cast<float>(y));
 	if (parent != NULL)
 		pos += parent ->GetGlobalPos();
 	return pos;
@@ -277,9 +282,9 @@ void Control::HandlePress(int pointId, const sm::Vec2 &point)
 
 	std::list<Control*>::iterator it;
 	for (it = children.begin(); it != children.end(); it++)
-		(*it) ->HandlePress(pointId, sm::Vec2(point.x - this->x, point.y - this->y));
+		(*it) ->HandlePress(pointId, point);
 	
-	if (HitTest(point.x, point.y))
+	if (HitTest(sm::Vec3(point.x, point.y, 0.0f)))
 	{
 		if (m_pressState == PressState_Unpressed)
 		{
@@ -298,7 +303,7 @@ void Control::HandleRelease(int pointId, const sm::Vec2 &point)
 
 	std::list<Control*>::iterator it;
 	for (it = children.begin(); it != children.end(); it++)
-		(*it) ->HandleRelease(pointId, sm::Vec2(point.x - this->x, point.y - this->y));
+		(*it) ->HandleRelease(pointId, point);
 	
 	if (m_pressState == PressState_Pressed &&
 		m_pressedFingerId == pointId)
@@ -308,7 +313,7 @@ void Control::HandleRelease(int pointId, const sm::Vec2 &point)
 		
 		OnTouchEnd(pointId, point.x - this->x, point.y - this->y);
 		
-		if (HitTest(point.x, point.y))
+		if (HitTest(sm::Vec3(point.x, point.y, 0.0f)))
 			OnClicked(pointId, point.x - this->x, point.y - this->y);
 	}
 }
@@ -320,9 +325,9 @@ void Control::HandleMove(int pointId, const sm::Vec2 &point)
 
 	std::list<Control*>::iterator it;
 	for (it = children.begin(); it != children.end(); it++)
-		(*it) ->HandleMove(pointId, sm::Vec2(point.x - this->x, point.y - this->y));
+		(*it) ->HandleMove(pointId, point);
 	
-	if (HitTest(point.x, point.y))
+	if (HitTest(sm::Vec3(point.x, point.y, 0.0f)))
 	{
 	}
 	else
@@ -338,25 +343,13 @@ void Control::HandleMove(int pointId, const sm::Vec2 &point)
 	}
 }
 
-bool Control::HitTest(int x, int y) const
+bool Control::HitTest(const sm::Vec3& position) const
 {
-	float rotate = GetGlobalRotation();
+	sm::Vec3 mousePos = GetGlobalTransform().GetInversed() * position;
 
-	if (rotate == 0.0f)
-	{
-		return
-			(x >= this->x && x < this->x + width) &&
-			(y >= this->y && y < this->y + height);
-	}
-	else
-	{
-		sm::Vec3 center = (sm::Vec3(this->x, this->y, 0.0f) + sm::Vec3(this->x + this->width, this->y + this->height, 0.0f)) * 0.5f;
-		sm::Vec3 mousePos = sm::Vec3::RotateZ(sm::Vec3(x, y, 0.0f) - center, -rotate) + center;
-
-		return
-			(mousePos.x >= this->x && mousePos.x < this->x + width) &&
-			(mousePos.y >= this->y && mousePos.y < this->y + height);
-	}
+	return
+		(mousePos.x >= 0 && mousePos.x < 0 + width) &&
+		(mousePos.y >= 0 && mousePos.y < 0 + height);
 }
 
 void Control::Update(float time, float ms)
@@ -518,14 +511,23 @@ void Control::OnDraw(float time, float ms)
 {
 	if (bg.Tex != NULL)
 	{
-		sm::Vec2 globalPos = GetGlobalPos();
-		spriteBatch ->Draw(bg,
+		//sm::Vec2 globalPos = GetGlobalPos();
+		/*spriteBatch ->Draw(bg,
 						   Color(255, 255, 255, (unsigned char)(255.0f * opacity)),
 						   (int)globalPos.x,
 						   (int)globalPos.y,
 						   width,
 						   height,
-						   GetGlobalRotation());
+						   GetGlobalTransform());*/
+
+		spriteBatch->Draw(
+			bg,
+			Color(255, 255, 255, (unsigned char)(255.0f * opacity)),
+			(int)0,
+			(int)0,
+			width,
+			height,
+			GetGlobalTransform());
 	}
 }
 
@@ -573,6 +575,22 @@ bool Control::IsEnabled() const
 	return enabled;
 }
 
+sm::Matrix Control::GetLocalTransform() const
+{
+	return
+		sm::Matrix::TranslateMatrix(x + width / 2, y + height / 2, 0.0f) *
+		sm::Matrix::RotateAxisMatrix(m_rollAngle, sm::Vec3(0, 0, 1)) *
+		sm::Matrix::TranslateMatrix(-width / 2, -height / 2, 0.0f);
+}
+
+sm::Matrix Control::GetGlobalTransform() const
+{
+	if (parent == NULL)
+		return GetLocalTransform();
+
+	return parent->GetGlobalTransform() * GetLocalTransform();
+}
+
 sm::Vec2 Control::GetParentSize() const
 {
 	static int screenWidth = TaxiGame::Environment::GetInstance()->GetScreenWidth();
@@ -600,6 +618,19 @@ float Control::GetGlobalRotation() const
 		return m_rollAngle;
 
 	return parent->GetGlobalRotation() + m_rollAngle;
+}
+
+sm::Vec3 Control::GetRotateLocalPivot() const
+{
+	return (sm::Vec3(x, y, 0.0f) + sm::Vec3(x + width, y + height, 0.0f)) * 0.5f;
+}
+
+sm::Vec3 Control::GetRotateGlobalPivot() const
+{
+	if (parent == NULL)
+		return GetRotateLocalPivot();
+
+	return parent->GetRotateGlobalPivot() + GetRotateLocalPivot();
 }
 
 void Control::SetOpacity(float opacity)

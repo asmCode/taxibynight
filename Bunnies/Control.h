@@ -71,6 +71,7 @@ public:
 	
 public:
 	std::string m_tmpFill;
+	sm::Vec3 m_rotatePivot;
 
 	static void SetSpriteBatch(SpriteBatch *spriteBatch);
 	
@@ -112,6 +113,10 @@ public:
 	bool IsVisible() const;
 	bool IsEnabled() const;
 
+	//sm::Matrix m_transform;
+	sm::Matrix GetLocalTransform() const;
+	sm::Matrix GetGlobalTransform() const;
+
 	sm::Vec2 GetParentSize() const;
 
 	Control* FindChild(const std::string &name);
@@ -123,6 +128,8 @@ public:
 	float GetOpacity() const;
 	float GetLocalRotation() const;
 	float GetGlobalRotation() const;
+	sm::Vec3 GetRotateLocalPivot() const;
+	sm::Vec3 GetRotateGlobalPivot() const;
 	void SetOpacity(float opacity);
 	
 	sm::Vec2 GetLocalPos();
@@ -137,7 +144,7 @@ public:
 	void HandleRelease(int pointIndex, const sm::Vec2 &point);
 	void HandleMove(int pointId, const sm::Vec2 &point);
 
-	virtual bool HitTest(int x, int y) const;
+	virtual bool HitTest(const sm::Vec3& position) const;
 	
 	virtual void Update(float time, float ms);
 	virtual void Draw(float time, float ms);

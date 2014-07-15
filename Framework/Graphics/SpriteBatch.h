@@ -22,9 +22,9 @@ public:
 	void Draw(Texture *tex, int x, int y);
 	void Draw(Texture *tex, const float *texCoords, int x, int y, int width, int height);
 	void Draw(const TexPart &texPart, int x, int y);
-	void Draw(const TexPart &texPart, int x, int y, int width, int height, float rotate = 0.0f);
+	void Draw(const TexPart &texPart, int x, int y, int width, int height, const sm::Matrix& transform = sm::Matrix::Identity);
 	void Draw(const TexPart &texPart, const Color &colorMask, int x, int y);
-	void Draw(const TexPart &texPart, const Color &colorMask, int x, int y, int width, int height, float rotate = 0.0f);
+	void Draw(const TexPart &texPart, const Color &colorMask, int x, int y, int width, int height, const sm::Matrix& transform = sm::Matrix::Identity);
 	
 	void Draw(const Color &color, sm::Matrix trans);
 	void Draw(const TexPart &texPart, const Color &colorMask, const sm::Matrix &trans);
@@ -49,5 +49,5 @@ private:
 	static float VertexBuffer[16];
 	static const unsigned char ColorMask[16];
 
-	void CreateQuad(float *vertices, int x, int y, int width, int height, float rotate = 0.0f);
+	void CreateQuad(float *vertices, int x, int y, int width, int height, const sm::Matrix& transform = sm::Matrix::Identity);
 };

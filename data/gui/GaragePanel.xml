@@ -1,9 +1,9 @@
 <Panel name="" fill="true">
-	<!--<Image image="town" tmp_fill="wypelnij" align="top" width="650" height="495"/>-->
+	<Image image="town" tmp_fill="wypelnij" align="top" width="650" height="495"/>
 	
-	<Panel width="100" height="100" rotate="1" align="left" margin_left="300">
-		<Image image="town" width="400" height="200" rotate="0">
-			<Image image="town" width="200" height="100" rotate="-1.0"/>
+	<Panel width="500" height="300" rotate="0.3" align="left" margin_left="300">
+		<Image image="money_bg" fill="true" />
+		<Image image="town" width="200" height="100" rotate="0.0" align="bottom-right">
 		</Image>
 	</Panel>
 	
@@ -17,7 +17,7 @@
 	
 	<Grid align="top-left" margin_left="40" margin_top="150" >
 		<AnimButton name="car_dealer" align="top-left" margin_top="0" width="128" height="128" image="car_dealer_button" image_pushed="car_dealer_button" />
-		<AnimButton name="car_parts" align="top-left" margin_top="0" width="128" height="128" image="car_parts_button" image_pushed="car_parts_button" rotate="1.1415"/>
+		<AnimButton name="car_parts" align="top-left" margin_top="0" width="128" height="128" image="car_parts_button" image_pushed="car_parts_button" />
 		<AnimButton name="car_paint" align="top-left" margin_top="0" width="128" height="128" image="car_paint_button" image_pushed="car_paint_button" />
 	</Grid>
 </Panel>

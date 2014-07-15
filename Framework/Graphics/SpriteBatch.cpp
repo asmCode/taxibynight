@@ -121,10 +121,10 @@ void SpriteBatch::Draw(const TexPart &texPart, int x, int y)
 	Draw(texPart, x, y, texPart.ImageRect.Width, texPart.ImageRect.Height);
 }
 
-void SpriteBatch::Draw(const TexPart &texPart, int x, int y, int width, int height, float rotate)
+void SpriteBatch::Draw(const TexPart &texPart, int x, int y, int width, int height, const sm::Matrix& transform)
 {
 	float verts[8];
-	CreateQuad(verts, x, y, width, height, rotate);
+	CreateQuad(verts, x, y, width, height, transform);
 	
 	Draw(texPart.Tex, verts, texPart.TexCoords, NULL);
 }
@@ -134,10 +134,10 @@ void SpriteBatch::Draw(const TexPart &texPart, const Color &colorMask, int x, in
 	Draw(texPart, colorMask, x, y, texPart.ImageRect.Width, texPart.ImageRect.Height);
 }
 
-void SpriteBatch::Draw(const TexPart &texPart, const Color &colorMask, int x, int y, int width, int height, float rotate)
+void SpriteBatch::Draw(const TexPart &texPart, const Color &colorMask, int x, int y, int width, int height, const sm::Matrix& transform)
 {
 	float verts[8];
-	CreateQuad(verts, x, y, width, height, rotate);
+	CreateQuad(verts, x, y, width, height, transform);
 	
 	const unsigned char _color[16] = {
 		colorMask.R, colorMask.G, colorMask.B, colorMask.A,
@@ -235,9 +235,9 @@ void SpriteBatch::Draw(Texture *tex,
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 }
 
-void SpriteBatch::CreateQuad(float *vertices, int x, int y, int width, int height, float rotate)
+void SpriteBatch::CreateQuad(float *vertices, int x, int y, int width, int height, const sm::Matrix& transform)
 {
-	if (rotate == 0.0f)
+	if (transform == sm::Matrix::Identity)
 	{
 		vertices[0] = static_cast<float>(x);
 		vertices[1] = static_cast<float>(y + height);
@@ -255,12 +255,10 @@ void SpriteBatch::CreateQuad(float *vertices, int x, int y, int width, int heigh
 		sm::Vec3 bl(static_cast<float>(x), static_cast<float>(y), 0.0f);
 		sm::Vec3 br(static_cast<float>(x + width), static_cast<float>(y), 0.0f);
 
-		sm::Vec3 center = (tl + tr + bl + br) * 0.25f;
-
-		tl = sm::Vec3::RotateZ(tl - center, rotate) + center;
-		tr = sm::Vec3::RotateZ(tr - center, rotate) + center;
-		bl = sm::Vec3::RotateZ(bl - center, rotate) + center;
-		br = sm::Vec3::RotateZ(br - center, rotate) + center;
+		tl = transform * tl;
+		tr = transform * tr;
+		bl = transform * bl;
+		br = transform * br;
 
 		vertices[0] = tl.x;
 		vertices[1] = tl.y;
