@@ -279,6 +279,13 @@ namespace sm
 		{
 			return ray - (normal * Dot(normal, ray) * 2.0f);
 		}
+
+		static Vec3 RotateZ(const Vec3& vector, float angle)
+		{
+			Vec3 ret = vector;
+			ret.RotateZ(angle);
+			return ret;
+		}
 	};
 }
 

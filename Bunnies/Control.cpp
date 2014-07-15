@@ -24,6 +24,7 @@ Control::Control(const std::string &name) :
 	width = 0;
 	height = 0;
 	opacity = 1.0f;
+	m_rollAngle = 0.0f;
 	
 	parent		= NULL;
 	visible		= true;
@@ -41,6 +42,7 @@ Control::Control(const std::string &name, int x, int y, int width, int height) :
 	this ->width = width;
 	this ->height = height;
 	opacity = 1.0f;
+	m_rollAngle = 0.0f;
 	
 	parent		= NULL;
 	visible		= true;
@@ -58,6 +60,7 @@ Control::Control(const std::string &name, int x, int y, const TexPart &bg) :
 	this ->width = bg.ImageRect.Width;
 	this ->height = bg.ImageRect.Height;
 	opacity = 1.0f;
+	m_rollAngle = 0.0f;
 	
 	parent = NULL;
 	visible = true;
@@ -76,6 +79,7 @@ Control::Control(const std::string &name, int x, int y, int width, int height, c
 	this ->width = width;
 	this ->height = height;
 	opacity = 1.0f;
+	m_rollAngle = 0.0f;
 	
 	parent = NULL;
 	visible = true;
@@ -101,6 +105,7 @@ void Control::SetDefaults()
 	m_marginRight = 0;
 	m_marginTop = 0;
 	m_marginBottom = 0;
+	m_rollAngle = 0.0f;
 
 	m_tmpFill = "";
 
@@ -175,6 +180,11 @@ void Control::SetWidth(int width)
 void Control::SetHeight(int height)
 {
 	this->height = height;
+}
+
+void Control::SetLocalRotation(float rollAngle)
+{
+	m_rollAngle = rollAngle;
 }
 
 void Control::SetMarginLeft(int value)
@@ -500,7 +510,8 @@ void Control::OnDraw(float time, float ms)
 						   (int)globalPos.x,
 						   (int)globalPos.y,
 						   width,
-						   height);
+						   height,
+						   GetGlobalRotation());
 	}
 }
 
@@ -562,6 +573,19 @@ sm::Vec2 Control::GetParentSize() const
 float Control::GetOpacity() const
 {
 	return opacity;
+}
+
+float Control::GetLocalRotation() const
+{
+	return m_rollAngle;
+}
+
+float Control::GetGlobalRotation() const
+{
+	if (parent == NULL)
+		return m_rollAngle;
+
+	return parent->GetGlobalRotation() + m_rollAngle;
 }
 
 void Control::SetOpacity(float opacity)

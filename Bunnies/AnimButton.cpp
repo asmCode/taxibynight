@@ -24,7 +24,7 @@ void AnimButton::OnDraw(float time, float ms)
 
 	TexPart image = m_pressState == PressState_Pressed || m_checked ? pushedState : normalState;
 	
-	spriteBatch ->Draw(image, (int)globalPos.x, (int)globalPos.y, width, height);
+	spriteBatch ->Draw(image, (int)globalPos.x, (int)globalPos.y, width, height, GetGlobalRotation());
 }
 
 void AnimButton::SetChecked(bool checked)

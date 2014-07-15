@@ -31,6 +31,7 @@ Control* Inflater::LoadNode(XMLNode *node)
 	std::string type = node->GetName();
 	std::string name = node->GetAttribAsString("name");
 	bool visible = node->GetAttribAsBool("visible", true);
+	float rotate = node->GetAttribAsFloat("rotate");
 
 	Control *control = NULL;
 
@@ -55,6 +56,7 @@ Control* Inflater::LoadNode(XMLNode *node)
 		return NULL;
 
 	control->SetVisible(visible);
+	control->SetLocalRotation(rotate);
 
 	LoadLayout(node, control);
 

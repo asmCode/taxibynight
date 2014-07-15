@@ -37,6 +37,8 @@ public:
 	int m_marginTop;
 	int m_marginBottom;
 
+	float m_rollAngle;
+
 	PressState m_pressState;
 	int m_pressedFingerId;
 	
@@ -90,6 +92,7 @@ public:
 	void SetSize(int width, int height);
 	void SetWidth(int width);
 	void SetHeight(int height);
+	void SetLocalRotation(float angle);
 
 	void SetMarginLeft(int value);
 	void SetMarginRight(int value);
@@ -118,6 +121,8 @@ public:
 	void SetBackground(TexPart texPart);
 
 	float GetOpacity() const;
+	float GetLocalRotation() const;
+	float GetGlobalRotation() const;
 	void SetOpacity(float opacity);
 	
 	sm::Vec2 GetLocalPos();
