@@ -1,7 +1,7 @@
 <Panel name="" fill="true">
 	<Image image="town" tmp_fill="wypelnij" align="top" width="650" height="495"/>
 	
-	<Panel width="500" height="300" rotate="0.3" align="left" margin_left="300">
+	<Panel name="panel_anim" width="500" height="300" rotate="0.0" align="left" margin_left="300">
 		<Image image="money_bg" fill="true" />
 		<Image image="town" width="200" height="100" rotate="0.0" align="bottom-right">
 		</Image>

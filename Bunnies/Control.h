@@ -70,6 +70,11 @@ public:
 	virtual void OnUpdate(float time, float ms);
 	
 public:
+	sm::Vec4 m_animTransform;
+	float m_animRotate;
+	float m_animScale;
+	sm::Vec4 m_animColor;
+
 	std::string m_tmpFill;
 	sm::Vec3 m_rotatePivot;
 

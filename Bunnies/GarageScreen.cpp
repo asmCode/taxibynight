@@ -5,6 +5,7 @@
 #include "GameController.h"
 #include "Environment.h"
 #include "Gui/StatusBar.h"
+#include "ControlAnimation.h"
 #include <Graphics/SpriteBatch.h>
 #include <Audio/SoundManager.h>
 
@@ -14,6 +15,7 @@ GarageScreen::GarageScreen(GameController *gameController) :
 	m_carDealerButton(NULL),
 	m_carPartsButton(NULL),
 	m_carPaintButton(NULL),
+	m_viewAnim(NULL),
 	m_statusBar(NULL)
 {
 }
@@ -41,6 +43,11 @@ bool GarageScreen::InitResources()
 	m_statusBar = dynamic_cast<StatusBar*>(m_garageView->FindChild("status_bar"));
 	assert(m_statusBar != NULL);
 
+	m_viewAnim = ControlAnimation::LoadFromFile("data/gui/GaragePanelIntroAnimation.xml");
+	assert(m_viewAnim != NULL);
+
+	m_viewAnim->SetTarget(m_garageView);
+
 	ObsCast(IControlEventsObserver, m_carDealerButton)->AddObserver(this);
 	ObsCast(IControlEventsObserver, m_carPartsButton)->AddObserver(this);
 	ObsCast(IControlEventsObserver, m_carPaintButton)->AddObserver(this);
@@ -65,6 +72,7 @@ void GarageScreen::Draw(float time, float seconds)
 
 void GarageScreen::Update(float time, float seconds)
 {
+	m_viewAnim->Update(seconds);
 	m_garageView->Update(time, seconds);
 }
 

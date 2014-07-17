@@ -6,6 +6,7 @@
 class GameController;
 class StatusBar;
 class Control;
+class ControlAnimation;
 
 class GarageScreen :
 	public IScreen,
@@ -29,6 +30,8 @@ private:
 	Control* m_carDealerButton;
 	Control* m_carPartsButton;
 	Control* m_carPaintButton;
+
+	ControlAnimation* m_viewAnim;
 
 	StatusBar* m_statusBar;
 

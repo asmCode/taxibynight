@@ -105,6 +105,10 @@
     <ClInclude Include="Bunnies\CarObserver.h" />
     <ClInclude Include="Bunnies\CarPartsScreen.h" />
     <ClInclude Include="Bunnies\ComicsScreen.h" />
+    <ClInclude Include="Bunnies\ControlAnimation.h" />
+    <ClInclude Include="Bunnies\ControlAnimationVector4Curve.h" />
+    <ClInclude Include="Bunnies\ControlAnimationFloatCurve.h" />
+    <ClInclude Include="Bunnies\ControlAnimationTarget.h" />
     <ClInclude Include="Bunnies\DecalId.h" />
     <ClInclude Include="Bunnies\DummyAnalytics.h" />
     <ClInclude Include="Bunnies\Effects\DiffLightEffect.h" />
@@ -236,6 +240,8 @@
     <ClInclude Include="Framework\IO\BinaryReader.h" />
     <ClInclude Include="Framework\IO\BinaryWriter.h" />
     <ClInclude Include="Framework\IO\Path.h" />
+    <ClInclude Include="Framework\Math\Animation\IAnimationCurve.h" />
+    <ClInclude Include="Framework\Math\Animation\LinearCurve.h" />
     <ClInclude Include="Framework\Math\MathUtils.h" />
     <ClInclude Include="Framework\Math\Matrix.h" />
     <ClInclude Include="Framework\Math\Plane.h" />
@@ -273,6 +279,10 @@
     <ClCompile Include="Bunnies\CardId.cpp" />
     <ClCompile Include="Bunnies\CarPartsScreen.cpp" />
     <ClCompile Include="Bunnies\ComicsScreen.cpp" />
+    <ClCompile Include="Bunnies\ControlAnimation.cpp" />
+    <ClCompile Include="Bunnies\ControlAnimationVector4Curve.cpp" />
+    <ClCompile Include="Bunnies\ControlAnimationFloatCurve.cpp" />
+    <ClCompile Include="Bunnies\ControlAnimationTarget.cpp" />
     <ClCompile Include="Bunnies\DecalId.cpp" />
     <ClCompile Include="Bunnies\DummyAnalytics.cpp" />
     <ClCompile Include="Bunnies\Effects\DiffLightEffect.cpp" />
@@ -366,6 +376,7 @@
     <ClCompile Include="Framework\IO\BinaryReader.cpp" />
     <ClCompile Include="Framework\IO\BinaryWriter.cpp" />
     <ClCompile Include="Framework\IO\Win32\Path.cpp" />
+    <ClCompile Include="Framework\Math\Animation\LinearCurve.cpp" />
     <ClCompile Include="Framework\Math\MathUtils.cpp" />
     <ClCompile Include="Framework\Math\Matrix.cpp" />
     <ClCompile Include="Framework\UserInput\Input2.cpp" />

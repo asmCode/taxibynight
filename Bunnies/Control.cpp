@@ -116,6 +116,11 @@ void Control::SetDefaults()
 
 	m_pressState = PressState_Unpressed;
 	m_pressedFingerId = 0;
+
+	m_animTransform.Set(0, 0, 0, 0);
+	m_animRotate = 0.0f;
+	m_animScale = 0.0f;
+	m_animColor.Set(1, 1, 1, 1);
 }
 
 Control *Control::GetParent()
@@ -578,7 +583,7 @@ bool Control::IsEnabled() const
 sm::Matrix Control::GetLocalTransform() const
 {
 	return
-		sm::Matrix::TranslateMatrix(x + width / 2, y + height / 2, 0.0f) *
+		sm::Matrix::TranslateMatrix(x + width / 2 + m_animTransform.x, y + height / 2 + m_animTransform.y, 0.0f) *
 		sm::Matrix::RotateAxisMatrix(m_rollAngle, sm::Vec3(0, 0, 1)) *
 		sm::Matrix::TranslateMatrix(-width / 2, -height / 2, 0.0f);
 }
