@@ -3,7 +3,10 @@
 #include "ControlAnimationFloatCurve.h"
 #include "ControlAnimationVector4Curve.h"
 #include "Control.h"
+#include <Math/MathUtils.h>
 #include <Math/Animation/LinearCurve.h>
+#include <Math/Animation/QuarticOut.h>
+#include <Math/Animation/BackOut.h>
 #include <Utils/StringUtils.h>
 #include <XML/XMLLoader.h>
 #include <XML/XMLNode.h>
@@ -28,7 +31,7 @@ ControlAnimation* ControlAnimation::LoadFromFile(const std::string& filename)
 
 	for (uint32_t i = 0; i < root->GetChildrenCount(); i++)
 	{
-		XMLNode* node = root->GetChild(0);
+		XMLNode* node = root->GetChild(i);
 		assert(node != NULL);
 
 		ControlAnimationTarget* target = LoadTarget(node);
@@ -83,17 +86,37 @@ ControlAnimationTarget* ControlAnimation::LoadTarget(XMLNode* node)
 	ControlAnimationFloatCurve* scaleCurve = NULL;
 	ControlAnimationVector4Curve* colorCurve = NULL;
 
+	sm::Vec4 valueBegin;
+	sm::Vec4 valueEnd;
+	IAnimationCurve* curve;
+	float duration;
+
 	XMLNode* transformNode = node->GetChild("Transform");
 	if (transformNode != NULL)
 	{
-		sm::Vec4 valueBegin;
-		sm::Vec4 valueEnd;
-		IAnimationCurve* curve;
-		float duration;
-
 		LoadCurve(transformNode, valueBegin, valueEnd, curve, duration);
-
 		transformCurve = new ControlAnimationVector4Curve(curve, valueBegin, valueEnd, duration);
+	}
+
+	XMLNode* rotationNode = node->GetChild("Rotation");
+	if (rotationNode != NULL)
+	{
+		LoadCurve(rotationNode, valueBegin, valueEnd, curve, duration);
+		rotateCurve = new ControlAnimationFloatCurve(curve, valueBegin.x * MathUtils::Deg2Rad, valueEnd.x * MathUtils::Deg2Rad, duration);
+	}
+
+	XMLNode* scaleNode = node->GetChild("Scale");
+	if (scaleNode != NULL)
+	{
+		LoadCurve(scaleNode, valueBegin, valueEnd, curve, duration);
+		scaleCurve = new ControlAnimationFloatCurve(curve, valueBegin.x, valueEnd.x, duration);
+	}
+
+	XMLNode* colorNode = node->GetChild("Color");
+	if (colorNode != NULL)
+	{
+		LoadCurve(colorNode, valueBegin, valueEnd, curve, duration);
+		colorCurve = new ControlAnimationVector4Curve(curve, valueBegin, valueEnd, duration);
 	}
 
 	ControlAnimationTarget* target = new ControlAnimationTarget(
@@ -135,4 +158,8 @@ void ControlAnimation::LoadCurve(
 
 	if (curveTxt == "linear")
 		curve = new LinearCurve();
+	if (curveTxt == "quartic_out")
+		curve = new QuarticOut();
+	if (curveTxt == "back_out")
+		curve = new BackOut();
 }

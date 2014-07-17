@@ -171,9 +171,10 @@ public:
 		return v >= 0 ? v : -v;
 	}
 
-	static float PI;
-	static float PI2;
-	static float PI4;
+	static const float PI;
+	static const float PI2;
+	static const float PI4;
+	static const float Deg2Rad;
 };
 
 #endif

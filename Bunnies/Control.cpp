@@ -119,7 +119,7 @@ void Control::SetDefaults()
 
 	m_animTransform.Set(0, 0, 0, 0);
 	m_animRotate = 0.0f;
-	m_animScale = 0.0f;
+	m_animScale = 1.0f;
 	m_animColor.Set(1, 1, 1, 1);
 }
 
@@ -525,9 +525,15 @@ void Control::OnDraw(float time, float ms)
 						   height,
 						   GetGlobalTransform());*/
 
+		Color color = Color(
+			(unsigned char)(255.0f * m_animColor.x),
+			(unsigned char)(255.0f * m_animColor.y),
+			(unsigned char)(255.0f * m_animColor.z),
+			(unsigned char)(255.0f * opacity * m_animColor.w));
+
 		spriteBatch->Draw(
 			bg,
-			Color(255, 255, 255, (unsigned char)(255.0f * opacity)),
+			color,
 			(int)0,
 			(int)0,
 			width,
@@ -584,7 +590,8 @@ sm::Matrix Control::GetLocalTransform() const
 {
 	return
 		sm::Matrix::TranslateMatrix(x + width / 2 + m_animTransform.x, y + height / 2 + m_animTransform.y, 0.0f) *
-		sm::Matrix::RotateAxisMatrix(m_rollAngle, sm::Vec3(0, 0, 1)) *
+		sm::Matrix::RotateAxisMatrix(m_rollAngle + m_animRotate, sm::Vec3(0, 0, 1)) *
+		sm::Matrix::ScaleMatrix(m_animScale, m_animScale, m_animScale) *
 		sm::Matrix::TranslateMatrix(-width / 2, -height / 2, 0.0f);
 }
 

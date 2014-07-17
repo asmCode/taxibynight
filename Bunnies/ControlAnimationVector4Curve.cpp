@@ -18,7 +18,7 @@ sm::Vec4 ControlAnimationVector4Curve::Evaluate(float time)
 	return sm::Vec4(
 		m_curve->Evaluate(m_valueBegin.x, m_valueEnd.x, time / m_duration),
 		m_curve->Evaluate(m_valueBegin.y, m_valueEnd.y, time / m_duration),
-		m_curve->Evaluate(m_valueBegin.w, m_valueEnd.z, time / m_duration),
-		m_curve->Evaluate(m_valueBegin.x, m_valueEnd.w, time / m_duration));
+		m_curve->Evaluate(m_valueBegin.z, m_valueEnd.z, time / m_duration),
+		m_curve->Evaluate(m_valueBegin.w, m_valueEnd.w, time / m_duration));
 }
 

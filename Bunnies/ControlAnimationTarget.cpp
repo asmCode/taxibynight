@@ -32,6 +32,12 @@ void ControlAnimationTarget::SetAnimationTime(float time)
 
 	if (m_transformCurve != NULL)
 		m_control->m_animTransform = m_transformCurve->Evaluate(time);
+	if (m_rotationCurve != NULL)
+		m_control->m_animRotate = m_rotationCurve->Evaluate(time);
+	if (m_scaleCurve != NULL)
+		m_control->m_animScale = m_scaleCurve->Evaluate(time);
+	if (m_colorCurve != NULL)
+		m_control->m_animColor = m_colorCurve->Evaluate(time);
 }
 
 const std::string& ControlAnimationTarget::GetTargetName() const

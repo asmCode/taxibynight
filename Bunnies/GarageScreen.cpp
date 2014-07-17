@@ -72,7 +72,10 @@ void GarageScreen::Draw(float time, float seconds)
 
 void GarageScreen::Update(float time, float seconds)
 {
-	m_viewAnim->Update(seconds);
+	static float f = 0.0f;
+	f += seconds;
+	if (f > 2)
+		m_viewAnim->Update(seconds);
 	m_garageView->Update(time, seconds);
 }
 
