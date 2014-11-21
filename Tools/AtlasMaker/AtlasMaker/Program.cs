@@ -41,7 +41,7 @@ namespace AtlasMaker
             foreach (var sprite in spritesData)
             {
                 string name = System.IO.Path.GetFileNameWithoutExtension(sprite.FileName);
-                xml += string.Format("\t<Sprite name=\"{4}\" bounds=\"{0};{1};{2};{3}\" />\n", sprite.Bounds.X, sprite.Bounds.Y, sprite.Bounds.Width, sprite.Bounds.Height, name);
+                xml += string.Format("\t<Sprite name=\"{4}\" bounds=\"{0},{1},{2},{3}\" />\n", sprite.Bounds.X, sprite.Bounds.Y, sprite.Bounds.Width, sprite.Bounds.Height, name);
             }
 
             xml += "</Atlas>\n";

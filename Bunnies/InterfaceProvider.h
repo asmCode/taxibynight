@@ -8,6 +8,7 @@ class Content;
 class SpriteBatch;
 class SpritesMap;
 class FontRenderer;
+class Atlas;
 
 class InterfaceProvider
 {
@@ -22,6 +23,7 @@ public:
 
 private:
 	typedef std::map<std::string, FontRenderer*> FontsMap;
+	typedef std::map<std::string, Atlas*> AtlasesMap;
 
 	static IGraphicsEngine *m_graphicsEngine;
 	static Content *m_content;
@@ -29,5 +31,6 @@ private:
 	static SpritesMap* m_spritesMap;
 
 	static FontsMap m_fonts;
+	static AtlasesMap m_atlases;
 };
 

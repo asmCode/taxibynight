@@ -91,6 +91,7 @@
     <ClInclude Include="Bunnies\AnalyticsProvider.h" />
     <ClInclude Include="Bunnies\AnimButton.h" />
     <ClInclude Include="Bunnies\Arrow.h" />
+    <ClInclude Include="Bunnies\Atlas.h" />
     <ClInclude Include="Bunnies\Billboard.h" />
     <ClInclude Include="Bunnies\Bonuses\Bonus.h" />
     <ClInclude Include="Bunnies\Bonuses\BonusBlowEffect.h" />
@@ -270,6 +271,7 @@
     <ClCompile Include="Bunnies\AnalyticsProvider.cpp" />
     <ClCompile Include="Bunnies\AnimButton.cpp" />
     <ClCompile Include="Bunnies\Arrow.cpp" />
+    <ClCompile Include="Bunnies\Atlas.cpp" />
     <ClCompile Include="Bunnies\Billboard.cpp" />
     <ClCompile Include="Bunnies\Bonuses\Bonus.cpp" />
     <ClCompile Include="Bunnies\Bonuses\BonusBlowEffect.cpp" />

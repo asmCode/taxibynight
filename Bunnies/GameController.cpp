@@ -9,6 +9,7 @@
 #include "IntroScreen.h"
 #include "LeaderboardScreen.h"
 #include "GarageScreen.h"
+#include "Atlas.h"
 #include "CarDealerScreen.h"
 #include "CarPartsScreen.h"
 #include "SpritesMap.h"
@@ -34,6 +35,7 @@
 #include "AdsMnager.h"
 #include <Utils/Log.h>
 #include <time.h>
+#include <IO/Path.h>
 #include <stddef.h>
 #include <stdlib.h>
 #include <assert.h>
@@ -65,6 +67,7 @@ bool GameController::InitializeGraphics(const std::string &basePath)
 	m_content = new Content(m_graphicsEngine);
 	InterfaceProvider::m_content = m_content;
 	m_content->LoadTextures(basePath + "data/gui/");
+	m_content->LoadTextures(basePath + "data/atlases/");
 	m_content->LoadTextures(basePath + "data/textures/");
 	m_content->LoadTextures(basePath + "data/textures/comics/");
 	m_content->LoadShaders(basePath + "data/shaders/");
@@ -105,6 +108,20 @@ bool GameController::InitializeGraphics(const std::string &basePath)
 	InterfaceProvider::m_fonts["digital_bold_24"] = FontRenderer::LoadFromFile((basePath + "data/fonts/digital_bold_24.xml").c_str(), spriteBatch);
 	InterfaceProvider::m_fonts["fenix_18"] = FontRenderer::LoadFromFile((basePath + "data/fonts/fenix_18.xml").c_str(), spriteBatch);
 	InterfaceProvider::m_fonts["fenix_26"] = FontRenderer::LoadFromFile((basePath + "data/fonts/fenix_26.xml").c_str(), spriteBatch);
+
+	std::vector<std::string> atlasFiles;
+	std::string atlasesBasePath = basePath + "data/atlases/";
+	Path::GetAllFiles(atlasFiles, atlasesBasePath, "*.xml");
+	for (uint32_t i = 0; i < atlasFiles.size(); i++)
+	{
+		Path path(atlasFiles[i]);
+		std::string atlasName = path.GetFilename();
+
+		Atlas* atlas = new Atlas();
+
+		atlas->LoadFromFile(atlasesBasePath, atlasName, m_content);
+		InterfaceProvider::m_atlases[atlasName] = atlas;
+	}
 
 	Control::SetSpriteBatch(spriteBatch);
 
