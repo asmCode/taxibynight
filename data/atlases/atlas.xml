@@ -1,0 +1,12 @@
+<Atlas>
+	<Sprite name="bck_money" bounds="0,0,145,62" />
+	<Sprite name="acc" bounds="135,0,128,125" />
+	<Sprite name="tires" bounds="0,53,128,126" />
+	<Sprite name="power" bounds="259,0,128,128" />
+	<Sprite name="back_glow" bounds="135,124,171,178" />
+	<Sprite name="stripe_glow" bounds="0,177,98,126" />
+	<Sprite name="plus" bounds="382,0,56,54" />
+	<Sprite name="plus_dwn" bounds="259,124,56,54" />
+	<Sprite name="back2" bounds="135,218,52,59" />
+	<Sprite name="back1" bounds="59,177,52,59" />
+</Atlas>

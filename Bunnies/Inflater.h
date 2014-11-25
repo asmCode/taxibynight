@@ -12,6 +12,7 @@ public:
 
 private:
 	static Control* LoadImageControl(XMLNode *node, const std::string &name);
+	static Control* LoadSpriteControl(XMLNode *node, const std::string &name);
 	static Control* LoadAnimButtonControl(XMLNode *node, const std::string &name);
 	static Control* LoadGridControl(XMLNode *node, const std::string &name);
 	static Control* LoadProgressControl(XMLNode *node, const std::string &name);

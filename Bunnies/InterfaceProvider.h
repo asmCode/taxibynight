@@ -15,15 +15,18 @@ class InterfaceProvider
 	friend class GameController;
 
 public:
+	typedef std::map<std::string, Atlas*> AtlasesMap;
+
 	static IGraphicsEngine* GetGraphicsEngine();
 	static Content* GetContent();
 	static SpriteBatch* GetSpriteBatch();
 	static SpritesMap* GetSpritesMap();
 	static FontRenderer* GetFontRenderer(const std::string &fontName);
 
+	static AtlasesMap m_atlases;
+
 private:
 	typedef std::map<std::string, FontRenderer*> FontsMap;
-	typedef std::map<std::string, Atlas*> AtlasesMap;
 
 	static IGraphicsEngine *m_graphicsEngine;
 	static Content *m_content;
@@ -31,6 +34,5 @@ private:
 	static SpritesMap* m_spritesMap;
 
 	static FontsMap m_fonts;
-	static AtlasesMap m_atlases;
 };
 

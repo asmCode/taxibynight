@@ -3,6 +3,7 @@
 #include "Label.h"
 #include "AnimButton.h"
 #include "ProgressBar.h"
+#include "Atlas.h"
 #include "Gui/GridPanel.h"
 #include "Gui/StatusBar.h"
 #include "../Bunnies/Gui/ProgressControl.h"
@@ -14,6 +15,7 @@
 #include <XML/XMLNode.h>
 #include <stddef.h>
 #include <assert.h>
+
 
 Control* Inflater::Inflate(const std::string &xml)
 {
@@ -39,6 +41,8 @@ Control* Inflater::LoadNode(XMLNode *node)
 		control = LoadPanelControl(node, name);
 	else if (type == "Image")
 		control = LoadImageControl(node, name);
+	else if (type == "Sprite")
+		control = LoadSpriteControl(node, name);
 	else if (type == "StatusBar")
 		control = LoadStatusBar(node, name);
 	else if (type == "AnimButton")
@@ -110,6 +114,20 @@ Control* Inflater::LoadImageControl(XMLNode *node, const std::string &name)
 	assert(imageSprite != NULL);
 
 	return new Control(name, 0, 0, *imageSprite);
+}
+
+Control* Inflater::LoadSpriteControl(XMLNode *node, const std::string &name)
+{
+	std::string atlasName;
+	std::string spriteName;
+
+	atlasName = node->GetAttribAsString("atlas_name");
+	spriteName = node->GetAttribAsString("sprite_name");
+
+	TexPart *texPart= InterfaceProvider::m_atlases[atlasName]->GetTexPart(spriteName);
+	assert(texPart != NULL);
+
+	return new Control(name, 0, 0, *texPart);
 }
 
 Control* Inflater::LoadLabelControl(XMLNode *node, const std::string &name)

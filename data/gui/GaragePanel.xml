@@ -1,6 +1,8 @@
 <Panel name="" fill="true">
 	<Image image="town" tmp_fill="wypelnij" align="top" width="650" height="495"/>
 	
+	<Sprite atlas_name="atlas" sprite_name="plus" />
+	
 	<Panel name="panel_anim" width="500" height="300" rotate="0.0" align="left" margin_left="300">
 		<Image name="money_bg" image="money_bg" fill="true" />
 		<Image name="small_town" image="town" width="200" height="100" rotate="0.0" align="bottom-right">
