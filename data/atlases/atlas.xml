@@ -1,12 +1,18 @@
 <Atlas>
-	<Sprite name="bck_money" bounds="0,0,145,62" />
-	<Sprite name="acc" bounds="135,0,128,125" />
-	<Sprite name="tires" bounds="0,53,128,126" />
-	<Sprite name="power" bounds="259,0,128,128" />
-	<Sprite name="back_glow" bounds="135,124,171,178" />
-	<Sprite name="stripe_glow" bounds="0,177,98,126" />
-	<Sprite name="plus" bounds="382,0,56,54" />
-	<Sprite name="plus_dwn" bounds="259,124,56,54" />
-	<Sprite name="back2" bounds="135,218,52,59" />
-	<Sprite name="back1" bounds="59,177,52,59" />
+	<Sprite name="big_board" bounds="0,0,575,409" />
+	<Sprite name="upper_board" bounds="575,0,415,273" />
+	<Sprite name="stick" bounds="0,409,409,418" />
+	<Sprite name="left_board" bounds="575,273,340,116" />
+	<Sprite name="photo" bounds="409,409,163,172" />
+	<Sprite name="bck_money" bounds="0,827,145,62" />
+	<Sprite name="back_board" bounds="575,389,133,230" />
+	<Sprite name="acc" bounds="409,581,128,125" />
+	<Sprite name="tires" bounds="135,827,128,126" />
+	<Sprite name="power" bounds="0,880,128,128" />
+	<Sprite name="back_glow" bounds="708,389,171,178" />
+	<Sprite name="stripe_glow" bounds="915,273,98,126" />
+	<Sprite name="plus" bounds="575,619,56,54" />
+	<Sprite name="plus_dwn" bounds="409,705,56,54" />
+	<Sprite name="back2" bounds="259,827,52,59" />
+	<Sprite name="back1" bounds="135,951,52,59" />
 </Atlas>

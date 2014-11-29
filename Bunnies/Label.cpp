@@ -29,7 +29,8 @@ void Label::OnDraw(float time, float ms)
 	if (parent != NULL)
 		color.A = (unsigned char)((float)color.A * parent->GetOpacity() * opacity);
 	sm::Vec2 globalPos = GetGlobalPos();
-	fontRenderer ->DrawString(text.c_str(), globalPos.x, globalPos.y, color, m_size);
+	sm::Matrix transform = GetGlobalTransform();
+	fontRenderer ->DrawString(text.c_str(), globalPos.x, globalPos.y, color, m_size, transform);
 }
 
 void Label::SetText(const std::string &text)

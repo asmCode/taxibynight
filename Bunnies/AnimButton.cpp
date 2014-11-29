@@ -20,6 +20,9 @@ AnimButton::AnimButton(const std::string &name,
 
 void AnimButton::OnDraw(float time, float ms)
 {
+	if (pushedState.Tex == NULL || normalState.Tex == NULL)
+		return;
+
 	sm::Vec2 globalPos = GetGlobalPos();
 
 	TexPart image = m_pressState == PressState_Pressed || m_checked ? pushedState : normalState;

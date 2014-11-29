@@ -186,6 +186,7 @@ Control* Inflater::LoadProgressBar(XMLNode *node, const std::string &name)
 
 Control* Inflater::LoadAnimButtonControl(XMLNode *node, const std::string &name)
 {
+	/*
 	std::string imageName;
 	std::string imagePushedName;
 
@@ -194,13 +195,15 @@ Control* Inflater::LoadAnimButtonControl(XMLNode *node, const std::string &name)
 	if (node->HasAttrib("image_pushed"))
 		imagePushedName = node->GetAttribAsString("image_pushed");
 
-	TexPart *image = InterfaceProvider::GetSpritesMap()->GetTexPart(imageName);
+	*/
+	/*TexPart *image = InterfaceProvider::GetSpritesMap()->GetTexPart(imageName);
 	assert(image != NULL);
 
 	TexPart *imagePushed = InterfaceProvider::GetSpritesMap()->GetTexPart(imagePushedName);
-	assert(imagePushed != NULL);
+	assert(imagePushed != NULL);*/
 
-	return new AnimButton(name, 0, 0, *image, *imagePushed);
+	//return new AnimButton(name, 0, 0, *image, *imagePushed);
+	return new AnimButton(name, 0, 0, TexPart(), TexPart());
 }
 
 Control* Inflater::LoadGridControl(XMLNode *node, const std::string &name)

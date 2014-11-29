@@ -130,13 +130,13 @@ FontRenderer::~FontRenderer()
 {
 }
 
-void FontRenderer::DrawString(const char *text, unsigned x, unsigned y, const Color &color, float scale)
+void FontRenderer::DrawString(const char *text, unsigned x, unsigned y, const Color &color, float scale, const sm::Matrix& transform)
 {
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	unsigned xShift = x;
-	unsigned yShift = y;
+	unsigned xShift = 0;
+	unsigned yShift = 0;
 	unsigned rowHeight = texLetters['A'].Size.Y * scale;
 	for (unsigned i = 0; i < strlen(text); i++)
 	{
@@ -157,7 +157,8 @@ void FontRenderer::DrawString(const char *text, unsigned x, unsigned y, const Co
 			xShift,
 			yShift,
 			(int)((float)letter.Coords.ImageRect.Width * scale),
-			(int)((float)letter.Coords.ImageRect.Height * scale));//, letter.Size.X, letter.Size.Y);
+			(int)((float)letter.Coords.ImageRect.Height * scale),
+			transform);//, letter.Size.X, letter.Size.Y);
 		xShift += letter.Size.X * scale;
 		
 	}

@@ -1,17 +1,27 @@
 <Animation>
+<!--
 	<Target name="panel_anim">
 		<Transform from="-300;300" to="0;0" curve="back_out" duration="2.0" />
 		<Rotation from="180.0" to="0.0" curve="back_out" duration="2.0" />
 		<Scale from="0.2" to="1.0" curve="back_out" duration="2.0" />
 		<Color from="0.0;0.0;0.0;0.0" to="0.3;1.0;1.0;1.0" curve="linear" duration="2.0" />
 	</Target>
+-->
 	
+	<Target name="back_panel">
+		<Transform from="0;-200" to="0;0" curve="back_out" duration="0.4" />
+	</Target>
+	
+	<!--
 	<Target name="small_town">
 		<Rotation from="-1000.0" to="0.0" curve="back_out" duration="5.0" />
 		<Color from="1.0;0.0;0.0;0.0" to="0.0;1.0;1.0;1.0" curve="linear" duration="2.0" />
 	</Target>
+	-->
 	
+	<!--
 	<Target name="car_dealer">
 		<Transform from="300;-300" to="0;0" curve="linear" duration="10.0" />
 	</Target>
+	-->
 </Animation>
