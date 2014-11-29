@@ -128,7 +128,7 @@ namespace AtlasMaker
                     continue;
                 }
 
-                sprite.Bounds = new Rect(location, sprite.Bounds.Size);
+                sprite.Bounds = new Rect(location, sprite.CropBounds.Size);
             }
         }
     }

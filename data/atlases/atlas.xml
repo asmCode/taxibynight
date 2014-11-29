@@ -3,16 +3,19 @@
 	<Sprite name="upper_board" bounds="575,0,415,273" />
 	<Sprite name="stick" bounds="0,409,409,418" />
 	<Sprite name="left_board" bounds="575,273,340,116" />
+	<Sprite name="cogwheel_big" bounds="0,827,170,172" />
 	<Sprite name="photo" bounds="409,409,163,172" />
-	<Sprite name="bck_money" bounds="0,827,145,62" />
-	<Sprite name="back_board" bounds="575,389,133,230" />
-	<Sprite name="acc" bounds="409,581,128,125" />
-	<Sprite name="tires" bounds="135,827,128,126" />
-	<Sprite name="power" bounds="0,880,128,128" />
-	<Sprite name="back_glow" bounds="708,389,171,178" />
-	<Sprite name="stripe_glow" bounds="915,273,98,126" />
-	<Sprite name="plus" bounds="575,619,56,54" />
-	<Sprite name="plus_dwn" bounds="409,705,56,54" />
-	<Sprite name="back2" bounds="259,827,52,59" />
-	<Sprite name="back1" bounds="135,951,52,59" />
+	<Sprite name="bck_money" bounds="575,389,135,53" />
+	<Sprite name="back_board" bounds="409,581,133,230" />
+	<Sprite name="tires" bounds="170,827,124,124" />
+	<Sprite name="acc" bounds="710,389,124,124" />
+	<Sprite name="power" bounds="575,442,123,124" />
+	<Sprite name="cogwheel_small" bounds="409,811,113,112" />
+	<Sprite name="back_glow" bounds="294,827,91,94" />
+	<Sprite name="progress_stripe_glow" bounds="915,273,59,99" />
+	<Sprite name="plus" bounds="170,951,56,52" />
+	<Sprite name="plus_dwn" bounds="834,389,56,52" />
+	<Sprite name="back2" bounds="710,513,52,59" />
+	<Sprite name="back1" bounds="575,566,51,59" />
+	<Sprite name="progress_stripe" bounds="990,0,31,71" />
 </Atlas>
