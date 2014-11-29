@@ -15,10 +15,15 @@ namespace AtlasMaker
         private static readonly string DefaultBitmapFilename = "atlas.png";
         private static readonly string DefaultLayoutFilename = "atlas.xml";
 
+        private static List<string> m_ignoreCropFiles = new List<string>();
+
         static void Main(string[] args)
         {
             if (File.Exists(DefaultBitmapFilename))
                 File.Delete(DefaultBitmapFilename);
+
+            ProgramParams pp = new ProgramParams(args);
+            CheckIgnoreCrop(pp);
 
             string[] fileNames = GetGraphicsFileNames();
 
@@ -30,6 +35,22 @@ namespace AtlasMaker
 
             WriteAtlasImage(DefaultBitmapFilename, spritesData);
             WriteAtlasLayout(DefaultLayoutFilename, spritesData);
+        }
+
+        private static void CheckIgnoreCrop(ProgramParams pp)
+        {
+            string files = pp.GetNamedParam("ignore_crop");
+            if (string.IsNullOrEmpty(files))
+                return;
+
+            string[] filesSplitted = files.Split(' ');
+            foreach (var ignoreFile in filesSplitted)
+            {
+                string ignoreFileTrim = ignoreFile.Trim();
+                m_ignoreCropFiles.Add(ignoreFileTrim);
+
+                Console.WriteLine("Ignoring auto crop: " + ignoreFileTrim);
+            }
         }
 
         private static void WriteAtlasLayout(string filename, SpriteData[] spritesData)
@@ -102,6 +123,11 @@ namespace AtlasMaker
             return spritesData;
         }
 
+        private static bool IgnoreAutoCrop(string file)
+        {
+            return m_ignoreCropFiles.Exists(t => t == Path.GetFileName(file));
+        }
+
         static void GetImageBounds(string fileName, out Rect bounds, out Rect cropBounds)
         {
             bounds = Rect.Empty;
@@ -112,7 +138,11 @@ namespace AtlasMaker
                 return;
 
             bounds = new Rect(0, 0, image.Width, image.Height);
-            cropBounds = BitmapUtils.CalcBoundingBox(new Bitmap(image));
+
+            if (!IgnoreAutoCrop(fileName))
+                cropBounds = BitmapUtils.CalcBoundingBox(new Bitmap(image));
+            else
+                cropBounds = bounds;
         }
 
         static void LayoutSprites(SpriteData[] sprites)
