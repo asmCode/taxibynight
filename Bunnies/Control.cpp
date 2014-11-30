@@ -89,9 +89,6 @@ Control::Control(const std::string &name, int x, int y, int width, int height, c
 
 Control::~Control()
 {
-	std::map<std::string, unsigned char*>::iterator it;
-	for (it = userData.begin(); it != userData.end(); it++)
-		delete [] it ->second;
 }
 
 void Control::SetDefaults()
@@ -142,7 +139,14 @@ void Control::AddChild(Control *control)
 
 void Control::RemoveChild(Control *control)
 {
+	control->RemoveAllChildren();
 	children.remove(control);
+}
+
+void Control::RemoveAllChildren()
+{
+	while (GetChildrenCount() > 0)
+		RemoveChild(GetChild(0));
 }
 
 int Control::GetChildrenCount() const
@@ -674,4 +678,18 @@ Control* Control::FindChild(const std::string &name)
 void Control::SetBackground(TexPart texPart)
 {
 	bg = texPart;
+}
+
+void Control::SetUserData(const std::string &name, const std::string& value)
+{
+	userData[name] = value;
+}
+
+std::string Control::GetUserData(const std::string &name) const
+{
+	std::map<std::string, std::string>::iterator it = userData.find(name);
+	if (it == userData.end())
+		return "";
+
+	return it->second;
 }

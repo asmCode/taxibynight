@@ -1,0 +1,37 @@
+<Panel fill="true">
+	<Panel name="buy_panel" align="top" width="360" height="100" margin_top="150" visible="false">
+		<Image image="money_bg" fill="true" />
+		
+		<AnimButton name="buy_soft_btn" align="bottom-left" margin_left="0" margin_bottom="0" width="160" height="80" >
+			<Sprite atlas_name="atlas" sprite_name="left_board" fill="true" />
+			<Panel align="bottom" width="158" height="55">
+				<Label name="soft_price" font="fenix_18" color="0;0;0" text="100" align="left" />
+				<Image image="money_soft_icon" align="right" width="45" height="55" />
+			</Panel>
+			
+			<Label font="fenix_18" color="255;255;255" text="buy" align="top" />
+		</AnimButton>
+		
+		<AnimButton name="buy_hard_btn" align="bottom-right" margin_left="0" margin_bottom="0" width="160" height="80" >
+			<Sprite atlas_name="atlas" sprite_name="left_board" fill="true" />
+			<Panel align="bottom" width="158" height="55">
+				<Label name="hard_price" font="fenix_18" color="0;0;0" text="100" align="left" />
+				<Image image="money_hard_icon" align="right" width="45" height="55" />
+			</Panel>
+			
+			<Label font="fenix_18" color="255;255;255" text="buy" align="top" />
+		</AnimButton>
+	</Panel>
+
+	<Panel name="activate_panel" align="top" width="300" height="140" margin_top="150" visible="false">
+		<Image image="money_bg" fill="true" />
+		
+		<AnimButton name="activate_btn" align="bottom" margin_left="0" margin_top="0" width="160" height="80">
+			<Sprite atlas_name="atlas" sprite_name="left_board" fill="true" />
+			<Label font="fenix_18" color="255;255;255" text="Activate" align="center" />
+		</AnimButton>
+	</Panel>
+	
+	<Grid name="decals_grid" width="372" height="128" align="bottom" margin_bottom="0" orientation="horizontal" >
+	</Grid>
+</Panel>

@@ -49,7 +49,7 @@ public:
 	
 	Control *parent;
 	std::list<Control*> children;
-	mutable std::map<std::string, unsigned char*> userData;
+	mutable std::map<std::string, std::string> userData;
 	
 	TexPart bg;
 	static SpriteBatch *spriteBatch;
@@ -89,6 +89,7 @@ public:
 	Control *GetParent();
 	virtual void AddChild(Control *control);
 	virtual void RemoveChild(Control *control);
+	virtual void RemoveAllChildren();
 	int GetChildrenCount() const;
 	Control* GetChild(int index);
 	
@@ -155,22 +156,6 @@ public:
 	virtual void Update(float time, float ms);
 	virtual void Draw(float time, float ms);
 	
-	template <typename T>
-	void SetUserData(const std::string &name, const T &value)
-	{
-		unsigned char *valCopy = new unsigned char[sizeof(T)];
-		memcpy(valCopy, &value, sizeof(T));
-		userData[name] = valCopy;
-	}
-	
-	template <typename T>
-	bool GetUserData(const std::string &name, T &value) const
-	{
-		std::map<std::string, unsigned char*>::iterator it = userData.find(name);
-		if (it == userData.end())
-			return false;
-		
-		memcpy(&value, it ->second, sizeof(T));
-		return true;
-	}
+	void SetUserData(const std::string &name, const std::string& value);
+	std::string GetUserData(const std::string &name) const;
 };

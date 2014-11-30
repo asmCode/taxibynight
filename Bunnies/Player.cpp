@@ -201,7 +201,10 @@ void Player::AddCar(const std::string& carId)
 	CarData carData = GlobalSettings::GetCarById(carId);
 
 	Car* car = new Car(carData, 0, 0, 0, std::vector<DecalData>());
+	car->SetDefaultDecal();
 	m_cars.push_back(car);
+
+	car->AddObserver(this);
 
 	Save();
 }
@@ -341,5 +344,17 @@ void Player::LoadCars(XMLNode* node)
 		car->SetDecal(activeDecal);
 
 		m_cars.push_back(car);
+
+		car->AddObserver(this);
 	}
+}
+
+void Player::AddedDecal(Car* car, const std::string& decalId)
+{
+	Save();
+}
+
+void Player::ChangedDecal(Car* car, const std::string& decalId)
+{
+	Save();
 }

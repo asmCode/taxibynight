@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CardId.h"
+#include "CarObserver.h"
 #include <string>
 #include <vector>
 
@@ -9,7 +10,7 @@ class Experience;
 class Car;
 class XMLNode;
 
-class Player
+class Player : public CarObserver
 {
 public:
 	static Player *Instance;
@@ -65,6 +66,9 @@ private:
 	void NotifyLevelChanged();
 	void NotifySoftMoneyChanged();
 	void NotifyHardMoneyChanged();
+
+	void AddedDecal(Car* car, const std::string& decalId);
+	void ChangedDecal(Car* car, const std::string& decalId);
 
 	void LoadCars(XMLNode* node);
 };

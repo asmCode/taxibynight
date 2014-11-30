@@ -31,4 +31,5 @@
 	<StatusBar name="status_bar" />
 	<CarDealerPanel name="car_dealer_panel" />
 	<CarPartsPanel name="car_parts_panel" />
+	<DecalsPanel name="decals_panel" />
 </Panel>

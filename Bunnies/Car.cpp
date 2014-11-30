@@ -191,6 +191,19 @@ void Car::AddObserver(CarObserver* carObserver)
 	m_observers.push_back(carObserver);
 }
 
+void Car::SetDefaultDecal()
+{
+	if (m_carData.Decals.size() == 0)
+		return;
+
+	std::string decalId = m_carData.Decals[0].Id;
+
+	if (!HasDecal(decalId))
+		AddDecal(m_carData.GetDecalData(decalId));
+
+	SetDecal(m_carData.Decals[0].Id);
+}
+
 void Car::NotifyUpgraded(const std::string& upgradeId)
 {
 	for (uint32_t i = 0; i < m_observers.size(); i++)

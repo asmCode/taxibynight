@@ -114,6 +114,7 @@
     <ClInclude Include="Bunnies\CustomControlFactory.h" />
     <ClInclude Include="Bunnies\CustomControlsDefinitions.h" />
     <ClInclude Include="Bunnies\DecalId.h" />
+    <ClInclude Include="Bunnies\DecalsPanelController.h" />
     <ClInclude Include="Bunnies\DummyAnalytics.h" />
     <ClInclude Include="Bunnies\Effects\DiffLightEffect.h" />
     <ClInclude Include="Bunnies\Experience.h" />
@@ -293,6 +294,7 @@
     <ClCompile Include="Bunnies\ControlAnimationTarget.cpp" />
     <ClCompile Include="Bunnies\CustomControlsDefinitions.cpp" />
     <ClCompile Include="Bunnies\DecalId.cpp" />
+    <ClCompile Include="Bunnies\DecalsPanelController.cpp" />
     <ClCompile Include="Bunnies\DummyAnalytics.cpp" />
     <ClCompile Include="Bunnies\Effects\DiffLightEffect.cpp" />
     <ClCompile Include="Bunnies\Experience.cpp" />

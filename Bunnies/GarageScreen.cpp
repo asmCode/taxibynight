@@ -5,6 +5,7 @@
 #include "GameController.h"
 #include "CarDealerPanelController.h"
 #include "CarPartsPanelController.h"
+#include "DecalsPanelController.h"
 #include "Environment.h"
 #include "Gui/StatusBar.h"
 #include "ControlAnimation.h"
@@ -18,6 +19,8 @@ GarageScreen::GarageScreen(GameController *gameController) :
 	m_carPartsButton(NULL),
 	m_carPaintButton(NULL),
 	m_carDealerPanelController(NULL),
+	m_carPartsPanelController(NULL),
+	m_decalsPanelController(NULL),
 	m_viewAnim(NULL),
 	m_statusBar(NULL)
 {
@@ -43,6 +46,11 @@ bool GarageScreen::InitResources()
 	assert(carPartsPanel != NULL);
 	m_carPartsPanelController = new CarPartsPanelController(m_gameController, carPartsPanel);
 	m_carPartsPanelController->InitResources();
+
+	Control* decalsPanel = m_garageView->FindChild("decals_panel");
+	assert(decalsPanel != NULL);
+	m_decalsPanelController = new DecalsPanelController(m_gameController, decalsPanel);
+	m_decalsPanelController->InitResources();
 
 	m_carDealerButton = dynamic_cast<Control*>(m_garageView->FindChild("car_dealer"));
 	assert(m_carDealerButton != NULL);
@@ -125,11 +133,17 @@ void GarageScreen::Clicked(Control *control, uint32_t x, uint32_t y)
 		SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Button);
 		ShowCarPartsPanel();
 	}
+	else if (control == m_carPaintButton)
+	{
+		SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Button);
+		ShowDecalsPanel();
+	}
 }
 
 void GarageScreen::ShowCarDealerPanel()
 {
 	m_carPartsPanelController->SetActive(false);
+	m_decalsPanelController->SetActive(false);
 
 	m_carDealerPanelController->SetActive(true);
 	m_carDealerPanelController->Enter();
@@ -138,7 +152,17 @@ void GarageScreen::ShowCarDealerPanel()
 void GarageScreen::ShowCarPartsPanel()
 {
 	m_carDealerPanelController->SetActive(false);
+	m_decalsPanelController->SetActive(false);
 
 	m_carPartsPanelController->SetActive(true);
 	m_carPartsPanelController->Enter();
+}
+
+void GarageScreen::ShowDecalsPanel()
+{
+	m_carDealerPanelController->SetActive(false);
+	m_carPartsPanelController->SetActive(false);
+
+	m_decalsPanelController->SetActive(true);
+	m_decalsPanelController->Enter();
 }

@@ -40,6 +40,7 @@ public:
 
 	void AddDecal(DecalData decalData);
 	void SetDecal(const std::string& decalId);
+	void SetDefaultDecal();
 	DecalData GetDecal(const std::string& decalId) const;
 	std::string GetActiveDecalId() const;
 	float GetActiveDecalBonus() const;
