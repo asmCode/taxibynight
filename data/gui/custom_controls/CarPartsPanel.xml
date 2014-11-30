@@ -1,13 +1,4 @@
-<Panel name="" fill="true">
-	<Image image="town" tmp_fill="wypelnij" align="top" width="650" height="495"/>
-	
-	<AnimButton name="back_btn" align="top-left" margin_left="0" margin_top="0" width="160" height="40">
-		<Sprite atlas_name="atlas" sprite_name="left_board" fill="true" />
-		<Label font="fenix_18" color="0;0;0" text="back" align="center" />
-	</AnimButton>
-	
-	<StatusBar name="status_bar" />
-	
+<Panel name="" fill="true">	
 	<Panel align="bottom-right" width="576" height="409" rotate="-0.2">
 		<Sprite atlas_name="atlas" sprite_name="big_board" />
 		<Panel align="center" width="450" height="300" >

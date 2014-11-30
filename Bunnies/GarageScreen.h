@@ -8,6 +8,7 @@ class StatusBar;
 class Control;
 class ControlAnimation;
 class CarDealerPanelController;
+class CarPartsPanelController;
 
 class GarageScreen :
 	public IScreen,
@@ -33,12 +34,14 @@ private:
 	Control* m_carPaintButton;
 
 	CarDealerPanelController* m_carDealerPanelController;
+	CarPartsPanelController* m_carPartsPanelController;
 
 	ControlAnimation* m_viewAnim;
 
 	StatusBar* m_statusBar;
 
 	void ShowCarDealerPanel();
+	void ShowCarPartsPanel();
 
 	void HandlePress(int pointId, const sm::Vec2 &point);
 	void HandleRelease(int pointId, const sm::Vec2 &point);

@@ -1,4 +1,4 @@
-#include "CarPartsScreen.h"
+#include "CarPartsPanelController.h"
 #include "Inflater.h"
 #include "InterfaceProvider.h"
 #include "Car.h"
@@ -8,19 +8,17 @@
 #include "GameController.h"
 #include "Environment.h"
 #include "Gui/ProgressControl.h"
-#include "Gui/StatusBar.h"
 #include <Audio/SoundManager.h>
 #include <Graphics/SpriteBatch.h>
 #include <Utils/Log.h>
 #include <Utils/StringUtils.h>
 
-CarPartsScreen::CarPartsScreen(GameController *gameController) :
+CarPartsPanelController::CarPartsPanelController(GameController *gameController, Control* view) :
 	m_gameController(gameController),
-	m_backButton(NULL),
+	m_view(view),
 	m_speedProgress(NULL),
 	m_accProgress(NULL),
 	m_tiresProgress(NULL),
-	m_statusBar(NULL),
 	m_buySpeedButton(NULL),
 	m_buyAccButton(NULL),
 	m_buyTiresButton(NULL),
@@ -30,19 +28,13 @@ CarPartsScreen::CarPartsScreen(GameController *gameController) :
 {
 }
 
-CarPartsScreen::~CarPartsScreen(void)
+CarPartsPanelController::~CarPartsPanelController(void)
 {
 }
 
-bool CarPartsScreen::InitResources()
+bool CarPartsPanelController::InitResources()
 {
 	std::string basePath = TaxiGame::Environment::GetInstance()->GetBasePath();
-
-	m_view = Inflater::Inflate(basePath + "data/gui/CarPartsPanel.xml");
-	assert(m_view != NULL);
-
-	m_backButton = dynamic_cast<Control*>(m_view->FindChild("back_btn"));
-	assert(m_backButton != NULL);
 
 	m_speedProgress = dynamic_cast<ProgressControl*>(m_view->FindChild("speed"));
 	assert(m_speedProgress != NULL);
@@ -65,10 +57,6 @@ bool CarPartsScreen::InitResources()
 	m_tiresPrice = dynamic_cast<Label*>(m_view->FindChild("tires_price"));
 	assert(m_tiresPrice != NULL);
 
-	m_statusBar = dynamic_cast<StatusBar*>(m_view->FindChild("status_bar"));
-	assert(m_statusBar != NULL);
-
-	ObsCast(IControlEventsObserver, m_backButton)->AddObserver(this);
 	ObsCast(IControlEventsObserver, m_buySpeedButton)->AddObserver(this);
 	ObsCast(IControlEventsObserver, m_buyAccButton)->AddObserver(this);
 	ObsCast(IControlEventsObserver, m_buyTiresButton)->AddObserver(this);
@@ -76,7 +64,7 @@ bool CarPartsScreen::InitResources()
 	return true;
 }
 
-bool CarPartsScreen::ReleaseResources()
+bool CarPartsPanelController::ReleaseResources()
 {
 	if (m_view != NULL)
 		delete m_view;
@@ -84,34 +72,34 @@ bool CarPartsScreen::ReleaseResources()
 	return true;
 }
 
-void CarPartsScreen::Draw(float time, float seconds)
+void CarPartsPanelController::Draw(float time, float seconds)
 {
 	InterfaceProvider::GetSpriteBatch()->Begin();
 	m_view->Draw(time, seconds);
 	InterfaceProvider::GetSpriteBatch()->End();
 }
 
-void CarPartsScreen::Update(float time, float seconds)
+void CarPartsPanelController::Update(float time, float seconds)
 {
 	m_view->Update(time, seconds);
 }
 
-void CarPartsScreen::HandlePress(int pointId, const sm::Vec2 &point)
+void CarPartsPanelController::HandlePress(int pointId, const sm::Vec2 &point)
 {
 	m_view->HandlePress(pointId, point);
 }
 
-void CarPartsScreen::HandleRelease(int pointId, const sm::Vec2 &point)
+void CarPartsPanelController::HandleRelease(int pointId, const sm::Vec2 &point)
 {
 	m_view->HandleRelease(pointId, point);
 }
 
-void CarPartsScreen::HandleMove(int pointId, const sm::Vec2 &point)
+void CarPartsPanelController::HandleMove(int pointId, const sm::Vec2 &point)
 {
 	m_view->HandleMove(pointId, point);
 }
 
-void CarPartsScreen::Enter()
+void CarPartsPanelController::Enter()
 {
 	m_activeCar = Player::Instance->GetActiveCar();
 	if (m_activeCar == NULL)
@@ -122,14 +110,14 @@ void CarPartsScreen::Enter()
 	RefreshView();
 }
 
-void CarPartsScreen::Clicked(Control *control, uint32_t x, uint32_t y)
+void CarPartsPanelController::SetActive(bool active)
 {
-	if (control == m_backButton)
-	{
-		SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Button);
-		m_gameController->ShowGarageScreen();
-	}
-	else if (control == m_buySpeedButton)
+	m_view->SetVisible(active);
+}
+
+void CarPartsPanelController::Clicked(Control *control, uint32_t x, uint32_t y)
+{
+	if (control == m_buySpeedButton)
 	{
 		SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Button);
 		Upgrade(UpgradeId::Speed);
@@ -146,14 +134,14 @@ void CarPartsScreen::Clicked(Control *control, uint32_t x, uint32_t y)
 	}
 }
 
-void CarPartsScreen::RefreshView()
+void CarPartsPanelController::RefreshView()
 {
 	RefreshUpgradeProgress(UpgradeId::Speed, m_speedProgress, m_speedPrice);
 	RefreshUpgradeProgress(UpgradeId::Acc, m_accProgress, m_accPrice);
 	RefreshUpgradeProgress(UpgradeId::Tires, m_tiresProgress, m_tiresPrice);
 }
 
-void CarPartsScreen::RefreshUpgradeProgress(
+void CarPartsPanelController::RefreshUpgradeProgress(
 	const std::string& upgradeId,
 	ProgressControl* progressControl,
 	Label* upgradePrice)
@@ -185,7 +173,7 @@ void CarPartsScreen::RefreshUpgradeProgress(
 	}
 }
 
-void CarPartsScreen::Upgrade(const std::string& upgradeId)
+void CarPartsPanelController::Upgrade(const std::string& upgradeId)
 {
 	if (m_activeCar == NULL)
 	{
@@ -205,7 +193,7 @@ void CarPartsScreen::Upgrade(const std::string& upgradeId)
 	Player::Instance->SetSoftMoney(Player::Instance->GetSoftMoney() - softPrice);
 }
 
-void CarPartsScreen::Upgraded(Car* car, const std::string& upgradeId)
+void CarPartsPanelController::Upgraded(Car* car, const std::string& upgradeId)
 {
 	RefreshView();
 }

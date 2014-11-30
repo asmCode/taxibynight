@@ -10,7 +10,6 @@
 #include "LeaderboardScreen.h"
 #include "GarageScreen.h"
 #include "Atlas.h"
-#include "CarPartsScreen.h"
 #include "CustomControlsDefinitions.h"
 #include "SpritesMap.h"
 #include "Player.h"
@@ -192,10 +191,6 @@ bool GameController::Initialize(ISystemUtils *systemUtils, IServiceProvider* ser
 	m_garageScreen = new GarageScreen(this);
 	if (!m_garageScreen->InitResources())
 		return false;
-
-	m_carPartsScreen = new CarPartsScreen(this);
-	if (!m_carPartsScreen->InitResources())
-		return false;
 	
 	PlayerStats playerStats;
 
@@ -300,13 +295,6 @@ void GameController::ShowGarageScreen()
 {
 	m_activeScreen->Leave();
 	m_activeScreen = m_garageScreen;
-	m_activeScreen->Enter();
-}
-
-void GameController::ShowCarPartsScreen()
-{
-	m_activeScreen->Leave();
-	m_activeScreen = m_carPartsScreen;
 	m_activeScreen->Enter();
 }
 

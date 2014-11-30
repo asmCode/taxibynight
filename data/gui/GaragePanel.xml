@@ -29,6 +29,6 @@
 	</Panel>
 	
 	<StatusBar name="status_bar" />
-	
 	<CarDealerPanel name="car_dealer_panel" />
+	<CarPartsPanel name="car_parts_panel" />
 </Panel>

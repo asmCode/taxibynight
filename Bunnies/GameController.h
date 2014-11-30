@@ -17,7 +17,6 @@ class SummaryScreen;
 class LeaderboardScreen;
 class GarageScreen;
 class CarDealerScreen;
-class CarPartsScreen;
 class Content;
 class IServiceProvider;
 
@@ -48,7 +47,6 @@ public:
 
 	void ShowGameScreen();
 	void ShowGarageScreen();
-	void ShowCarPartsScreen();
 	void ShowLeaderboard();
 	void ShowMainMenuScreen();
 	void ShowIntroScreen();
@@ -68,7 +66,6 @@ private:
 	LeaderboardScreen *m_leaderboardScreen;
 	GarageScreen *m_garageScreen;
 	CarDealerScreen *m_carDealerScreen;
-	CarPartsScreen* m_carPartsScreen;
 	IntroScreen *m_introScreen;
 
 	IGraphicsEngine *m_graphicsEngine;

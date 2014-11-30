@@ -1,8 +1,8 @@
 #pragma once
 
-#include "IScreen.h"
 #include "IControlEventsObserver.h"
 #include "CarObserver.h"
+#include <Math/Vec2.h>
 
 class GameController;
 class ProgressControl;
@@ -11,14 +11,13 @@ class Control;
 class Label;
 class Car;
 
-class CarPartsScreen :
-	public IScreen,
+class CarPartsPanelController :
 	public IControlEventsObserver,
 	public CarObserver
 {
 public:
-	CarPartsScreen(GameController *gameController);
-	~CarPartsScreen(void);
+	CarPartsPanelController(GameController *gameController, Control* view);
+	~CarPartsPanelController(void);
 
 	bool InitResources();
 	bool ReleaseResources();
@@ -26,12 +25,13 @@ public:
 	void Draw(float time, float seconds);
 	void Update(float time, float seconds);
 
+	void Enter();
+	void SetActive(bool active);
+
 private:
 	GameController *m_gameController;
 
 	Control *m_view;
-
-	Control* m_backButton;
 
 	Control* m_buySpeedButton;
 	Control* m_buyAccButton;
@@ -44,8 +44,6 @@ private:
 	ProgressControl* m_speedProgress;
 	ProgressControl* m_accProgress;
 	ProgressControl* m_tiresProgress;
-
-	StatusBar* m_statusBar;
 
 	Car* m_activeCar;
 
@@ -62,8 +60,6 @@ private:
 	void HandleMove(int pointId, const sm::Vec2 &point);
 
 	void Clicked(Control *control, uint32_t x, uint32_t y);
-
-	void Enter();
 
 	void Upgraded(Car* car, const std::string& upgradeId);
 };

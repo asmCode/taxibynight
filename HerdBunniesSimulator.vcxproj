@@ -105,7 +105,7 @@
     <ClInclude Include="Bunnies\CarDealerPanelController.h" />
     <ClInclude Include="Bunnies\CardId.h" />
     <ClInclude Include="Bunnies\CarObserver.h" />
-    <ClInclude Include="Bunnies\CarPartsScreen.h" />
+    <ClInclude Include="Bunnies\CarPartsPanelController.h" />
     <ClInclude Include="Bunnies\ComicsScreen.h" />
     <ClInclude Include="Bunnies\ControlAnimation.h" />
     <ClInclude Include="Bunnies\ControlAnimationVector4Curve.h" />
@@ -285,7 +285,7 @@
     <ClCompile Include="Bunnies\Car.cpp" />
     <ClCompile Include="Bunnies\CarDealerPanelController.cpp" />
     <ClCompile Include="Bunnies\CardId.cpp" />
-    <ClCompile Include="Bunnies\CarPartsScreen.cpp" />
+    <ClCompile Include="Bunnies\CarPartsPanelController.cpp" />
     <ClCompile Include="Bunnies\ComicsScreen.cpp" />
     <ClCompile Include="Bunnies\ControlAnimation.cpp" />
     <ClCompile Include="Bunnies\ControlAnimationVector4Curve.cpp" />
