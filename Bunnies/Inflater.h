@@ -8,7 +8,7 @@ class XMLNode;
 class Inflater
 {	
 public:
-	static Control* Inflate(const std::string &xml);
+	static Control* Inflate(const std::string &xml, bool fromCode = false);
 
 private:
 	static Control* LoadImageControl(XMLNode *node, const std::string &name);
@@ -20,6 +20,7 @@ private:
 	static Control* LoadPanelControl(XMLNode *node, const std::string &name);
 	static Control* LoadStatusBar(XMLNode *node, const std::string &name);
 	static Control* LoadProgressBar(XMLNode *node, const std::string &name);
+	static Control* LoadCustomControl(XMLNode *node, const std::string &type, const std::string &name);
 	static Control* LoadNode(XMLNode *node);
 	static void LoadLayout(XMLNode *node, Control *control);
 };

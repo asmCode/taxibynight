@@ -48,7 +48,6 @@ public:
 
 	void ShowGameScreen();
 	void ShowGarageScreen();
-	void ShowCarDealerScreen();
 	void ShowCarPartsScreen();
 	void ShowLeaderboard();
 	void ShowMainMenuScreen();

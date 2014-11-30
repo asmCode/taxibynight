@@ -29,6 +29,8 @@
 	</Panel>
 	
 	<StatusBar name="status_bar" />
+	
+	<CarDealerPanel name="car_dealer_panel" />
 
 	<Panel align="bottom-right" width="576" height="409" rotate="-0.2">
 		<Sprite atlas_name="atlas" sprite_name="big_board" />
@@ -48,12 +50,4 @@
 			</Panel>
 		</Panel>
 	</Panel>
-	
-<!--
-	<Grid align="top-left" margin_left="40" margin_top="150" >
-		<AnimButton name="car_dealer" align="top-left" margin_top="0" width="128" height="128" image="car_dealer_button" image_pushed="car_dealer_button" />
-		<AnimButton name="car_parts" align="top-left" margin_top="0" width="128" height="128" image="car_parts_button" image_pushed="car_parts_button" />
-		<AnimButton name="car_paint" align="top-left" margin_top="0" width="128" height="128" image="car_paint_button" image_pushed="car_paint_button" />
-	</Grid>
--->
 </Panel>

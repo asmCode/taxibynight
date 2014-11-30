@@ -251,6 +251,11 @@ std::string Control::GetName() const
 	return m_name;
 }
 
+void Control::SetName(const std::string& name)
+{
+	m_name = name;
+}
+
 //void Control::HandleTapGesture(const sm::Vec2 &point)
 //{
 //	if (!visible || !enabled)

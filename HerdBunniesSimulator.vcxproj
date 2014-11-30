@@ -101,7 +101,8 @@
     <ClInclude Include="Bunnies\Bonuses\BonusType.h" />
     <ClInclude Include="Bunnies\Camera.h" />
     <ClInclude Include="Bunnies\Car.h" />
-    <ClInclude Include="Bunnies\CarDealerScreen.h" />
+    <ClInclude Include="Bunnies\CarDealerPanelFactory.h" />
+    <ClInclude Include="Bunnies\CarDealerPanelController.h" />
     <ClInclude Include="Bunnies\CardId.h" />
     <ClInclude Include="Bunnies\CarObserver.h" />
     <ClInclude Include="Bunnies\CarPartsScreen.h" />
@@ -110,6 +111,8 @@
     <ClInclude Include="Bunnies\ControlAnimationVector4Curve.h" />
     <ClInclude Include="Bunnies\ControlAnimationFloatCurve.h" />
     <ClInclude Include="Bunnies\ControlAnimationTarget.h" />
+    <ClInclude Include="Bunnies\CustomControlFactory.h" />
+    <ClInclude Include="Bunnies\CustomControlsDefinitions.h" />
     <ClInclude Include="Bunnies\DecalId.h" />
     <ClInclude Include="Bunnies\DummyAnalytics.h" />
     <ClInclude Include="Bunnies\Effects\DiffLightEffect.h" />
@@ -125,6 +128,7 @@
     <ClInclude Include="Bunnies\Gui\ProgressControl.h" />
     <ClInclude Include="Bunnies\Gui\StatusBar.h" />
     <ClInclude Include="Bunnies\HttpCommunication.h" />
+    <ClInclude Include="Bunnies\ICustomControl.h" />
     <ClInclude Include="Bunnies\IntroScreen.h" />
     <ClInclude Include="Bunnies\Leaderboard.h" />
     <ClInclude Include="Bunnies\LeaderboardScreen.h" />
@@ -279,7 +283,7 @@
     <ClCompile Include="Bunnies\Bonuses\BonusStreetSymbol.cpp" />
     <ClCompile Include="Bunnies\Camera.cpp" />
     <ClCompile Include="Bunnies\Car.cpp" />
-    <ClCompile Include="Bunnies\CarDealerScreen.cpp" />
+    <ClCompile Include="Bunnies\CarDealerPanelController.cpp" />
     <ClCompile Include="Bunnies\CardId.cpp" />
     <ClCompile Include="Bunnies\CarPartsScreen.cpp" />
     <ClCompile Include="Bunnies\ComicsScreen.cpp" />
@@ -287,6 +291,7 @@
     <ClCompile Include="Bunnies\ControlAnimationVector4Curve.cpp" />
     <ClCompile Include="Bunnies\ControlAnimationFloatCurve.cpp" />
     <ClCompile Include="Bunnies\ControlAnimationTarget.cpp" />
+    <ClCompile Include="Bunnies\CustomControlsDefinitions.cpp" />
     <ClCompile Include="Bunnies\DecalId.cpp" />
     <ClCompile Include="Bunnies\DummyAnalytics.cpp" />
     <ClCompile Include="Bunnies\Effects\DiffLightEffect.cpp" />

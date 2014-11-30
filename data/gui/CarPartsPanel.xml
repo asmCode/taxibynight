@@ -1,7 +1,8 @@
 <Panel name="" fill="true">
 	<Image image="town" tmp_fill="wypelnij" align="top" width="650" height="495"/>
 	
-	<AnimButton name="back_btn" align="top-left" margin_left="0" margin_top="0" width="160" height="40" image="uni_button" image_pushed="uni_button_down">
+	<AnimButton name="back_btn" align="top-left" margin_left="0" margin_top="0" width="160" height="40">
+		<Sprite atlas_name="atlas" sprite_name="left_board" fill="true" />
 		<Label font="fenix_18" color="0;0;0" text="back" align="center" />
 	</AnimButton>
 	
@@ -17,15 +18,18 @@
 		</Panel>
 		
 		<Panel align="top-right" width="200"  height="160">
-			<AnimButton name="buy_speed_btn" align="top-right" margin_left="0" margin_top="0" width="160" height="40" image="uni_button" image_pushed="uni_button_down">
+			<AnimButton name="buy_speed_btn" align="top-right" margin_left="0" margin_top="0" width="160" height="40">
+				<Sprite atlas_name="atlas" sprite_name="left_board" fill="true" />
 				<Label name="speed_price" font="fenix_18" color="0;0;0" text="100" align="center-left" />
 				<Image image="money_soft_icon" align="center-right" width="45" height="55" />
 			</AnimButton>
-			<AnimButton name="buy_acc_btn" align="top-right" margin_left="0" margin_top="50" width="160" height="40" image="uni_button" image_pushed="uni_button_down">
+			<AnimButton name="buy_acc_btn" align="top-right" margin_left="0" margin_top="50" width="160" height="40">
+				<Sprite atlas_name="atlas" sprite_name="left_board" fill="true" />
 				<Label name="acc_price" font="fenix_18" color="0;0;0" text="100" align="center-left" />
 				<Image image="money_soft_icon" align="center-right" width="45" height="55" />
 			</AnimButton>
-			<AnimButton name="buy_tires_btn" align="top-right" margin_left="0" margin_top="100" width="160" height="40" image="uni_button" image_pushed="uni_button_down">
+			<AnimButton name="buy_tires_btn" align="top-right" margin_left="0" margin_top="100" width="160" height="40">
+				<Sprite atlas_name="atlas" sprite_name="left_board" fill="true" />
 				<Label name="tires_price" font="fenix_18" color="0;0;0" text="100" align="center-left" />
 				<Image image="money_soft_icon" align="center-right" width="45" height="55" />
 			</AnimButton>

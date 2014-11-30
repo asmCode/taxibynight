@@ -8,6 +8,7 @@ SpriteBatch *InterfaceProvider::m_spriteBatch;
 SpritesMap* InterfaceProvider::m_spritesMap;
 InterfaceProvider::FontsMap InterfaceProvider::m_fonts;
 InterfaceProvider::AtlasesMap InterfaceProvider::m_atlases;
+CustomControlsDefinitions* InterfaceProvider::CustomControlsDefinitions;
 
 IGraphicsEngine* InterfaceProvider::GetGraphicsEngine()
 {

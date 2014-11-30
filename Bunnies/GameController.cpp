@@ -10,8 +10,8 @@
 #include "LeaderboardScreen.h"
 #include "GarageScreen.h"
 #include "Atlas.h"
-#include "CarDealerScreen.h"
 #include "CarPartsScreen.h"
+#include "CustomControlsDefinitions.h"
 #include "SpritesMap.h"
 #include "Player.h"
 #include "Environment.h"
@@ -105,6 +105,8 @@ bool GameController::InitializeGraphics(const std::string &basePath)
 	InterfaceProvider::m_graphicsEngine = m_graphicsEngine;
 	InterfaceProvider::m_spriteBatch = spriteBatch;
 	InterfaceProvider::m_spritesMap = spritesMap;
+	InterfaceProvider::CustomControlsDefinitions = new CustomControlsDefinitions();
+	InterfaceProvider::CustomControlsDefinitions->LoadControlsFromPath(basePath + "data/gui/custom_controls/");
 	InterfaceProvider::m_fonts["digital_bold_24"] = FontRenderer::LoadFromFile((basePath + "data/fonts/digital_bold_24.xml").c_str(), spriteBatch);
 	InterfaceProvider::m_fonts["fenix_18"] = FontRenderer::LoadFromFile((basePath + "data/fonts/fenix_18.xml").c_str(), spriteBatch);
 	InterfaceProvider::m_fonts["fenix_26"] = FontRenderer::LoadFromFile((basePath + "data/fonts/fenix_26.xml").c_str(), spriteBatch);
@@ -193,10 +195,6 @@ bool GameController::Initialize(ISystemUtils *systemUtils, IServiceProvider* ser
 
 	m_carPartsScreen = new CarPartsScreen(this);
 	if (!m_carPartsScreen->InitResources())
-		return false;
-
-	m_carDealerScreen = new CarDealerScreen(this);
-	if (!m_carDealerScreen->InitResources())
 		return false;
 	
 	PlayerStats playerStats;
@@ -302,13 +300,6 @@ void GameController::ShowGarageScreen()
 {
 	m_activeScreen->Leave();
 	m_activeScreen = m_garageScreen;
-	m_activeScreen->Enter();
-}
-
-void GameController::ShowCarDealerScreen()
-{
-	m_activeScreen->Leave();
-	m_activeScreen = m_carDealerScreen;
 	m_activeScreen->Enter();
 }
 

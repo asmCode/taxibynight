@@ -3,6 +3,7 @@
 #include "InterfaceProvider.h"
 #include "Control.h"
 #include "GameController.h"
+#include "CarDealerPanelController.h"
 #include "Environment.h"
 #include "Gui/StatusBar.h"
 #include "ControlAnimation.h"
@@ -15,6 +16,7 @@ GarageScreen::GarageScreen(GameController *gameController) :
 	m_carDealerButton(NULL),
 	m_carPartsButton(NULL),
 	m_carPaintButton(NULL),
+	m_carDealerPanelController(NULL),
 	m_viewAnim(NULL),
 	m_statusBar(NULL)
 {
@@ -30,6 +32,11 @@ bool GarageScreen::InitResources()
 
 	m_garageView = Inflater::Inflate(basePath + "data/gui/GaragePanel.xml");
 	assert(m_garageView != NULL);
+
+	Control* carDealerPanel = m_garageView->FindChild("car_dealer_panel");
+	assert(carDealerPanel != NULL);
+	m_carDealerPanelController = new CarDealerPanelController(m_gameController, carDealerPanel);
+	m_carDealerPanelController->InitResources();
 
 	m_carDealerButton = dynamic_cast<Control*>(m_garageView->FindChild("car_dealer"));
 	assert(m_carDealerButton != NULL);
@@ -96,6 +103,7 @@ void GarageScreen::HandleMove(int pointId, const sm::Vec2 &point)
 
 void GarageScreen::Enter()
 {
+	m_carDealerPanelController->SetActive(false);
 }
 
 void GarageScreen::Clicked(Control *control, uint32_t x, uint32_t y)
@@ -103,11 +111,17 @@ void GarageScreen::Clicked(Control *control, uint32_t x, uint32_t y)
 	if (control == m_carDealerButton)
 	{
 		SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Button);
-		m_gameController->ShowCarDealerScreen();
+		ShowCarDealerPanel();
 	}
 	else if (control == m_carPartsButton)
 	{
 		SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Button);
 		m_gameController->ShowCarPartsScreen();
 	}
+}
+
+void GarageScreen::ShowCarDealerPanel()
+{
+	m_carDealerPanelController->SetActive(true);
+	m_carDealerPanelController->Enter();
 }

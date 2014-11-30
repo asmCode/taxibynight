@@ -4,6 +4,7 @@
 #include "AnimButton.h"
 #include "ProgressBar.h"
 #include "Atlas.h"
+#include "CustomControlsDefinitions.h"
 #include "Gui/GridPanel.h"
 #include "Gui/StatusBar.h"
 #include "../Bunnies/Gui/ProgressControl.h"
@@ -17,9 +18,9 @@
 #include <assert.h>
 
 
-Control* Inflater::Inflate(const std::string &xml)
+Control* Inflater::Inflate(const std::string &xml, bool fromCode)
 {
-	XMLNode *rootNode = XMLLoader::LoadFromFile(xml);
+	XMLNode *rootNode = fromCode ? XMLLoader::LoadFromString(xml) : XMLLoader::LoadFromFile(xml);
 	if (rootNode == NULL)
 		return NULL;
 
@@ -55,6 +56,10 @@ Control* Inflater::LoadNode(XMLNode *node)
 		control = LoadLabelControl(node, name);
 	else if (type == "ProgressBar")
 		control = LoadProgressBar(node, name);
+	else
+	{
+		control = LoadCustomControl(node, type, name);
+	}
 
 	if (control == NULL)
 		return NULL;
@@ -182,6 +187,19 @@ Control* Inflater::LoadProgressBar(XMLNode *node, const std::string &name)
 	assert(fg != NULL);
 
 	return new ProgressBar(name, *bg, *fg);
+}
+
+Control* Inflater::LoadCustomControl(XMLNode *node, const std::string &type, const std::string &name)
+{
+	std::string code = InterfaceProvider::CustomControlsDefinitions->GetControlDefinition(type);
+	assert(code.size() > 0);
+
+	Control* control = Inflate(code, true);
+
+	if (control != NULL)
+		control->SetName(name);
+
+	return control;
 }
 
 Control* Inflater::LoadAnimButtonControl(XMLNode *node, const std::string &name)

@@ -127,6 +127,7 @@ public:
 	Control* FindChild(const std::string &name);
 
 	std::string GetName() const;
+	void SetName(const std::string& name);
 	
 	void SetBackground(TexPart texPart);
 

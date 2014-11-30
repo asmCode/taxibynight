@@ -1,7 +1,7 @@
 #pragma once
 
-#include "IScreen.h"
 #include "IControlEventsObserver.h"
+#include <Math/Vec2.h>
 #include <string>
 
 class GameController;
@@ -10,13 +10,12 @@ class Control;
 class Label;
 class Car;
 
-class CarDealerScreen :
-	public IScreen,
+class CarDealerPanelController :
 	public IControlEventsObserver
 {
 public:
-	CarDealerScreen(GameController *gameController);
-	~CarDealerScreen(void);
+	CarDealerPanelController(GameController *gameController, Control* view);
+	~CarDealerPanelController(void);
 
 	bool InitResources();
 	bool ReleaseResources();
@@ -25,13 +24,13 @@ public:
 	void Update(float time, float seconds);
 
 	void RefreshView();
+	void Enter();
+	void SetActive(bool active);
 
 private:
 	GameController *m_gameController;
 
 	Control *m_view;
-
-	Control* m_backButton;
 
 	Control* m_car1Button;
 	Control* m_car2Button;
@@ -68,7 +67,5 @@ private:
 	void HandleMove(int pointId, const sm::Vec2 &point);
 
 	void Clicked(Control *control, uint32_t x, uint32_t y);
-
-	void Enter();
 };
 

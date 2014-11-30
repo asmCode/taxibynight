@@ -1,4 +1,4 @@
-#include "CarDealerScreen.h"
+#include "CarDealerPanelController.h"
 #include "Inflater.h"
 #include "Car.h"
 #include "Player.h"
@@ -13,9 +13,9 @@
 #include <Utils/StringUtils.h>
 #include <Audio/SoundManager.h>
 
-CarDealerScreen::CarDealerScreen(GameController *gameController) :
+CarDealerPanelController::CarDealerPanelController(GameController *gameController, Control* view) :
 	m_gameController(gameController),
-	m_backButton(NULL),
+	m_view(view),
 	m_car1Button(NULL),
 	m_car2Button(NULL),
 	m_car3Button(NULL),
@@ -35,19 +35,13 @@ CarDealerScreen::CarDealerScreen(GameController *gameController) :
 {
 }
 
-CarDealerScreen::~CarDealerScreen(void)
+CarDealerPanelController::~CarDealerPanelController(void)
 {
 }
 
-bool CarDealerScreen::InitResources()
+bool CarDealerPanelController::InitResources()
 {
 	std::string basePath = TaxiGame::Environment::GetInstance()->GetBasePath();
-
-	m_view = Inflater::Inflate(basePath + "data/gui/CarDealerPanel.xml");
-	assert(m_view != NULL);
-
-	m_backButton = dynamic_cast<Control*>(m_view->FindChild("back_btn"));
-	assert(m_backButton != NULL);
 
 	m_car1Button = dynamic_cast<Control*>(m_view->FindChild("car_1_button"));
 	assert(m_car1Button != NULL);
@@ -86,7 +80,6 @@ bool CarDealerScreen::InitResources()
 	m_tiresProgress = dynamic_cast<ProgressControl*>(m_view->FindChild("tires"));
 	assert(m_tiresProgress != NULL);
 
-	ObsCast(IControlEventsObserver, m_backButton)->AddObserver(this);
 	ObsCast(IControlEventsObserver, m_car1Button)->AddObserver(this);
 	ObsCast(IControlEventsObserver, m_car2Button)->AddObserver(this);
 	ObsCast(IControlEventsObserver, m_car3Button)->AddObserver(this);
@@ -97,7 +90,7 @@ bool CarDealerScreen::InitResources()
 	return true;
 }
 
-bool CarDealerScreen::ReleaseResources()
+bool CarDealerPanelController::ReleaseResources()
 {
 	if (m_view != NULL)
 		delete m_view;
@@ -105,19 +98,19 @@ bool CarDealerScreen::ReleaseResources()
 	return true;
 }
 
-void CarDealerScreen::Draw(float time, float seconds)
+void CarDealerPanelController::Draw(float time, float seconds)
 {
 	InterfaceProvider::GetSpriteBatch()->Begin();
 	m_view->Draw(time, seconds);
 	InterfaceProvider::GetSpriteBatch()->End();
 }
 
-void CarDealerScreen::Update(float time, float seconds)
+void CarDealerPanelController::Update(float time, float seconds)
 {
 	m_view->Update(time, seconds);
 }
 
-void CarDealerScreen::SelectCar(const std::string& carId)
+void CarDealerPanelController::SelectCar(const std::string& carId)
 {
 	if (carId == m_selectedCarId)
 		return;
@@ -125,7 +118,7 @@ void CarDealerScreen::SelectCar(const std::string& carId)
 	m_selectedCarId = carId;
 }
 
-void CarDealerScreen::BuyCar(const std::string& carId, bool buyForHard)
+void CarDealerPanelController::BuyCar(const std::string& carId, bool buyForHard)
 {
 	assert(Player::Instance->HasCar(carId) == false);
 	if (Player::Instance->HasCar(carId))
@@ -163,7 +156,7 @@ void CarDealerScreen::BuyCar(const std::string& carId, bool buyForHard)
 	ActivateCar(carId);
 }
 
-void CarDealerScreen::ActivateCar(const std::string& carId)
+void CarDealerPanelController::ActivateCar(const std::string& carId)
 {
 	assert(Player::Instance->HasCar(carId));
 	if (!Player::Instance->HasCar(carId))
@@ -176,14 +169,14 @@ void CarDealerScreen::ActivateCar(const std::string& carId)
 	RefreshView();
 }
 
-void CarDealerScreen::HideAllActionPanels()
+void CarDealerPanelController::HideAllActionPanels()
 {
 	m_buyPanel->SetVisible(false);
 	m_activatePanel->SetVisible(false);
 	m_alreadyHavePanel->SetVisible(false);
 }
 
-void CarDealerScreen::RefreshCarStatistics()
+void CarDealerPanelController::RefreshCarStatistics()
 {
 	if (Player::Instance->HasCar(m_selectedCarId))
 	{
@@ -216,7 +209,7 @@ void CarDealerScreen::RefreshCarStatistics()
 	}
 }
 
-void CarDealerScreen::RefreshView()
+void CarDealerPanelController::RefreshView()
 {
 	CarData carData = GlobalSettings::GetCarById(m_selectedCarId);
 
@@ -259,22 +252,22 @@ void CarDealerScreen::RefreshView()
 	RefreshCarStatistics();
 }
 
-void CarDealerScreen::HandlePress(int pointId, const sm::Vec2 &point)
+void CarDealerPanelController::HandlePress(int pointId, const sm::Vec2 &point)
 {
 	m_view->HandlePress(pointId, point);
 }
 
-void CarDealerScreen::HandleRelease(int pointId, const sm::Vec2 &point)
+void CarDealerPanelController::HandleRelease(int pointId, const sm::Vec2 &point)
 {
 	m_view->HandleRelease(pointId, point);
 }
 
-void CarDealerScreen::HandleMove(int pointId, const sm::Vec2 &point)
+void CarDealerPanelController::HandleMove(int pointId, const sm::Vec2 &point)
 {
 	m_view->HandleMove(pointId, point);
 }
 
-void CarDealerScreen::Enter()
+void CarDealerPanelController::Enter()
 {
 	m_activeCar = Player::Instance->GetActiveCar();
 	
@@ -282,14 +275,14 @@ void CarDealerScreen::Enter()
 	RefreshView();
 }
 
-void CarDealerScreen::Clicked(Control *control, uint32_t x, uint32_t y)
+void CarDealerPanelController::SetActive(bool active)
 {
-	if (control == m_backButton)
-	{
-		SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Button);
-		m_gameController->ShowGarageScreen();
-	}
-	else if (control == m_car1Button)
+	m_view->SetVisible(active);
+}
+
+void CarDealerPanelController::Clicked(Control *control, uint32_t x, uint32_t y)
+{
+	if (control == m_car1Button)
 	{
 		SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Button);
 		SelectCar(CarId::Car1);

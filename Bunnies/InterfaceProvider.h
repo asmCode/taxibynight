@@ -9,6 +9,7 @@ class SpriteBatch;
 class SpritesMap;
 class FontRenderer;
 class Atlas;
+class CustomControlsDefinitions;
 
 class InterfaceProvider
 {
@@ -24,6 +25,7 @@ public:
 	static FontRenderer* GetFontRenderer(const std::string &fontName);
 
 	static AtlasesMap m_atlases;
+	static CustomControlsDefinitions* CustomControlsDefinitions;
 
 private:
 	typedef std::map<std::string, FontRenderer*> FontsMap;

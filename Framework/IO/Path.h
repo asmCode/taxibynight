@@ -113,6 +113,19 @@ public:
 		return true;
 	}
 
+	static std::string GetFileContentAsText(const char* fileName)
+	{
+		uint8_t* data;
+		uint32_t size;
+		GetFileContent(fileName, data, size);
+
+		std::string text((char*)data, size);
+
+		delete[] data;
+
+		return text;
+	}
+
 	static bool WriteTextFile(const char *fileName, const std::string &text)
 	{
 		std::ofstream file(fileName);
