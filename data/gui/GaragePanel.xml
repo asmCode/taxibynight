@@ -31,23 +31,4 @@
 	<StatusBar name="status_bar" />
 	
 	<CarDealerPanel name="car_dealer_panel" />
-
-	<Panel align="bottom-right" width="576" height="409" rotate="-0.2">
-		<Sprite atlas_name="atlas" sprite_name="big_board" />
-		<Panel align="center" width="450" height="300" >
-			<!--<Image image="ib_logo" fill="true" />-->
-			<Panel width="420" height="100" align="top-left">
-				<Sprite atlas_name="atlas" sprite_name="power" align="left" />
-				<ProgressControl width="280" height="100" margin_left="136" align="left" max_values="7" atlas_name="atlas" active_sprite_name="progress_stripe_glow" inactive_sprite_name="progress_stripe" />
-			</Panel>
-			<Panel width="420" height="100" align="left">
-				<Sprite atlas_name="atlas" sprite_name="acc" align="left" />
-				<ProgressControl width="280" height="100" margin_left="136" align="left" max_values="7" atlas_name="atlas" active_sprite_name="progress_stripe_glow" inactive_sprite_name="progress_stripe" />
-			</Panel>
-			<Panel width="420" height="100" align="bottom-left">
-				<Sprite atlas_name="atlas" sprite_name="tires" align="left" />
-				<ProgressControl width="280" height="100" margin_left="136" align="left" max_values="7" atlas_name="atlas" active_sprite_name="progress_stripe_glow" inactive_sprite_name="progress_stripe" />
-			</Panel>
-		</Panel>
-	</Panel>
 </Panel>

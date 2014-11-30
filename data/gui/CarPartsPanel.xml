@@ -8,27 +8,36 @@
 	
 	<StatusBar name="status_bar" />
 	
-	<Panel align="bottom-right" width="700" height="160">
-		<Image image="money_bg" fill="true" />
-		
-		<Panel align="top-left" width="500" height="160">
-			<ProgressControl name="speed" title="Speed" max_values="6" align="top-left" margin_top="0" atlas_name="atlas" active_sprite_name="progress_stripe_glow" inactive_sprite_name="progress_stripe" />
-			<ProgressControl name="acc" title="Acceleration" max_values="6" align="top-left" margin_top="50" atlas_name="atlas" active_sprite_name="progress_stripe_glow" inactive_sprite_name="progress_stripe" />
-			<ProgressControl name="tires" title="Tires" max_values="6" align="top-left" margin_top="100" atlas_name="atlas" active_sprite_name="progress_stripe_glow" inactive_sprite_name="progress_stripe" />
+	<Panel align="bottom-right" width="576" height="409" rotate="-0.2">
+		<Sprite atlas_name="atlas" sprite_name="big_board" />
+		<Panel align="center" width="450" height="300" >
+			<!--<Image image="ib_logo" fill="true" />-->
+			<Panel width="420" height="100" align="top-left">
+				<Sprite atlas_name="atlas" sprite_name="power" align="left" />
+				<ProgressControl name="speed" width="280" height="100" margin_left="136" align="left" max_values="7" atlas_name="atlas" active_sprite_name="progress_stripe_glow" inactive_sprite_name="progress_stripe" />
+			</Panel>
+			<Panel width="420" height="100" align="left">
+				<Sprite atlas_name="atlas" sprite_name="acc" align="left" />
+				<ProgressControl name="acc" width="280" height="100" margin_left="136" align="left" max_values="7" atlas_name="atlas" active_sprite_name="progress_stripe_glow" inactive_sprite_name="progress_stripe" />
+			</Panel>
+			<Panel width="420" height="100" align="bottom-left">
+				<Sprite atlas_name="atlas" sprite_name="tires" align="left" />
+				<ProgressControl name="tires" width="280" height="100" margin_left="136" align="left" max_values="7" atlas_name="atlas" active_sprite_name="progress_stripe_glow" inactive_sprite_name="progress_stripe" />
+			</Panel>
 		</Panel>
 		
-		<Panel align="top-right" width="200"  height="160">
-			<AnimButton name="buy_speed_btn" align="top-right" margin_left="0" margin_top="0" width="160" height="40">
+		<Panel align="right" width="200"  height="300">
+			<AnimButton name="buy_speed_btn" align="top-right" margin_left="0" margin_top="0" width="160" height="100">
 				<Sprite atlas_name="atlas" sprite_name="left_board" fill="true" />
 				<Label name="speed_price" font="fenix_18" color="0;0;0" text="100" align="center-left" />
 				<Image image="money_soft_icon" align="center-right" width="45" height="55" />
 			</AnimButton>
-			<AnimButton name="buy_acc_btn" align="top-right" margin_left="0" margin_top="50" width="160" height="40">
+			<AnimButton name="buy_acc_btn" align="right" margin_left="0" margin_top="50" width="160" height="100">
 				<Sprite atlas_name="atlas" sprite_name="left_board" fill="true" />
 				<Label name="acc_price" font="fenix_18" color="0;0;0" text="100" align="center-left" />
 				<Image image="money_soft_icon" align="center-right" width="45" height="55" />
 			</AnimButton>
-			<AnimButton name="buy_tires_btn" align="top-right" margin_left="0" margin_top="100" width="160" height="40">
+			<AnimButton name="buy_tires_btn" align="bottom-right" margin_left="0" margin_top="100" width="160" height="100">
 				<Sprite atlas_name="atlas" sprite_name="left_board" fill="true" />
 				<Label name="tires_price" font="fenix_18" color="0;0;0" text="100" align="center-left" />
 				<Image image="money_soft_icon" align="center-right" width="45" height="55" />
