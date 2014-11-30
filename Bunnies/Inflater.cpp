@@ -228,14 +228,14 @@ Control* Inflater::LoadGridControl(XMLNode *node, const std::string &name)
 
 Control* Inflater::LoadProgressControl(XMLNode *node, const std::string &name)
 {
-	std::string title;
+	std::string activeSpriteName = node->GetAttribAsString("active_sprite_name");
+	std::string inactiveSpriteName = node->GetAttribAsString("inactive_sprite_name");
+	std::string atlasName = node->GetAttribAsString("atlas_name");
 	int maxValues = 0;
 
-	if (node->HasAttrib("title"))
-		title = node->GetAttribAsString("title");
 	if (node->HasAttrib("max_values"))
 		maxValues = node->GetAttribAsInt32("max_values");
 
-	return new ProgressControl(name, title, maxValues);
+	return new ProgressControl(name, maxValues, atlasName, activeSpriteName, inactiveSpriteName);
 }
 

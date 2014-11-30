@@ -11,9 +11,9 @@
 		<Image image="money_bg" fill="true" />
 		
 		<Panel align="top-left" width="500" height="160">
-			<ProgressControl name="speed" title="Speed" max_values="6" align="top-left" margin_top="0" />
-			<ProgressControl name="acc" title="Acceleration" max_values="6" align="top-left" margin_top="50" />
-			<ProgressControl name="tires" title="Tires" max_values="6" align="top-left" margin_top="100" />
+			<ProgressControl name="speed" title="Speed" max_values="6" align="top-left" margin_top="0" atlas_name="atlas" active_sprite_name="progress_stripe_glow" inactive_sprite_name="progress_stripe" />
+			<ProgressControl name="acc" title="Acceleration" max_values="6" align="top-left" margin_top="50" atlas_name="atlas" active_sprite_name="progress_stripe_glow" inactive_sprite_name="progress_stripe" />
+			<ProgressControl name="tires" title="Tires" max_values="6" align="top-left" margin_top="100" atlas_name="atlas" active_sprite_name="progress_stripe_glow" inactive_sprite_name="progress_stripe" />
 		</Panel>
 		
 		<Panel align="top-right" width="200"  height="160">

@@ -9,7 +9,12 @@ class GridPanel;
 class ProgressControl : public Control
 {
 public:
-	ProgressControl(const std::string& name, const std::string& title, int maxValue);
+	ProgressControl(
+		const std::string& name,
+		int maxValue,
+		const std::string& atlasName,
+		const std::string& activeSpriteName,
+		const std::string& inactiveSpriteName);
 
 	void SetTitle(const std::string& title);
 	std::string GetTitle() const;
@@ -27,11 +32,13 @@ private:
 
 	Control *m_view;
 
-	Label* m_nameLabel;
 	GridPanel* m_cellsGridOn;
 	GridPanel* m_cellsGridOff;
 
 	Control **m_fillCells;
+
+	TexPart *m_cellOnTexPart;
+	TexPart *m_cellOffTexPart;
 
 	void CreateCells();
 };
