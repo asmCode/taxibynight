@@ -1,5 +1,5 @@
 <Panel name="" fill="true">
-	<Image image="town" tmp_fill="wypelnij" align="top" width="650" height="495"/>
+	<!--<Image image="town" tmp_fill="wypelnij" align="top" width="650" height="495"/>-->
 	
 	<Sprite atlas_name="atlas" sprite_name="upper_board" align="top" margin_top="-60" >
 		<Label font="exo_40" align="top" margin_top="150" text="GARAGE" color="255;181;54" size="1.0" />

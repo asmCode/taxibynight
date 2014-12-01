@@ -62,6 +62,8 @@ void Shader::BindVertexChannel(unsigned channel, const char *name)
 void Shader::SetParameter(const char *name, float val)
 {
 	int uniformParam = glGetUniformLocation(m_programId, name);
+	if (uniformParam == -1)
+		return;
 	assert(uniformParam != -1);
 	
 	glUniform1f(uniformParam, val);
@@ -75,6 +77,8 @@ void Shader::SetParameter(uint32_t location, float val)
 void Shader::SetParameter(const char *name, float val1, float val2, float val3)
 {
 	int uniformParam = glGetUniformLocation(m_programId, name);
+	if (uniformParam == -1)
+		return;
 	assert(uniformParam != -1);
 	
 	glUniform3f(uniformParam, val1, val2, val3);

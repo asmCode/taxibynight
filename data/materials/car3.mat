@@ -1,0 +1,11 @@
+<Material Name="car3">
+	<Param Type="Diffuse" Value="0.588;0.588;0.588" />
+	<Param Type="Specular" Value="0.396;0.396;0.396" />
+	<Param Type="Opacity" Value="1" />
+	<Param Type="Glossiness" Value="0.1" />
+	<Param Type="SpecularLevel" Value="1" />
+	<Textures>
+		<Texture Type="Diffuse" File="car3dec1.png">
+		</Texture>
+	</Textures>
+</Material>

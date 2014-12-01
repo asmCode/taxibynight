@@ -3,6 +3,7 @@
 #include "InterfaceProvider.h"
 #include "Control.h"
 #include "GameController.h"
+#include "GuiCar.h"
 #include "CarDealerPanelController.h"
 #include "CarPartsPanelController.h"
 #include "DecalsPanelController.h"
@@ -22,7 +23,8 @@ GarageScreen::GarageScreen(GameController *gameController) :
 	m_carPartsPanelController(NULL),
 	m_decalsPanelController(NULL),
 	m_viewAnim(NULL),
-	m_statusBar(NULL)
+	m_statusBar(NULL),
+	m_guiCar(NULL)
 {
 }
 
@@ -73,6 +75,8 @@ bool GarageScreen::InitResources()
 	ObsCast(IControlEventsObserver, m_carPartsButton)->AddObserver(this);
 	ObsCast(IControlEventsObserver, m_carPaintButton)->AddObserver(this);
 
+	m_guiCar = new GuiCar();
+
 	return true;
 }
 
@@ -86,6 +90,8 @@ bool GarageScreen::ReleaseResources()
 
 void GarageScreen::Draw(float time, float seconds)
 {
+	m_guiCar->Draw(time, seconds);
+
 	InterfaceProvider::GetSpriteBatch()->Begin();
 	m_garageView->Draw(time, seconds);
 	InterfaceProvider::GetSpriteBatch()->End();

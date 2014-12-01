@@ -10,6 +10,7 @@ class ControlAnimation;
 class CarDealerPanelController;
 class CarPartsPanelController;
 class DecalsPanelController;
+class GuiCar;
 
 class GarageScreen :
 	public IScreen,
@@ -27,6 +28,8 @@ public:
 
 private:
 	GameController *m_gameController;
+
+	GuiCar* m_guiCar;
 
 	Control *m_garageView;
 
