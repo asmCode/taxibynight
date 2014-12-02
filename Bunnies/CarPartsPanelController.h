@@ -1,6 +1,7 @@
 #pragma once
 
 #include "IControlEventsObserver.h"
+#include "IGaragePanel.h"
 #include "CarObserver.h"
 #include <Math/Vec2.h>
 
@@ -12,6 +13,7 @@ class Label;
 class Car;
 
 class CarPartsPanelController :
+	public IGaragePanel,
 	public IControlEventsObserver,
 	public CarObserver
 {

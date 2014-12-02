@@ -2,6 +2,7 @@
 
 #include "IControlEventsObserver.h"
 #include "CarObserver.h"
+#include "IGaragePanel.h"
 #include <Math/Vec2.h>
 #include <string>
 
@@ -11,14 +12,16 @@ class Control;
 class Label;
 class GridPanel;
 class Car;
+class GuiCar;
 class AnimButton;
 
 class DecalsPanelController :
+	public IGaragePanel,
 	public IControlEventsObserver,
 	public CarObserver
 {
 public:
-	DecalsPanelController(GameController *gameController, Control* view);
+	DecalsPanelController(GameController *gameController, Control* view, GuiCar* guiCar);
 	~DecalsPanelController(void);
 
 	bool InitResources();
@@ -29,11 +32,12 @@ public:
 
 	void RefreshView();
 	void Enter();
+	void Leave();
 	void SetActive(bool active);
 
 private:
 	GameController *m_gameController;
-
+	GuiCar* m_guiCar;
 	Control *m_view;
 
 	Control* m_buyPanel;

@@ -125,15 +125,18 @@
     <ClInclude Include="Bunnies\GlobalSettings\UpgradeData.h" />
     <ClInclude Include="Bunnies\GlobalSettings\UpgradeLevelData.h" />
     <ClInclude Include="Bunnies\GuiCar.h" />
+    <ClInclude Include="Bunnies\GuiCarUtils.h" />
     <ClInclude Include="Bunnies\Gui\BonusControl.h" />
     <ClInclude Include="Bunnies\Gui\GridPanel.h" />
     <ClInclude Include="Bunnies\Gui\ProgressControl.h" />
     <ClInclude Include="Bunnies\Gui\StatusBar.h" />
     <ClInclude Include="Bunnies\HttpCommunication.h" />
     <ClInclude Include="Bunnies\ICustomControl.h" />
+    <ClInclude Include="Bunnies\IGaragePanel.h" />
     <ClInclude Include="Bunnies\IntroScreen.h" />
     <ClInclude Include="Bunnies\Leaderboard.h" />
     <ClInclude Include="Bunnies\LeaderboardScreen.h" />
+    <ClInclude Include="Bunnies\MeshUtils.h" />
     <ClInclude Include="Bunnies\PausePanel.h" />
     <ClInclude Include="Bunnies\PlayerObserver.h" />
     <ClInclude Include="Bunnies\Player.h" />
@@ -303,6 +306,7 @@
     <ClCompile Include="Bunnies\GlobalSettings\CarData.cpp" />
     <ClCompile Include="Bunnies\GlobalSettings\GlobalSettings.cpp" />
     <ClCompile Include="Bunnies\GuiCar.cpp" />
+    <ClCompile Include="Bunnies\GuiCarUtils.cpp" />
     <ClCompile Include="Bunnies\Gui\BonusControl.cpp" />
     <ClCompile Include="Bunnies\Gui\GridPanel.cpp" />
     <ClCompile Include="Bunnies\Gui\ProgressControl.cpp" />
@@ -311,6 +315,7 @@
     <ClCompile Include="Bunnies\IntroScreen.cpp" />
     <ClCompile Include="Bunnies\Leaderboard.cpp" />
     <ClCompile Include="Bunnies\LeaderboardScreen.cpp" />
+    <ClCompile Include="Bunnies\MeshUtils.cpp" />
     <ClCompile Include="Bunnies\PausePanel.cpp" />
     <ClCompile Include="Bunnies\Player.cpp" />
     <ClCompile Include="Bunnies\BoxCollider.cpp" />

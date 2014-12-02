@@ -4,17 +4,20 @@
 #include "Player.h"
 #include "InterfaceProvider.h"
 #include "Control.h"
+#include "GuiCar.h"
 #include "Label.h"
 #include "Gui/ProgressControl.h"
 #include "GameController.h"
 #include "Environment.h"
+#include "GuiCarUtils.h"
 #include "GlobalSettings/GlobalSettings.h"
 #include <Graphics/SpriteBatch.h>
 #include <Utils/StringUtils.h>
 #include <Audio/SoundManager.h>
 
-CarDealerPanelController::CarDealerPanelController(GameController *gameController, Control* view) :
+CarDealerPanelController::CarDealerPanelController(GameController *gameController, Control* view, GuiCar* guiCar) :
 	m_gameController(gameController),
+	m_guiCar(guiCar),
 	m_view(view),
 	m_car1Button(NULL),
 	m_car2Button(NULL),
@@ -116,6 +119,11 @@ void CarDealerPanelController::SelectCar(const std::string& carId)
 		return;
 
 	m_selectedCarId = carId;
+
+	ZROB TAK, ZEBY SAMOCHODY KTORE GRACZ POSIADA LADOWALY SIE Z WYBRANYM DECALEM
+
+	//if (Player)
+	GuiCarUtils::LoadCarWithDefaultDecal(m_guiCar, carId);
 }
 
 void CarDealerPanelController::BuyCar(const std::string& carId, bool buyForHard)
@@ -273,6 +281,11 @@ void CarDealerPanelController::Enter()
 	
 	SelectCar(CarId::Car1);
 	RefreshView();
+}
+
+void CarDealerPanelController::Leave()
+{
+	GuiCarUtils::LoadPlayerCar(m_guiCar);
 }
 
 void CarDealerPanelController::SetActive(bool active)

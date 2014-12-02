@@ -1,6 +1,7 @@
 #pragma once
 
 #include "IControlEventsObserver.h"
+#include "IGaragePanel.h"
 #include <Math/Vec2.h>
 #include <string>
 
@@ -9,12 +10,14 @@ class ProgressControl;
 class Control;
 class Label;
 class Car;
+class GuiCar;
 
 class CarDealerPanelController :
+	public IGaragePanel,
 	public IControlEventsObserver
 {
 public:
-	CarDealerPanelController(GameController *gameController, Control* view);
+	CarDealerPanelController(GameController *gameController, Control* view, GuiCar* guiCar);
 	~CarDealerPanelController(void);
 
 	bool InitResources();
@@ -25,11 +28,12 @@ public:
 
 	void RefreshView();
 	void Enter();
+	void Leave();
 	void SetActive(bool active);
 
 private:
 	GameController *m_gameController;
-
+	GuiCar* m_guiCar;
 	Control *m_view;
 
 	Control* m_car1Button;

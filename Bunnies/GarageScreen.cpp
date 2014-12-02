@@ -4,6 +4,8 @@
 #include "Control.h"
 #include "GameController.h"
 #include "GuiCar.h"
+#include "GuiCarUtils.h"
+#include "IGaragePanel.h"
 #include "CarDealerPanelController.h"
 #include "CarPartsPanelController.h"
 #include "DecalsPanelController.h"
@@ -24,7 +26,8 @@ GarageScreen::GarageScreen(GameController *gameController) :
 	m_decalsPanelController(NULL),
 	m_viewAnim(NULL),
 	m_statusBar(NULL),
-	m_guiCar(NULL)
+	m_guiCar(NULL),
+	m_activeGaragePanel(NULL)
 {
 }
 
@@ -36,12 +39,15 @@ bool GarageScreen::InitResources()
 {
 	std::string basePath = TaxiGame::Environment::GetInstance()->GetBasePath();
 
+	m_guiCar = new GuiCar("data/cars/");
+	GuiCarUtils::LoadPlayerCar(m_guiCar);
+
 	m_garageView = Inflater::Inflate(basePath + "data/gui/GaragePanel.xml");
 	assert(m_garageView != NULL);
 
 	Control* carDealerPanel = m_garageView->FindChild("car_dealer_panel");
 	assert(carDealerPanel != NULL);
-	m_carDealerPanelController = new CarDealerPanelController(m_gameController, carDealerPanel);
+	m_carDealerPanelController = new CarDealerPanelController(m_gameController, carDealerPanel, m_guiCar);
 	m_carDealerPanelController->InitResources();
 
 	Control* carPartsPanel = m_garageView->FindChild("car_parts_panel");
@@ -51,8 +57,12 @@ bool GarageScreen::InitResources()
 
 	Control* decalsPanel = m_garageView->FindChild("decals_panel");
 	assert(decalsPanel != NULL);
-	m_decalsPanelController = new DecalsPanelController(m_gameController, decalsPanel);
+	m_decalsPanelController = new DecalsPanelController(m_gameController, decalsPanel, m_guiCar);
 	m_decalsPanelController->InitResources();
+
+	m_carDealerPanelController->SetActive(false);
+	m_carPartsPanelController->SetActive(false);
+	m_decalsPanelController->SetActive(false);
 
 	m_carDealerButton = dynamic_cast<Control*>(m_garageView->FindChild("car_dealer"));
 	assert(m_carDealerButton != NULL);
@@ -74,8 +84,6 @@ bool GarageScreen::InitResources()
 	ObsCast(IControlEventsObserver, m_carDealerButton)->AddObserver(this);
 	ObsCast(IControlEventsObserver, m_carPartsButton)->AddObserver(this);
 	ObsCast(IControlEventsObserver, m_carPaintButton)->AddObserver(this);
-
-	m_guiCar = new GuiCar();
 
 	return true;
 }
@@ -123,8 +131,7 @@ void GarageScreen::HandleMove(int pointId, const sm::Vec2 &point)
 
 void GarageScreen::Enter()
 {
-	m_carDealerPanelController->SetActive(false);
-	m_carPartsPanelController->SetActive(false);
+	ShowPanel(m_carDealerPanelController);
 }
 
 void GarageScreen::Clicked(Control *control, uint32_t x, uint32_t y)
@@ -132,43 +139,36 @@ void GarageScreen::Clicked(Control *control, uint32_t x, uint32_t y)
 	if (control == m_carDealerButton)
 	{
 		SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Button);
-		ShowCarDealerPanel();
+		ShowPanel(m_carDealerPanelController);
 	}
 	else if (control == m_carPartsButton)
 	{
 		SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Button);
-		ShowCarPartsPanel();
+		ShowPanel(m_carPartsPanelController);
 	}
 	else if (control == m_carPaintButton)
 	{
 		SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Button);
-		ShowDecalsPanel();
+		ShowPanel(m_decalsPanelController);
 	}
 }
 
-void GarageScreen::ShowCarDealerPanel()
+void GarageScreen::ShowPanel(IGaragePanel* garagePanel)
 {
-	m_carPartsPanelController->SetActive(false);
-	m_decalsPanelController->SetActive(false);
+	if (m_activeGaragePanel == garagePanel)
+		return;
 
-	m_carDealerPanelController->SetActive(true);
-	m_carDealerPanelController->Enter();
-}
+	if (m_activeGaragePanel != NULL)
+	{
+		m_activeGaragePanel->Leave();
+		m_activeGaragePanel->SetActive(false);
+	}
 
-void GarageScreen::ShowCarPartsPanel()
-{
-	m_carDealerPanelController->SetActive(false);
-	m_decalsPanelController->SetActive(false);
+	m_activeGaragePanel = garagePanel;
 
-	m_carPartsPanelController->SetActive(true);
-	m_carPartsPanelController->Enter();
-}
-
-void GarageScreen::ShowDecalsPanel()
-{
-	m_carDealerPanelController->SetActive(false);
-	m_carPartsPanelController->SetActive(false);
-
-	m_decalsPanelController->SetActive(true);
-	m_decalsPanelController->Enter();
+	if (m_activeGaragePanel != NULL)
+	{
+		m_activeGaragePanel->Enter();
+		m_activeGaragePanel->SetActive(true);
+	}
 }

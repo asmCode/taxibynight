@@ -5,6 +5,8 @@
 #include "Atlas.h"
 #include "InterfaceProvider.h"
 #include "Control.h"
+#include "GuiCar.h"
+#include "GuiCarUtils.h"
 #include "AnimButton.h"
 #include "Label.h"
 #include "Gui/ProgressControl.h"
@@ -17,8 +19,9 @@
 #include <Utils/StringUtils.h>
 #include <Audio/SoundManager.h>
 
-DecalsPanelController::DecalsPanelController(GameController *gameController, Control* view) :
+DecalsPanelController::DecalsPanelController(GameController *gameController, Control* view, GuiCar* guiCar) :
 	m_gameController(gameController),
+	m_guiCar(guiCar),
 	m_view(view),
 	m_buyPanel(NULL),
 	m_activatePanel(NULL),
@@ -93,6 +96,8 @@ void DecalsPanelController::SelectDecal(const std::string& decalId)
 		return;
 
 	m_selectedDecalId = decalId;
+
+	m_guiCar->LoadDecal(decalId);
 }
 
 void DecalsPanelController::BuyDecal(const std::string& decalId, bool buyForHard)
@@ -245,6 +250,11 @@ void DecalsPanelController::Enter()
 	SelectDecal(m_activeCar->GetActiveDecalId());
 	CreateDecalsButtons();
 	RefreshView();
+}
+
+void DecalsPanelController::Leave()
+{
+	GuiCarUtils::LoadPlayerCar(m_guiCar);
 }
 
 void DecalsPanelController::SetActive(bool active)

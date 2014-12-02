@@ -11,6 +11,7 @@ class CarDealerPanelController;
 class CarPartsPanelController;
 class DecalsPanelController;
 class GuiCar;
+class IGaragePanel;
 
 class GarageScreen :
 	public IScreen,
@@ -31,6 +32,8 @@ private:
 
 	GuiCar* m_guiCar;
 
+	IGaragePanel* m_activeGaragePanel;
+
 	Control *m_garageView;
 
 	Control* m_carDealerButton;
@@ -45,9 +48,7 @@ private:
 
 	StatusBar* m_statusBar;
 
-	void ShowCarDealerPanel();
-	void ShowCarPartsPanel();
-	void ShowDecalsPanel();
+	void ShowPanel(IGaragePanel* garagePanel);
 
 	void HandlePress(int pointId, const sm::Vec2 &point);
 	void HandleRelease(int pointId, const sm::Vec2 &point);
