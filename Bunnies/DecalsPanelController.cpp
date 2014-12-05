@@ -243,6 +243,8 @@ void DecalsPanelController::HandleMove(int pointId, const sm::Vec2 &point)
 
 void DecalsPanelController::Enter()
 {
+	m_selectedDecalId = "";
+
 	m_activeCar = Player::Instance->GetActiveCar();
 	if (m_activeCar == NULL)
 		return;
@@ -254,7 +256,7 @@ void DecalsPanelController::Enter()
 
 void DecalsPanelController::Leave()
 {
-	GuiCarUtils::LoadPlayerCar(m_guiCar);
+	GuiCarUtils::LoadPlayerActiveCar(m_guiCar);
 }
 
 void DecalsPanelController::SetActive(bool active)

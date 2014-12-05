@@ -120,10 +120,10 @@ void CarDealerPanelController::SelectCar(const std::string& carId)
 
 	m_selectedCarId = carId;
 
-	ZROB TAK, ZEBY SAMOCHODY KTORE GRACZ POSIADA LADOWALY SIE Z WYBRANYM DECALEM
-
-	//if (Player)
-	GuiCarUtils::LoadCarWithDefaultDecal(m_guiCar, carId);
+	if (Player::Instance->HasCar(carId))
+		GuiCarUtils::LoadPlayerCar(m_guiCar, carId);
+	else 
+		GuiCarUtils::LoadCarWithDefaultDecal(m_guiCar, carId);
 }
 
 void CarDealerPanelController::BuyCar(const std::string& carId, bool buyForHard)
@@ -277,6 +277,7 @@ void CarDealerPanelController::HandleMove(int pointId, const sm::Vec2 &point)
 
 void CarDealerPanelController::Enter()
 {
+	m_selectedCarId = "";
 	m_activeCar = Player::Instance->GetActiveCar();
 	
 	SelectCar(CarId::Car1);
@@ -285,7 +286,7 @@ void CarDealerPanelController::Enter()
 
 void CarDealerPanelController::Leave()
 {
-	GuiCarUtils::LoadPlayerCar(m_guiCar);
+	GuiCarUtils::LoadPlayerActiveCar(m_guiCar);
 }
 
 void CarDealerPanelController::SetActive(bool active)

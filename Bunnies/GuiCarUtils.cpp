@@ -4,9 +4,18 @@
 #include "Player.h"
 #include "GlobalSettings\GlobalSettings.h"
 
-void GuiCarUtils::LoadPlayerCar(GuiCar* guiCar)
+void GuiCarUtils::LoadPlayerActiveCar(GuiCar* guiCar)
 {
 	Car* car = Player::Instance->GetActiveCar();
+	if (car == NULL)
+		return;
+
+	LoadPlayerCar(guiCar, car->GetId());
+}
+
+void GuiCarUtils::LoadPlayerCar(GuiCar* guiCar, const std::string& carId)
+{
+	Car* car = Player::Instance->GetCar(carId);
 	if (car == NULL)
 		return;
 

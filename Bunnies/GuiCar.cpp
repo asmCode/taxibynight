@@ -25,6 +25,7 @@ GuiCar::GuiCar(const std::string& carsPath) :
 	m_decalTexture(NULL),
 	m_shadow(NULL),
 	m_carsPath(carsPath),
+	m_rotationAngle(0.0f),
 	m_show(false)
 {
 	Content *content = InterfaceProvider::GetContent();
@@ -37,7 +38,7 @@ GuiCar::GuiCar(const std::string& carsPath) :
 
 	m_worldMatrix = sm::Matrix::TranslateMatrix(-1, -0.5f, 0);
 
-	m_camera.SetPosition(sm::Vec3(-4, 2, -4));
+	m_camera.SetPosition(sm::Vec3(-4, 2, -5));
 	m_camera.SetLookDirection(m_camera.GetPosition().GetNormalized().GetReversed());
 }
 
@@ -47,6 +48,7 @@ GuiCar::~GuiCar()
 
 void GuiCar::Update(float time, float seconds)
 {
+	m_rotationAngle += seconds * 2.0f;
 }
 
 void GuiCar::Draw(float time, float seconds)
@@ -61,7 +63,7 @@ void GuiCar::Draw(float time, float seconds)
 	DrawingRoutines::SetEyePosition(m_camera.GetPosition());
 	DrawingRoutines::SetViewMatrix(m_camera.GetViewMatrix());
 
-	DrawingRoutines::DrawWithMaterial(m_carModel->m_meshParts, m_worldMatrix);
+	DrawingRoutines::DrawWithMaterial(m_carModel->m_meshParts, m_worldMatrix * sm::Matrix::RotateAxisMatrix(m_rotationAngle, 0, 1, 0));
 
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

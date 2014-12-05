@@ -40,7 +40,7 @@ bool GarageScreen::InitResources()
 	std::string basePath = TaxiGame::Environment::GetInstance()->GetBasePath();
 
 	m_guiCar = new GuiCar("data/cars/");
-	GuiCarUtils::LoadPlayerCar(m_guiCar);
+	GuiCarUtils::LoadPlayerActiveCar(m_guiCar);
 
 	m_garageView = Inflater::Inflate(basePath + "data/gui/GaragePanel.xml");
 	assert(m_garageView != NULL);
@@ -112,6 +112,8 @@ void GarageScreen::Update(float time, float seconds)
 	if (f > 2)
 		m_viewAnim->Update(seconds);
 	m_garageView->Update(time, seconds);
+
+	m_guiCar->Update(time, seconds);
 }
 
 void GarageScreen::HandlePress(int pointId, const sm::Vec2 &point)

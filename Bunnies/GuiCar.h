@@ -41,6 +41,8 @@ private:
 
 	bool m_show;
 
+	float m_rotationAngle;
+
 	sm::Camera m_camera;
 
 	void UnloadCar();
