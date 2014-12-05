@@ -6,6 +6,7 @@
 #include "GuiCar.h"
 #include "GuiCarUtils.h"
 #include "IGaragePanel.h"
+#include <UserInput/Input2.h>
 #include "CarDealerPanelController.h"
 #include "CarPartsPanelController.h"
 #include "DecalsPanelController.h"
@@ -15,6 +16,7 @@
 #include <Graphics/SpriteBatch.h>
 #include <Audio/SoundManager.h>
 
+extern bool GlobalDone;
 
 GarageScreen::GarageScreen(GameController *gameController) :
 	m_gameController(gameController),
@@ -107,6 +109,11 @@ void GarageScreen::Draw(float time, float seconds)
 
 void GarageScreen::Update(float time, float seconds)
 {
+	if (Input2::GetKeyDown(KeyCode_Escape))
+	{
+		GlobalDone = true;
+	}
+
 	static float f = 0.0f;
 	f += seconds;
 	if (f > 2)
