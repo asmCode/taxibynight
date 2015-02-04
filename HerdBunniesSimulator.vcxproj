@@ -101,11 +101,13 @@
     <ClInclude Include="Bunnies\Bonuses\BonusType.h" />
     <ClInclude Include="Bunnies\Camera.h" />
     <ClInclude Include="Bunnies\Car.h" />
+    <ClInclude Include="Bunnies\CarController.h" />
     <ClInclude Include="Bunnies\CarDealerPanelFactory.h" />
     <ClInclude Include="Bunnies\CarDealerPanelController.h" />
     <ClInclude Include="Bunnies\CardId.h" />
     <ClInclude Include="Bunnies\CarObserver.h" />
     <ClInclude Include="Bunnies\CarPartsPanelController.h" />
+    <ClInclude Include="Bunnies\CarPhysics.h" />
     <ClInclude Include="Bunnies\ComicsScreen.h" />
     <ClInclude Include="Bunnies\ControlAnimation.h" />
     <ClInclude Include="Bunnies\ControlAnimationVector4Curve.h" />
@@ -288,9 +290,11 @@
     <ClCompile Include="Bunnies\Bonuses\BonusStreetSymbol.cpp" />
     <ClCompile Include="Bunnies\Camera.cpp" />
     <ClCompile Include="Bunnies\Car.cpp" />
+    <ClCompile Include="Bunnies\CarController.cpp" />
     <ClCompile Include="Bunnies\CarDealerPanelController.cpp" />
     <ClCompile Include="Bunnies\CardId.cpp" />
     <ClCompile Include="Bunnies\CarPartsPanelController.cpp" />
+    <ClCompile Include="Bunnies\CarPhysics.cpp" />
     <ClCompile Include="Bunnies\ComicsScreen.cpp" />
     <ClCompile Include="Bunnies\ControlAnimation.cpp" />
     <ClCompile Include="Bunnies\ControlAnimationVector4Curve.cpp" />

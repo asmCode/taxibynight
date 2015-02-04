@@ -170,6 +170,10 @@ public:
 	{
 		return v >= 0 ? v : -v;
 	}
+	
+	static void FixToZero(sm::Vec3& v);
+	static void FixToZero(float& v);
+	static float LinearDamp(float start, float end, float change);
 
 	static const float PI;
 	static const float PI2;
