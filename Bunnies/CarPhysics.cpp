@@ -89,16 +89,6 @@ void CarPhysics::Update(float seconds)
 	m_acceleration = netForce * (1.0f / m_totalMass);
 	m_velocity += m_acceleration * seconds;
 	m_position += m_velocity * seconds;
-
-	if (m_position.x < -20)
-		m_position.x = 20;
-	if (m_position.x > 20)
-		m_position.x = -20;
-
-	if (m_position.z < -20)
-		m_position.z = 20;
-	if (m_position.z > 20)
-		m_position.z = -20;
 }
 
 void CarPhysics::PushAccelerationPedal(float value)
