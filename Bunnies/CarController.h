@@ -39,7 +39,10 @@ public:
 	void Accelerate(bool press);
 	void Break(bool press);
 
+	float GetSpeed() const;
 	sm::Matrix GetTransform() const;
+	sm::Vec3 GetPosition() const;
+	sm::Vec3 GetDirection() const;
 
 public:
 	CarPhysics* m_carPhysics;

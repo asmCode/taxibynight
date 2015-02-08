@@ -270,13 +270,16 @@ void GameScreen::Update(float time, float seconds)
 //	//m_viewMatrix = m_manCam->GetViewMatrix();
 //	camPosition = m_viewMatrix.GetInversed() * sm::Vec3(0, 0, 0);
 
-	camPosition = taxiPosition - m_taxi->GetDirection() * 2;
+	//camPosition = taxiPosition - m_taxi->GetDirection() * 2;
+	camPosition = taxiPosition + sm::Vec3(0, 0, 4);
 	camPosition.y += 13;
 
-	float fixLook = 3.0f * (m_taxi->m_speed / Taxi::MaxSpeed);
+	// TODO: wczesniej dzielnik byl Taxi::MaxSpeed
+	float fixLook = 3.0f * (m_taxi->GetSpeed() / 30);
 
 	m_camera.SetDestinationPosition(camPosition);
-	m_camera.SetDestinationLookDirection(((taxiPosition + m_taxi->GetDirection() * (3 + fixLook)) - camPosition).GetNormalized());
+	//m_camera.SetDestinationLookDirection(((taxiPosition + m_taxi->GetDirection() * (3 + fixLook)) - camPosition).GetNormalized());
+	m_camera.SetDestinationLookDirection((taxiPosition - camPosition).GetNormalized());
 	//m_camera.SetRoll(-m_taxi->m_wheelsAngle * 0.1f);
 	m_camera.Update(seconds);
 	m_viewMatrix = m_camera.GetViewMatrix();

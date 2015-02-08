@@ -79,9 +79,24 @@ void CarController::Break(bool press)
 	m_isBreakPressed = press;
 }
 
+float CarController::GetSpeed() const
+{
+	return m_carPhysics->GetSpeed();
+}
+
 sm::Matrix CarController::GetTransform() const
 {
 	return m_carPhysics->GetTransform();
+}
+
+sm::Vec3 CarController::GetPosition() const
+{
+	return m_carPhysics->GetPosition();
+}
+
+sm::Vec3 CarController::GetDirection() const
+{
+	return m_carPhysics->GetBodyDirection();
 }
 
 void CarController::UpdatePedals(float deltaTime)

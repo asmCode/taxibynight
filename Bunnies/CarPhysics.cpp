@@ -22,6 +22,7 @@ CarPhysics::CarPhysics() :
 	m_velocityLat(0.0f),
 	m_traction(0.0f)
 {
+	m_position.Set(100, 0, 100);
 }
 
 CarPhysics::~CarPhysics()

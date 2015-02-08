@@ -8,6 +8,7 @@ class Mesh;
 class Texture;
 class Material;
 class BoxCollider;
+class CarController;
 
 class Taxi
 {
@@ -23,8 +24,9 @@ public:
 	void SetTurn(float turnValue);
 	void SetAcceleration(float acc);
 
-	const sm::Vec3& GetPosition() const;
-	const sm::Vec3& GetDirection() const;
+	sm::Vec3 GetPosition() const;
+	sm::Vec3 GetDirection() const;
+	float GetSpeed() const;
 
 	bool IsOccupied() const;
 
@@ -49,12 +51,10 @@ public:
 
 public:
 	static Taxi *m_instance;
-	static float MaxSpeed;
 
 	bool m_isOccupied;
 
-	float m_turnValue;
-	float m_acc;
+	CarController* m_carController;
 
 	Model *m_taxiModel;
 	Model *m_lights;
@@ -71,13 +71,6 @@ public:
 	sm::Vec3 m_boundsBottomRight;
 
 	sm::Vec3 m_passengerTarget;
-	sm::Vec3 m_position;
-	sm::Vec3 m_turnDirection; // normalized
-	sm::Vec3 m_velocity;
-	float m_speed;
-
-	float m_wheelsAngle;
-	sm::Vec3 m_carDirection;
 
 	sm::Vec3 m_baseFrontLeftWheelPosition;
 	sm::Vec3 m_baseFrontRightWheelPosition;
