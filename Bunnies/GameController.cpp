@@ -7,6 +7,8 @@
 #include "SummaryScreen.h"
 #include "ComicsScreen.h"
 #include "IntroScreen.h"
+#include "VectorGraphics.h"
+#include "GraphicsLog.h"
 #include "LeaderboardScreen.h"
 #include "GarageScreen.h"
 #include "Atlas.h"
@@ -30,6 +32,7 @@
 #include <Graphics/Animation.h>
 #include <Graphics/SpriteBatch.h>
 #include <Graphics/FontRenderer.h>
+#include <Graphics/Shader.h>
 #include <Audio/SoundManager.h>
 #include "AdsMnager.h"
 #include <Utils/Log.h>
@@ -74,6 +77,8 @@ bool GameController::InitializeGraphics(const std::string &basePath)
 	m_content->LoadAnimations(basePath + "data/animations/");
 	m_content->LoadMaterials(basePath + "data/materials/");
 	m_content->CombineResources();
+
+	InitializeDebug();
 	
 	Texture *gui01 = m_content->Get<Texture>("gui01");
 	gui01->BindTexture();
@@ -129,6 +134,16 @@ bool GameController::InitializeGraphics(const std::string &basePath)
 	Control::SetSpriteBatch(spriteBatch);
 
 	return true;
+}
+
+void GameController::InitializeDebug()
+{
+	Shader* vgShader = m_content->Get<Shader>("VectorGraphics");
+	assert(vgShader != NULL);
+	vgShader->BindVertexChannel(0, "a_position");
+	vgShader->LinkProgram();
+
+	VectorGraphics::Initialize(vgShader);
 }
 
 bool GameController::Initialize(ISystemUtils *systemUtils, IServiceProvider* serviceProvider)
@@ -215,6 +230,8 @@ void GameController::Draw(float time, float seconds)
 	assert(m_activeScreen != NULL);
 
 	m_activeScreen->Draw(time, seconds);
+
+	GraphicsLog::DrawAndClear();
 }
 
 void GameController::Update(float time, float seconds)

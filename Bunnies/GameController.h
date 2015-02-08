@@ -76,5 +76,7 @@ private:
 	ISystemUtils *m_systemUtils;
 
 	bool InitializeGraphics(const std::string &basePath);
+
+	void InitializeDebug();
 };
 

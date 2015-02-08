@@ -126,6 +126,7 @@
     <ClInclude Include="Bunnies\GlobalSettings\GlobalSettings.h" />
     <ClInclude Include="Bunnies\GlobalSettings\UpgradeData.h" />
     <ClInclude Include="Bunnies\GlobalSettings\UpgradeLevelData.h" />
+    <ClInclude Include="Bunnies\GraphicsLog.h" />
     <ClInclude Include="Bunnies\GuiCar.h" />
     <ClInclude Include="Bunnies\GuiCarUtils.h" />
     <ClInclude Include="Bunnies\Gui\BonusControl.h" />
@@ -183,6 +184,7 @@
     <ClInclude Include="Bunnies\ThrowTrajectory.h" />
     <ClInclude Include="Bunnies\Ticker.h" />
     <ClInclude Include="Bunnies\UpgradeId.h" />
+    <ClInclude Include="Bunnies\VectorGraphics.h" />
     <ClInclude Include="Framework\Ads\AdManagerFactory.h" />
     <ClInclude Include="Framework\Ads\DummyAds.h" />
     <ClInclude Include="Framework\Analytics\AnalyticsEvent.h" />
@@ -309,6 +311,7 @@
     <ClCompile Include="Bunnies\GarageScreen.cpp" />
     <ClCompile Include="Bunnies\GlobalSettings\CarData.cpp" />
     <ClCompile Include="Bunnies\GlobalSettings\GlobalSettings.cpp" />
+    <ClCompile Include="Bunnies\GraphicsLog.cpp" />
     <ClCompile Include="Bunnies\GuiCar.cpp" />
     <ClCompile Include="Bunnies\GuiCarUtils.cpp" />
     <ClCompile Include="Bunnies\Gui\BonusControl.cpp" />
@@ -358,6 +361,7 @@
     <ClCompile Include="Bunnies\ThrowTrajectory.cpp" />
     <ClCompile Include="Bunnies\Ticker.cpp" />
     <ClCompile Include="Bunnies\UpgradeId.cpp" />
+    <ClCompile Include="Bunnies\VectorGraphics.cpp" />
     <ClCompile Include="Ext\tinyxml\tinyxml2.cpp" />
     <ClCompile Include="Framework\Ads\AdManagerFactory.cpp" />
     <ClCompile Include="Framework\Ads\DummyAds.cpp" />

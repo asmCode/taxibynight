@@ -9,6 +9,8 @@
 #include "Camera.h"
 #include "Street.h"
 #include "GameController.h"
+#include "VectorGraphics.h"
+#include "GraphicsLog.h"
 #include "DrawingRoutines.h"
 #include "PausePanel.h"
 #include "Taxi.h"
@@ -318,6 +320,9 @@ void GameScreen::Update(float time, float seconds)
 	DrawingRoutines::SetViewMatrix(m_viewMatrix);
 	DrawingRoutines::SetLightPosition(taxiPosition + sm::Vec3(0, 6, 0));
 	DrawingRoutines::SetEyePosition(camPosition);
+
+	VectorGraphics::SetViewProjMatrix(m_projMatrix * m_viewMatrix);
+	GraphicsLog::AddSegment(taxiPosition, sm::Vec3(0, 0, 0));
 
 	if (m_taxi->IsOccupied())
 	{
