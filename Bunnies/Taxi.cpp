@@ -53,17 +53,6 @@ Taxi::Taxi() :
 	m_antiMagnet = content->Get<Model>("antimagnet");
 	assert(m_antiMagnet != NULL);
 
-	m_carController = new CarController();
-	m_carController->Initialize();
-	m_carController->SetParameters(
-		8.0f * 1000.0f,
-		-1.8f,
-		1.8f,
-		1000.0f,
-		15.0f);
-
-	m_worldMatrix = m_carController->GetTransform();
-
 	m_frontRightWheel = m_taxiModel->FindMesh("wheel_front_right");
 	m_frontLeftWheel = m_taxiModel->FindMesh("wheel_front_left");
 
@@ -88,7 +77,16 @@ Taxi::Taxi() :
 			0, 
 			m_boundsBottomRight.z - m_boundsTopRight.z));
 			
+	m_carController = new CarController();
+	m_carController->Initialize();
+	m_carController->SetParameters(
+		5.0f * 1000.0f,
+		m_baseFrontRightWheelPosition.z,
+		m_baseBackRightWheelPosition.z,
+		1000.0f,
+		20.0f);
 
+	m_worldMatrix = m_carController->GetTransform();
 }
 
 void Taxi::Reset()

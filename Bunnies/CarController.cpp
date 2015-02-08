@@ -3,7 +3,7 @@
 #include <Math/MathUtils.h>
 #include <stddef.h>
 
-float CarController::SteerAngleLimit = MathUtils::PI / 7.0f;
+float CarController::SteerAngleLimit = MathUtils::PI / 8.0f;
 float CarController::SteerSpeed = 1.0f;
 float CarController::SteerBackSpeed = 1.0f;
 

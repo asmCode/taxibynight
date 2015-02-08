@@ -24,13 +24,13 @@ public:
 
 	void SetSteerAngle(float angle);
 
-	const sm::Vec3& GetPosition() const;
+	sm::Vec3 GetPosition() const;
 	sm::Vec3 GetBodyDirection() const;
 	float GetSpeed() const;
 	float GetForwardSpeed() const;
 	float GetSideSpeed() const;
 
-	sm::Matrix GetTransform();
+	sm::Matrix GetTransform() const;
 	
 private:
 	static const float DragConstant;

@@ -4,7 +4,7 @@
 #include <Utils/StringUtils.h>
 #include <assert.h>
 
-const float CarPhysics::DragConstant = 2.0f;
+const float CarPhysics::DragConstant = 6.0f;
 const float CarPhysics::ResistanceConstant = 30.0f * CarPhysics::DragConstant;
 const float CarPhysics::SoftBrakeConstant = 100.0f;
 
@@ -104,9 +104,9 @@ void CarPhysics::SetSteerAngle(float angle)
 	MathUtils::FixToZero(m_steerAngle);
 }
 
-const sm::Vec3& CarPhysics::GetPosition() const
+sm::Vec3 CarPhysics::GetPosition() const
 {
-	return m_position;
+	return GetTransform() * sm::Vec3(0, 0, 0);
 }
 
 sm::Vec3 CarPhysics::GetBodyDirection() const
@@ -132,7 +132,7 @@ float CarPhysics::GetSideSpeed() const
 	return m_velocityLat;
 }
 
-sm::Matrix CarPhysics::GetTransform()
+sm::Matrix CarPhysics::GetTransform() const
 {
 	return
 		sm::Matrix::TranslateMatrix(m_position) *
