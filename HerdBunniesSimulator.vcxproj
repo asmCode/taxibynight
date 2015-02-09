@@ -195,6 +195,10 @@
     <ClInclude Include="Framework\Audio\FModAudioPlayer.h" />
     <ClInclude Include="Framework\Audio\IAudioPlayer.h" />
     <ClInclude Include="Framework\Audio\SoundManager.h" />
+    <ClInclude Include="Framework\Collision\CircleCollider.h" />
+    <ClInclude Include="Framework\Collision\CollisionInfo2d.h" />
+    <ClInclude Include="Framework\Collision\CollisionTester.h" />
+    <ClInclude Include="Framework\Collision\RectCollider.h" />
     <ClInclude Include="Framework\Graphics\Animation.h" />
     <ClInclude Include="Framework\Graphics\OpenglPort.h" />
     <ClInclude Include="Framework\Graphics\AnimationLoader.h" />
@@ -371,6 +375,9 @@
     <ClCompile Include="Framework\Audio\DummyAudioPlayer.cpp" />
     <ClCompile Include="Framework\Audio\FModAudioPlayer.cpp" />
     <ClCompile Include="Framework\Audio\SoundManager.cpp" />
+    <ClCompile Include="Framework\Collision\CircleCollider.cpp" />
+    <ClCompile Include="Framework\Collision\CollisionTester.cpp" />
+    <ClCompile Include="Framework\Collision\RectCollider.cpp" />
     <ClCompile Include="Framework\Graphics\Animation.cpp" />
     <ClCompile Include="Framework\Graphics\AnimationLoader.cpp" />
     <ClCompile Include="Framework\Graphics\BoundingBox.cpp" />

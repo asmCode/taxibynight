@@ -187,7 +187,7 @@ namespace sm
 			y = tx * tsin + ty * tcos;
 		}
 
-		static float Dot(Vec2 &v1, Vec2 &v2)
+		static float Dot(const Vec2 &v1, const Vec2 &v2)
 		{
 			return (v1.x * v2.x) + (v1.y * v2.y);
 		}
