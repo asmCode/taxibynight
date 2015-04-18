@@ -1,6 +1,6 @@
 #include "ImageUtils.h"
 #include <stddef.h>
-#include <memory.h>
+#include <string.h>
 #include <assert.h>
 
 void ImageUtils::FlipVertical(uint8_t *data, uint32_t width, uint32_t height, uint32_t bytesCount)
