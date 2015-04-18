@@ -6,4 +6,7 @@
 #elif __APPLE__
 #import <OpenGLES/ES2/gl.h>
 #import <OpenGLES/ES2/glext.h>
+#elif __ANDROID__
+#include <GLES2/gl2.h>
+#include <GLES2/gl2ext.h>
 #endif
