@@ -14,6 +14,7 @@ FRAMEWORK_GRAPHICS_FILES += TaxiCode/Framework/Graphics/Android/ImageLoader.cpp
 
 FRAMEWORK_IO_FILES := $(wildcard $(LOCAL_PATH)/TaxiCode/Framework/IO/*.cpp)
 FRAMEWORK_IO_FILES := $(FRAMEWORK_IO_FILES:$(LOCAL_PATH)/%=%)
+FRAMEWORK_IO_FILES += TaxiCode/Framework/IO/Android/Path.cpp
 
 FRAMEWORK_UTILS_FILES := $(wildcard $(LOCAL_PATH)/TaxiCode/Framework/Utils/*.cpp)
 FRAMEWORK_UTILS_FILES := $(FRAMEWORK_UTILS_FILES:$(LOCAL_PATH)/%=%)
@@ -24,7 +25,6 @@ FRAMEWORK_XML_FILES := $(FRAMEWORK_XML_FILES:$(LOCAL_PATH)/%=%)
 
 EXT_TINYXML_FILES := $(wildcard $(LOCAL_PATH)/TaxiCode/Ext/tinyxml/*.cpp)
 EXT_TINYXML_FILES := $(EXT_TINYXML_FILES:$(LOCAL_PATH)/%=%)
-
 
 LOCAL_MODULE    := libtaxisoftlaunch
 LOCAL_SRC_FILES := $(ROOT_FILES)
