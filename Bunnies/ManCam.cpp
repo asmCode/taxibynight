@@ -1,3 +1,5 @@
+#ifdef _WIN32
+
 #include "ManCam.h"
 
 ManCam::ManCam()
@@ -172,3 +174,6 @@ float ManCam::GetFocal(float time)
 {
 	return 5.0f;
 }
+
+#endif
+

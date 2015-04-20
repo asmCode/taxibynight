@@ -1,3 +1,5 @@
+#ifdef _WIN32
+
 #pragma once
 
 #include <Windows.h>
@@ -45,3 +47,6 @@ public:
 		return 12000.0f;
 	}
 };
+
+#endif
+

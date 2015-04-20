@@ -9,7 +9,6 @@
 #include <Graphics/Content/Content.h>
 #include <Graphics/SpriteBatch.h>
 #include <UserInput/Input2.h>
-#include <Windows.h>
 
 MainMenuScreen::MainMenuScreen(GameController *gameController) :
 	m_gameController(gameController),
@@ -52,10 +51,13 @@ extern bool GlobalDone;
 
 void MainMenuScreen::Update(float time, float seconds)
 {
-	if (Input2::GetKeyDown(KeyCode_Escape))
+	//TODO: hw back button
+	//if (Input2::GetKeyDown(KeyCode_Escape))
+	if (false)
 	{
 		GlobalDone = true;
-		PostQuitMessage(0);
+		//TODO: tu zrobic jakeis wychodzenie z gry jesli potrzebne (hw back button)
+		//PostQuitMessage(0);
 	}
 
 	m_mainMenuPanel->Update(time, seconds);

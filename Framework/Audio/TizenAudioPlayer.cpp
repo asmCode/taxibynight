@@ -1,3 +1,5 @@
+#ifdef _TIZEN
+
 #include "TizenAudioPlayer.h"
 #include <Utils/Log.h>
 
@@ -63,3 +65,6 @@ void TizenAudioPlayer::SetPitch(float pitch)
 {
 	// not implemented
 }
+
+#endif
+

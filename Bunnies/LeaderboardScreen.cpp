@@ -86,7 +86,9 @@ void LeaderboardScreen::Draw(float time, float seconds)
 
 void LeaderboardScreen::Update(float time, float seconds)
 {
-	if (Input2::GetKeyDown(KeyCode_Escape))
+	//TODO: hw back button
+	//if (Input2::GetKeyDown(KeyCode_Escape))
+	if (false)
 		m_gameController->ShowMainMenuScreen();
 
 	m_leaderboardPanel->Update(time, seconds);

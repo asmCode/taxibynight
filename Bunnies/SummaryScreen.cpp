@@ -45,7 +45,9 @@ void SummaryScreen::Draw(float time, float seconds)
 
 void SummaryScreen::Update(float time, float seconds)
 {
-	if (Input2::GetKeyDown(KeyCode_Escape))
+	//TODO: hw back button
+	//if (Input2::GetKeyDown(KeyCode_Escape))
+	if (false)
 		m_gameController->ShowMainMenuScreen();
 
 	m_summaryPanel->Update(time, seconds);

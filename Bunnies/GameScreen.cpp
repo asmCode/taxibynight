@@ -188,7 +188,9 @@ bool justResumed;
 
 void GameScreen::Update(float time, float seconds)
 {
-	if (!justResumed && !m_isPaused && Input2::GetKeyUp(KeyCode_Escape))
+	//TODO: hw back button
+	//if (!justResumed && !m_isPaused && Input2::GetKeyUp(KeyCode_Escape))
+	if (false)
 	{
 		ShowPause();
 		return;
@@ -210,7 +212,9 @@ void GameScreen::Update(float time, float seconds)
 
 	if (m_isPaused)
 	{
-		if (Input2::GetKeyUp(KeyCode_Escape))
+		//TODO: hw back button
+		//if (Input2::GetKeyUp(KeyCode_Escape))
+		if (false)
 		{
 			justResumed = true;
 			Resume();

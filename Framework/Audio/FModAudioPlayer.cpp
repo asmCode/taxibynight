@@ -1,5 +1,10 @@
 #include "FModAudioPlayer.h"
+
+#ifdef __ANDROID__
+#include <fmod_android/fmod.hpp>
+#else
 #include <fmod/fmod.hpp>
+#endif
 
 bool FModAudioPlayer::m_isInitialized;
 FMOD::System *FModAudioPlayer::m_system;
@@ -44,7 +49,7 @@ bool FModAudioPlayer::LoadFromFile(const std::string& file, bool stereo, bool lo
 
 	result = m_system->createSound(
 		file.c_str(),
-		FMOD_2D | FMOD_HARDWARE | FMOD_LOOP_NORMAL | useStream,
+		FMOD_2D | FMOD_LOOP_NORMAL | useStream,
 		NULL,
 		&m_sound);
 

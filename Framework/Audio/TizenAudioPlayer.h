@@ -1,3 +1,5 @@
+#ifdef _TIZEN
+
 #pragma once
 
 #include "IAudioPlayer.h"
@@ -34,3 +36,6 @@ public:
 private:
 	 Tizen::Media::Player m_player;
 };
+
+#endif
+
