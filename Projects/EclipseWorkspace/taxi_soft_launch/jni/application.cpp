@@ -5,9 +5,18 @@
 
 #include "gl_code.h"
 #include "StorageHelper.h"
+#include "TaxiCode/Bunnies/InfectedBunniesFactory.h"
+#include "TaxiCode/Bunnies/Environment.h"
+#include "TaxiCode/Bunnies/SystemSpecificData/SystemSpecificData.h"
+#include <Graphics/GraphicsEngineFactory.h>
 
 #include <jni.h>
 #include <fstream>
+#include <vector>
+#include <string>
+#include <dirent.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 
 static const char gVertexShader[] = 
     "attribute vec4 vPosition;\n"
@@ -25,24 +34,56 @@ GLuint gvPositionHandle;
 
 void ProcessAsset(AAssetManager* assetManager, const std::string& writablePath)
 {
-	std::string unpackedAssetPath = StorageHelper::UnpackAsset(assetManager, "01.bmp", writablePath);
+	std::vector<std::string> assets;
+	assets.push_back("data/textures/antimagnet.png");
+	assets.push_back("data/textures/blade.png");
+	assets.push_back("data/textures/bonus.png");
+	assets.push_back("data/textures/bonus_blow.png");
+	assets.push_back("data/textures/cabby_carma_diff.png");
+	assets.push_back("data/textures/cabby_diff.png");
+	assets.push_back("data/textures/circle.png");
+	assets.push_back("data/textures/flat_1_diffuse.png");
+	assets.push_back("data/textures/flat_2_diffuse.png");
+	assets.push_back("data/textures/flat_3_diffuse.png");
+	assets.push_back("data/textures/guy.png");
+	assets.push_back("data/textures/lights.png");
+	assets.push_back("data/textures/misc_diffuse.png");
+	assets.push_back("data/textures/shadow_tex.png");
+	assets.push_back("data/textures/street_1_cross.png");
+	assets.push_back("data/textures/street_1_straight.png");
+	assets.push_back("data/textures/street_1_t.png");
+	assets.push_back("data/textures/street_1_turn.png");
+	assets.push_back("data/textures/street_map.png");
+	assets.push_back("data/textures/street_pavement.png");
 
-	std::ifstream file(unpackedAssetPath.c_str(), std::ios::binary);
+	std::string dataPath = writablePath + "/taxi_data/";
+	DIR* dataDir = opendir(dataPath.c_str());
 
-	char data;
-	file.read(&data, 1);
-	LOGI("byte 1: %c", data);
-	file.read(&data, 1);
-	LOGI("byte 2: %c", data);
-	file.read(&data, 1);
-	LOGI("byte 3: %c", data);
+	if (dataDir != NULL)
+		return;
 
-	file.close();
+	mkdir(dataPath.c_str(), S_IRWXU |S_IRWXG| S_IRWXO);
 
+	for (uint32_t i = 0; i < assets.size(); i++)
+		StorageHelper::UnpackAsset(assetManager, assets[i], dataPath);
 }
+
+IGameController* m_game;
 
 bool setupGraphics(AAssetManager* assetManager, const std::string& writablePath, int w, int h)
 {
+	TaxiGame::Environment::GetInstance()->SetBasePath("./");
+	TaxiGame::Environment::GetInstance()->SetWritePath(writablePath);
+
+	TaxiGame::Environment::GetInstance()->SetScreenSize(w, h);
+
+	ProcessAsset(assetManager, writablePath);
+
+	IGraphicsEngine *graphicsEngine = GraphicsEngineFactory::Create();
+	m_game = InfectedBunniesFactory::Create(graphicsEngine);
+	m_game->Initialize(NULL, NULL);
+
+	/*
 	ProcessAsset(assetManager, writablePath);
 
     printGLString("Version", GL_VERSION);
@@ -64,12 +105,15 @@ bool setupGraphics(AAssetManager* assetManager, const std::string& writablePath,
     glViewport(0, 0, w, h);
     checkGlError("glViewport");
     return true;
+    */
 }
 
 const GLfloat gTriangleVertices[] = { 0.0f, 0.5f, -0.5f, -0.5f,
         0.5f, -0.5f };
 
-void renderFrame() {
+void renderFrame()
+{
+	/*
     static float grey;
     grey += 0.01f;
     if (grey > 1.0f) {
@@ -89,4 +133,5 @@ void renderFrame() {
     checkGlError("glEnableVertexAttribArray");
     glDrawArrays(GL_TRIANGLES, 0, 3);
     checkGlError("glDrawArrays");
+    */
 }

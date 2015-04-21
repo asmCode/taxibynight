@@ -1,4 +1,5 @@
 #include "StorageHelper.h"
+#include <IO/Path.h>
 #include <android/asset_manager.h>
 #include <fstream>
 
@@ -7,6 +8,8 @@ std::string StorageHelper::UnpackAsset(
 		const std::string& assetPath,
 		const std::string& writablePath)
 {
+	Path _path(assetPath);
+
 	AAsset* asset = AAssetManager_open(assetManager, assetPath.c_str(), AASSET_MODE_UNKNOWN);
 	if (NULL == asset)
 	{
@@ -18,13 +21,15 @@ std::string StorageHelper::UnpackAsset(
 	AAsset_read (asset, buffer, size);
 	AAsset_close(asset);
 
-	std::ofstream tmpFile((writablePath + "/tmp").c_str(), std::ios::binary);
+	std::string tmpFilePath = writablePath + "/" + _path.GetFilenameExt();
+
+	std::ofstream tmpFile(tmpFilePath.c_str(), std::ios::binary);
 	tmpFile.write(buffer, size);
 	tmpFile.close();
 
 	delete[] buffer;
 
-	return writablePath + "/tmp";
+	return tmpFilePath;
 }
 
 void StorageHelper::DeleteUnpackedAsset(std::string unpackedAssetPath)
