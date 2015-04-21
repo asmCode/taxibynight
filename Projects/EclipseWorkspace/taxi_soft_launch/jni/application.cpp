@@ -141,6 +141,14 @@ void ProcessAsset(AAssetManager* assetManager, const std::string& writablePath)
 		return;
 
 	mkdir(dataPath.c_str(), S_IRWXU |S_IRWXG| S_IRWXO);
+	mkdir((dataPath + "/audio").c_str(), S_IRWXU |S_IRWXG| S_IRWXO);
+	mkdir((dataPath + "/fonts").c_str(), S_IRWXU |S_IRWXG| S_IRWXO);
+	mkdir((dataPath + "/gui").c_str(), S_IRWXU |S_IRWXG| S_IRWXO);
+	mkdir((dataPath + "/materials").c_str(), S_IRWXU |S_IRWXG| S_IRWXO);
+	mkdir((dataPath + "/models").c_str(), S_IRWXU |S_IRWXG| S_IRWXO);
+	mkdir((dataPath + "/shaders").c_str(), S_IRWXU |S_IRWXG| S_IRWXO);
+	mkdir((dataPath + "/textures").c_str(), S_IRWXU |S_IRWXG| S_IRWXO);
+	mkdir((dataPath + "/textures/comics").c_str(), S_IRWXU |S_IRWXG| S_IRWXO);
 
 	for (uint32_t i = 0; i < assets.size(); i++)
 		StorageHelper::UnpackAsset(assetManager, assets[i], dataPath);

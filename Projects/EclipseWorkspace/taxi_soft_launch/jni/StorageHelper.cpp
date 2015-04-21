@@ -21,7 +21,7 @@ std::string StorageHelper::UnpackAsset(
 	AAsset_read (asset, buffer, size);
 	AAsset_close(asset);
 
-	std::string tmpFilePath = writablePath + "/" + _path.GetFilenameExt();
+	std::string tmpFilePath = writablePath + (_path.GetFullPath().c_str() + 5);
 
 	std::ofstream tmpFile(tmpFilePath.c_str(), std::ios::binary);
 	tmpFile.write(buffer, size);
