@@ -15,6 +15,7 @@ IAudioPlayer* AudioPlayerFactory::CreateAudioPlayer(const std::string &file,
 													bool stereo,
 													bool loadIntoMemory)
 {
+	/*
 	IAudioPlayer *player = new FModAudioPlayer();
 	if (player == NULL)
 		return NULL;
@@ -25,6 +26,10 @@ IAudioPlayer* AudioPlayerFactory::CreateAudioPlayer(const std::string &file,
 		return NULL;
 	}
 
+	return player;
+	*/
+
+	IAudioPlayer *player = new DummyAudioPlayer();
 	return player;
 }
 

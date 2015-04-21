@@ -8,6 +8,8 @@ class DummyAudioPlayer : public IAudioPlayer
 public:
 	bool Initialize();
 
+	bool LoadFromFile(const std::string& file, bool stereo, bool loadIntoMemory) {};
+
 	void Play();
 	void Stop();
 	
