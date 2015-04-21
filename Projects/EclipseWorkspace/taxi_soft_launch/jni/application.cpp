@@ -55,6 +55,84 @@ void ProcessAsset(AAssetManager* assetManager, const std::string& writablePath)
 	assets.push_back("data/textures/street_1_turn.png");
 	assets.push_back("data/textures/street_map.png");
 	assets.push_back("data/textures/street_pavement.png");
+	assets.push_back("data/textures/comics/page0.png");
+	assets.push_back("data/textures/comics/page1.png");
+	assets.push_back("data/textures/comics/page2.png");
+
+	assets.push_back("data/shaders/Diff.fpr");
+	assets.push_back("data/shaders/Diff.vpr");
+	assets.push_back("data/shaders/DiffLight.fpr");
+	assets.push_back("data/shaders/DiffLight.vpr");
+	assets.push_back("data/shaders/DiffTex.fpr");
+	assets.push_back("data/shaders/DiffTex.vpr");
+	assets.push_back("data/shaders/Ped.fpr");
+	assets.push_back("data/shaders/Ped.vpr");
+	assets.push_back("data/shaders/sprite.fpr");
+	assets.push_back("data/shaders/sprite.vpr");
+	assets.push_back("data/shaders/Sprite2.fpr");
+	assets.push_back("data/shaders/Sprite2.vpr");
+	assets.push_back("data/shaders/Unlit.fpr");
+	assets.push_back("data/shaders/Unlit.vpr");
+
+	assets.push_back("data/models/antimagnet.geo");
+	assets.push_back("data/models/arrow.geo");
+	assets.push_back("data/models/blade.geo");
+	assets.push_back("data/models/bonus.geo");
+	assets.push_back("data/models/lights.geo");
+	assets.push_back("data/models/passenger.geo");
+	assets.push_back("data/models/ped_shadow.geo");
+	assets.push_back("data/models/skycrapper01.geo");
+	assets.push_back("data/models/skycrapper02.geo");
+	assets.push_back("data/models/skycrapper03.geo");
+	assets.push_back("data/models/street.geo");
+	assets.push_back("data/models/taxi.geo");
+	assets.push_back("data/models/taxi_shadow.geo");
+
+	assets.push_back("data/materials/arrow.mat");
+	assets.push_back("data/materials/blade.mat");
+	assets.push_back("data/materials/bonus.mat");
+	assets.push_back("data/materials/flat_1.mat");
+	assets.push_back("data/materials/flat_2.mat");
+	assets.push_back("data/materials/flat_3.mat");
+	assets.push_back("data/materials/lights.mat");
+	assets.push_back("data/materials/Material #1.mat");
+	assets.push_back("data/materials/passenger.mat");
+	assets.push_back("data/materials/ped.mat");
+	assets.push_back("data/materials/ped_shadow.mat");
+	assets.push_back("data/materials/street.mat");
+	assets.push_back("data/materials/taxi.mat");
+	assets.push_back("data/materials/taxi_shadow.mat");
+
+	assets.push_back("data/gui/BonusControl.xml");
+	assets.push_back("data/gui/gui01.png");
+	assets.push_back("data/gui/gui02.png");
+	assets.push_back("data/gui/HUD.xml");
+	assets.push_back("data/gui/IntroPanel.xml");
+	assets.push_back("data/gui/LeaderboardPanel.xml");
+	assets.push_back("data/gui/MainMenuPanel.xml");
+	assets.push_back("data/gui/PausePanel.xml");
+	assets.push_back("data/gui/SplashScreen.png");
+	assets.push_back("data/gui/SpritesMap.xml");
+	assets.push_back("data/gui/SummaryPanel.xml");
+
+	assets.push_back("data/fonts/digital_bold_24.png");
+	assets.push_back("data/fonts/digital_bold_24.xml");
+	assets.push_back("data/fonts/fenix_18.png");
+	assets.push_back("data/fonts/fenix_18.xml");
+	assets.push_back("data/fonts/fenix_26.png");
+	assets.push_back("data/fonts/fenix_26.xml");
+
+	assets.push_back("data/audio/bonus.mp3");
+	assets.push_back("data/audio/button.mp3");
+	assets.push_back("data/audio/city_ambient.mp3");
+	assets.push_back("data/audio/collision01.mp3");
+	assets.push_back("data/audio/collision02.mp3");
+	assets.push_back("data/audio/collision03.mp3");
+	assets.push_back("data/audio/die.mp3");
+	assets.push_back("data/audio/doors.mp3");
+	assets.push_back("data/audio/engine.mp3");
+	assets.push_back("data/audio/money.mp3");
+	assets.push_back("data/audio/summary.mp3");
 
 	std::string dataPath = writablePath + "/taxi_data/";
 	DIR* dataDir = opendir(dataPath.c_str());
