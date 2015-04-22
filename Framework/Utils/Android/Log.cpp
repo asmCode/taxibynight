@@ -1,7 +1,11 @@
 #include "../Log.h"
+#include <android/log.h>
 #include <sstream>
 #include <time.h>
 #include <stdarg.h>
+
+#define  LOG_TAG    "taxi"
+#define  LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG_TAG,__VA_ARGS__)
 
 bool Log::logThreadName;
 
@@ -50,6 +54,8 @@ void Log::LogT(const char *formatString, ...)
 	
 	UpdateTime();
 	UpdateLog();
+
+	LOGI("%s", logSStream.str().c_str());
 
 	m_fileStream.write(logSStream.str().c_str(), logSStream.str().length());
 	m_fileStream.flush();
