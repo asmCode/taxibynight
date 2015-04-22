@@ -17,9 +17,9 @@ Shader::~Shader()
 Shader* Shader::LoadFromFile(const char *vertexShaderFile,
 							 const char *fragmentShaderFile)
 {
-	printf("compiling shaders:\n");
-	printf("vertex: %s\n", vertexShaderFile);
-	printf("fragment: %s\n", fragmentShaderFile);
+	Log::LogT("compiling shaders:\n");
+	Log::LogT("vertex: %s\n", vertexShaderFile);
+	Log::LogT("fragment: %s\n", fragmentShaderFile);
 	
 	Shader *shader = new Shader();
 	
