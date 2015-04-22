@@ -3,6 +3,7 @@
 #include "../ImageLoader.h"
 #include "Utils/StringUtils.h"
 #include <IO/Path.h>
+#include <LodePNG/lodepng.h>
 #include <string>
 #include <stdint.h>
 #include <stdio.h>
@@ -14,13 +15,10 @@ bool ImageLoader::LoadFromFile(const std::string &path,
 								 uint32_t &height,
 								 uint32_t &bytesCount)
 {
-	width = 64;
-	height = 64;
+	int result = lodepng_decode32_file(&data, &width, &height, path.c_str());
 	bytesCount = 4;
 	
-	data = new uint8_t[width * height * bytesCount];
-	
-	return true;
+	return result == 0;
 }
 
 #endif

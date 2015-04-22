@@ -32,7 +32,7 @@ HUD *HUD::Create(GameScreen *gameScreen)
 	HUD *ret = new HUD();
 	ret->m_gameScreen = gameScreen;
 
-	Control *content = Inflater::Inflate(basePath + "data/gui/HUD.xml");
+	Control *content = Inflater::Inflate(basePath + "gui/HUD.xml");
 
 	ret->AddChild(content);
 

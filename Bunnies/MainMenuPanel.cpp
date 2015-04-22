@@ -21,7 +21,7 @@ MainMenuPanel *MainMenuPanel::Create(GameController *gameController)
 
 	std::string basePath = TaxiGame::Environment::GetInstance()->GetBasePath();
 
-	Control *content = Inflater::Inflate(basePath + "data/gui/MainMenuPanel.xml");
+	Control *content = Inflater::Inflate(basePath + "gui/MainMenuPanel.xml");
 	if (content == NULL)
 		return NULL;
 

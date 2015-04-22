@@ -21,7 +21,7 @@ bool IntroScreen::InitResources()
 {
 	std::string basePath = TaxiGame::Environment::GetInstance()->GetBasePath();
 
-	m_introView = Inflater::Inflate(basePath + "data/gui/IntroPanel.xml");
+	m_introView = Inflater::Inflate(basePath + "gui/IntroPanel.xml");
 	assert(m_introView != NULL);
 
 	m_nextButton = dynamic_cast<Control*>(m_introView->FindChild("next"));

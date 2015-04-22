@@ -21,7 +21,7 @@ PausePanel *PausePanel::Create(GameScreen *gameScreen)
 
 	std::string basePath = TaxiGame::Environment::GetInstance()->GetBasePath();
 
-	Control *content = Inflater::Inflate(basePath + "data/gui/PausePanel.xml");
+	Control *content = Inflater::Inflate(basePath + "gui/PausePanel.xml");
 	if (content == NULL)
 		return NULL;
 

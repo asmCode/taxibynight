@@ -32,7 +32,7 @@ LeaderboardScreen::~LeaderboardScreen(void)
 
 bool LeaderboardScreen::InitResources()
 {
-	m_leaderboardPanel = Inflater::Inflate(TaxiGame::Environment::GetInstance()->GetBasePath() + "data/gui/LeaderboardPanel.xml");
+	m_leaderboardPanel = Inflater::Inflate(TaxiGame::Environment::GetInstance()->GetBasePath() + "gui/LeaderboardPanel.xml");
 
 	if (m_leaderboardPanel == NULL)
 	{

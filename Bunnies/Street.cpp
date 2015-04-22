@@ -49,7 +49,7 @@ Street::Street(PedsManager *pedsManager)
 	m_pavementTexture = content->Get<Texture>("street_pavement");
 	assert(m_pavementTexture != NULL);
 
-	m_streetMap = new StreetMap(TaxiGame::Environment::GetInstance()->GetBasePath() + "data/");
+	m_streetMap = new StreetMap(TaxiGame::Environment::GetInstance()->GetBasePath());
 
 	m_streetPieces[StreetPiece::PieceType_Pavement] = new StreetPiece(
 		StreetPiece::PieceType_Pavement,

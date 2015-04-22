@@ -29,7 +29,7 @@ SummaryPanel *SummaryPanel::Create(GameController *gameController)
 	SummaryPanel *ret = new SummaryPanel();
 	ret->m_gameController = gameController;
 
-	Control *content = Inflater::Inflate(basePath + "data/gui/SummaryPanel.xml");
+	Control *content = Inflater::Inflate(basePath + "gui/SummaryPanel.xml");
 
 	ret->AddChild(content);
 	

@@ -57,13 +57,13 @@ bool GameController::InitializeGraphics(const std::string &basePath)
 
 	m_content = new Content(m_graphicsEngine);
 	InterfaceProvider::m_content = m_content;
-	m_content->LoadTextures(basePath + "data/gui/");
-	m_content->LoadTextures(basePath + "data/textures/");
-	m_content->LoadTextures(basePath + "data/textures/comics/");
-	m_content->LoadShaders(basePath + "data/shaders/");
-	m_content->LoadModels(basePath + "data/models/");
-	m_content->LoadAnimations(basePath + "data/animations/");
-	m_content->LoadMaterials(basePath + "data/materials/");
+	m_content->LoadTextures(basePath + "gui/");
+	m_content->LoadTextures(basePath + "textures/");
+	m_content->LoadTextures(basePath + "textures/comics/");
+	m_content->LoadShaders(basePath + "shaders/");
+	m_content->LoadModels(basePath + "models/");
+	m_content->LoadAnimations(basePath + "animations/");
+	m_content->LoadMaterials(basePath + "materials/");
 	m_content->CombineResources();
 	
 	Texture *gui01 = m_content->Get<Texture>("gui01");
@@ -89,15 +89,15 @@ bool GameController::InitializeGraphics(const std::string &basePath)
 	SpriteBatch *spriteBatch = new SpriteBatch(shader, sm::Matrix::Ortho2DMatrix(0, screenWidth, screenHeight, 0));
 
 	SpritesMap *spritesMap = new SpritesMap();
-	if (!spritesMap->LoadFromFile(basePath + "data/gui/SpritesMap.xml", m_content))
+	if (!spritesMap->LoadFromFile(basePath + "gui/SpritesMap.xml", m_content))
 		return false;
 
 	InterfaceProvider::m_graphicsEngine = m_graphicsEngine;
 	InterfaceProvider::m_spriteBatch = spriteBatch;
 	InterfaceProvider::m_spritesMap = spritesMap;
-	InterfaceProvider::m_fonts["digital_bold_24"] = FontRenderer::LoadFromFile((basePath + "data/fonts/digital_bold_24.xml").c_str(), spriteBatch);
-	InterfaceProvider::m_fonts["fenix_18"] = FontRenderer::LoadFromFile((basePath + "data/fonts/fenix_18.xml").c_str(), spriteBatch);
-	InterfaceProvider::m_fonts["fenix_26"] = FontRenderer::LoadFromFile((basePath + "data/fonts/fenix_26.xml").c_str(), spriteBatch);
+	InterfaceProvider::m_fonts["digital_bold_24"] = FontRenderer::LoadFromFile((basePath + "fonts/digital_bold_24.xml").c_str(), spriteBatch);
+	InterfaceProvider::m_fonts["fenix_18"] = FontRenderer::LoadFromFile((basePath + "fonts/fenix_18.xml").c_str(), spriteBatch);
+	InterfaceProvider::m_fonts["fenix_26"] = FontRenderer::LoadFromFile((basePath + "fonts/fenix_26.xml").c_str(), spriteBatch);
 
 	Control::SetSpriteBatch(spriteBatch);
 
@@ -119,7 +119,7 @@ bool GameController::Initialize(ISystemUtils *systemUtils, IServiceProvider* ser
 
 	std::string basePath = TaxiGame::Environment::GetInstance()->GetBasePath();
 
-	SoundManager::GetInstance()->Initialize(basePath + "data/audio/");
+	SoundManager::GetInstance()->Initialize(basePath + "audio/");
 	SoundManager::GetInstance()->PlayMusic();
 
 	if (!InitializeGraphics(basePath))

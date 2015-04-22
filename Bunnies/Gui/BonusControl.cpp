@@ -12,7 +12,7 @@ BonusControl::BonusControl(Bonus* bonus) :
 	Control(""),
 	m_bonus(bonus)
 {
-	m_view = Inflater::Inflate(TaxiGame::Environment::GetInstance()->GetBasePath() + "data/gui/BonusControl.xml");
+	m_view = Inflater::Inflate(TaxiGame::Environment::GetInstance()->GetBasePath() + "gui/BonusControl.xml");
 
 	SetWidth(m_view->GetWidth());
 	SetHeight(m_view->GetHeight());

@@ -9,6 +9,7 @@
 #include "TaxiCode/Bunnies/Environment.h"
 #include "TaxiCode/Bunnies/SystemSpecificData/SystemSpecificData.h"
 #include <Graphics/GraphicsEngineFactory.h>
+#include <IO/Path.h>
 
 #include <jni.h>
 #include <fstream>
@@ -152,15 +153,22 @@ void ProcessAsset(AAssetManager* assetManager, const std::string& writablePath)
 
 	for (uint32_t i = 0; i < assets.size(); i++)
 		StorageHelper::UnpackAsset(assetManager, assets[i], dataPath);
+
+	std::vector<std::string> files;
+	Path::GetAllFiles(files, dataPath + "gui", "*.xml");
+	int d = 0;
+
+	LOGI("*********** files in %s", (dataPath + "gui").c_str());
+	for (int i = 0; i < files.size(); i++)
+		LOGI("*********** file %s", files[i].c_str());
 }
 
 IGameController* m_game;
 
 bool setupGraphics(AAssetManager* assetManager, const std::string& writablePath, int w, int h)
 {
-	TaxiGame::Environment::GetInstance()->SetBasePath("./");
+	TaxiGame::Environment::GetInstance()->SetBasePath(writablePath + "/taxi_data/");
 	TaxiGame::Environment::GetInstance()->SetWritePath(writablePath);
-
 	TaxiGame::Environment::GetInstance()->SetScreenSize(w, h);
 
 	ProcessAsset(assetManager, writablePath);
@@ -199,25 +207,6 @@ const GLfloat gTriangleVertices[] = { 0.0f, 0.5f, -0.5f, -0.5f,
 
 void renderFrame()
 {
-	/*
-    static float grey;
-    grey += 0.01f;
-    if (grey > 1.0f) {
-        grey = 0.0f;
-    }
-    glClearColor(grey, grey, grey, 1.0f);
-    checkGlError("glClearColor");
-    glClear( GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
-    checkGlError("glClear");
-
-    glUseProgram(gProgram);
-    checkGlError("glUseProgram");
-
-    glVertexAttribPointer(gvPositionHandle, 2, GL_FLOAT, GL_FALSE, 0, gTriangleVertices);
-    checkGlError("glVertexAttribPointer");
-    glEnableVertexAttribArray(gvPositionHandle);
-    checkGlError("glEnableVertexAttribArray");
-    glDrawArrays(GL_TRIANGLES, 0, 3);
-    checkGlError("glDrawArrays");
-    */
+	m_game->Update(0.0f, 0.1f);
+	m_game->Draw(0.0f, 0.1f);
 }
