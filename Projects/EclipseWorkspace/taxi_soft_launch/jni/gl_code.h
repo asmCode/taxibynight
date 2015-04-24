@@ -19,5 +19,3 @@ extern bool setupGraphics(AAssetManager* assetManager, const std::string& writab
 extern void renderFrame();
 extern void printGLString(const char *name, GLenum s);
 extern void checkGlError(const char* op);
-extern GLuint createProgram(const char* pVertexSource, const char* pFragmentSource);
-
