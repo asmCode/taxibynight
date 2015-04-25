@@ -32,6 +32,7 @@ package com.ssg.taxisoftlaunch;
  */
 
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.PixelFormat;
@@ -40,6 +41,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
+import android.view.MotionEvent.PointerCoords;
 
 import javax.microedition.khronos.egl.EGL10;
 import javax.microedition.khronos.egl.EGLConfig;
@@ -86,6 +88,57 @@ class GL2JNIView extends GLSurfaceView {
         m_assetManager = assetManager;
         m_writablePath = context.getFilesDir().getPath();
         init(translucent, depth, stencil);
+    }
+    
+	@Override
+    public boolean onTouchEvent(MotionEvent e)
+    {	
+		/*
+		for (int i = 0; i < e.getPointerCount(); i++)
+		{
+	        int pointId = e.getPointerId(i);
+	
+	        switch (e.getActionIndex())
+	        {
+	            case MotionEvent.ACTION_MOVE:
+	            	GL2JNILib.HandleMove(pointId, e.getX(i), e.getY(i));
+	            	break;
+	        }
+		}
+		*/
+		
+		int actionIndex = e.getActionIndex();
+		int pointId = e.getPointerId(actionIndex);
+		float x = e.getX(actionIndex);
+		float y = e.getY(actionIndex);
+		
+		switch (e.getActionMasked())
+		{
+			case MotionEvent.ACTION_DOWN:
+				GL2JNILib.HandlePress(pointId, x, y);
+				break;
+				
+			case MotionEvent.ACTION_POINTER_DOWN:
+				GL2JNILib.HandlePress(pointId, x, y);
+				break;
+				
+			case MotionEvent.ACTION_UP:
+				GL2JNILib.HandleRelease(pointId, x, y);
+				break;
+				
+			case MotionEvent.ACTION_POINTER_UP:
+				GL2JNILib.HandleRelease(pointId, x, y);
+				break;
+				
+			case MotionEvent.ACTION_MOVE:
+				for (int pointerIndex = 0; pointerIndex < e.getPointerCount(); pointerIndex++)
+				{
+					GL2JNILib.HandleMove(e.getPointerId(pointerIndex), e.getX(pointerIndex), e.getY(pointerIndex));
+				}
+			break;
+		}
+
+        return true;
     }
 
     private void init(boolean translucent, int depth, int stencil) {

@@ -18,18 +18,16 @@ package com.ssg.taxisoftlaunch;
 
 import android.content.res.AssetManager;
 
-// Wrapper for native library
-
-public class GL2JNILib {
-
-     static {
+public class GL2JNILib
+{
+     static
+     {
          System.loadLibrary("taxisoftlaunch");
      }
 
-    /**
-     * @param width the current view width
-     * @param height the current view height
-     */
      public static native void init(AssetManager javaAssetManager, String writablePath, int width, int height);
      public static native void step();
+     public static native void HandlePress(int pointId, float x, float y);
+     public static native void HandleRelease(int pointId, float x, float y);
+     public static native void HandleMove(int pointId, float x, float y);
 }

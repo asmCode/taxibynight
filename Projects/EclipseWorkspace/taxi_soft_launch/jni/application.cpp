@@ -153,14 +153,6 @@ void ProcessAsset(AAssetManager* assetManager, const std::string& writablePath)
 
 	for (uint32_t i = 0; i < assets.size(); i++)
 		StorageHelper::UnpackAsset(assetManager, assets[i], dataPath);
-
-	std::vector<std::string> files;
-	Path::GetAllFiles(files, dataPath + "gui", "*.xml");
-	int d = 0;
-
-	LOGI("*********** files in %s", (dataPath + "gui").c_str());
-	for (int i = 0; i < files.size(); i++)
-		LOGI("*********** file %s", files[i].c_str());
 }
 
 IGameController* m_game;
@@ -210,3 +202,19 @@ void renderFrame()
 	m_game->Update(0.0f, 0.1f);
 	m_game->Draw(0.0f, 0.1f);
 }
+
+void HandlePress(int pointId, float x, float y)
+{
+	m_game->HandlePress(pointId, sm::Vec2(x, y));
+}
+
+void HandleRelease(int pointId, float x, float y)
+{
+	m_game->HandleRelease(pointId, sm::Vec2(x, y));
+}
+
+void HandleMove(int pointId, float x, float y)
+{
+	m_game->HandleMove(pointId, sm::Vec2(x, y));
+}
+

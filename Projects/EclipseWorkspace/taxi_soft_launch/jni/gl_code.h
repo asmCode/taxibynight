@@ -19,3 +19,7 @@ extern bool setupGraphics(AAssetManager* assetManager, const std::string& writab
 extern void renderFrame();
 extern void printGLString(const char *name, GLenum s);
 extern void checkGlError(const char* op);
+
+extern void HandlePress(int pointId, float x, float y);
+extern void HandleRelease(int pointId, float x, float y);
+extern void HandleMove(int pointId, float x, float y);

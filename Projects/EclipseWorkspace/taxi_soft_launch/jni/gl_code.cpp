@@ -50,6 +50,10 @@ extern "C" {
 			jint height);
 
     JNIEXPORT void JNICALL Java_com_ssg_taxisoftlaunch_GL2JNILib_step(JNIEnv * env, jobject obj);
+
+    JNIEXPORT void JNICALL Java_com_ssg_taxisoftlaunch_GL2JNILib_HandlePress(JNIEnv * env, jobject obj, int pointId, float x, float y);
+    JNIEXPORT void JNICALL Java_com_ssg_taxisoftlaunch_GL2JNILib_HandleRelease(JNIEnv * env, jobject obj, int pointId, float x, float y);
+    JNIEXPORT void JNICALL Java_com_ssg_taxisoftlaunch_GL2JNILib_HandleMove(JNIEnv * env, jobject obj, int pointId, float x, float y);
 };
 
 JNIEXPORT void JNICALL Java_com_ssg_taxisoftlaunch_GL2JNILib_init(
@@ -76,3 +80,19 @@ JNIEXPORT void JNICALL Java_com_ssg_taxisoftlaunch_GL2JNILib_step(JNIEnv * env, 
 {
     renderFrame();
 }
+
+JNIEXPORT void JNICALL Java_com_ssg_taxisoftlaunch_GL2JNILib_HandlePress(JNIEnv * env, jobject obj, int pointId, float x, float y)
+{
+	HandlePress(pointId, x, y);
+}
+
+JNIEXPORT void JNICALL Java_com_ssg_taxisoftlaunch_GL2JNILib_HandleRelease(JNIEnv * env, jobject obj, int pointId, float x, float y)
+{
+	HandleRelease(pointId, x, y);
+}
+
+JNIEXPORT void JNICALL Java_com_ssg_taxisoftlaunch_GL2JNILib_HandleMove(JNIEnv * env, jobject obj, int pointId, float x, float y)
+{
+	HandleMove(pointId, x, y);
+}
+
