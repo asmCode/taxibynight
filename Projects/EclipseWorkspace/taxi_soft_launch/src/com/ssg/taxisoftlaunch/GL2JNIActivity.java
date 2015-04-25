@@ -30,7 +30,7 @@ public class GL2JNIActivity extends Activity {
 
     @Override protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        mView = new GL2JNIView(getAssets(), getApplication());
+        mView = new GL2JNIView(getAssets(), getApplication(), true, 24, 0);
 	setContentView(mView);
     }
 
