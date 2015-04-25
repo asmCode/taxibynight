@@ -92,21 +92,7 @@ class GL2JNIView extends GLSurfaceView {
     
 	@Override
     public boolean onTouchEvent(MotionEvent e)
-    {	
-		/*
-		for (int i = 0; i < e.getPointerCount(); i++)
-		{
-	        int pointId = e.getPointerId(i);
-	
-	        switch (e.getActionIndex())
-	        {
-	            case MotionEvent.ACTION_MOVE:
-	            	GL2JNILib.HandleMove(pointId, e.getX(i), e.getY(i));
-	            	break;
-	        }
-		}
-		*/
-		
+    {		
 		int actionIndex = e.getActionIndex();
 		int pointId = e.getPointerId(actionIndex);
 		float x = e.getX(actionIndex);

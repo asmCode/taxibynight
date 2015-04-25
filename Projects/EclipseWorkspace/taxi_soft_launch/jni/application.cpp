@@ -19,20 +19,6 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 
-static const char gVertexShader[] = 
-    "attribute vec4 vPosition;\n"
-    "void main() {\n"
-    "  gl_Position = vPosition;\n"
-    "}\n";
-
-static const char gFragmentShader[] = 
-    "precision mediump float;\n"
-    "void main() {\n"
-    "  gl_FragColor = vec4(0.0, 1.0, 0.0, 1.0);\n"
-    "}\n";
-GLuint gProgram;
-GLuint gvPositionHandle;
-
 void ProcessAsset(AAssetManager* assetManager, const std::string& writablePath)
 {
 	std::vector<std::string> assets;
@@ -168,30 +154,6 @@ bool setupGraphics(AAssetManager* assetManager, const std::string& writablePath,
 	IGraphicsEngine *graphicsEngine = GraphicsEngineFactory::Create();
 	m_game = InfectedBunniesFactory::Create(graphicsEngine);
 	m_game->Initialize(NULL, NULL);
-
-	/*
-	ProcessAsset(assetManager, writablePath);
-
-    printGLString("Version", GL_VERSION);
-    printGLString("Vendor", GL_VENDOR);
-    printGLString("Renderer", GL_RENDERER);
-    printGLString("Extensions", GL_EXTENSIONS);
-
-    LOGI("setupGraphics(%d, %d)", w, h);
-    gProgram = createProgram(gVertexShader, gFragmentShader);
-    if (!gProgram) {
-        LOGE("Could not create program.");
-        return false;
-    }
-    gvPositionHandle = glGetAttribLocation(gProgram, "vPosition");
-    checkGlError("glGetAttribLocation");
-    LOGI("glGetAttribLocation(\"vPosition\") = %d\n",
-            gvPositionHandle);
-
-    glViewport(0, 0, w, h);
-    checkGlError("glViewport");
-    return true;
-    */
 }
 
 const GLfloat gTriangleVertices[] = { 0.0f, 0.5f, -0.5f, -0.5f,
