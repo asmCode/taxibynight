@@ -74,20 +74,32 @@ class GL2JNIView extends GLSurfaceView {
     private AssetManager m_assetManager;
     private String m_writablePath;
 
-    public GL2JNIView(AssetManager assetManager, Context context) {
-        super(context);
-        
-        m_assetManager = assetManager;
-        m_writablePath = context.getFilesDir().getPath();
-        init(false, 0, 0);
-    }
-
     public GL2JNIView(AssetManager assetManager, Context context, boolean translucent, int depth, int stencil) {
         super(context);
         
         m_assetManager = assetManager;
         m_writablePath = context.getFilesDir().getPath();
         init(translucent, depth, stencil);
+    }
+    
+    // to nie przeciazenie
+    public void onDestroy()
+    {
+    	GL2JNILib.Destroy();
+    }
+    
+    public void onPause()
+    {
+    	super.onPause();
+    	
+    	GL2JNILib.HandleEnterBackground();
+    }
+    
+    public void onResume()
+    {
+    	super.onResume();
+    	
+    	GL2JNILib.HandleEnterForeground();
     }
     
 	@Override
@@ -156,14 +168,14 @@ class GL2JNIView extends GLSurfaceView {
         setRenderer(new Renderer(m_assetManager, m_writablePath));
     }
 
-    private static class ContextFactory implements GLSurfaceView.EGLContextFactory {
+    private static class ContextFactory implements GLSurfaceView.EGLContextFactory
+    {
         private static int EGL_CONTEXT_CLIENT_VERSION = 0x3098;
-        public EGLContext createContext(EGL10 egl, EGLDisplay display, EGLConfig eglConfig) {
-            Log.w(TAG, "creating OpenGL ES 2.0 context");
-            checkEglError("Before eglCreateContext", egl);
+        
+        public EGLContext createContext(EGL10 egl, EGLDisplay display, EGLConfig eglConfig)
+        {
             int[] attrib_list = {EGL_CONTEXT_CLIENT_VERSION, 2, EGL10.EGL_NONE };
             EGLContext context = egl.eglCreateContext(display, eglConfig, EGL10.EGL_NO_CONTEXT, attrib_list);
-            checkEglError("After eglCreateContext", egl);
             return context;
         }
 
@@ -391,7 +403,7 @@ class GL2JNIView extends GLSurfaceView {
         public void onSurfaceChanged(GL10 gl, int width, int height)
         {
         	if (m_needToInitialize)
-        	{
+        	{        		
         		GL2JNILib.init(m_assetManager, m_writablePath, width, height);
         		m_needToInitialize = false;
         	}
