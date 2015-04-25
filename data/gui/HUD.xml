@@ -9,12 +9,10 @@
 	
 	<Grid align="top-left" margin_left="10" margin_top="170" name="bonuses_grid" />
 	
-	<!--
 	<AnimButton name="turn_left" align="bottom-left" margin_left="30" margin_bottom="40" width="180" height="180" image="arrow_left" image_pushed="arrow_left" />
 	<AnimButton name="turn_right" align="bottom-left" margin_left="230" margin_bottom="40" width="180" height="180" image="arrow_right" image_pushed="arrow_right" />
 	<AnimButton name="acc_pedal" align="bottom-right" margin_right="30" margin_bottom="40" width="180" height="180" image="arrow_up" image_pushed="arrow_up" />
 	<AnimButton name="brake_pedal" align="bottom-right" margin_right="230" margin_bottom="40" width="180" height="180" image="arrow_down" image_pushed="arrow_down" />
-	-->
 	
 	<Label font="fenix_26" name="total_money_label" align="top-right" text="Income:" margin_right="160" margin_top="10" />
 	<Label font="fenix_26" name="total_money_value" align="top-right" text="$0.00" margin_right="10" margin_top="10" />
