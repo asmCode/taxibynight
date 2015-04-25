@@ -141,7 +141,17 @@ void ProcessAsset(AAssetManager* assetManager, const std::string& writablePath)
 		StorageHelper::UnpackAsset(assetManager, assets[i], dataPath);
 }
 
-IGameController* m_game;
+IGameController* m_game = NULL;
+float gameTime = 0.0f;
+uint64_t lastTime;
+
+uint64_t GetTimestamp()
+{
+	static struct timespec _time;
+
+	clock_gettime(CLOCK_MONOTONIC, &_time);
+	return (uint64_t)_time.tv_sec * 1000000000LL + _time.tv_nsec;
+}
 
 bool setupGraphics(AAssetManager* assetManager, const std::string& writablePath, int w, int h)
 {
@@ -154,15 +164,19 @@ bool setupGraphics(AAssetManager* assetManager, const std::string& writablePath,
 	IGraphicsEngine *graphicsEngine = GraphicsEngineFactory::Create();
 	m_game = InfectedBunniesFactory::Create(graphicsEngine);
 	m_game->Initialize(NULL, NULL);
-}
 
-const GLfloat gTriangleVertices[] = { 0.0f, 0.5f, -0.5f, -0.5f,
-        0.5f, -0.5f };
+	lastTime = GetTimestamp();
+}
 
 void renderFrame()
 {
-	m_game->Update(0.0f, 0.1f);
-	m_game->Draw(0.0f, 0.1f);
+	uint64_t timeNow = GetTimestamp();
+	float deltaTime = (float)(timeNow - lastTime) / 1000000000.0f;
+	lastTime = timeNow;
+	gameTime += deltaTime;
+
+	m_game->Update(gameTime, deltaTime);
+	m_game->Draw(gameTime, deltaTime);
 }
 
 void HandlePress(int pointId, float x, float y)
