@@ -31,17 +31,28 @@ public class GL2JNIActivity extends Activity {
     @Override protected void onCreate(Bundle icicle)
     {
         super.onCreate(icicle);
+        
+        Log.d("taxi", "GL2JNIActivity.onCreate");
+        
         mView = new GL2JNIView(getAssets(), getApplication(), true, 24, 0);
         mView.setPreserveEGLContextOnPause(true);
         setContentView(mView);
     }
+    
+    @Override protected void onDestroy()
+    {
+    	super.onDestroy();
+    	mView.onDestroy();
+    }
 
-    @Override protected void onPause() {
+    @Override protected void onPause()
+    {
         super.onPause();
         mView.onPause();
     }
 
-    @Override protected void onResume() {
+    @Override protected void onResume()
+    {
         super.onResume();
         mView.onResume();
     }

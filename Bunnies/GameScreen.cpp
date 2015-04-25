@@ -83,8 +83,6 @@ bool GameScreen::Initialize()
 {
 	m_fontKomika = InterfaceProvider::GetFontRenderer("digital_bold_24");
 
-	Billboard::Initialize();
-
 	//m_manCam = new ManCam();
 
 	m_taxi = new Taxi();

@@ -155,6 +155,11 @@ uint64_t GetTimestamp()
 
 bool setupGraphics(AAssetManager* assetManager, const std::string& writablePath, int w, int h)
 {
+	LOGI("setupGraphics()");
+
+	if (m_game != NULL)
+		Destroy();
+
 	TaxiGame::Environment::GetInstance()->SetBasePath(writablePath + "/taxi_data/");
 	TaxiGame::Environment::GetInstance()->SetWritePath(writablePath);
 	TaxiGame::Environment::GetInstance()->SetScreenSize(w, h);
@@ -166,10 +171,26 @@ bool setupGraphics(AAssetManager* assetManager, const std::string& writablePath,
 	m_game->Initialize(NULL, NULL);
 
 	lastTime = GetTimestamp();
+
+	return true;
+}
+
+void Destroy()
+{
+	LOGI("Destroy(), m_game = %x", m_game);
+
+	if (m_game != NULL)
+	{
+		delete m_game;
+		m_game = NULL;
+	}
 }
 
 void renderFrame()
 {
+	if (m_game == NULL)
+		return;
+
 	uint64_t timeNow = GetTimestamp();
 	float deltaTime = (float)(timeNow - lastTime) / 1000000000.0f;
 	lastTime = timeNow;
@@ -181,16 +202,37 @@ void renderFrame()
 
 void HandlePress(int pointId, float x, float y)
 {
-	m_game->HandlePress(pointId, sm::Vec2(x, y));
+	if (m_game != NULL)
+		m_game->HandlePress(pointId, sm::Vec2(x, y));
 }
 
 void HandleRelease(int pointId, float x, float y)
 {
-	m_game->HandleRelease(pointId, sm::Vec2(x, y));
+	if (m_game != NULL)
+		m_game->HandleRelease(pointId, sm::Vec2(x, y));
 }
 
 void HandleMove(int pointId, float x, float y)
 {
-	m_game->HandleMove(pointId, sm::Vec2(x, y));
+	if (m_game != NULL)
+		m_game->HandleMove(pointId, sm::Vec2(x, y));
+}
+
+void HandleEnterForeground()
+{
+	if (m_game != NULL)
+		m_game->HandleEnterForeground();
+}
+
+void HandleEnterBackground()
+{
+	if (m_game != NULL)
+		m_game->HandleEnterBackground();
+}
+
+void HandleBackButton()
+{
+	if (m_game != NULL)
+		m_game->HandleBackButton();
 }
 

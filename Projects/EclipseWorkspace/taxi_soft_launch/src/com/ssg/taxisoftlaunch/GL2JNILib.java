@@ -31,4 +31,9 @@ public class GL2JNILib
      public static native void HandlePress(int pointId, float x, float y);
      public static native void HandleRelease(int pointId, float x, float y);
      public static native void HandleMove(int pointId, float x, float y);
+     
+     public static native void HandleEnterForeground();
+     public static native void HandleEnterBackground();
+     public static native void HandleBackButton();
+     public static native void Destroy();
 }

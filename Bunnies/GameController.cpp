@@ -13,6 +13,7 @@
 #include "Environment.h"
 #include "Control.h"
 #include "DrawingRoutines.h"
+#include "Billboard.h"
 #include "InterfaceProvider.h"
 #include "Leaderboard.h"
 #include "AnalyticsProvider.h"
@@ -40,12 +41,39 @@ GameController::GameController(IGraphicsEngine *graphicsEngine) :
 	m_summaryScreen(NULL),
 	m_gameScreen(NULL),
 	m_comicsScreen(NULL),
-	m_activeScreen(NULL)
+	m_activeScreen(NULL),
+	m_introScreen(NULL),
+	m_content(NULL)
 {
 }
 
 GameController::~GameController(void)
 {
+	Billboard::Release();
+
+	if (m_gameScreen != NULL)
+		delete m_gameScreen;
+
+	if (m_splashScreen != NULL)
+		delete m_splashScreen;
+
+	if (m_mainMenuScreen != NULL)
+		delete m_mainMenuScreen;
+
+	if (m_summaryScreen != NULL)
+		delete m_summaryScreen;
+
+	if (m_comicsScreen != NULL)
+		delete m_comicsScreen;
+
+	if (m_leaderboardScreen != NULL)
+		delete m_leaderboardScreen;
+
+	if (m_introScreen != NULL)
+		delete m_introScreen;
+
+	if (m_content != NULL)
+		delete m_content;
 }
 
 bool GameController::InitializeGraphics(const std::string &basePath)
@@ -128,6 +156,7 @@ bool GameController::Initialize(ISystemUtils *systemUtils, IServiceProvider* ser
 		return false;
 	}
 
+	Billboard::Initialize();
 	BonusStreetSymbol::Initialize();
 	BonusBlowEffect::Initialize();
 
@@ -303,7 +332,9 @@ void GameController::HandleEnterForeground()
 	SoundManager::GetInstance()->PlayMusic();
 
 	if (m_activeScreen == m_gameScreen)
+	{
 		SoundManager::GetInstance()->StartEngine();
+	}
 }
 
 void GameController::HandleEnterBackground()
@@ -311,7 +342,11 @@ void GameController::HandleEnterBackground()
 	SoundManager::GetInstance()->StopMusic();
 
 	if (m_activeScreen == m_gameScreen)
+	{
 		SoundManager::GetInstance()->StopEngine();
+
+		m_gameScreen->ShowPause();
+	}
 }
 
 void GameController::HandleBackButton()

@@ -16,6 +16,7 @@
 class AAssetManager;
 
 extern bool setupGraphics(AAssetManager* assetManager, const std::string& writablePath, int w, int h);
+extern void Destroy();
 extern void renderFrame();
 extern void printGLString(const char *name, GLenum s);
 extern void checkGlError(const char* op);
@@ -23,3 +24,7 @@ extern void checkGlError(const char* op);
 extern void HandlePress(int pointId, float x, float y);
 extern void HandleRelease(int pointId, float x, float y);
 extern void HandleMove(int pointId, float x, float y);
+
+extern void HandleEnterForeground();
+extern void HandleEnterBackground();
+extern void HandleBackButton();

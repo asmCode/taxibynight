@@ -54,6 +54,12 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_ssg_taxisoftlaunch_GL2JNILib_HandlePress(JNIEnv * env, jobject obj, int pointId, float x, float y);
     JNIEXPORT void JNICALL Java_com_ssg_taxisoftlaunch_GL2JNILib_HandleRelease(JNIEnv * env, jobject obj, int pointId, float x, float y);
     JNIEXPORT void JNICALL Java_com_ssg_taxisoftlaunch_GL2JNILib_HandleMove(JNIEnv * env, jobject obj, int pointId, float x, float y);
+
+    JNIEXPORT void JNICALL Java_com_ssg_taxisoftlaunch_GL2JNILib_HandleEnterForeground(JNIEnv * env, jobject obj);
+    JNIEXPORT void JNICALL Java_com_ssg_taxisoftlaunch_GL2JNILib_HandleEnterBackground(JNIEnv * env, jobject obj);
+    JNIEXPORT void JNICALL Java_com_ssg_taxisoftlaunch_GL2JNILib_HandleBackButton(JNIEnv * env, jobject obj);
+
+    JNIEXPORT void JNICALL Java_com_ssg_taxisoftlaunch_GL2JNILib_Destroy(JNIEnv * env, jobject obj);
 };
 
 JNIEXPORT void JNICALL Java_com_ssg_taxisoftlaunch_GL2JNILib_init(
@@ -96,3 +102,27 @@ JNIEXPORT void JNICALL Java_com_ssg_taxisoftlaunch_GL2JNILib_HandleMove(JNIEnv *
 	HandleMove(pointId, x, y);
 }
 
+JNIEXPORT void JNICALL Java_com_ssg_taxisoftlaunch_GL2JNILib_HandleEnterForeground(JNIEnv * env, jobject obj, int pointId, float x, float y)
+{
+	HandleEnterForeground();
+}
+
+JNIEXPORT void JNICALL Java_com_ssg_taxisoftlaunch_GL2JNILib_HandleEnterForeground(JNIEnv * env, jobject obj)
+{
+	HandleEnterForeground();
+}
+
+JNIEXPORT void JNICALL Java_com_ssg_taxisoftlaunch_GL2JNILib_HandleEnterBackground(JNIEnv * env, jobject obj)
+{
+	HandleEnterBackground();
+}
+
+JNIEXPORT void JNICALL Java_com_ssg_taxisoftlaunch_GL2JNILib_HandleBackButton(JNIEnv * env, jobject obj)
+{
+	HandleBackButton();
+}
+
+JNIEXPORT void JNICALL Java_com_ssg_taxisoftlaunch_GL2JNILib_Destroy(JNIEnv * env, jobject obj)
+{
+	Destroy();
+}
