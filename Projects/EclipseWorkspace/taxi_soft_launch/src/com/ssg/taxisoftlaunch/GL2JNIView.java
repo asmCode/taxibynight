@@ -375,6 +375,7 @@ class GL2JNIView extends GLSurfaceView {
     {
     	private AssetManager m_assetManager;
     	private String m_writablePath;
+    	private boolean m_needToInitialize = true;
     	
     	Renderer(AssetManager assetManager, String writeblePath)
     	{
@@ -382,17 +383,23 @@ class GL2JNIView extends GLSurfaceView {
     		m_writablePath = writeblePath;
     	}
     	
-        public void onDrawFrame(GL10 gl) {
+        public void onDrawFrame(GL10 gl)
+        {
             GL2JNILib.step();
         }
 
         public void onSurfaceChanged(GL10 gl, int width, int height)
         {
-            GL2JNILib.init(m_assetManager, m_writablePath, width, height);
+        	if (m_needToInitialize)
+        	{
+        		GL2JNILib.init(m_assetManager, m_writablePath, width, height);
+        		m_needToInitialize = false;
+        	}
         }
 
-        public void onSurfaceCreated(GL10 gl, EGLConfig config) {
-            // Do nothing.
+        public void onSurfaceCreated(GL10 gl, EGLConfig config)
+        {
+            m_needToInitialize = true; 
         }
     }
 }

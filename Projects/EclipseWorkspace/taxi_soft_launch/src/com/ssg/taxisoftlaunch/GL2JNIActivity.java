@@ -28,10 +28,12 @@ public class GL2JNIActivity extends Activity {
 
     GL2JNIView mView;
 
-    @Override protected void onCreate(Bundle icicle) {
+    @Override protected void onCreate(Bundle icicle)
+    {
         super.onCreate(icicle);
         mView = new GL2JNIView(getAssets(), getApplication(), true, 24, 0);
-	setContentView(mView);
+        mView.setPreserveEGLContextOnPause(true);
+        setContentView(mView);
     }
 
     @Override protected void onPause() {
