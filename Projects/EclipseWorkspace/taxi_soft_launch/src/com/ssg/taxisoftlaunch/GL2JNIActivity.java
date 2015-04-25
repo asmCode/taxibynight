@@ -34,6 +34,8 @@ public class GL2JNIActivity extends Activity {
         
         Log.d("taxi", "GL2JNIActivity.onCreate");
         
+        GL2JNILib.SetMainActivity(this);
+        
         mView = new GL2JNIView(getAssets(), getApplication(), true, 24, 0);
         mView.setPreserveEGLContextOnPause(true);
         setContentView(mView);
