@@ -22,6 +22,7 @@ public class GL2JNILib
 {
      static
      {
+    	 System.loadLibrary("fmod");
          System.loadLibrary("taxisoftlaunch");
      }
 
