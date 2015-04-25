@@ -102,6 +102,11 @@ class GL2JNIView extends GLSurfaceView {
     	GL2JNILib.HandleEnterForeground();
     }
     
+    public void HandleBackButton()
+    {
+    	GL2JNILib.HandleBackButton();
+    }
+    
 	@Override
     public boolean onTouchEvent(MotionEvent e)
     {		

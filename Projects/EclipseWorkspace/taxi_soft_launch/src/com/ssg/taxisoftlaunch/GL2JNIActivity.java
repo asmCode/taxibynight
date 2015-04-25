@@ -56,4 +56,9 @@ public class GL2JNIActivity extends Activity {
         super.onResume();
         mView.onResume();
     }
+    
+    @Override public void onBackPressed()
+    {
+    	mView.HandleBackButton();
+    }
 }

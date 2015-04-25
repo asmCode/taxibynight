@@ -5,6 +5,7 @@
 
 #include "gl_code.h"
 #include "StorageHelper.h"
+#include "AndroidSystemUtils.h"
 #include "TaxiCode/Bunnies/InfectedBunniesFactory.h"
 #include "TaxiCode/Bunnies/Environment.h"
 #include "TaxiCode/Bunnies/SystemSpecificData/SystemSpecificData.h"
@@ -168,7 +169,9 @@ bool setupGraphics(AAssetManager* assetManager, const std::string& writablePath,
 
 	IGraphicsEngine *graphicsEngine = GraphicsEngineFactory::Create();
 	m_game = InfectedBunniesFactory::Create(graphicsEngine);
-	m_game->Initialize(NULL, NULL);
+
+	AndroidSystemUtils* systemUtils = new AndroidSystemUtils();
+	m_game->Initialize(systemUtils, NULL);
 
 	lastTime = GetTimestamp();
 
