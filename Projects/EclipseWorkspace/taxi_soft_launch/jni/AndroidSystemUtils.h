@@ -1,3 +1,5 @@
+#pragma once
+
 #include "TaxiCode/Bunnies/ISystemUtils.h"
 
 class AndroidSystemUtils : public ISystemUtils

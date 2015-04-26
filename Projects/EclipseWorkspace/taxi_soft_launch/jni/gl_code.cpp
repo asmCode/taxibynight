@@ -16,6 +16,7 @@
 
 // OpenGL ES 2.0 code
 
+#include "Cpp2Java.h"
 #include <jni.h>
 #include <android/asset_manager_jni.h>
 
@@ -62,6 +63,14 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_ssg_taxisoftlaunch_GL2JNILib_Destroy(JNIEnv * env, jobject obj);
 };
 
+JavaVM *javaVM;
+
+JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved)
+{
+	javaVM = vm;
+    return JNI_VERSION_1_6;
+}
+
 JNIEXPORT void JNICALL Java_com_ssg_taxisoftlaunch_GL2JNILib_init(
 		JNIEnv * env,
 		jobject obj,
@@ -70,10 +79,6 @@ JNIEXPORT void JNICALL Java_com_ssg_taxisoftlaunch_GL2JNILib_init(
 		jint width,
 		jint height)
 {
-
-
-	sleep(0);
-
 	AAssetManager* assetManager = AAssetManager_fromJava(env, javaAssetManager);
 
 	const jsize len = env->GetStringUTFLength(javaWritablePath);

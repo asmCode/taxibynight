@@ -18,21 +18,14 @@ package com.ssg.taxisoftlaunch;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.WindowManager;
 
-import java.io.File;
-
-
-public class GL2JNIActivity extends Activity {
-
+public class GL2JNIActivity extends Activity
+{
     GL2JNIView mView;
 
     @Override protected void onCreate(Bundle icicle)
     {
         super.onCreate(icicle);
-        
-        Log.d("taxi", "GL2JNIActivity.onCreate");
         
         GL2JNILib.SetMainActivity(this);
         
@@ -61,6 +54,10 @@ public class GL2JNIActivity extends Activity {
     
     @Override public void onBackPressed()
     {
-    	mView.HandleBackButton();
+    	mView.queueEvent(new Runnable()
+    	{	
+			@Override
+			public void run() { mView.HandleBackButton(); }
+		});
     }
 }

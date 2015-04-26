@@ -16,7 +16,6 @@
 
 package com.ssg.taxisoftlaunch;
 
-import android.app.Activity;
 import android.content.res.AssetManager;
 
 public class GL2JNILib
@@ -27,7 +26,7 @@ public class GL2JNILib
          System.loadLibrary("taxisoftlaunch");
      }
      
-     private static Activity m_activity;
+     private static GL2JNIActivity m_activity;
 
      public static native void init(AssetManager javaAssetManager, String writablePath, int width, int height);
      public static native void step();
@@ -40,14 +39,19 @@ public class GL2JNILib
      public static native void HandleBackButton();
      public static native void Destroy();
      
-     public static void SetMainActivity(Activity activity)
+     public static void SetMainActivity(GL2JNIActivity activity)
      {
     	 m_activity = activity;
      }
      
      public static void RequestAppClose()
-     {
+     { 
     	 if (m_activity != null)
-    		 m_activity.finish();
+    	 {
+    		 m_activity.runOnUiThread(new Runnable()
+    		 {
+    			 public void run() { m_activity.finish(); }
+    		 });
+    	 }
      }
 }
