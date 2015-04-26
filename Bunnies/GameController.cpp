@@ -224,21 +224,24 @@ void GameController::Update(float time, float seconds)
 
 void GameController::HandlePress(int pointId, const sm::Vec2 &point)
 {
-	assert(m_activeScreen != NULL);
+	if (m_activeScreen == NULL)
+		return;
 
 	m_activeScreen->HandlePress(pointId, point);
 }
 
 void GameController::HandleRelease(int pointId, const sm::Vec2 &point)
 {
-	assert(m_activeScreen != NULL);
+	if (m_activeScreen == NULL)
+		return;
 
 	m_activeScreen->HandleRelease(pointId, point);
 }
 
 void GameController::HandleMove(int pointId, const sm::Vec2 &point)
 {
-	assert(m_activeScreen != NULL);
+	if (m_activeScreen == NULL)
+		return;
 
 	m_activeScreen->HandleMove(pointId, point);
 }
