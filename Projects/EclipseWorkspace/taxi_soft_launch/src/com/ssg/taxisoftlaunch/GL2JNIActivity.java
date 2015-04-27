@@ -16,16 +16,20 @@
 
 package com.ssg.taxisoftlaunch;
 
+import com.ssg.taxisoftlaunch.analytics.AnalyticsManager;
+
 import android.app.Activity;
 import android.os.Bundle;
 
 public class GL2JNIActivity extends Activity
 {
-    GL2JNIView mView;
+    GL2JNIView mView; 
 
     @Override protected void onCreate(Bundle icicle)
     {
         super.onCreate(icicle);
+        
+        AnalyticsManager.Initialize(this);
         
         GL2JNILib.SetMainActivity(this);
         
@@ -44,12 +48,16 @@ public class GL2JNIActivity extends Activity
     {
         super.onPause();
         mView.onPause();
+        
+        AnalyticsManager.OnPause();
     }
 
     @Override protected void onResume()
     {
         super.onResume();
         mView.onResume();
+        
+        AnalyticsManager.OnResume();
     }
     
     @Override public void onBackPressed()
