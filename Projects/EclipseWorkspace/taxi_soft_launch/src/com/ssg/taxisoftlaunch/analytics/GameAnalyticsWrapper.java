@@ -15,6 +15,7 @@ public class GameAnalyticsWrapper implements IAnalytics
 		
 		GameAnalytics.initialise(context, GameSettings.GameAnalyticsSecretKey, GameSettings.GameAnalyticsGameKey);
 		GameAnalytics.startSession(context);
+		GameAnalytics.setDebugLogLevel(GameAnalytics.VERBOSE);
 	}
 	
 	@Override

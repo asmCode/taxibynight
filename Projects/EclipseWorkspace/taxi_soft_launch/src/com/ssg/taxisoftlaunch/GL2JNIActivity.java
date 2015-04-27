@@ -16,9 +16,14 @@
 
 package com.ssg.taxisoftlaunch;
 
+import java.io.IOException;
+
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.ssg.taxisoftlaunch.analytics.AnalyticsManager;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 
 public class GL2JNIActivity extends Activity
@@ -28,8 +33,12 @@ public class GL2JNIActivity extends Activity
     @Override protected void onCreate(Bundle icicle)
     {
         super.onCreate(icicle);
-        
+               
         AnalyticsManager.Initialize(this);
+        
+        AnalyticsManager.LogEvent("event no data");
+    	AnalyticsManager.LogEvent("event string", "string_value");
+    	AnalyticsManager.LogEvent("event float", 123.0f);
         
         GL2JNILib.SetMainActivity(this);
         
@@ -62,10 +71,14 @@ public class GL2JNIActivity extends Activity
     
     @Override public void onBackPressed()
     {
+    	AnalyticsManager.LogEvent("event no data");
+    	AnalyticsManager.LogEvent("event string", "string_value");
+    	AnalyticsManager.LogEvent("event float", 123.0f);
+    	
     	mView.queueEvent(new Runnable()
     	{	
 			@Override
-			public void run() { mView.HandleBackButton(); }
+			public void run() { mView.HandleBackButton();}
 		});
     }
 }
