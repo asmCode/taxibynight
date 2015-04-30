@@ -16,6 +16,8 @@
 
 package com.ssg.taxisoftlaunch;
 
+import com.ssg.taxisoftlaunch.analytics.AnalyticsManager;
+
 import android.content.res.AssetManager;
 
 public class GL2JNILib
@@ -51,6 +53,47 @@ public class GL2JNILib
     		 m_activity.runOnUiThread(new Runnable()
     		 {
     			 public void run() { m_activity.finish(); }
+    		 });
+    	 }
+     }
+     
+     public static void LogAnalyticsEvent(String name)
+     {
+    	 final String _name = name;
+    	 
+    	 if (m_activity != null)
+    	 {
+    		 m_activity.runOnUiThread(new Runnable()
+    		 {
+    			 public void run() { AnalyticsManager.LogEvent(_name); }
+    		 });
+    	 }
+     }
+     
+     public static void LogAnalyticsEvent(String name, String value)
+     {
+    	 final String _name = name;
+    	 final String _value = value;
+    	 
+    	 if (m_activity != null)
+    	 {
+    		 m_activity.runOnUiThread(new Runnable()
+    		 {
+    			 public void run() { AnalyticsManager.LogEvent(_name, _value); }
+    		 });
+    	 }
+     }
+     
+     public static void LogAnalyticsEvent(String name, float value)
+     {
+    	 final String _name = name;
+    	 final float _value = value;
+    	 
+    	 if (m_activity != null)
+    	 {
+    		 m_activity.runOnUiThread(new Runnable()
+    		 {
+    			 public void run() { AnalyticsManager.LogEvent(_name, _value); }
     		 });
     	 }
      }
