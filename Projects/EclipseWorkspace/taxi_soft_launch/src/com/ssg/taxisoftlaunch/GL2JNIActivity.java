@@ -36,10 +36,6 @@ public class GL2JNIActivity extends Activity
                
         AnalyticsManager.Initialize(this);
         
-        AnalyticsManager.LogEvent("event no data");
-    	AnalyticsManager.LogEvent("event string", "string_value");
-    	AnalyticsManager.LogEvent("event float", 123.0f);
-        
         GL2JNILib.SetMainActivity(this);
         
         mView = new GL2JNIView(getAssets(), getApplication(), true, 24, 0);
