@@ -185,14 +185,7 @@ class GL2JNIView extends GLSurfaceView {
             egl.eglDestroyContext(display, context);
         }
     }
-
-    private static void checkEglError(String prompt, EGL10 egl) {
-        int error;
-        while ((error = egl.eglGetError()) != EGL10.EGL_SUCCESS) {
-            Log.e(TAG, String.format("%s: EGL error: 0x%x", prompt, error));
-        }
-    }
-
+    
     private static class ConfigChooser implements GLSurfaceView.EGLConfigChooser {
 
         public ConfigChooser(int r, int g, int b, int a, int depth, int stencil) {
