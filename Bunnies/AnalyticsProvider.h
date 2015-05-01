@@ -10,8 +10,6 @@ public:
 	static IAnalytics* GetAnalytics();
 	
 private:
-	static std::string FlurryApiKey;
-	
 	static IAnalytics* m_analytics;
 };
 

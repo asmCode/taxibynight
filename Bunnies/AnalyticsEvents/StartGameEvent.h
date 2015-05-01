@@ -7,8 +7,6 @@ class StartGameEvent : public AnalyticsEvent
 {
 public:
 	StartGameEvent();
-	
-	std::string GetEventName() const;
 };
 
 #endif // START_GAME_EVENT
