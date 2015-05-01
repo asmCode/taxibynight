@@ -13,7 +13,6 @@ SplashScreen::SplashScreen(GameController *gameController) :
 {
 }
 
-
 SplashScreen::~SplashScreen(void)
 {
 }
@@ -49,8 +48,7 @@ void SplashScreen::Update(float time, float seconds)
 {
 	m_timeout.Progress(seconds);
 	if (m_timeout.IsTimeout())
-		//m_gameController->ShowMainMenuScreen();
-		m_gameController->ShowIntroScreen();
+		m_gameController->ShowMainMenuScreen();
 }
 
 void SplashScreen::Leave()

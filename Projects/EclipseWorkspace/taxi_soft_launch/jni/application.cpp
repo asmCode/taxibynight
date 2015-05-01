@@ -95,7 +95,6 @@ void ProcessAsset(AAssetManager* assetManager, const std::string& writablePath)
 	assets.push_back("data/gui/gui01.png");
 	assets.push_back("data/gui/gui02.png");
 	assets.push_back("data/gui/HUD.xml");
-	assets.push_back("data/gui/IntroPanel.xml");
 	assets.push_back("data/gui/LeaderboardPanel.xml");
 	assets.push_back("data/gui/MainMenuPanel.xml");
 	assets.push_back("data/gui/PausePanel.xml");
