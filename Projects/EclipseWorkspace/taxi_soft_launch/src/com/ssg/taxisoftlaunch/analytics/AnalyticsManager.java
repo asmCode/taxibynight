@@ -14,7 +14,11 @@ public class AnalyticsManager
 		GameAnalyticsWrapper gameAnalytics = new GameAnalyticsWrapper();
 		gameAnalytics.Initialize(context);
 		
+		FlurryAnalyticsWrapper flurryAnalytics = new FlurryAnalyticsWrapper();
+		flurryAnalytics.Initialize(context);
+		
 		m_analytics.add(gameAnalytics);
+		m_analytics.add(flurryAnalytics);
 	}
 	
 	public static void OnPause()
