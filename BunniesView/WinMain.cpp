@@ -15,7 +15,7 @@ int ScreenWidth = 960;
 int ScreenHeight = 640;
 #endif
 
-#if 1
+#if 0
 // galaxy S II
 int ScreenWidth = 800;
 int ScreenHeight = 480;
@@ -32,9 +32,9 @@ int ScreenWidth = 1024;
 int ScreenHeight = 600;
 #endif
 
-#if 0
-int ScreenWidth = 1920;
-int ScreenHeight = 1080;
+#if 1
+int ScreenWidth = 1024;
+int ScreenHeight = 600;
 #endif
 
 OpenglWindow *glwnd;
