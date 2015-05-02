@@ -50,11 +50,11 @@ SummaryPanel *SummaryPanel::Create(GameController *gameController)
 	ret->m_againButton = dynamic_cast<AnimButton*>(ret->FindChild("again"));
 	assert(ret->m_againButton != NULL);
 	ret->m_leaderButton = dynamic_cast<AnimButton*>(ret->FindChild("leaderboard_button"));
-	assert(ret->m_leaderButton != NULL);
+	if (ret->m_leaderButton != NULL)
+		ObsCast(IControlEventsObserver, ret->m_leaderButton)->AddObserver(ret);
 
 	ObsCast(IControlEventsObserver, ret->m_mainMenuButton)->AddObserver(ret);
 	ObsCast(IControlEventsObserver, ret->m_againButton)->AddObserver(ret);
-	ObsCast(IControlEventsObserver, ret->m_leaderButton)->AddObserver(ret);
 
 	return ret;
 }

@@ -12,6 +12,16 @@
 #include <stddef.h>
 #include <assert.h>
 
+float GetGuiScale()
+{
+	float screenHeight = (float)TaxiGame::Environment::GetInstance()->GetScreenHeight();
+
+	if (screenHeight >= 720.0f)
+		return 1.0f;
+	else
+		return screenHeight / 720.0f;
+}
+
 Control* Inflater::Inflate(const std::string &xml)
 {
 	XMLNode *rootNode = XMLLoader::LoadFromFile(xml);
@@ -63,26 +73,28 @@ Control* Inflater::LoadNode(XMLNode *node)
 
 void Inflater::LoadLayout(XMLNode *node, Control *control)
 {
+	float guiScale = GetGuiScale();
+
 	if (node->HasAttrib("left"))
-		control->SetX(node->GetAttribAsUInt32("left"));
+		control->SetX((int)((float)node->GetAttribAsUInt32("left") * guiScale));
 	if (node->HasAttrib("top"))
-		control->SetY(node->GetAttribAsUInt32("top"));
+		control->SetY((int)((float)node->GetAttribAsUInt32("top") * guiScale));
 	if (node->HasAttrib("width"))
-		control->SetWidth(node->GetAttribAsUInt32("width"));
+		control->SetWidth((int)((float)node->GetAttribAsUInt32("width") * guiScale));
 	if (node->HasAttrib("height"))
-		control->SetHeight(node->GetAttribAsUInt32("height"));
+		control->SetHeight((int)((float)node->GetAttribAsUInt32("height") * guiScale));
 	if (node->HasAttrib("fill"))
 		control->SetFill(node->GetAttribAsBool("fill"));
 	if (node->HasAttrib("align"))
 		control->SetAlign(node->GetAttribAsString("align"));
 	if (node->HasAttrib("margin_left"))
-		control->SetMarginLeft(node->GetAttribAsInt32("margin_left"));
+		control->SetMarginLeft((int)((float)node->GetAttribAsInt32("margin_left") * guiScale));
 	if (node->HasAttrib("margin_right"))
-		control->SetMarginRight(node->GetAttribAsInt32("margin_right"));
+		control->SetMarginRight((int)((float)node->GetAttribAsInt32("margin_right") * guiScale));
 	if (node->HasAttrib("margin_bottom"))
-		control->SetMarginBottom(node->GetAttribAsInt32("margin_bottom"));
+		control->SetMarginBottom((int)((float)node->GetAttribAsInt32("margin_bottom") * guiScale));
 	if (node->HasAttrib("margin_top"))
-		control->SetMarginTop(node->GetAttribAsInt32("margin_top"));
+		control->SetMarginTop((int)((float)node->GetAttribAsInt32("margin_top") * guiScale));
 	if (node->HasAttrib("tmp_fill"))
 		control->m_tmpFill = node->GetAttribAsString("tmp_fill");
 }
@@ -90,18 +102,26 @@ void Inflater::LoadLayout(XMLNode *node, Control *control)
 Control* Inflater::LoadImageControl(XMLNode *node, const std::string &name)
 {
 	std::string image;
+	float opacity = 1.0f;
 
 	if (node->HasAttrib("image"))
 		image = node->GetAttribAsString("image");
+	if (node->HasAttrib("opacity"))
+		opacity = node->GetAttribAsFloat("opacity");
 
 	TexPart *imageSprite = InterfaceProvider::GetSpritesMap()->GetTexPart(image);
 	assert(imageSprite != NULL);
 
-	return new Control(name, 0, 0, *imageSprite);
+	Control* control = new Control(name, 0, 0, *imageSprite);
+	control->SetOpacity(opacity);
+
+	return control;
 }
 
 Control* Inflater::LoadLabelControl(XMLNode *node, const std::string &name)
 {
+	float guiScale = GetGuiScale();
+
 	std::string text;
 	std::string font;
 	Color color = Color::White;
@@ -123,7 +143,7 @@ Control* Inflater::LoadLabelControl(XMLNode *node, const std::string &name)
 		color.B = (unsigned char)b;
 	}
 
-	return new Label(name, text, InterfaceProvider::GetFontRenderer(font), size, color, 0, 0);
+	return new Label(name, text, InterfaceProvider::GetFontRenderer(font), size * guiScale, color, 0, 0);
 }
 
 Control* Inflater::LoadPanelControl(XMLNode *node, const std::string &name)

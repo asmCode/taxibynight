@@ -26,13 +26,13 @@ MainMenuPanel *MainMenuPanel::Create(GameController *gameController)
 		return NULL;
 
 	Control *startButton = content->FindChild("start_game_btn");
-	assert(startButton != NULL);
+	if (startButton != NULL)
+		ObsCast(IControlEventsObserver, startButton)->AddObserver(ret);
 
 	Control *leaderButton = content->FindChild("leaderboard_button");
-	assert(leaderButton != NULL);
-
-	ObsCast(IControlEventsObserver, startButton)->AddObserver(ret);
-	ObsCast(IControlEventsObserver, leaderButton)->AddObserver(ret);
+	if (leaderButton != NULL)
+		ObsCast(IControlEventsObserver, leaderButton)->AddObserver(ret);
+	
 
 	ret->AddChild(content);
 
