@@ -15,7 +15,7 @@
 #include "InterfaceProvider.h"
 #include "Leaderboard.h"
 #include "AnalyticsProvider.h"
-#include "AnalyticsEvents/StartGameEvent.h"
+#include "AnalyticsEvents/StartRound.h"
 #include "Bonuses/BonusStreetSymbol.h"
 #include "Bonuses/BonusBlowEffect.h"
 #include <Graphics/IGraphicsEngine.h>
@@ -243,7 +243,7 @@ void GameController::proto_SetLookTarget(const sm::Vec3 &lookTarget)
 
 void GameController::ShowGameScreen()
 {
-	AnalyticsProvider::GetAnalytics()->TrackEvent(StartGameEvent());
+	AnalyticsProvider::GetAnalytics()->TrackEvent(StartRound());
 	
 	IScreen* screen = NULL;
 
