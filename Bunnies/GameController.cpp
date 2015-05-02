@@ -287,14 +287,16 @@ void GameController::ShowSummaryScreen(
 	int courses,
 	float totalEarn,
 	int totalCourses,
-	bool record)
+	bool record,
+	bool timeout)
 {
 	m_summaryScreen->SetStatistics(
 		earn,
 		courses,
 		totalEarn,
 		totalCourses,
-		record);
+		record,
+		timeout);
 
 	m_activeScreen->Leave();
 	m_activeScreen = m_summaryScreen;

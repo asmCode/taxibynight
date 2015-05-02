@@ -22,7 +22,8 @@ public:
 		int courses,
 		float totalEarn,
 		int totalCourses,
-		bool record);
+		bool record,
+		bool timeout);
 
 private:
 	GameController *m_gameController;

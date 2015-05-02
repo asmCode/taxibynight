@@ -3,6 +3,10 @@
 #include "InterfaceProvider.h"
 #include "AnimButton.h"
 #include "Label.h"
+#include "AnalyticsProvider.h"
+#include "AnalyticsEvents/PlayAgainAfterTimeout.h"
+#include "AnalyticsEvents/Restart.h"
+#include "AnalyticsEvents/LeaveGame.h"
 #include "SpritesMap.h"
 #include "GameController.h"
 #include "Taxi.h"
@@ -64,11 +68,20 @@ void SummaryPanel::Clicked(Control *control, uint32_t x, uint32_t y)
 	if (control == m_mainMenuButton)
 	{
 		SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Button);
+
+		AnalyticsProvider::GetAnalytics()->TrackEvent(LeaveGame());
+
 		m_gameController->ShowMainMenuScreen();
 	}
 	else if (control == m_againButton)
 	{
 		SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Button);
+
+		if (m_afterTimeout)
+			AnalyticsProvider::GetAnalytics()->TrackEvent(PlayAgainAfterTimeout());
+		else
+			AnalyticsProvider::GetAnalytics()->TrackEvent(Restart());
+
 		m_gameController->ShowGameScreen();
 	}
 	else if (control == m_leaderButton)
@@ -88,8 +101,11 @@ void SummaryPanel::SetContent(
 		int courses,
 		float totalEarn,
 		int totalCourses,
-		bool record)
+		bool record,
+		bool timeout)
 {
+	m_afterTimeout = timeout;
+
 	m_earnLabel->SetText(std::string("$") + StringUtils::ToString(earn));
 	m_coursesLabel->SetText(StringUtils::ToString(courses));
 	m_totalEarnLabel->SetText(std::string("$") + StringUtils::ToString(totalEarn));

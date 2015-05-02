@@ -275,6 +275,8 @@ void GameScreen::Update(float time, float seconds)
 		m_arrow->SetDirection(pedTrgDir.GetReversed());
 		m_arrow->Update(time, seconds);
 	}
+	else
+		m_totalFreeTime += seconds;
 
 	//m_manCam->Process(seconds);
 
@@ -343,7 +345,7 @@ void GameScreen::Update(float time, float seconds)
 		{
 			AnalyticsProvider::GetAnalytics()->TrackEvent(Timeout());
 
-			EndRound();
+			EndRound(true);
 		}
 	}
 }
@@ -491,7 +493,7 @@ void GameScreen::Resume()
 	m_isPaused = false;
 }
 
-void GameScreen::EndRound()
+void GameScreen::EndRound(bool timeout)
 {
 	bool record = false;
 	Player::Instance->m_totalMoney += m_pedsManager->m_totalMoney;
@@ -519,7 +521,8 @@ void GameScreen::EndRound()
 		m_pedsManager->m_totalCourses,
 		Player::Instance->m_totalMoney,
 		Player::Instance->m_totalCourses,
-		record);
+		record,
+		timeout);
 
 	SaveAnalytics();
 }
@@ -533,11 +536,13 @@ void GameScreen::SaveAnalytics()
 	AnalyticsProvider::GetAnalytics()->TrackEvent(AvgSpeed(avgSpeed));
 
 	AnalyticsProvider::GetAnalytics()->TrackEvent(Distance(Taxi::GetInstance()->m_totalDistance));
+	AnalyticsProvider::GetAnalytics()->TrackEvent(RoundTime(m_totalRoundTime));
 
 	AnalyticsProvider::GetAnalytics()->TrackEvent(ScoredPeds(m_pedsManager->m_totalCourses));
 	AnalyticsProvider::GetAnalytics()->TrackEvent(EarnedMoney(m_pedsManager->m_totalMoney));
 
 	AnalyticsProvider::GetAnalytics()->TrackEvent(AvgFps((int)((float)m_totalFps / m_totalRoundTime) + 1));
+	AnalyticsProvider::GetAnalytics()->TrackEvent(TimeWithNoClient(m_totalFreeTime));
 }
 
 void GameScreen::Enter()

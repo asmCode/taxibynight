@@ -43,7 +43,7 @@ void PausePanel::Clicked(Control *control, uint32_t x, uint32_t y)
 	if (control->GetName() == "end")
 	{
 		SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Button);
-		m_gameScreen->EndRound();
+		m_gameScreen->EndRound(false);
 	}
 	if (control->GetName() == "resume")
 	{

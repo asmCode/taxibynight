@@ -2,7 +2,7 @@
 
 #include <Analytics/AnalyticsEvent.h>
 
-// Opuszczenie gry (Pauza->End Round->Main Menu)
+// Opuszczenie gry na ekranie podsumowania (obojetne czy po pauzie czy timeoucie)
 class LeaveGame : public AnalyticsEvent
 {
 public:

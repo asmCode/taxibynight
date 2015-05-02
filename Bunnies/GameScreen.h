@@ -50,7 +50,7 @@ public:
 
 	void ShowPause();
 	void Resume();
-	void EndRound();
+	void EndRound(bool timeout);
 	void SaveAnalytics();
 
 	void Enter();

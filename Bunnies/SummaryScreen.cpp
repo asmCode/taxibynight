@@ -73,14 +73,16 @@ void SummaryScreen::SetStatistics(
 		int courses,
 		float totalEarn,
 		int totalCourses,
-		bool record)
+		bool record,
+		bool timeout)
 {
 	m_summaryPanel->SetContent(
 		earn,
 		courses,
 		totalEarn,
 		totalCourses,
-		record);
+		record,
+		timeout);
 }
 
 void SummaryScreen::Enter()

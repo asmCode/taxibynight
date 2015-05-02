@@ -21,7 +21,8 @@ public:
 		int courses,
 		float totalEarn,
 		int totalCourses,
-		bool record);
+		bool record,
+		bool timeout);
 
 private:
 	Label *m_earnLabel;
@@ -35,6 +36,8 @@ private:
 	AnimButton *m_leaderButton;
 
 	bool m_record;
+
+	bool m_afterTimeout; // summary screen pokazal sie po timeoucie, a nie wyjsciu z gry z pauzy
 
 	SummaryPanel();
 	
