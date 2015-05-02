@@ -160,10 +160,14 @@ void GameScreen::Draw(float time, float seconds)
 	m_placeIndicator->Draw(time, seconds);	
 	m_taxi->DrawTransparencies();
 
+	InterfaceProvider::GetSpriteBatch()->Begin();
+
+#if 0 // Show FPS
 	char fpsText[16];
 	sprintf(fpsText, "fps: %d", m_currentFps);
-	InterfaceProvider::GetSpriteBatch()->Begin();
 	m_fontKomika->DrawString(fpsText, 2, TaxiGame::Environment::GetInstance()->GetScreenHeight() - 22, Color::White);
+#endif
+
 	if (m_isPaused)
 		m_pausePanel->Draw(time, seconds);
 	else
