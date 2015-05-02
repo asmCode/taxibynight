@@ -370,6 +370,8 @@ void Taxi::Update(float time, float seconds)
 	else
 		m_worldMatrix = newWorldMatrix;
 
+	m_totalDistance += (m_position - oldPos).GetLength();
+
 	m_frontRightWheel->Transform() =
 		m_frontRightWheel->m_worldMatrix *
 		sm::Matrix::RotateAxisMatrix(m_wheelsAngle, 0, 1, 0) *

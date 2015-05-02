@@ -24,6 +24,21 @@
 #include "Bonuses/BonusStreetSymbol.h"
 #include "Bonuses/BonusBlowEffect.h"
 
+#include "AnalyticsEvents/AvgFps.h"
+#include "AnalyticsEvents/AvgSpeed.h"
+#include "AnalyticsEvents/Collisions.h"
+#include "AnalyticsEvents/Distance.h"
+#include "AnalyticsEvents/EarnedMoney.h"
+#include "AnalyticsEvents/KilledPeds.h"
+#include "AnalyticsEvents/LeaveGame.h"
+#include "AnalyticsEvents/PlayAgainAfterTimeout.h"
+#include "AnalyticsEvents/Restart.h"
+#include "AnalyticsEvents/RoundTime.h"
+#include "AnalyticsEvents/ScoredPeds.h"
+#include "AnalyticsEvents/StartRound.h"
+#include "AnalyticsEvents/Timeout.h"
+#include "AnalyticsEvents/TimeWithNoClient.h"
+
 #include <Math/MathUtils.h>
 #include <Graphics/Shader.h>
 #include <Graphics/FontRenderer.h>
@@ -224,6 +239,8 @@ void GameScreen::Update(float time, float seconds)
 			return;
 		}
 	}
+
+	m_totalRoundTime += seconds;
 
 	m_taxi->Update(time, seconds);
 
@@ -506,7 +523,13 @@ void GameScreen::EndRound()
 
 void GameScreen::SaveAnalytics()
 {
+	AnalyticsProvider::GetAnalytics()->TrackEvent(Collisions(Taxi::GetInstance()->m_collisionCount));
+	AnalyticsProvider::GetAnalytics()->TrackEvent(KilledPeds(Taxi::GetInstance()->m_killedPeds));
 
+	float avgSpeed = (m_totalRoundTime > 0.0f)? Taxi::GetInstance()->m_totalDistance / m_totalRoundTime : 0.0f;
+	AnalyticsProvider::GetAnalytics()->TrackEvent(AvgSpeed(avgSpeed));
+
+	AnalyticsProvider::GetAnalytics()->TrackEvent(Distance(Taxi::GetInstance()->m_totalDistance));
 }
 
 void GameScreen::Enter()

@@ -160,6 +160,7 @@ void PedsManager::Update(float time, float seconds)
 				if (m_pedApproaching == m_peds[i])
 					m_pedApproaching = NULL;
 				m_peds[i]->Die();
+				Taxi::GetInstance()->m_killedPeds++;
 				SoundManager::GetInstance()->PlaySound(SoundManager::Sound_Die);
 
 				float penalty;
