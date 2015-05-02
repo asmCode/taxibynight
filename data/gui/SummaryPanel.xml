@@ -4,7 +4,7 @@
 	<Panel name="summary_panel" align="center" width="568" height="470" margin_top="70">
 		<Image name="summary_screen_content_bg" image="summary_screen_bg" fill="true" />
 		
-		<Label font="fenix_26" name="earn_label" text="Earn" size="1.0" left="50" top="90" />
+		<Label font="fenix_26" name="earn_label" text="Earned" size="1.0" left="50" top="90" />
 		<Label font="fenix_26" name="earn_value" text="$0" size="1.0" left="350" top="90" />
 		<Label font="fenix_18" name="record" text="Record!" size="1.0" left="350" top="130" color="241;165;15" />
 		<Label font="fenix_18" name="courses_label" text="Courses" size="1.0" left="50" top="170" />
