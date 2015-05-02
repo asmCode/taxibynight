@@ -19,11 +19,13 @@ package com.ssg.taxisoftlaunch;
 import com.ssg.taxisoftlaunch.analytics.AnalyticsManager;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.os.Bundle;
 
 public class GL2JNIActivity extends Activity
 {
-    GL2JNIView mView; 
+    GL2JNIView mView;
+    private Dialog m_splashScreenDialog; 
 
     @Override protected void onCreate(Bundle icicle)
     {
@@ -33,9 +35,13 @@ public class GL2JNIActivity extends Activity
         
         GL2JNILib.SetMainActivity(this);
         
-        mView = new GL2JNIView(getAssets(), getApplication(), true, 24, 0);
+        mView = new GL2JNIView(getAssets(), this, true, 24, 0);
         mView.setPreserveEGLContextOnPause(true);
         setContentView(mView);
+        
+        m_splashScreenDialog = new Dialog(this,android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+        m_splashScreenDialog.setContentView(R.layout.activity_main);
+        m_splashScreenDialog.show();
     }
     
     @Override protected void onDestroy()
@@ -67,5 +73,10 @@ public class GL2JNIActivity extends Activity
 			@Override
 			public void run() { mView.HandleBackButton();}
 		});
+    }
+    
+    public void DismissSplashScreen()
+    {
+    	m_splashScreenDialog.dismiss();
     }
 }

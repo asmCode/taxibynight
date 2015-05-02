@@ -33,12 +33,12 @@ package com.ssg.taxisoftlaunch;
 
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.PixelFormat;
 import android.opengl.GLSurfaceView;
 import android.util.Log;
 import android.view.MotionEvent;
+
 import javax.microedition.khronos.egl.EGL10;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.egl.EGLContext;
@@ -63,18 +63,23 @@ import javax.microedition.khronos.opengles.GL10;
  *   that matches it exactly (with regards to red/green/blue/alpha channels
  *   bit depths). Failure to do so would result in an EGL_BAD_MATCH error.
  */
-class GL2JNIView extends GLSurfaceView {
-    private static String TAG = "GL2JNIView";
+class GL2JNIView extends GLSurfaceView
+{
+    private static String TAG = "taxi";
     private static final boolean DEBUG = false;
     
+    private GL2JNIActivity m_activity;
     private AssetManager m_assetManager;
     private String m_writablePath;
 
-    public GL2JNIView(AssetManager assetManager, Context context, boolean translucent, int depth, int stencil) {
-        super(context);
+    public GL2JNIView(AssetManager assetManager, GL2JNIActivity activity, boolean translucent, int depth, int stencil)
+    {
+        super(activity);
+        
+        m_activity = activity;
         
         m_assetManager = assetManager;
-        m_writablePath = context.getFilesDir().getPath();
+        m_writablePath = m_activity.getFilesDir().getPath();
         init(translucent, depth, stencil);
     }
     
@@ -141,8 +146,8 @@ class GL2JNIView extends GLSurfaceView {
         return true;
     }
 
-    private void init(boolean translucent, int depth, int stencil) {
-
+    private void init(boolean translucent, int depth, int stencil)
+    {
         /* By default, GLSurfaceView() creates a RGB_565 opaque surface.
          * If we want a translucent one, we should change the surface's
          * format here, using PixelFormat.TRANSLUCENT for GL Surfaces
@@ -167,7 +172,7 @@ class GL2JNIView extends GLSurfaceView {
                              new ConfigChooser(5, 6, 5, 0, depth, stencil) );
 
         /* Set the renderer responsible for frame rendering */
-        setRenderer(new Renderer(m_assetManager, m_writablePath));
+        setRenderer(new Renderer(m_activity, m_assetManager, m_writablePath));
     }
 
     private static class ContextFactory implements GLSurfaceView.EGLContextFactory
@@ -380,12 +385,14 @@ class GL2JNIView extends GLSurfaceView {
 
     private static class Renderer implements GLSurfaceView.Renderer
     {
+    	private GL2JNIActivity m_activity;
     	private AssetManager m_assetManager;
     	private String m_writablePath;
     	private boolean m_needToInitialize = true;
     	
-    	Renderer(AssetManager assetManager, String writeblePath)
+    	Renderer(GL2JNIActivity activity, AssetManager assetManager, String writeblePath)
     	{
+    		m_activity = activity;    		
     		m_assetManager = assetManager;	
     		m_writablePath = writeblePath;
     	}
@@ -398,15 +405,20 @@ class GL2JNIView extends GLSurfaceView {
         public void onSurfaceChanged(GL10 gl, int width, int height)
         {
         	if (m_needToInitialize)
-        	{        		
+        	{
         		GL2JNILib.init(m_assetManager, m_writablePath, width, height);
         		m_needToInitialize = false;
+        		
+        		m_activity.runOnUiThread(new Runnable()
+       		 	{
+        			public void run() { m_activity.DismissSplashScreen(); }
+       		 	});
         	}
         }
 
         public void onSurfaceCreated(GL10 gl, EGLConfig config)
         {
-            m_needToInitialize = true; 
+            m_needToInitialize = true;
         }
     }
 }
