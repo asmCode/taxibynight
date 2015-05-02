@@ -51,6 +51,7 @@ public:
 	void ShowPause();
 	void Resume();
 	void EndRound();
+	void SaveAnalytics();
 
 	void Enter();
 	void Leave();
@@ -69,6 +70,10 @@ private:
 
 	Label *m_messageLabel;
 	Label *m_penaltyLabel;
+
+	float m_totalFreeTime; // czas bez pasazera
+	float m_totalRoundTime;
+	int m_totalFps;
 
 	PausePanel *m_pausePanel;
 

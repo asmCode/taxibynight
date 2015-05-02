@@ -18,6 +18,7 @@
 #include "Leaderboard.h"
 #include "PlaceIndicator.h"
 #include "Label.h"
+#include "AnalyticsProvider.h"
 #include <Audio/SoundManager.h>
 #include "HUD.h"
 #include "Bonuses/BonusStreetSymbol.h"
@@ -340,6 +341,10 @@ void GameScreen::Reset()
 	m_pedsManager->Reset(m_taxi->GetPosition());
 	m_street->SetInitialVisibility(m_taxi->GetPosition());
 
+	m_totalFreeTime = 0;
+	m_totalRoundTime = 0;
+	m_totalFps = 0;
+
 	ResetCamera();
 }
 
@@ -495,6 +500,13 @@ void GameScreen::EndRound()
 		Player::Instance->m_totalMoney,
 		Player::Instance->m_totalCourses,
 		record);
+
+	SaveAnalytics();
+}
+
+void GameScreen::SaveAnalytics()
+{
+
 }
 
 void GameScreen::Enter()

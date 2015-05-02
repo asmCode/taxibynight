@@ -88,8 +88,6 @@ Taxi::Taxi() :
 			m_boundsTopRight.x - m_boundsTopLeft.x,
 			0, 
 			m_boundsBottomRight.z - m_boundsTopRight.z));
-			
-
 }
 
 void Taxi::Reset()
@@ -111,6 +109,10 @@ void Taxi::Reset()
 	m_turnValue = 0.0f;
 	m_revard = 0.0f;
 	m_timeLeft = 0.0f;
+
+	m_collisionCount = 0;
+	m_killedPeds = 0;
+	m_totalDistance = 0;
 }
 
 Taxi* Taxi::GetInstance()
@@ -242,6 +244,8 @@ void Taxi::Update(float time, float seconds)
 			static Randomizer random;
 
 			SoundManager::GetInstance()->PlaySound((SoundManager::Sound)random.GetInt(0, 2));
+
+			m_collisionCount++;
 		}
 
 		float dot = sm::Vec3::Dot(collisionNormal, m_carDirection.GetReversed());
@@ -272,6 +276,8 @@ void Taxi::Update(float time, float seconds)
 			static Randomizer random;
 
 			SoundManager::GetInstance()->PlaySound((SoundManager::Sound)random.GetInt(0, 2));
+
+			m_collisionCount++;
 		}
 
 		float dot = sm::Vec3::Dot(collisionNormal, m_carDirection.GetReversed());
@@ -332,6 +338,8 @@ void Taxi::Update(float time, float seconds)
 			static Randomizer random;
 
 			SoundManager::GetInstance()->PlaySound((SoundManager::Sound)random.GetInt(0, 2));
+
+			m_collisionCount++;
 		}
 
 		m_position = oldPos + collisionNormal * 0.1f;
@@ -348,6 +356,8 @@ void Taxi::Update(float time, float seconds)
 			static Randomizer random;
 
 			SoundManager::GetInstance()->PlaySound((SoundManager::Sound)random.GetInt(0, 2));
+
+			m_collisionCount++;
 		}
 
 		m_position = oldPos + collisionNormal * 0.1f;

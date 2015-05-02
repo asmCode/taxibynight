@@ -56,6 +56,10 @@ public:
 	float m_turnValue;
 	float m_acc;
 
+	int m_collisionCount;
+	int m_killedPeds;
+	float m_totalDistance;
+
 	Model *m_taxiModel;
 	Model *m_lights;
 	Model *m_bladeModel;
