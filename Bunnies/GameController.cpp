@@ -2,7 +2,6 @@
 
 #include "IScreen.h"
 #include "GameScreen.h"
-#include "SplashScreen.h"
 #include "MainMenuScreen.h"
 #include "SummaryScreen.h"
 #include "ComicsScreen.h"
@@ -35,7 +34,6 @@
 
 GameController::GameController(IGraphicsEngine *graphicsEngine) :
 	m_graphicsEngine(graphicsEngine),
-	m_splashScreen(NULL),
 	m_mainMenuScreen(NULL),
 	m_summaryScreen(NULL),
 	m_gameScreen(NULL),
@@ -51,9 +49,6 @@ GameController::~GameController(void)
 
 	if (m_gameScreen != NULL)
 		delete m_gameScreen;
-
-	if (m_splashScreen != NULL)
-		delete m_splashScreen;
 
 	if (m_mainMenuScreen != NULL)
 		delete m_mainMenuScreen;
@@ -159,10 +154,6 @@ bool GameController::Initialize(ISystemUtils *systemUtils, IServiceProvider* ser
 	if (!m_gameScreen->Initialize())
 		return false;
 
-	m_splashScreen = new SplashScreen(this);
-	if (!m_splashScreen->InitResources())
-		return false;
-
 	m_mainMenuScreen = new MainMenuScreen(this);
 	if (!m_mainMenuScreen->InitResources())
 		return false;
@@ -192,7 +183,8 @@ bool GameController::Initialize(ISystemUtils *systemUtils, IServiceProvider* ser
 	Leaderboard::GetInstance()->SendPlayerPoints(playerStats);
 
 
-	m_activeScreen = m_splashScreen;
+	m_activeScreen = m_mainMenuScreen;
+	m_activeScreen->Enter();
 
 	return true;
 }

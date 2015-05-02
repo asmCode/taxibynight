@@ -9,7 +9,6 @@
 class IGraphicsEngine;
 class IScreen;
 class GameScreen;
-class SplashScreen;
 class MainMenuScreen;
 class ComicsScreen;
 class SummaryScreen;
@@ -54,7 +53,6 @@ public:
 
 private:
 	GameScreen *m_gameScreen;
-	SplashScreen *m_splashScreen;
 	MainMenuScreen *m_mainMenuScreen;
 	SummaryScreen *m_summaryScreen;
 	ComicsScreen *m_comicsScreen;
