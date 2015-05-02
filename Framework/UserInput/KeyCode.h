@@ -26,5 +26,5 @@ enum KeyCode
 
 	KeyCode_Escape,
 
-	KeyCode_Count
+	Count
 };

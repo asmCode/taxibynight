@@ -13,11 +13,11 @@ public:
 	static bool GetKeyUp(KeyCode keyCode);
 
 private:
-	static bool m_pressed[KeyCode_Count];
-	static bool m_justPressed[KeyCode_Count];
-	static bool m_justReleased[KeyCode_Count];
+	static bool m_pressed[Count];
+	static bool m_justPressed[Count];
+	static bool m_justReleased[Count];
 
-	static int m_keyMap[KeyCode_Count];
+	static int m_keyMap[Count];
 
 	// user do simulate static constructor
 	static bool m_constructorTrigger;

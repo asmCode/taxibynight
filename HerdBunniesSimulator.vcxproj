@@ -88,6 +88,7 @@
     <ClInclude Include="BunniesView\TimeControl.h" />
     <ClInclude Include="Bunnies\AdsMnager.h" />
     <ClInclude Include="Bunnies\AnalyticsEvents\StartGameEvent.h" />
+    <ClInclude Include="Bunnies\AnalyticsFactory.h" />
     <ClInclude Include="Bunnies\AnalyticsProvider.h" />
     <ClInclude Include="Bunnies\AnimButton.h" />
     <ClInclude Include="Bunnies\Arrow.h" />
@@ -105,7 +106,6 @@
     <ClInclude Include="Bunnies\Gui\BonusControl.h" />
     <ClInclude Include="Bunnies\Gui\GridPanel.h" />
     <ClInclude Include="Bunnies\HttpCommunication.h" />
-    <ClInclude Include="Bunnies\IntroScreen.h" />
     <ClInclude Include="Bunnies\Leaderboard.h" />
     <ClInclude Include="Bunnies\LeaderboardScreen.h" />
     <ClInclude Include="Bunnies\PausePanel.h" />
@@ -139,7 +139,6 @@
     <ClInclude Include="Bunnies\Ped.h" />
     <ClInclude Include="Bunnies\PedsManager.h" />
     <ClInclude Include="Bunnies\PlaceIndicator.h" />
-    <ClInclude Include="Bunnies\SplashScreen.h" />
     <ClInclude Include="Bunnies\SpritesMap.h" />
     <ClInclude Include="Bunnies\Street.h" />
     <ClInclude Include="Bunnies\StreetMap.h" />
@@ -241,6 +240,7 @@
     <ClCompile Include="BunniesView\WinMain.cpp" />
     <ClCompile Include="Bunnies\AdsMnager.cpp" />
     <ClCompile Include="Bunnies\AnalyticsEvents\StartGameEvent.cpp" />
+    <ClCompile Include="Bunnies\AnalyticsFactory.cpp" />
     <ClCompile Include="Bunnies\AnalyticsProvider.cpp" />
     <ClCompile Include="Bunnies\AnimButton.cpp" />
     <ClCompile Include="Bunnies\Arrow.cpp" />
@@ -256,7 +256,6 @@
     <ClCompile Include="Bunnies\Gui\BonusControl.cpp" />
     <ClCompile Include="Bunnies\Gui\GridPanel.cpp" />
     <ClCompile Include="Bunnies\HttpCommunication.cpp" />
-    <ClCompile Include="Bunnies\IntroScreen.cpp" />
     <ClCompile Include="Bunnies\Leaderboard.cpp" />
     <ClCompile Include="Bunnies\LeaderboardScreen.cpp" />
     <ClCompile Include="Bunnies\PausePanel.cpp" />
@@ -285,7 +284,6 @@
     <ClCompile Include="Bunnies\Ped.cpp" />
     <ClCompile Include="Bunnies\PedsManager.cpp" />
     <ClCompile Include="Bunnies\PlaceIndicator.cpp" />
-    <ClCompile Include="Bunnies\SplashScreen.cpp" />
     <ClCompile Include="Bunnies\SpritesMap.cpp" />
     <ClCompile Include="Bunnies\Street.cpp" />
     <ClCompile Include="Bunnies\StreetMap.cpp" />
@@ -338,9 +336,9 @@
     <ClCompile Include="Framework\Math\MathUtils.cpp" />
     <ClCompile Include="Framework\Math\Matrix.cpp" />
     <ClCompile Include="Framework\UserInput\Input2.cpp" />
-    <ClCompile Include="Framework\Utils\Log.cpp" />
     <ClCompile Include="Framework\Utils\Randomizer.cpp" />
     <ClCompile Include="Framework\Utils\StringUtils.cpp" />
+    <ClCompile Include="Framework\Utils\Win32\Log.cpp" />
     <ClCompile Include="Framework\XML\XMLLoader.cpp" />
     <ClCompile Include="Framework\XML\XMLNode.cpp" />
   </ItemGroup>
