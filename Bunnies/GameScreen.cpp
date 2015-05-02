@@ -241,6 +241,7 @@ void GameScreen::Update(float time, float seconds)
 	}
 
 	m_totalRoundTime += seconds;
+	m_totalFps++;
 
 	m_taxi->Update(time, seconds);
 
@@ -340,6 +341,8 @@ void GameScreen::Update(float time, float seconds)
 	{
 		if (m_taxi->m_timeLeft == 0.0f)
 		{
+			AnalyticsProvider::GetAnalytics()->TrackEvent(Timeout());
+
 			EndRound();
 		}
 	}
@@ -530,6 +533,11 @@ void GameScreen::SaveAnalytics()
 	AnalyticsProvider::GetAnalytics()->TrackEvent(AvgSpeed(avgSpeed));
 
 	AnalyticsProvider::GetAnalytics()->TrackEvent(Distance(Taxi::GetInstance()->m_totalDistance));
+
+	AnalyticsProvider::GetAnalytics()->TrackEvent(ScoredPeds(m_pedsManager->m_totalCourses));
+	AnalyticsProvider::GetAnalytics()->TrackEvent(EarnedMoney(m_pedsManager->m_totalMoney));
+
+	AnalyticsProvider::GetAnalytics()->TrackEvent(AvgFps((int)((float)m_totalFps / m_totalRoundTime) + 1));
 }
 
 void GameScreen::Enter()
