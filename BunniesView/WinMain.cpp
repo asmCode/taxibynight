@@ -33,8 +33,8 @@ int ScreenHeight = 600;
 #endif
 
 #if 1
-int ScreenWidth = 1024;
-int ScreenHeight = 600;
+int ScreenWidth = 1280;
+int ScreenHeight = 720;
 #endif
 
 OpenglWindow *glwnd;

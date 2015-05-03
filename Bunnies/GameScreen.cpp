@@ -206,6 +206,17 @@ bool justResumed;
 
 void GameScreen::Update(float time, float seconds)
 {
+	/*
+	if (Input2::GetKeyDown(KeyCode_A))
+		BonusesManager::Instance->ActivateBonus(BonusType_Carmageddon);
+
+	if (Input2::GetKeyDown(KeyCode_S))
+		BonusesManager::Instance->ActivateBonus(BonusType_ZombiePeds);
+
+	if (Input2::GetKeyDown(KeyCode_D))
+		BonusesManager::Instance->ActivateBonus(BonusType_PedsAntiMagnet);
+		*/
+
 	//TODO: hw back button
 	//if (!justResumed && !m_isPaused && Input2::GetKeyUp(KeyCode_Escape))
 	if (false)
