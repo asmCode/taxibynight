@@ -183,8 +183,7 @@ bool GameController::Initialize(ISystemUtils *systemUtils, IServiceProvider* ser
 	Leaderboard::GetInstance()->SendPlayerPoints(playerStats);
 
 
-	m_activeScreen = m_mainMenuScreen;
-	m_activeScreen->Enter();
+	ShowMainMenuScreen();
 
 	return true;
 }
@@ -270,7 +269,8 @@ void GameController::ShowMainMenuScreen()
 {
 	m_mainMenuScreen->UpdateStats();
 
-	m_activeScreen->Leave();
+	if (m_activeScreen != NULL)
+		m_activeScreen->Leave();
 	m_activeScreen = m_mainMenuScreen;
 	m_activeScreen->Enter();
 }
