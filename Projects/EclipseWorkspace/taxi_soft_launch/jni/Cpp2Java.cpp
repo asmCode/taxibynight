@@ -36,7 +36,7 @@ void Cpp2Java::CallStaticMethodV(const std::string& methodName)
 		return;
 	}
 
-	jclass clazz = env->FindClass("com/ssg/taxisoftlaunch/GL2JNILib");
+	jclass clazz = env->FindClass("com/semiseriousgames/taxibynight/GL2JNILib");
 	jmethodID methodId = env->GetStaticMethodID(clazz, methodName.c_str(), "()V");
 
 	env->CallStaticVoidMethod(clazz, methodId);
@@ -51,7 +51,7 @@ void Cpp2Java::CallStaticMethodV(const std::string& methodName, const std::strin
 		return;
 	}
 
-	jclass clazz = env->FindClass("com/ssg/taxisoftlaunch/GL2JNILib");
+	jclass clazz = env->FindClass("com/semiseriousgames/taxibynight/GL2JNILib");
 	jmethodID methodId = env->GetStaticMethodID(clazz, methodName.c_str(), "(Ljava/lang/String;)V");
 
 	jstring javaParam = env->NewStringUTF(param.c_str());
@@ -68,7 +68,7 @@ void Cpp2Java::CallStaticMethodV(const std::string& methodName, const std::strin
 		return;
 	}
 
-	jclass clazz = env->FindClass("com/ssg/taxisoftlaunch/GL2JNILib");
+	jclass clazz = env->FindClass("com/semiseriousgames/taxibynight/GL2JNILib");
 	jmethodID methodId = env->GetStaticMethodID(clazz, methodName.c_str(), "(Ljava/lang/String;Ljava/lang/String;)V");
 
 	jstring javaParam1 = env->NewStringUTF(param1.c_str());
@@ -86,7 +86,7 @@ void Cpp2Java::CallStaticMethodV(const std::string& methodName, const std::strin
 		return;
 	}
 
-	jclass clazz = env->FindClass("com/ssg/taxisoftlaunch/GL2JNILib");
+	jclass clazz = env->FindClass("com/semiseriousgames/taxibynight/GL2JNILib");
 	jmethodID methodId = env->GetStaticMethodID(clazz, methodName.c_str(), "(Ljava/lang/String;F)V");
 
 	jstring javaParam1 = env->NewStringUTF(param1.c_str());

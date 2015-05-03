@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.ssg.taxisoftlaunch;
+package com.semiseriousgames.taxibynight;
 /*
  * Copyright (C) 2008 The Android Open Source Project
  *

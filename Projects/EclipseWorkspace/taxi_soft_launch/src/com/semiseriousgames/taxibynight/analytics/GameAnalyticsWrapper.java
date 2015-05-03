@@ -1,9 +1,9 @@
-package com.ssg.taxisoftlaunch.analytics;
+package com.semiseriousgames.taxibynight.analytics;
 
 import android.content.Context;
 
 import com.gameanalytics.android.GameAnalytics;
-import com.ssg.taxisoftlaunch.GameSettings;
+import com.semiseriousgames.taxibynight.GameSettings;
 
 public class GameAnalyticsWrapper implements IAnalytics
 {

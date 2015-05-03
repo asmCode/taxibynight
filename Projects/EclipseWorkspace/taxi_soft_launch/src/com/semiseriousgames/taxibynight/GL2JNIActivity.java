@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.ssg.taxisoftlaunch;
+package com.semiseriousgames.taxibynight;
 
-import com.ssg.taxisoftlaunch.analytics.AnalyticsManager;
+import com.semiseriousgames.taxibynight.analytics.AnalyticsManager;
 
 import android.app.Activity;
 import android.app.Dialog;

@@ -1,4 +1,4 @@
-package com.ssg.taxisoftlaunch;
+package com.semiseriousgames.taxibynight;
 
 public class GameSettings
 {

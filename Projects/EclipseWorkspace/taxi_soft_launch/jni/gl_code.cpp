@@ -42,7 +42,7 @@ void checkGlError(const char* op) {
 }
 
 extern "C" {
-    JNIEXPORT void JNICALL Java_com_ssg_taxisoftlaunch_GL2JNILib_init(
+    JNIEXPORT void JNICALL Java_com_semiseriousgames_taxibynight_GL2JNILib_init(
     		JNIEnv * env,
 			jobject obj,
 			jobject javaAssetManager,
@@ -50,17 +50,17 @@ extern "C" {
 			jint width,
 			jint height);
 
-    JNIEXPORT void JNICALL Java_com_ssg_taxisoftlaunch_GL2JNILib_step(JNIEnv * env, jobject obj);
+    JNIEXPORT void JNICALL Java_com_semiseriousgames_taxibynight_GL2JNILib_step(JNIEnv * env, jobject obj);
 
-    JNIEXPORT void JNICALL Java_com_ssg_taxisoftlaunch_GL2JNILib_HandlePress(JNIEnv * env, jobject obj, int pointId, float x, float y);
-    JNIEXPORT void JNICALL Java_com_ssg_taxisoftlaunch_GL2JNILib_HandleRelease(JNIEnv * env, jobject obj, int pointId, float x, float y);
-    JNIEXPORT void JNICALL Java_com_ssg_taxisoftlaunch_GL2JNILib_HandleMove(JNIEnv * env, jobject obj, int pointId, float x, float y);
+    JNIEXPORT void JNICALL Java_com_semiseriousgames_taxibynight_GL2JNILib_HandlePress(JNIEnv * env, jobject obj, int pointId, float x, float y);
+    JNIEXPORT void JNICALL Java_com_semiseriousgames_taxibynight_GL2JNILib_HandleRelease(JNIEnv * env, jobject obj, int pointId, float x, float y);
+    JNIEXPORT void JNICALL Java_com_semiseriousgames_taxibynight_GL2JNILib_HandleMove(JNIEnv * env, jobject obj, int pointId, float x, float y);
 
-    JNIEXPORT void JNICALL Java_com_ssg_taxisoftlaunch_GL2JNILib_HandleEnterForeground(JNIEnv * env, jobject obj);
-    JNIEXPORT void JNICALL Java_com_ssg_taxisoftlaunch_GL2JNILib_HandleEnterBackground(JNIEnv * env, jobject obj);
-    JNIEXPORT void JNICALL Java_com_ssg_taxisoftlaunch_GL2JNILib_HandleBackButton(JNIEnv * env, jobject obj);
+    JNIEXPORT void JNICALL Java_com_semiseriousgames_taxibynight_GL2JNILib_HandleEnterForeground(JNIEnv * env, jobject obj);
+    JNIEXPORT void JNICALL Java_com_semiseriousgames_taxibynight_GL2JNILib_HandleEnterBackground(JNIEnv * env, jobject obj);
+    JNIEXPORT void JNICALL Java_com_semiseriousgames_taxibynight_GL2JNILib_HandleBackButton(JNIEnv * env, jobject obj);
 
-    JNIEXPORT void JNICALL Java_com_ssg_taxisoftlaunch_GL2JNILib_Destroy(JNIEnv * env, jobject obj);
+    JNIEXPORT void JNICALL Java_com_semiseriousgames_taxibynight_GL2JNILib_Destroy(JNIEnv * env, jobject obj);
 };
 
 JavaVM *javaVM;
@@ -71,7 +71,7 @@ JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved)
     return JNI_VERSION_1_6;
 }
 
-JNIEXPORT void JNICALL Java_com_ssg_taxisoftlaunch_GL2JNILib_init(
+JNIEXPORT void JNICALL Java_com_semiseriousgames_taxibynight_GL2JNILib_init(
 		JNIEnv * env,
 		jobject obj,
 		jobject javaAssetManager,
@@ -87,47 +87,47 @@ JNIEXPORT void JNICALL Java_com_ssg_taxisoftlaunch_GL2JNILib_init(
     setupGraphics(assetManager, std::string(writablePath, len), width, height);
 }
 
-JNIEXPORT void JNICALL Java_com_ssg_taxisoftlaunch_GL2JNILib_step(JNIEnv * env, jobject obj)
+JNIEXPORT void JNICALL Java_com_semiseriousgames_taxibynight_GL2JNILib_step(JNIEnv * env, jobject obj)
 {
     renderFrame();
 }
 
-JNIEXPORT void JNICALL Java_com_ssg_taxisoftlaunch_GL2JNILib_HandlePress(JNIEnv * env, jobject obj, int pointId, float x, float y)
+JNIEXPORT void JNICALL Java_com_semiseriousgames_taxibynight_GL2JNILib_HandlePress(JNIEnv * env, jobject obj, int pointId, float x, float y)
 {
 	HandlePress(pointId, x, y);
 }
 
-JNIEXPORT void JNICALL Java_com_ssg_taxisoftlaunch_GL2JNILib_HandleRelease(JNIEnv * env, jobject obj, int pointId, float x, float y)
+JNIEXPORT void JNICALL Java_com_semiseriousgames_taxibynight_GL2JNILib_HandleRelease(JNIEnv * env, jobject obj, int pointId, float x, float y)
 {
 	HandleRelease(pointId, x, y);
 }
 
-JNIEXPORT void JNICALL Java_com_ssg_taxisoftlaunch_GL2JNILib_HandleMove(JNIEnv * env, jobject obj, int pointId, float x, float y)
+JNIEXPORT void JNICALL Java_com_semiseriousgames_taxibynight_GL2JNILib_HandleMove(JNIEnv * env, jobject obj, int pointId, float x, float y)
 {
 	HandleMove(pointId, x, y);
 }
 
-JNIEXPORT void JNICALL Java_com_ssg_taxisoftlaunch_GL2JNILib_HandleEnterForeground(JNIEnv * env, jobject obj, int pointId, float x, float y)
+JNIEXPORT void JNICALL Java_com_semiseriousgames_taxibynight_GL2JNILib_HandleEnterForeground(JNIEnv * env, jobject obj, int pointId, float x, float y)
 {
 	HandleEnterForeground();
 }
 
-JNIEXPORT void JNICALL Java_com_ssg_taxisoftlaunch_GL2JNILib_HandleEnterForeground(JNIEnv * env, jobject obj)
+JNIEXPORT void JNICALL Java_com_semiseriousgames_taxibynight_GL2JNILib_HandleEnterForeground(JNIEnv * env, jobject obj)
 {
 	HandleEnterForeground();
 }
 
-JNIEXPORT void JNICALL Java_com_ssg_taxisoftlaunch_GL2JNILib_HandleEnterBackground(JNIEnv * env, jobject obj)
+JNIEXPORT void JNICALL Java_com_semiseriousgames_taxibynight_GL2JNILib_HandleEnterBackground(JNIEnv * env, jobject obj)
 {
 	HandleEnterBackground();
 }
 
-JNIEXPORT void JNICALL Java_com_ssg_taxisoftlaunch_GL2JNILib_HandleBackButton(JNIEnv * env, jobject obj)
+JNIEXPORT void JNICALL Java_com_semiseriousgames_taxibynight_GL2JNILib_HandleBackButton(JNIEnv * env, jobject obj)
 {
 	HandleBackButton();
 }
 
-JNIEXPORT void JNICALL Java_com_ssg_taxisoftlaunch_GL2JNILib_Destroy(JNIEnv * env, jobject obj)
+JNIEXPORT void JNICALL Java_com_semiseriousgames_taxibynight_GL2JNILib_Destroy(JNIEnv * env, jobject obj)
 {
 	Destroy();
 }

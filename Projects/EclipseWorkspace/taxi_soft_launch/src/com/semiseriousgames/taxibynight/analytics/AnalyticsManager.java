@@ -1,4 +1,4 @@
-package com.ssg.taxisoftlaunch.analytics;
+package com.semiseriousgames.taxibynight.analytics;
 
 import java.util.List;
 import java.util.Vector;

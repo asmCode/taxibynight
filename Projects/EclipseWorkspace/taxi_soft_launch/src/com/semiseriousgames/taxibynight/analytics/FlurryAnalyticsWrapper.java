@@ -1,4 +1,4 @@
-package com.ssg.taxisoftlaunch.analytics;
+package com.semiseriousgames.taxibynight.analytics;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -6,7 +6,7 @@ import java.util.Map;
 import android.content.Context;
 
 import com.flurry.android.FlurryAgent;
-import com.ssg.taxisoftlaunch.GameSettings;
+import com.semiseriousgames.taxibynight.GameSettings;
 
 public class FlurryAnalyticsWrapper implements IAnalytics
 {
