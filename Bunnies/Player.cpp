@@ -3,6 +3,7 @@
 #include <IO/Path.h>
 #include <XML/XMLLoader.h>
 #include <XML/XMLNode.h>
+#include <Utils/Log.h>
 #include <string>
 
 Player *Player::Instance;
@@ -22,6 +23,8 @@ Player::Player(const std::string &path) :
 
 void Player::Load()
 {
+	Log::LogT("Loading player data from %s", m_path.c_str());
+
 	if (!Path::IsFileExists(m_path.c_str()))
 		return;
 
