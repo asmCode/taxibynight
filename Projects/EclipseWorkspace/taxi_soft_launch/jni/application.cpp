@@ -124,8 +124,10 @@ void ProcessAsset(AAssetManager* assetManager, const std::string& writablePath)
 	std::string dataPath = writablePath + "/taxi_data/";
 	DIR* dataDir = opendir(dataPath.c_str());
 
+#if 0 // Skip copy if exists
 	if (dataDir != NULL)
 		return;
+#endif
 
 	mkdir(dataPath.c_str(), S_IRWXU |S_IRWXG| S_IRWXO);
 	mkdir((dataPath + "/audio").c_str(), S_IRWXU |S_IRWXG| S_IRWXO);
@@ -192,6 +194,10 @@ void renderFrame()
 {
 	if (m_game == NULL)
 		return;
+
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glDepthMask(true);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	uint64_t timeNow = GetTimestamp();
 	float deltaTime = (float)(timeNow - lastTime) / 1000000000.0f;

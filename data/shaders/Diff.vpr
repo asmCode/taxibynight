@@ -1,7 +1,7 @@
 //#version 120
 
 attribute vec3 a_position;
-attribute vec2 a_coordsDiff;
+attribute vec2 a_coords;
 attribute vec3 a_normal;
 
 uniform mat4 u_worldMatrix;
@@ -16,7 +16,7 @@ varying vec3 o_eyeDirection;
 
 void main()
 {
-	o_coordsDiff = a_coordsDiff;
+	o_coordsDiff = a_coords;
 	
 	vec4 worldPosition = u_worldMatrix * vec4(a_position, 1.0);
 	o_normal = mat3(u_worldMatrix) * a_normal;
