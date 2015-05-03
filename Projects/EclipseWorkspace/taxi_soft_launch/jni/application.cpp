@@ -161,7 +161,7 @@ bool setupGraphics(AAssetManager* assetManager, const std::string& writablePath,
 		Destroy();
 
 	TaxiGame::Environment::GetInstance()->SetBasePath(writablePath + "/taxi_data/");
-	TaxiGame::Environment::GetInstance()->SetWritePath(writablePath);
+	TaxiGame::Environment::GetInstance()->SetWritePath(writablePath + "/");
 	TaxiGame::Environment::GetInstance()->SetScreenSize(w, h);
 
 	ProcessAsset(assetManager, writablePath);
