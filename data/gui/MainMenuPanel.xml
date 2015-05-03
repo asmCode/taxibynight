@@ -1,5 +1,5 @@
 <Panel name="main_menu" fill="true">
-	<Image image="town" tmp_fill="wypelnij" align="top" width="650" height="495" opacity="0.1"/>
+	<Image image="town" tmp_fill="wypelnij" align="top" width="650" height="495" opacity="0.3"/>
 	
 	<Panel width="512" height="680" align="center">	
 		<Image image="title" width="512" height="128" align="top" margin_top="0" />

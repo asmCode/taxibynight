@@ -1,5 +1,5 @@
 <Panel name="summary_panel" fill="true">
-	<Image image="town" tmp_fill="wypelnij" align="top" width="650" height="495" opacity="0.1"/>
+	<Image image="town" tmp_fill="wypelnij" align="top" width="650" height="495" opacity="0.3"/>
 	
 	<Panel name="summary_panel" align="center" width="568" height="470" margin_top="70">
 		<Image name="summary_screen_content_bg" image="summary_screen_bg" fill="true" />
